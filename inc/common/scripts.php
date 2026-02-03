@@ -1,0 +1,22 @@
+<?php
+
+function add_theme_scripts() {
+    wp_enqueue_style('bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.css', array(), '5.2.3', 'all');
+    // blog-page-filter-css
+    wp_enqueue_style('blog-loop-style', get_stylesheet_directory_uri() . '/assets/css/blog-loop.css', [], '1.0');
+    wp_enqueue_style('my-custom-main', get_template_directory_uri() . '/assets/css/my-custom-main.css', array(), '1.0.0', 'all');
+    wp_enqueue_style('property-single', get_template_directory_uri() . '/assets/css/property-single.css', array(), '1.0.0', 'all');
+
+    wp_enqueue_style('style', get_stylesheet_uri());
+
+
+
+
+    wp_enqueue_script('property-single-js', get_template_directory_uri() . '/assets/js/property-single.js', array('jquery'), "1.0.1", true);
+    wp_enqueue_script('sbtech-main-now', get_template_directory_uri() . '/assets/js/sbtech-main-now.js', array('jquery'), "1.0.1", true);
+
+    if (is_singular() && comments_open() && get_option('thread_comments')) {
+        wp_enqueue_script('comment-reply');
+    }
+}
+add_action('wp_enqueue_scripts', 'add_theme_scripts');
