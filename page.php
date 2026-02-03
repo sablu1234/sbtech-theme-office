@@ -2,7 +2,7 @@
 
 
 <section class="container">
-    <?php echo do_shortcode('[porpertypi_ajax_filter]'); ?>
+    <?php echo do_shortcode('[porpertypi_ajax_filter_dynamic]'); ?>
 </section>
 
 
