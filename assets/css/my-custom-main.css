@@ -220,3 +220,44 @@ body{
 .top-actions .cta:hover {
     color: white;
 }
+
+/* footer area */
+.footer {
+  padding: 40px 16px;
+  background: #111;
+}
+
+.main_footer_container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  align-items: center;
+}
+
+.inner_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner_div img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .main_footer_container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .main_footer_container {
+    grid-template-columns: 1fr;
+  }
+}

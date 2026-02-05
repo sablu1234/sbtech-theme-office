@@ -100,6 +100,7 @@ if (class_exists('Kirki')) {
 
 
 
+
 // ajax filter test -=========================================================
 add_shortcode('porpertypi_ajax_filter', function () {
 	ob_start(); ?>
@@ -495,3 +496,5 @@ add_action('wp_enqueue_scripts', function () {
     })(jQuery);
   ");
 });
+
+include_once get_template_directory() . '/template-parts/filter/buy-ajax-filter.php';

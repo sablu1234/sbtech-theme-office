@@ -5,7 +5,7 @@
         <div class="container topbar-inner">
 
             <a class="logo" href="<?php echo home_url('/'); ?>">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/new image/logo.png" alt="Logo">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/header/logo.svg" alt="Logo">
             </a>
 
             <div class="top-actions">
