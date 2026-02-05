@@ -303,7 +303,7 @@ add_action('wp_enqueue_scripts', function () {
 	.avatar-name h6 {margin: 0px;}
 	.avatar-name {display: flex;flex-direction: column;justify-content: center;color: black;}
 	.re-card__body {display: flex;flex-direction: column;gap: 10px;}
-    .re-price{font-size:18px;font-weight:900;color:var(--b)}
+    .re-price{font-size:18px;font-weight:600;color:var(--b)}
     .re-title{margin-top:6px;color:var(--t);font-weight:400;line-height:1.25}
     .re-meta{display:flex;gap:12px;margin-top:8px;color:var(--m);font-size:12px;font-weight:700}
     .re-empty{padding:18px;border:1px dashed #cbd5e1;border-radius:var(--r);background:#fff;color:var(--m);font-weight:700}
