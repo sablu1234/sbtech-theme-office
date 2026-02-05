@@ -6,6 +6,7 @@ function add_theme_scripts() {
     wp_enqueue_style('blog-loop-style', get_stylesheet_directory_uri() . '/assets/css/blog-loop.css', [], '1.0');
     wp_enqueue_style('my-custom-main', get_template_directory_uri() . '/assets/css/my-custom-main.css', array(), '1.0.0', 'all');
     wp_enqueue_style('property-single', get_template_directory_uri() . '/assets/css/property-single.css', array(), '1.0.0', 'all');
+    wp_enqueue_style('page-sell', get_template_directory_uri() . '/assets/css/page-sell.css', array(), '1.0.0', 'all');
 
     wp_enqueue_style('style', get_stylesheet_uri());
 

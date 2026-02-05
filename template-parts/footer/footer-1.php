@@ -3,8 +3,8 @@
 
         <!-- 1 -->
         <div class="footer-col footer-brand">
-            <a class="brand" href="#">
-                <img src="YOUR-LOGO.png" alt="Logo">
+            <a class="brand" href="<?php echo home_url('/'); ?>">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/header/logo.svg" alt="Logo">
             </a>
 
             <p class="addr">
@@ -13,32 +13,32 @@
             </p>
 
             <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
-                <a href="#" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+                <a href="facebook.com/" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
      border:1px solid #cfe3ff;border-radius:8px;color:#0b63ce;text-decoration:none;">
                     <i class="fa-brands fa-facebook-f"></i>
                 </a>
 
-                <a href="#" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+                <a href="https://www.instagram.com/" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
      border:1px solid #cfe3ff;border-radius:8px;color:#0b63ce;text-decoration:none;">
                     <i class="fab fa-instagram"></i>
                 </a>
 
-                <a href="#" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+                <a href="https://youtube.com/" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
      border:1px solid #cfe3ff;border-radius:8px;color:#0b63ce;text-decoration:none;">
                     <i class="fab fa-youtube"></i>
                 </a>
 
-                <a href="#" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+                <a href="https://x.com/" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
      border:1px solid #cfe3ff;border-radius:8px;color:#0b63ce;text-decoration:none;">
                     <i class="fab fa-twitter"></i>
                 </a>
 
-                <a href="#" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+                <a href="linkedin.com" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
      border:1px solid #cfe3ff;border-radius:8px;color:#0b63ce;text-decoration:none;">
                     <i class="fab fa-linkedin-in"></i>
                 </a>
 
-                <a href="#" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+                <a href="https://web.telegram.org/" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
      border:1px solid #cfe3ff;border-radius:8px;color:#0b63ce;text-decoration:none;">
                     <i class="fab fa-telegram-plane"></i>
                 </a>
