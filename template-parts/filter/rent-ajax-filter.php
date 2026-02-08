@@ -1,0 +1,706 @@
+<?php
+
+
+
+// ajax filter -=========================================================
+
+
+define('RE_CPT_RENT', 'porpertypi');
+
+define('RE_META_PURPOSE_RENT', 'pp_purpose'); // ✅ your real meta_key
+define('RE_META_STATUS_RENT',  'pp_status');  // ✅ your real meta_key
+
+define('RE_META_PRICE_RENT',   '_re_price');
+define('RE_META_BEDS_RENT',    '_re_beds');
+define('RE_META_BATHS_RENT',   '_re_baths');
+define('RE_META_SIZE_RENT',    '_re_size_sqft');
+
+/**
+ * Shortcode: [porpertypi_ajax_filter_dynamic]
+ */
+add_shortcode('porpertypi_ajax_filter_dynamic_rent', function () {
+    $nonce = wp_create_nonce('re_filter_nonce');
+
+    // ✅ dynamic values from CPT meta
+    $purpose_options = re_get_distinct_meta_values_rent(RE_META_PURPOSE_RENT);
+    $status_options  = re_get_distinct_meta_values_rent(RE_META_STATUS_RENT);
+
+    ob_start(); ?>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <div class="re-wrap">
+        <div class="re-hero">
+            <div class="re-hero__bg_rent"></div>
+            <div class="re-hero__inner">
+                <h2 class="re-hero__title">Find Property</h2>
+
+                <form class="re-filter" id="reFilterForm">
+                    <input type="hidden" name="nonce" value="<?php echo esc_attr($nonce); ?>">
+                    <input type="hidden" name="paged" value="1">
+
+                    <div class="re-row re-row--top">
+                        <select name="purpose" class="re-input">
+                            <option value="For Rent">For Rent</option>
+                            <?php foreach ($purpose_options as $v): ?>
+                                <option value="<?php echo esc_attr($v); ?>"><?php echo esc_html(re_pretty_label_rent($v)); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+
+                        <select name="status" class="re-input">
+                            <option value="">All Status</option>
+                            <?php foreach ($status_options as $v): ?>
+                                <option value="<?php echo esc_attr($v); ?>"><?php echo esc_html(re_pretty_label_rent($v)); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+
+                        <input type="text" name="s" class="re-input" placeholder="Search by title..." />
+
+                        <button type="submit" class="re-btn">FIND</button>
+                    </div>
+
+                    <div class="re-row re-row--bottom">
+                        <input type="number" name="min_price" class="re-input" placeholder="Min. Price">
+                        <input type="number" name="max_price" class="re-input" placeholder="Max. Price">
+                        <input type="number" name="min_beds" class="re-input" placeholder="Min. Beds">
+                        <input type="number" name="min_baths" class="re-input" placeholder="Min. Baths">
+                        <input type="number" name="min_size" class="re-input" placeholder="Min. Size (sqft)">
+                        <input type="number" name="max_size" class="re-input" placeholder="Max. Size (sqft)">
+                    </div>
+
+                    <div class="re-row re-row--toolbar">
+                        <div class="re-count" id="reCount">—</div>
+                        <select class="re-input re-input--small" name="sort">
+                            <option value="newest">Newest</option>
+                            <option value="price_asc">Price: Low</option>
+                            <option value="price_desc">Price: High</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="reResults" class="re-results"></div>
+
+        <div class="re-pagination">
+            <button class="re-page" data-dir="prev" type="button">Prev</button>
+            <span id="rePageInfo">—</span>
+            <button class="re-page" data-dir="next" type="button">Next</button>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+});
+
+/**
+ * AJAX
+ */
+add_action('wp_ajax_re_filter_porpertypi_dynamic_rent', 're_filter_porpertypi_dynamic_rent');
+add_action('wp_ajax_nopriv_re_filter_porpertypi_dynamic_rent', 're_filter_porpertypi_dynamic_rent');
+
+function re_filter_porpertypi_dynamic_rent() {
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 're_filter_nonce')) {
+        wp_send_json_error(['message' => 'Invalid nonce']);
+    }
+
+    $paged = isset($_POST['paged']) ? max(1, (int)$_POST['paged']) : 1;
+    $s     = isset($_POST['s']) ? sanitize_text_field($_POST['s']) : '';
+
+    $purpose = isset($_POST['purpose']) ? sanitize_text_field($_POST['purpose']) : '';
+    $status  = isset($_POST['status'])  ? sanitize_text_field($_POST['status'])  : '';
+
+    $min_price = ($_POST['min_price'] ?? '') !== '' ? (int)$_POST['min_price'] : null;
+    $max_price = ($_POST['max_price'] ?? '') !== '' ? (int)$_POST['max_price'] : null;
+    $min_beds  = ($_POST['min_beds']  ?? '') !== '' ? (int)$_POST['min_beds']  : null;
+    $min_baths = ($_POST['min_baths'] ?? '') !== '' ? (int)$_POST['min_baths'] : null;
+    $min_size  = ($_POST['min_size']  ?? '') !== '' ? (int)$_POST['min_size']  : null;
+    $max_size  = ($_POST['max_size']  ?? '') !== '' ? (int)$_POST['max_size']  : null;
+
+    $sort = isset($_POST['sort']) ? sanitize_text_field($_POST['sort']) : 'newest';
+
+    $meta_query = ['relation' => 'AND'];
+
+    if ($purpose !== '') $meta_query[] = ['key' => RE_META_PURPOSE_RENT, 'value' => $purpose, 'compare' => '='];
+    if ($status  !== '') $meta_query[] = ['key' => RE_META_STATUS_RENT,  'value' => $status,  'compare' => '='];
+
+    if ($min_price !== null) $meta_query[] = ['key' => RE_META_PRICE_RENT, 'value' => $min_price, 'type' => 'NUMERIC', 'compare' => '>='];
+    if ($max_price !== null) $meta_query[] = ['key' => RE_META_PRICE_RENT, 'value' => $max_price, 'type' => 'NUMERIC', 'compare' => '<='];
+
+    if ($min_beds  !== null) $meta_query[] = ['key' => RE_META_BEDS_RENT,  'value' => $min_beds,  'type' => 'NUMERIC', 'compare' => '>='];
+    if ($min_baths !== null) $meta_query[] = ['key' => RE_META_BATHS_RENT, 'value' => $min_baths, 'type' => 'NUMERIC', 'compare' => '>='];
+
+    if ($min_size !== null) $meta_query[] = ['key' => RE_META_SIZE_RENT, 'value' => $min_size, 'type' => 'NUMERIC', 'compare' => '>='];
+    if ($max_size !== null) $meta_query[] = ['key' => RE_META_SIZE_RENT, 'value' => $max_size, 'type' => 'NUMERIC', 'compare' => '<='];
+
+    // sorting
+    $orderby = 'date';
+    $order = 'DESC';
+    $meta_key = '';
+
+    if ($sort === 'price_asc') {
+        $orderby = 'meta_value_num';
+        $order = 'ASC';
+        $meta_key = RE_META_PRICE_RENT;
+    }
+    if ($sort === 'price_desc') {
+        $orderby = 'meta_value_num';
+        $order = 'DESC';
+        $meta_key = RE_META_PRICE_RENT;
+    }
+
+    $args = [
+        'post_type'      => RE_CPT_RENT,
+        'post_status'    => 'publish',
+        'posts_per_page' => 20,
+        'paged'          => $paged,
+        's'              => $s,
+        'meta_query'     => (count($meta_query) > 1) ? $meta_query : [],
+        'orderby'        => $orderby,
+        'order'          => $order,
+    ];
+    if ($meta_key) $args['meta_key'] = $meta_key;
+
+    $q = new WP_Query($args);
+
+    ob_start();
+    if ($q->have_posts()) {
+        echo '<div class="re-grid">';
+        while ($q->have_posts()) {
+            $q->the_post();
+            $id = get_the_ID();
+
+            $price = (int)get_post_meta($id, RE_META_PRICE_RENT, true);
+            $beds  = (int)get_post_meta($id, RE_META_BEDS_RENT, true);
+            $baths = (int)get_post_meta($id, RE_META_BATHS_RENT, true);
+            $size  = (int)get_post_meta($id, RE_META_SIZE_RENT, true);
+
+            $pval = get_post_meta($id, RE_META_PURPOSE_RENT, true);
+            $sval = get_post_meta($id, RE_META_STATUS_RENT, true);
+    ?>
+            <a class="re-card" href="<?php echo esc_url(get_permalink($id)); ?>">
+                <div class="re-card__img">
+                    <?php if (has_post_thumbnail($id)) echo get_the_post_thumbnail($id, 'large', ['loading' => 'lazy']);
+                    else echo '<div class="re-ph">No Image</div>'; ?>
+                    <div class="re-badges">
+                        <?php if ($pval !== ''): ?><span class="re-badge"><?php echo esc_html(re_pretty_label_rent($pval)); ?></span><?php endif; ?>
+                        <?php if ($sval !== ''): ?><span class="re-badge re-badge--dark"><?php echo esc_html(re_pretty_label_rent($sval)); ?></span><?php endif; ?>
+                    </div>
+                </div>
+
+                <div class="re-card__body">
+                    <div class="re-price"><?php echo esc_html(number_format_i18n($price)); ?> AED</div>
+                    <div class="re-title"><?php echo esc_html(get_the_title($id)); ?></div>
+                    <div class="author_details">
+                        <div class="avatar">
+                            <?php
+                            $aid = get_the_author_meta('ID');
+                            echo get_avatar($aid, 48);
+                            ?>
+                        </div>
+                        <div class="avatar-name">
+                            <h6>Listing by</h6>
+                            <?php
+                            $author_id = get_the_author_meta('ID');
+                            echo get_the_author_meta('display_name', $author_id);
+
+                            ?>
+                        </div>
+                    </div>
+                    <div class="re-meta">
+                        <span><?php echo esc_html($beds); ?> Beds</span>
+                        <span><?php echo esc_html($baths); ?> Baths</span>
+                        <span><?php echo esc_html($size); ?> sqft</span>
+                    </div>
+                </div>
+            </a>
+    <?php
+        }
+        echo '</div>';
+    } else {
+        echo '<div class="re-empty">No properties found.</div>';
+    }
+    wp_reset_postdata();
+
+    wp_send_json_success([
+        'html'      => ob_get_clean(),
+        'found'     => (int)$q->found_posts,
+        'max_pages' => (int)$q->max_num_pages,
+        'paged'     => $paged,
+    ]);
+}
+
+/**
+ * ✅ Dynamic dropdown values from postmeta
+ * Handles normal string meta values.
+ * If your meta is saved serialized array, tell me — I'll update this to unserialize + merge.
+ */
+function re_get_distinct_meta_values_rent($meta_key) {
+    global $wpdb;
+
+    $sql = $wpdb->prepare("
+    SELECT DISTINCT pm.meta_value
+    FROM {$wpdb->postmeta} pm
+    INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+    WHERE pm.meta_key = %s
+      AND p.post_type = %s
+      AND p.post_status = 'publish'
+      AND pm.meta_value <> ''
+    ORDER BY pm.meta_value ASC
+  ", $meta_key, RE_CPT_RENT);
+
+    $vals = $wpdb->get_col($sql);
+    if (!is_array($vals)) return [];
+
+    $vals = array_map('sanitize_text_field', $vals);
+    $vals = array_filter($vals, fn($v) => $v !== '');
+    $vals = array_values(array_unique($vals));
+    return $vals;
+}
+
+function re_pretty_label_rent($v) {
+    $v = trim((string)$v);
+    $v = str_replace(['-', '_'], ' ', $v);
+    $v = preg_replace('/\s+/', ' ', $v);
+    return ucwords($v);
+}
+
+/**
+ * CSS/JS (one file)
+ */
+add_action('wp_enqueue_scripts', function () {
+    wp_register_style('re-style', false);
+    wp_enqueue_style('re-style');
+    wp_add_inline_style('re-style', "
+    :root{--f:Poppins,system-ui;--t:#0f172a;--m:#64748b;--l:#e5e7eb;--b:var(--clr-primary);--b2:#0a56b3;--s:0 10px 30px rgb(146 150 161 / 14%);--r:14px}
+    .re-wrap {max-width: 1200px;margin: 0 auto;padding: 16px;font-family: var(--f);margin-bottom: 60px;}
+    .re-hero{position:relative;border-radius:var(--r);overflow:hidden;box-shadow:var(--s);margin-bottom:14px}
+    .re-hero__bg_rent{position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,8,23,.35),rgba(2,8,23,.12)),url('https://images.unsplash.com/photo-1724482606633-fa74fe4f5de1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dhttps://images.unsplash.com/photo-1504279577054-acfeccf8fc52?auto=format&fit=crop&w=1800&q=80');background-size:cover;background-position:center}
+    .re-hero__inner{position:relative;padding:24px}
+    .re-hero__title{margin:0 0 12px;text-align:center;color:#fff;font-size:34px;font-weight:900}
+    .re-filter{background:rgba(255,255,255,.88);backdrop-filter:blur(10px);border:1px solid rgba(229,231,235,.9);border-radius:14px;box-shadow:0 18px 40px rgba(2,8,23,.12);padding:12px}
+	form#reFilterForm {display: flex;flex-direction: column;gap: 9px;}
+    .re-row{display:grid;gap:10px}
+    .re-row--top{grid-template-columns:170px 170px 1fr 140px;align-items:center}
+    .re-row--bottom{grid-template-columns:repeat(6,minmax(0,1fr))}
+    .re-row--toolbar{grid-template-columns:1fr auto;align-items:center;margin-top:10px}
+    .re-input{width:100%;padding:12px;border:1px solid var(--l);border-radius:10px;font-family:var(--f)}
+    .re-input--small{padding:10px 12px}
+    .re-btn{padding:12px;border:0;border-radius:10px;background:var(--b);color:#fff;font-weight:900;cursor:pointer}
+    .re-btn:hover{background:var(--b2)}
+    .re-results {margin-top: 64px;min-height: 120px;margin-bottom: 58px;}
+    .re-results.is-loading{opacity:.6;pointer-events:none}
+    .re-grid {display: grid;grid-template-columns: repeat(3,minmax(0,1fr));gap: 40px;}
+    .re-card{display:block;text-decoration:none;background:#fff;border:1px solid var(--l);border-radius:var(--r);overflow:hidden;box-shadow:var(--s)}
+    .re-card__img img{width:100%;height:190px;object-fit:cover;display:block}
+    .re-ph{height:190px;display:grid;place-items:center;background:#f1f5f9;color:#64748b;font-weight:800}
+    .re-badges{position:absolute;left:12px;top:12px;display:flex;gap:8px}
+    .re-card__img{position:relative}
+    .re-badge{background:rgba(11,99,206,.95);color:#fff;font-size:11px;font-weight:900;padding:6px 10px;border-radius:999px}
+    .re-badge--dark{background:rgba(15,23,42,.85)}
+    .re-card__body{padding:12px}
+	.author_details {display:flex;gap: 5px;}
+	.avatar-name h6 {margin: 0px;}
+	.avatar-name {display: flex;flex-direction: column;justify-content: center;color: black;}
+	.re-card__body {display: flex;flex-direction: column;gap: 10px;}
+    .re-price{font-size:18px;font-weight:600;color:var(--b)}
+    .re-title{margin-top:6px;color:var(--t);font-weight:400;line-height:1.25}
+    .re-meta{display:flex;gap:12px;margin-top:8px;color:var(--m);font-size:12px;font-weight:700}
+    .re-empty{padding:18px;border:1px dashed #cbd5e1;border-radius:var(--r);background:#fff;color:var(--m);font-weight:700}
+    .re-count{color:var(--m);font-weight:900}
+    .re-pagination{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:14px}
+    .re-page{border:1px solid var(--l);background:#fff;border-radius:10px;padding:10px 12px;cursor:pointer;font-weight:900}
+    .re-page:disabled{opacity:.5;cursor:not-allowed}
+    @media(max-width:1024px){.re-row--top{grid-template-columns:1fr 1fr}.re-row--bottom{grid-template-columns:1fr 1fr}.re-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:640px){.re-grid{grid-template-columns:1fr}.re-row--toolbar{grid-template-columns:1fr}}
+  ");
+
+    wp_register_script('re-js', false, ['jquery'], null, true);
+    wp_enqueue_script('re-js');
+
+    $ajax_url = admin_url('admin-ajax.php');
+
+    wp_add_inline_script('re-js', "
+    (function($){
+      const ajaxUrl = " . json_encode($ajax_url) . ";
+
+      function toObj(arr){ const o={}; arr.forEach(x=>o[x.name]=x.value); return o; }
+      function loading(on){ $('#reResults').toggleClass('is-loading', !!on); }
+
+      function fetchProps(page){
+        const \$f = $('#reFilterForm'); if(!\$f.length) return;
+        const data = toObj(\$f.serializeArray());
+        data.action = 're_filter_porpertypi_dynamic_rent';
+        data.paged = page || 1;
+
+        loading(true);
+        $.post(ajaxUrl, data).done(function(res){
+          loading(false);
+          if(!res || !res.success){ $('#reResults').html('<div class=\"re-empty\">Error</div>'); return; }
+
+          $('#reResults').html(res.data.html);
+          $('#reCount').text((res.data.found||0) + ' results');
+          $('#rePageInfo').text((res.data.paged||1) + ' / ' + (res.data.max_pages||1));
+
+          const pg = res.data.paged||1, max=res.data.max_pages||1;
+          $('.re-page[data-dir=\"prev\"]').prop('disabled', pg<=1);
+          $('.re-page[data-dir=\"next\"]').prop('disabled', pg>=max);
+
+          \$f.find('input[name=\"paged\"]').val(pg);
+        }).fail(function(){
+          loading(false);
+          $('#reResults').html('<div class=\"re-empty\">Request failed</div>');
+        });
+      }
+
+      $(document).on('ready', function(){ fetchProps(1); });
+
+      $(document).on('submit', '#reFilterForm', function(e){
+        e.preventDefault(); fetchProps(1);
+      });
+
+      // auto update on dropdown change (professional UX)
+      $(document).on('change', '#reFilterForm select', function(){
+        fetchProps(1);
+      });
+
+      $(document).on('click', '.re-page', function(){
+        const dir = $(this).data('dir');
+        const cur = parseInt($('#reFilterForm input[name=\"paged\"]').val()||'1',10);
+        fetchProps(dir==='next' ? cur+1 : cur-1);
+      });
+
+    })(jQuery);
+  ");
+});
+
+
+
+// recent post of this cpt("porpertypi") under this meta(pp_purpose = "For Rent") -======================================================
+// ✅ Shortcode: [reaf_recent_properties posts="6"]
+add_shortcode('reaf_recent_properties', function ($atts) {
+
+
+    $q = new WP_Query([
+        'post_type'      => 'porpertypi',
+        'posts_per_page' => 6,
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+
+        'meta_query' => [
+            [
+                'key'     => 'pp_purpose', // meta field নাম
+                'value'   => 'For Rent',
+                'compare' => '='
+            ]
+        ]
+    ]);
+
+    if (!$q->have_posts()) return '<div class="reaf-front-empty">No properties found.</div>';
+
+    ob_start(); ?>
+
+    <section class="rent-cards">
+
+        <h1>Recent Rent Property</h1>
+        <div class="rent-container">
+            <div class="rent-cards__grid">
+                <!-- Card -->
+                <?php while ($q->have_posts()): $q->the_post();
+                    $id = get_the_ID();
+
+                    // core meta
+                    $price = get_post_meta($id, '_re_price', true);
+                    $size  = get_post_meta($id, '_re_size_sqft', true);
+                    $beds  = get_post_meta($id, '_re_beds', true);
+                    $baths = get_post_meta($id, '_re_baths', true);
+
+                    // project meta
+                    $purpose       = get_post_meta($id, 'pp_purpose', true);
+                    $status        = get_post_meta($id, 'pp_status', true);
+                    $emirate       = get_post_meta($id, 'pp_emirate', true);
+                    $property_name = get_post_meta($id, 'pp_property_name', true);
+                    $added_on      = get_post_meta($id, 'pp_added_on', true);
+
+                    // contact
+                    $phone = get_post_meta($id, '_re_phone', true);
+                    $email = get_post_meta($id, '_re_email', true);
+                    $wa    = get_post_meta($id, '_re_whatsapp', true);
+
+                    // gallery ids (comma separated)
+                    $gallery = get_post_meta($id, '_re_gallery_ids', true);
+                    $first_gallery_id = 0;
+                    if ($gallery) {
+                        $ids = array_filter(array_map('absint', explode(',', $gallery)));
+                        $first_gallery_id = $ids ? $ids[0] : 0;
+                    }
+
+                    $img = '';
+                    if ($first_gallery_id) {
+                        $img = wp_get_attachment_image($first_gallery_id, 'large');
+                    } elseif (has_post_thumbnail($id)) {
+                        $img = get_the_post_thumbnail($id, 'large');
+                    }
+
+                    // amenities (collect non-empty)
+                    $indor_keys   = ['indor_1', 'indor_2', 'indor_3', 'indor_4', 'indor_6', 'indor_7', 'indor_8'];
+                    $outdoor_keys = ['outdoor_1', 'outdoor_2', 'outdoor_3', 'outdoor_4', 'outdoor_5', 'outdoor_6', 'outdoor_7', 'outdoor_8', 'outdoor_9', 'outdoor_10'];
+                    $services_keys = ['services_1', 'services_2', 'services_3', 'services_4', 'services_5', 'services_6', 'services_7', 'services_8', 'services_9', 'services_10'];
+
+                    $get_list = function ($keys) use ($id) {
+                        $items = [];
+                        foreach ($keys as $k) {
+                            $v = trim((string)get_post_meta($id, $k, true));
+                            if ($v !== '') $items[] = $v;
+                        }
+                        return $items;
+                    };
+
+                    $indor_list    = $get_list($indor_keys);
+                    $outdoor_list  = $get_list($outdoor_keys);
+                    $services_list = $get_list($services_keys);
+
+                    $community_desc = get_post_meta($id, 'community_description', true);
+
+                    // helpers
+                    $fmt_price = $price !== '' ? number_format_i18n((float)$price) : '';
+                    $fmt_size  = $size  !== '' ? number_format_i18n((float)$size)  : '';
+                ?>
+                    <article class="rent-cardx" aria-label="rent property card">
+                        <div class="rent-cardx__media">
+                            <img
+                                class="rent-cardx__img"
+                                src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>"
+                                alt="Property">
+                            <div class="rent-cardx__badges">
+                                <span class="rent-cardx__badge rent-cardx__badge--buy"> </span>
+                                <span class="rent-cardx__badge rent-cardx__badge--type">APARTMENT</span>
+                            </div>
+
+                            <button class="rent-cardx__fav" type="button" aria-label="Save to favorites">
+                                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                                    <path
+                                        d="M12 21s-7.2-4.35-9.6-8.6C.76 9.57 2.2 6.5 5.7 5.6c1.76-.45 3.33.2 4.3 1.3.97-1.1 2.54-1.75 4.3-1.3 3.5.9 4.94 3.97 3.3 6.8C19.2 16.65 12 21 12 21z"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </button>
+
+                            <div class="rent-cardx__watermark">METROPOLITAN</div>
+                        </div>
+
+                        <div class="rent-cardx__body">
+                            <div class="rent-cardx__price"><?php echo $fmt_price; ?> AED</div>
+
+                            <div class="rent-cardx__specs">
+                                <div class="rent-cardx__spec">
+                                    <div class="rent-cardx__specNum">2</div>
+                                    <div class="rent-cardx__specLbl">Beds</div>
+                                </div>
+                                <div class="rent-cardx__spec">
+                                    <div class="rent-cardx__specNum">3</div>
+                                    <div class="rent-cardx__specLbl">Baths</div>
+                                </div>
+                                <div class="rent-cardx__spec">
+                                    <div class="rent-cardx__specNum">1,343</div>
+                                    <div class="rent-cardx__specLbl">Square (ft)</div>
+                                </div>
+                            </div>
+
+                            <h3 class="rent-cardx__title">
+                                2BR Apartment for Sale in Mina Al Arab – MPS-45878
+                            </h3>
+
+                            <div class="rent-cardx__loc">
+                                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                                    <path
+                                        d="M12 22s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12z"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.8" />
+                                    <circle cx="12" cy="10" r="2.4" fill="none" stroke="currentColor" stroke-width="1.8" />
+                                </svg>
+                                Gateway Residences 2, Mina Al Arab
+                            </div>
+
+                            <hr class="rent-cardx__hr" />
+
+                            <div class="rent-cardx__agent">
+                                <div class="rent-cardx__agentLogo" aria-hidden="true">
+                                    <span class="rent-cardx__agentMark"></span>
+                                </div>
+                                <div class="rent-cardx__agentText">
+                                    <div class="rent-cardx__agentTop">Listing by</div>
+                                    <div class="rent-cardx__agentName">Metropolitan Premium Properties</div>
+                                </div>
+                            </div>
+
+                            <a class="rent-cardx__btn" href="#">Enquire Now</a>
+                        </div>
+                    </article>
+                <?php endwhile;
+                wp_reset_postdata(); ?>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="reaf-front-wrap">
+        <div class="reaf-front-container">
+            <div class="reaf-front-head">
+                <h2>Latest Properties</h2>
+                <p>Recently added listings with key details & amenities.</p>
+            </div>
+
+            <div class="reaf-front-grid">
+                <?php while ($q->have_posts()): $q->the_post();
+                    $id = get_the_ID();
+
+                    // core meta
+                    $price = get_post_meta($id, '_re_price', true);
+                    $size  = get_post_meta($id, '_re_size_sqft', true);
+                    $beds  = get_post_meta($id, '_re_beds', true);
+                    $baths = get_post_meta($id, '_re_baths', true);
+
+                    // project meta
+                    $purpose       = get_post_meta($id, 'pp_purpose', true);
+                    $status        = get_post_meta($id, 'pp_status', true);
+                    $emirate       = get_post_meta($id, 'pp_emirate', true);
+                    $property_name = get_post_meta($id, 'pp_property_name', true);
+                    $added_on      = get_post_meta($id, 'pp_added_on', true);
+
+                    // contact
+                    $phone = get_post_meta($id, '_re_phone', true);
+                    $email = get_post_meta($id, '_re_email', true);
+                    $wa    = get_post_meta($id, '_re_whatsapp', true);
+
+                    // gallery ids (comma separated)
+                    $gallery = get_post_meta($id, '_re_gallery_ids', true);
+                    $first_gallery_id = 0;
+                    if ($gallery) {
+                        $ids = array_filter(array_map('absint', explode(',', $gallery)));
+                        $first_gallery_id = $ids ? $ids[0] : 0;
+                    }
+
+                    $img = '';
+                    if ($first_gallery_id) {
+                        $img = wp_get_attachment_image($first_gallery_id, 'large');
+                    } elseif (has_post_thumbnail($id)) {
+                        $img = get_the_post_thumbnail($id, 'large');
+                    }
+
+                    // amenities (collect non-empty)
+                    $indor_keys   = ['indor_1', 'indor_2', 'indor_3', 'indor_4', 'indor_6', 'indor_7', 'indor_8'];
+                    $outdoor_keys = ['outdoor_1', 'outdoor_2', 'outdoor_3', 'outdoor_4', 'outdoor_5', 'outdoor_6', 'outdoor_7', 'outdoor_8', 'outdoor_9', 'outdoor_10'];
+                    $services_keys = ['services_1', 'services_2', 'services_3', 'services_4', 'services_5', 'services_6', 'services_7', 'services_8', 'services_9', 'services_10'];
+
+                    $get_list = function ($keys) use ($id) {
+                        $items = [];
+                        foreach ($keys as $k) {
+                            $v = trim((string)get_post_meta($id, $k, true));
+                            if ($v !== '') $items[] = $v;
+                        }
+                        return $items;
+                    };
+
+                    $indor_list    = $get_list($indor_keys);
+                    $outdoor_list  = $get_list($outdoor_keys);
+                    $services_list = $get_list($services_keys);
+
+                    $community_desc = get_post_meta($id, 'community_description', true);
+
+                    // helpers
+                    $fmt_price = $price !== '' ? number_format_i18n((float)$price) : '';
+                    $fmt_size  = $size  !== '' ? number_format_i18n((float)$size)  : '';
+                ?>
+                    <article class="reaf-card">
+                        <a class="reaf-media" href="<?php the_permalink(); ?>" aria-label="<?php echo esc_attr(get_the_title()); ?>">
+                            <?php if ($img): ?>
+                                <div class="reaf-media-img"><?php echo $img; ?></div>
+                            <?php else: ?>
+                                <div class="reaf-media-ph">No Image</div>
+                            <?php endif; ?>
+
+                            <div class="reaf-badges">
+                                <?php if ($status): ?><span class="reaf-badge"><?php echo esc_html($status); ?></span><?php endif; ?>
+                                <?php if ($purpose): ?><span class="reaf-badge reaf-badge-accent"><?php echo esc_html($purpose); ?></span><?php endif; ?>
+                            </div>
+                        </a>
+
+                        <div class="reaf-body">
+                            <div class="reaf-top">
+                                <h3 class="reaf-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                                <?php if ($fmt_price): ?>
+                                    <div class="reaf-price"><?php echo esc_html($fmt_price); ?></div>
+                                <?php endif; ?>
+                            </div>
+
+                            <div class="reaf-sub">
+                                <?php if ($property_name): ?>
+                                    <span class="reaf-sub-item"><?php echo esc_html($property_name); ?></span>
+                                <?php endif; ?>
+                                <?php if ($emirate): ?>
+                                    <span class="reaf-dot">•</span>
+                                    <span class="reaf-sub-item"><?php echo esc_html($emirate); ?></span>
+                                <?php endif; ?>
+                                <?php if ($added_on): ?>
+                                    <span class="reaf-dot">•</span>
+                                    <span class="reaf-sub-item"><?php echo esc_html($added_on); ?></span>
+                                <?php endif; ?>
+                            </div>
+
+                            <div class="reaf-feats">
+                                <?php if ($beds !== ''): ?><span class="reaf-pill"><?php echo esc_html($beds); ?> Beds</span><?php endif; ?>
+                                <?php if ($baths !== ''): ?><span class="reaf-pill"><?php echo esc_html($baths); ?> Baths</span><?php endif; ?>
+                                <?php if ($fmt_size): ?><span class="reaf-pill"><?php echo esc_html($fmt_size); ?> sqft</span><?php endif; ?>
+                            </div>
+
+                            <?php if ($community_desc): ?>
+                                <p class="reaf-desc"><?php echo esc_html(wp_trim_words($community_desc, 22)); ?></p>
+                            <?php else: ?>
+                                <p class="reaf-desc"><?php echo esc_html(wp_trim_words(get_the_excerpt(), 22)); ?></p>
+                            <?php endif; ?>
+
+                            <?php
+                            // show limited amenities (top 6 combined)
+                            $amen = array_slice(array_merge($indor_list, $outdoor_list, $services_list), 0, 6);
+                            ?>
+                            <?php if (!empty($amen)): ?>
+                                <div class="reaf-amen">
+                                    <?php foreach ($amen as $a): ?>
+                                        <span class="reaf-chip"><?php echo esc_html($a); ?></span>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+
+                            <div class="reaf-actions">
+                                <a class="reaf-btn" href="<?php the_permalink(); ?>">View Details</a>
+
+                                <div class="reaf-contacts">
+                                    <?php if ($phone): ?>
+                                        <a class="reaf-iconbtn" href="tel:<?php echo esc_attr(preg_replace('/\s+/', '', $phone)); ?>" aria-label="Call">📞</a>
+                                    <?php endif; ?>
+                                    <?php if ($email): ?>
+                                        <a class="reaf-iconbtn" href="mailto:<?php echo esc_attr($email); ?>" aria-label="Email">✉️</a>
+                                    <?php endif; ?>
+                                    <?php if ($wa): ?>
+                                        <a class="reaf-iconbtn" target="_blank" rel="noopener" href="https://wa.me/<?php echo esc_attr(preg_replace('/[^0-9]/', '', $wa)); ?>" aria-label="WhatsApp">🟢</a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                <?php endwhile;
+                wp_reset_postdata(); ?>
+            </div>
+        </div>
+    </section>
+<?php
+    return ob_get_clean();
+});

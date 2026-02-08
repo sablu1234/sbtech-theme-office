@@ -4,7 +4,7 @@
         <!-- 1 -->
         <div class="footer-col footer-brand">
             <a class="brand" href="<?php echo home_url('/'); ?>">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/header/logo.svg" alt="Logo">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/header/logo-main.png" alt="Logo">
             </a>
 
             <p class="addr">
