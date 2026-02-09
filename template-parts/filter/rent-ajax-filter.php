@@ -34,7 +34,7 @@ add_shortcode('porpertypi_ajax_filter_dynamic_rent', function () {
         <div class="re-hero">
             <div class="re-hero__bg_rent"></div>
             <div class="re-hero__inner">
-                <h2 class="re-hero__title">Find Property</h2>
+                <h2 class="re-hero__title">Find Rent Property</h2>
 
                 <form class="re-filter" id="reFilterForm">
                     <input type="hidden" name="nonce" value="<?php echo esc_attr($nonce); ?>">
@@ -403,7 +403,10 @@ add_shortcode('reaf_recent_properties', function ($atts) {
 
     <section class="rent-cards">
 
-        <h1>Recent Rent Property</h1>
+        <div class="reaf-front-head">
+            <h2>Recent Rent Property</h2>
+            <p>Recently added listings with key details & amenities.</p>
+        </div>
         <div class="rent-container">
             <div class="rent-cards__grid">
                 <!-- Card -->
@@ -420,6 +423,7 @@ add_shortcode('reaf_recent_properties', function ($atts) {
                     $purpose       = get_post_meta($id, 'pp_purpose', true);
                     $status        = get_post_meta($id, 'pp_status', true);
                     $emirate       = get_post_meta($id, 'pp_emirate', true);
+                    $address       = get_post_meta($id, 'pp_address', true);
                     $property_name = get_post_meta($id, 'pp_property_name', true);
                     $added_on      = get_post_meta($id, 'pp_added_on', true);
 
@@ -474,8 +478,8 @@ add_shortcode('reaf_recent_properties', function ($atts) {
                                 src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>"
                                 alt="Property">
                             <div class="rent-cardx__badges">
-                                <span class="rent-cardx__badge rent-cardx__badge--buy"> </span>
-                                <span class="rent-cardx__badge rent-cardx__badge--type">APARTMENT</span>
+                                <span class="rent-cardx__badge rent-cardx__badge--buy"><?php echo $status; ?></span>
+                                <span class="rent-cardx__badge rent-cardx__badge--type"><?php echo $purpose; ?></span>
                             </div>
 
                             <button class="rent-cardx__fav" type="button" aria-label="Save to favorites">
@@ -489,7 +493,7 @@ add_shortcode('reaf_recent_properties', function ($atts) {
                                 </svg>
                             </button>
 
-                            <div class="rent-cardx__watermark">METROPOLITAN</div>
+                            <div class="rent-cardx__watermark d-none">METROPOLITAN</div>
                         </div>
 
                         <div class="rent-cardx__body">
@@ -497,21 +501,21 @@ add_shortcode('reaf_recent_properties', function ($atts) {
 
                             <div class="rent-cardx__specs">
                                 <div class="rent-cardx__spec">
-                                    <div class="rent-cardx__specNum">2</div>
+                                    <div class="rent-cardx__specNum"><?php echo $beds; ?></div>
                                     <div class="rent-cardx__specLbl">Beds</div>
                                 </div>
                                 <div class="rent-cardx__spec">
-                                    <div class="rent-cardx__specNum">3</div>
+                                    <div class="rent-cardx__specNum"><?php echo $baths; ?></div>
                                     <div class="rent-cardx__specLbl">Baths</div>
                                 </div>
                                 <div class="rent-cardx__spec">
-                                    <div class="rent-cardx__specNum">1,343</div>
+                                    <div class="rent-cardx__specNum"><?php echo $fmt_size; ?></div>
                                     <div class="rent-cardx__specLbl">Square (ft)</div>
                                 </div>
                             </div>
 
                             <h3 class="rent-cardx__title">
-                                2BR Apartment for Sale in Mina Al Arab – MPS-45878
+                                <?php the_title(); ?>
                             </h3>
 
                             <div class="rent-cardx__loc">
@@ -523,22 +527,22 @@ add_shortcode('reaf_recent_properties', function ($atts) {
                                         stroke-width="1.8" />
                                     <circle cx="12" cy="10" r="2.4" fill="none" stroke="currentColor" stroke-width="1.8" />
                                 </svg>
-                                Gateway Residences 2, Mina Al Arab
+                                <?php echo esc_html($address) ?>
                             </div>
 
                             <hr class="rent-cardx__hr" />
 
                             <div class="rent-cardx__agent">
                                 <div class="rent-cardx__agentLogo" aria-hidden="true">
-                                    <span class="rent-cardx__agentMark"></span>
+                                    <?php echo get_avatar(get_the_author_meta('ID')); ?>
                                 </div>
                                 <div class="rent-cardx__agentText">
                                     <div class="rent-cardx__agentTop">Listing by</div>
-                                    <div class="rent-cardx__agentName">Metropolitan Premium Properties</div>
+                                    <div class="rent-cardx__agentName"><?php echo get_the_author_meta('display_name', get_the_author_meta("ID")); ?></div>
                                 </div>
                             </div>
 
-                            <a class="rent-cardx__btn" href="#">Enquire Now</a>
+                            <a class="rent-cardx__btn" href="<?php the_permalink(); ?>">Enquire Now</a>
                         </div>
                     </article>
                 <?php endwhile;
@@ -549,158 +553,6 @@ add_shortcode('reaf_recent_properties', function ($atts) {
     </section>
 
 
-
-
-    <section class="reaf-front-wrap">
-        <div class="reaf-front-container">
-            <div class="reaf-front-head">
-                <h2>Latest Properties</h2>
-                <p>Recently added listings with key details & amenities.</p>
-            </div>
-
-            <div class="reaf-front-grid">
-                <?php while ($q->have_posts()): $q->the_post();
-                    $id = get_the_ID();
-
-                    // core meta
-                    $price = get_post_meta($id, '_re_price', true);
-                    $size  = get_post_meta($id, '_re_size_sqft', true);
-                    $beds  = get_post_meta($id, '_re_beds', true);
-                    $baths = get_post_meta($id, '_re_baths', true);
-
-                    // project meta
-                    $purpose       = get_post_meta($id, 'pp_purpose', true);
-                    $status        = get_post_meta($id, 'pp_status', true);
-                    $emirate       = get_post_meta($id, 'pp_emirate', true);
-                    $property_name = get_post_meta($id, 'pp_property_name', true);
-                    $added_on      = get_post_meta($id, 'pp_added_on', true);
-
-                    // contact
-                    $phone = get_post_meta($id, '_re_phone', true);
-                    $email = get_post_meta($id, '_re_email', true);
-                    $wa    = get_post_meta($id, '_re_whatsapp', true);
-
-                    // gallery ids (comma separated)
-                    $gallery = get_post_meta($id, '_re_gallery_ids', true);
-                    $first_gallery_id = 0;
-                    if ($gallery) {
-                        $ids = array_filter(array_map('absint', explode(',', $gallery)));
-                        $first_gallery_id = $ids ? $ids[0] : 0;
-                    }
-
-                    $img = '';
-                    if ($first_gallery_id) {
-                        $img = wp_get_attachment_image($first_gallery_id, 'large');
-                    } elseif (has_post_thumbnail($id)) {
-                        $img = get_the_post_thumbnail($id, 'large');
-                    }
-
-                    // amenities (collect non-empty)
-                    $indor_keys   = ['indor_1', 'indor_2', 'indor_3', 'indor_4', 'indor_6', 'indor_7', 'indor_8'];
-                    $outdoor_keys = ['outdoor_1', 'outdoor_2', 'outdoor_3', 'outdoor_4', 'outdoor_5', 'outdoor_6', 'outdoor_7', 'outdoor_8', 'outdoor_9', 'outdoor_10'];
-                    $services_keys = ['services_1', 'services_2', 'services_3', 'services_4', 'services_5', 'services_6', 'services_7', 'services_8', 'services_9', 'services_10'];
-
-                    $get_list = function ($keys) use ($id) {
-                        $items = [];
-                        foreach ($keys as $k) {
-                            $v = trim((string)get_post_meta($id, $k, true));
-                            if ($v !== '') $items[] = $v;
-                        }
-                        return $items;
-                    };
-
-                    $indor_list    = $get_list($indor_keys);
-                    $outdoor_list  = $get_list($outdoor_keys);
-                    $services_list = $get_list($services_keys);
-
-                    $community_desc = get_post_meta($id, 'community_description', true);
-
-                    // helpers
-                    $fmt_price = $price !== '' ? number_format_i18n((float)$price) : '';
-                    $fmt_size  = $size  !== '' ? number_format_i18n((float)$size)  : '';
-                ?>
-                    <article class="reaf-card">
-                        <a class="reaf-media" href="<?php the_permalink(); ?>" aria-label="<?php echo esc_attr(get_the_title()); ?>">
-                            <?php if ($img): ?>
-                                <div class="reaf-media-img"><?php echo $img; ?></div>
-                            <?php else: ?>
-                                <div class="reaf-media-ph">No Image</div>
-                            <?php endif; ?>
-
-                            <div class="reaf-badges">
-                                <?php if ($status): ?><span class="reaf-badge"><?php echo esc_html($status); ?></span><?php endif; ?>
-                                <?php if ($purpose): ?><span class="reaf-badge reaf-badge-accent"><?php echo esc_html($purpose); ?></span><?php endif; ?>
-                            </div>
-                        </a>
-
-                        <div class="reaf-body">
-                            <div class="reaf-top">
-                                <h3 class="reaf-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                                <?php if ($fmt_price): ?>
-                                    <div class="reaf-price"><?php echo esc_html($fmt_price); ?></div>
-                                <?php endif; ?>
-                            </div>
-
-                            <div class="reaf-sub">
-                                <?php if ($property_name): ?>
-                                    <span class="reaf-sub-item"><?php echo esc_html($property_name); ?></span>
-                                <?php endif; ?>
-                                <?php if ($emirate): ?>
-                                    <span class="reaf-dot">•</span>
-                                    <span class="reaf-sub-item"><?php echo esc_html($emirate); ?></span>
-                                <?php endif; ?>
-                                <?php if ($added_on): ?>
-                                    <span class="reaf-dot">•</span>
-                                    <span class="reaf-sub-item"><?php echo esc_html($added_on); ?></span>
-                                <?php endif; ?>
-                            </div>
-
-                            <div class="reaf-feats">
-                                <?php if ($beds !== ''): ?><span class="reaf-pill"><?php echo esc_html($beds); ?> Beds</span><?php endif; ?>
-                                <?php if ($baths !== ''): ?><span class="reaf-pill"><?php echo esc_html($baths); ?> Baths</span><?php endif; ?>
-                                <?php if ($fmt_size): ?><span class="reaf-pill"><?php echo esc_html($fmt_size); ?> sqft</span><?php endif; ?>
-                            </div>
-
-                            <?php if ($community_desc): ?>
-                                <p class="reaf-desc"><?php echo esc_html(wp_trim_words($community_desc, 22)); ?></p>
-                            <?php else: ?>
-                                <p class="reaf-desc"><?php echo esc_html(wp_trim_words(get_the_excerpt(), 22)); ?></p>
-                            <?php endif; ?>
-
-                            <?php
-                            // show limited amenities (top 6 combined)
-                            $amen = array_slice(array_merge($indor_list, $outdoor_list, $services_list), 0, 6);
-                            ?>
-                            <?php if (!empty($amen)): ?>
-                                <div class="reaf-amen">
-                                    <?php foreach ($amen as $a): ?>
-                                        <span class="reaf-chip"><?php echo esc_html($a); ?></span>
-                                    <?php endforeach; ?>
-                                </div>
-                            <?php endif; ?>
-
-                            <div class="reaf-actions">
-                                <a class="reaf-btn" href="<?php the_permalink(); ?>">View Details</a>
-
-                                <div class="reaf-contacts">
-                                    <?php if ($phone): ?>
-                                        <a class="reaf-iconbtn" href="tel:<?php echo esc_attr(preg_replace('/\s+/', '', $phone)); ?>" aria-label="Call">📞</a>
-                                    <?php endif; ?>
-                                    <?php if ($email): ?>
-                                        <a class="reaf-iconbtn" href="mailto:<?php echo esc_attr($email); ?>" aria-label="Email">✉️</a>
-                                    <?php endif; ?>
-                                    <?php if ($wa): ?>
-                                        <a class="reaf-iconbtn" target="_blank" rel="noopener" href="https://wa.me/<?php echo esc_attr(preg_replace('/[^0-9]/', '', $wa)); ?>" aria-label="WhatsApp">🟢</a>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                <?php endwhile;
-                wp_reset_postdata(); ?>
-            </div>
-        </div>
-    </section>
 <?php
     return ob_get_clean();
 });
