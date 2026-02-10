@@ -1,12 +1,12 @@
 <?php
 // recent post of this cpt("porpertypi") under this meta(pp_purpose = "For Rent") -======================================================
-// ✅ Shortcode: [reaf_recent_properties posts="6"]
+// ✅ Shortcode: [Commercial_reaf_recent_properties posts="6"]
 add_shortcode('Commercial_reaf_recent_properties', function ($atts) {
 
 
     $q = new WP_Query([
         'post_type'      => 'porpertypi',
-        'posts_per_page' => 6,
+        'posts_per_page' => 10,
         'post_status'    => 'publish',
         'orderby'        => 'date',
         'order'          => 'DESC',
@@ -101,8 +101,13 @@ add_shortcode('Commercial_reaf_recent_properties', function ($atts) {
                                 src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>"
                                 alt="Property">
                             <div class="rent-cardx__badges">
-                                <span class="rent-cardx__badge rent-cardx__badge--buy"><?php echo $status; ?></span>
-                                <span class="rent-cardx__badge rent-cardx__badge--type"><?php echo $purpose; ?></span>
+                                <?php if ($status) : ?>
+                                    <span class="rent-cardx__badge rent-cardx__badge--buy"><?php echo $status; ?></span>
+                                <?php endif; ?>
+
+                                <?php if ($purpose) : ?>
+                                    <span class="rent-cardx__badge rent-cardx__badge--type"><?php echo $purpose; ?></span>
+                                <?php endif; ?>
                             </div>
 
                             <button class="rent-cardx__fav" type="button" aria-label="Save to favorites">

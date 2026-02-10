@@ -104,6 +104,7 @@
 <section class="container commercial-recent">
     <?php echo do_shortcode('[Commercial_reaf_recent_properties]'); ?>
 </section>
+<!-- Recent commercial Property end -->
 
 <!-- Who we are start -->
 <section class="commercial-who">
