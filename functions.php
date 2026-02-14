@@ -105,3 +105,4 @@ include_once get_template_directory() . '/template-parts/filter/buy-ajax-filter.
 include_once get_template_directory() . '/template-parts/filter/rent-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/commercial-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/new-projects-ajax-filter.php';
+include_once get_template_directory() . '/template-parts/filter/areas-ajax-filter.php';

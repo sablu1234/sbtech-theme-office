@@ -90,4 +90,125 @@
     </div>
 </section>
 <!-- Office for sate end -->
+
+<!-- Faq section start -->
+<section class="rent-faqs" aria-label="rent faq">
+    <div class="rent-container">
+        <div class="rent-faqs__head">
+            <div>
+                <span class="rent-faqs__kicker">FAQ</span>
+                <h2 class="rent-faqs__title">Frequently asked questions</h2>
+                <p class="rent-faqs__sub">Find quick answers about new projects, listings, payments, and how the platform works. Everything you need before making your decision.</p>
+            </div>
+        </div>
+
+        <div class="rent-faqs__wrap" id="rentFaq">
+            <!-- Item -->
+            <div class="rent-faq" data-open="true">
+                <button class="rent-faq__q" type="button" aria-expanded="true">
+                    1.How do I find the best new projects?
+                    <span class="rent-faq__icon" aria-hidden="true"></span>
+                </button>
+                <div class="rent-faq__a" role="region">
+                    <div class="rent-faq__aInner">
+                        Use the advanced filters to search by location, developer, budget, handover date, and property type to quickly find suitable projects.
+                    </div>
+                </div>
+            </div>
+
+            <div class="rent-faq">
+                <button class="rent-faq__q" type="button" aria-expanded="false">
+                    2. Can I view full project details before enquiring?
+                    <span class="rent-faq__icon" aria-hidden="true"></span>
+                </button>
+                <div class="rent-faq__a" role="region">
+                    <div class="rent-faq__aInner">
+                        Yes. Each project page includes gallery, amenities, payment plan, developer info, location map, and available units.
+                    </div>
+                </div>
+            </div>
+
+            <div class="rent-faq">
+                <button class="rent-faq__q" type="button" aria-expanded="false">
+                    3. Are the developers and listings verified?
+                    <span class="rent-faq__icon" aria-hidden="true"></span>
+                </button>
+                <div class="rent-faq__a" role="region">
+                    <div class="rent-faq__aInner">
+                        All projects are from trusted developers and verified sources to ensure accuracy and reliability.
+                    </div>
+                </div>
+            </div>
+
+            <div class="rent-faq">
+                <button class="rent-faq__q" type="button" aria-expanded="false">
+                    4. Is it possible to add projects in bulk?
+                    <span class="rent-faq__icon" aria-hidden="true"></span>
+                </button>
+                <div class="rent-faq__a" role="region">
+                    <div class="rent-faq__aInner">
+                        Yes. Projects can be imported using CSV/Excel files or synced automatically through API integration.
+                    </div>
+                </div>
+            </div>
+
+            <div class="rent-faq">
+                <button class="rent-faq__q" type="button" aria-expanded="false">
+                    5. Do you offer flexible payment plan options?
+                    <span class="rent-faq__icon" aria-hidden="true"></span>
+                </button>
+                <div class="rent-faq__a" role="region">
+                    <div class="rent-faq__aInner">
+                        Many off-plan projects include flexible payment plans such as post-handover and installment options, depending on the developer.
+                    </div>
+                </div>
+            </div>
+
+            <div class="rent-faq">
+                <button class="rent-faq__q" type="button" aria-expanded="false">
+                    6. How can I contact an agent or request more details?
+                    <span class="rent-faq__icon" aria-hidden="true"></span>
+                </button>
+                <div class="rent-faq__a" role="region">
+                    <div class="rent-faq__aInner">
+                        You can use the Enquire button, contact form, or WhatsApp/call options available on each project page for quick assistance.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Faq section end -->
+
+<!-- Newsletter section start -->
+<section class="rent-newsletter" aria-label="rent newsletter">
+    <div class="rent-container">
+        <div class="rent-newsletter__box">
+            <div class="rent-newsletter__left">
+                <h3 class="rent-newsletter__title">Our newsletter</h3>
+                <p class="rent-newsletter__sub">Sign up for weekly market updates, new rentals, and area insights.</p>
+            </div>
+
+            <form class="rent-newsletter__form" action="#" method="post">
+                <label class="rent-newsletter__field" aria-label="Name">
+                    <input class="rent-newsletter__input" type="text" name="name" placeholder="Enter your Name*" required />
+                </label>
+
+                <label class="rent-newsletter__field" aria-label="Email">
+                    <input class="rent-newsletter__input" type="email" name="email" placeholder="Enter your E-mail*" required />
+                </label>
+
+                <button class="rent-newsletter__btn" type="submit">
+                    <span>SUBSCRIBE</span>
+                    <svg class="rent-newsletter__icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <path d="M4 8l8 5 8-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <path d="M4 8v10h16V8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+<!-- Newsletter section end -->
+
 <?php get_footer(); ?>
