@@ -106,3 +106,37 @@ include_once get_template_directory() . '/template-parts/filter/rent-ajax-filter
 include_once get_template_directory() . '/template-parts/filter/commercial-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/new-projects-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/areas-ajax-filter.php';
+
+// Tushar bhai
+
+include_once get_template_directory() . '/inc/developers-cpt.php';
+
+include_once get_template_directory() . '/template-parts/developers/developers-ajax.php';
+include_once get_template_directory() . '/inc/developers-options.php';
+include_once get_template_directory() . '/inc/custom-cpt/custom-cpt-my.php';
+
+
+add_action('wp_enqueue_scripts', function () {
+	// only for developers template
+	if (!is_page_template('template-developers.php')) return;
+
+	wp_enqueue_style(
+		'sbtech-developers',
+		get_template_directory_uri() . '/assets/css/developers.css',
+		[],
+		'1.0.1'
+	);
+
+	wp_enqueue_script(
+		'sbtech-developers',
+		get_template_directory_uri() . '/assets/js/developers.js',
+		['jquery'],
+		'1.0.1',
+		true
+	);
+
+	wp_localize_script('sbtech-developers', 'SBTECH_DEV', [
+		'ajax'  => admin_url('admin-ajax.php'),
+		'nonce' => wp_create_nonce('sbtech_developers_nonce'),
+	]);
+}, 20);
