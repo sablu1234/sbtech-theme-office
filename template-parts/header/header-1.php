@@ -45,7 +45,7 @@
                 <li><a href="<?php echo home_url('/commercial'); ?>">Commercial</a></li>
                 <li><a href="<?php echo home_url('/new-projects'); ?>">New Projects</a></li>
                 <li><a href="<?php echo home_url('/areas'); ?>">Areas</a></li>
-                <li><a href="<?php echo home_url('/developers'); ?>">Developers</a></li>
+                <li><a href="<?php echo home_url('/developer'); ?>">Developers</a></li>
                 <li><a href="<?php echo home_url('/services'); ?>">Services</a></li>
                 <li><a href="<?php echo home_url('/events'); ?>">Events</a></li>
                 <li><a href="<?php echo home_url('/media'); ?>">Media</a></li>

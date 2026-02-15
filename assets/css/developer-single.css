@@ -1,0 +1,89 @@
+.sbdev-wrap{padding:0 0 40px;}
+.sbdev-container{width:min(1180px, 92%); margin:0 auto;}
+
+.sbdev-hero{padding:28px 0 10px;}
+.sbdev-hero-card{
+  display:grid; grid-template-columns: 1.1fr 1.4fr;
+  border-radius: 14px; overflow:hidden;
+  box-shadow: 0 18px 60px rgba(0,0,0,.08);
+  background:#fff;
+}
+.sbdev-hero-left{
+  background: #0b5d8c;
+  color:#fff;
+  padding:34px 30px;
+}
+.sbdev-hero-sub{opacity:.85; font-weight:600; margin-bottom:8px;}
+.sbdev-hero-title{font-size:38px; line-height:1.1; margin:0 0 18px; font-weight:800;}
+.sbdev-hero-stats{list-style:none; padding:0; margin:0 0 18px; display:grid; gap:10px;}
+.sbdev-hero-stats li{display:flex; align-items:center; gap:10px; opacity:.95;}
+.sbdev-ico{width:28px; height:28px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.12); border-radius:8px;}
+.sbdev-label{min-width:90px; opacity:.9;}
+.sbdev-val{margin-left:auto; font-size:18px;}
+
+.sbdev-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:12px 18px; border-radius:10px;
+  background:#fff; color:#0b5d8c; font-weight:700;
+  text-decoration:none;
+}
+.sbdev-btn:hover{opacity:.95;}
+
+.sbdev-hero-right{background:#e9eef3;}
+.sbdev-hero-img{width:100%; height:100%; min-height:280px; background-size:cover; background-position:center;}
+.sbdev-hero-img--empty{background:linear-gradient(135deg,#dbeafe,#e2e8f0);}
+
+.sbdev-section{padding:34px 0;}
+.sbdev-sec-head{display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:14px;}
+.sbdev-h2{margin:0; font-size:26px; font-weight:800;}
+.sbdev-h3{margin:0 0 6px; font-size:20px; font-weight:800;}
+.sbdev-muted{margin:0; color:#64748b;}
+
+.sbdev-logo{width:70px; height:auto; object-fit:contain; opacity:.95;}
+
+.sbdev-grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px;}
+.sbdev-card{border:1px solid rgba(15,23,42,.08); border-radius:12px; overflow:hidden; background:#fff;}
+.sbdev-card-img{display:block; height:170px; background:#f1f5f9; background-size:cover; background-position:center;}
+.sbdev-card-body{padding:14px;}
+.sbdev-card-title{margin:0 0 6px; font-size:16px; font-weight:800;}
+.sbdev-card-title a{text-decoration:none; color:#0f172a;}
+.sbdev-card-meta{color:#64748b; font-size:12px; margin-bottom:12px;}
+.sbdev-card-btn{display:inline-flex; padding:10px 14px; background:#0ea5e9; color:#fff; text-decoration:none; border-radius:10px; font-weight:700;}
+.sbdev-card-btn:hover{opacity:.95;}
+
+.sbdev-grid--agents{grid-template-columns: repeat(3, 1fr);}
+.sbdev-agent{border:1px solid rgba(15,23,42,.08); border-radius:12px; background:#fff; padding:14px;}
+.sbdev-agent-img{width:100%; height:180px; border-radius:10px; overflow:hidden; background:#f1f5f9; margin-bottom:10px;}
+.sbdev-agent-img img{width:100%; height:100%; object-fit:cover;}
+.sbdev-agent-name{font-weight:800; margin:0 0 8px;}
+.sbdev-agent-link{text-decoration:none; color:#0ea5e9; font-weight:700;}
+
+.sbdev-grid--areas{grid-template-columns: repeat(2, 1fr);}
+.sbdev-area{border-radius:12px; overflow:hidden; border:1px solid rgba(15,23,42,.08); background:#fff;}
+.sbdev-area-img{display:block; height:220px; background:linear-gradient(135deg,#60a5fa,#e2e8f0);}
+.sbdev-area-body{padding:14px;}
+.sbdev-area-title{font-size:18px; font-weight:900;}
+.sbdev-area-sub{color:#64748b; font-size:13px;}
+
+.sbdev-content{color:#0f172a; line-height:1.75;}
+
+.sbdev-contact-box{
+  border-radius:14px;
+  background: #0ea5e9;
+  color:#fff;
+  padding:18px;
+  display:grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap:16px;
+}
+.sbdev-form{background:#fff; border-radius:12px; padding:14px; color:#0f172a;}
+
+.sbdev-link{color:#0ea5e9; font-weight:700; text-decoration:none;}
+.sbdev-empty{padding:14px; background:#f8fafc; border:1px dashed rgba(15,23,42,.2); border-radius:12px; color:#475569;}
+
+@media (max-width: 980px){
+  .sbdev-hero-card{grid-template-columns:1fr;}
+  .sbdev-grid{grid-template-columns:1fr;}
+  .sbdev-grid--areas{grid-template-columns:1fr;}
+  .sbdev-contact-box{grid-template-columns:1fr;}
+}

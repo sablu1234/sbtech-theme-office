@@ -3,7 +3,7 @@
 
 <!-- new projects filter shortcode start -->
 <section class="container new-projects">
-    <?php echo do_shortcode('[areas_page]'); ?>
+    <?php echo do_shortcode('[developers_page]'); ?>
 </section>
 <!-- new projects filter shortcode end -->
 

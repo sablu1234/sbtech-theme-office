@@ -106,3 +106,82 @@ include_once get_template_directory() . '/template-parts/filter/rent-ajax-filter
 include_once get_template_directory() . '/template-parts/filter/commercial-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/new-projects-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/areas-ajax-filter.php';
+include_once get_template_directory() . '/template-parts/filter/developer-ajax-filter.php';
+
+// Tushar bhai
+
+include_once get_template_directory() . '/inc/developers-cpt.php';
+
+include_once get_template_directory() . '/template-parts/developers/developers-ajax.php';
+include_once get_template_directory() . '/inc/developers-options.php';
+include_once get_template_directory() . '/inc/custom-cpt/custom-cpt-my.php';
+
+
+add_action('wp_enqueue_scripts', function () {
+	// only for developers template
+	if (!is_page_template('template-developers.php')) return;
+
+	wp_enqueue_style(
+		'sbtech-developers',
+		get_template_directory_uri() . '/assets/css/developers.css',
+		[],
+		'1.0.1'
+	);
+
+	wp_enqueue_script(
+		'sbtech-developers',
+		get_template_directory_uri() . '/assets/js/developers.js',
+		['jquery'],
+		'1.0.1',
+		true
+	);
+
+	wp_localize_script('sbtech-developers', 'SBTECH_DEV', [
+		'ajax'  => admin_url('admin-ajax.php'),
+		'nonce' => wp_create_nonce('sbtech_developers_nonce'),
+	]);
+}, 20);
+
+
+
+
+
+
+
+
+
+// Events: CPT + meta + template assets
+include_once get_template_directory() . '/inc/events-cpt.php';
+include_once get_template_directory() . '/inc/events-meta.php';
+
+add_action('wp_enqueue_scripts', function () {
+	if (!is_page_template('template-events-archive.php')) return;
+
+	wp_enqueue_style(
+		'sbtech-events-archive',
+		get_template_directory_uri() . '/assets/css/events-archive.css',
+		[],
+		'1.0.0'
+	);
+}, 20);
+
+
+// Single Event page assets
+add_action('wp_enqueue_scripts', function () {
+	if (!is_singular('event')) return;
+
+	wp_enqueue_style(
+		'sbtech-events-single',
+		get_template_directory_uri() . '/assets/css/events-single.css',
+		[],
+		'1.0.0'
+	);
+
+	wp_enqueue_script(
+		'sbtech-events-single',
+		get_template_directory_uri() . '/assets/js/events-single.js',
+		[],
+		'1.0.0',
+		true
+	);
+}, 20);

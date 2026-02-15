@@ -13,7 +13,7 @@ add_shortcode('Commercial_reaf_recent_properties', function ($atts) {
 
         'meta_query' => [
             [
-                'key'     => 'pp_purpose', // meta field নাম
+                'key'     => 'pp_purpose', // meta field 
                 'value'   => 'Commercial',
                 'compare' => '='
             ]

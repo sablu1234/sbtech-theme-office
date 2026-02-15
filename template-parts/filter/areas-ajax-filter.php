@@ -1,379 +1,405 @@
 <?php
 
-
-
-// ajax filter -=========================================================
-
-
-define('RE_CPT_AREAS', 'porpertypi');
-
-define('RE_META_PURPOSE_AREAS', 'pp_purpose'); // ✅ your real meta_key
-define('RE_META_STATUS_AREAS',  'pp_status');  // ✅ your real meta_key
-
-define('RE_META_PRICE_AREAS',   '_re_price');
-define('RE_META_BEDS_AREAS',    '_re_beds');
-define('RE_META_BATHS_AREAS',   '_re_baths');
-define('RE_META_SIZE_AREAS',    '_re_size_sqft');
-
 /**
- * Shortcode: [porpertypi_ajax_filter_dynamic_areas]
+ * CPT: area
+ * Shortcode: [areas_page]
+ * AJAX: suggestions + results + pagination
  */
-add_shortcode('porpertypi_ajax_filter_dynamic_areas', function () {
-    $nonce = wp_create_nonce('re_filter_nonce');
 
-    // ✅ dynamic values from CPT meta
-    $purpose_options = re_get_distinct_meta_values_areas(RE_META_PURPOSE_AREAS);
-    $status_options  = re_get_distinct_meta_values_areas(RE_META_STATUS_AREAS);
-
-    ob_start(); ?>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <div class="re-wrap">
-        <div class="re-hero">
-            <div class="re-hero__bg"></div>
-            <div class="re-hero__inner">
-                <h2 class="re-hero__title">Find Property</h2>
-
-                <form class="re-filter" id="reFilterForm">
-                    <input type="hidden" name="nonce" value="<?php echo esc_attr($nonce); ?>">
-                    <input type="hidden" name="paged" value="1">
-
-                    <div class="re-row re-row--top">
-                        <select name="purpose" class="re-input">
-                            <option value="">All Purpose</option>
-                            <?php foreach ($purpose_options as $v): ?>
-                                <option value="<?php echo esc_attr($v); ?>"><?php echo esc_html(re_pretty_label_areas($v)); ?></option>
-                            <?php endforeach; ?>
-                        </select>
-
-                        <select name="status" class="re-input">
-                            <option value="">All Status</option>
-                            <?php foreach ($status_options as $v): ?>
-                                <option value="<?php echo esc_attr($v); ?>"><?php echo esc_html(re_pretty_label_areas($v)); ?></option>
-                            <?php endforeach; ?>
-                        </select>
-
-                        <input type="text" name="s" class="re-input" placeholder="Search by title..." />
-
-                        <button type="submit" class="re-btn">FIND</button>
-                    </div>
-
-                    <div class="re-row re-row--bottom">
-                        <input type="number" name="min_price" class="re-input" placeholder="Min. Price">
-                        <input type="number" name="max_price" class="re-input" placeholder="Max. Price">
-                        <input type="number" name="min_beds" class="re-input" placeholder="Min. Beds">
-                        <input type="number" name="min_baths" class="re-input" placeholder="Min. Baths">
-                        <input type="number" name="min_size" class="re-input" placeholder="Min. Size (sqft)">
-                        <input type="number" name="max_size" class="re-input" placeholder="Max. Size (sqft)">
-                    </div>
-
-                    <div class="re-row re-row--toolbar">
-                        <div class="re-count" id="reCount">—</div>
-                        <select class="re-input re-input--small" name="sort">
-                            <option value="newest">Newest</option>
-                            <option value="price_asc">Price: Low</option>
-                            <option value="price_desc">Price: High</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div id="reResults" class="re-results"></div>
-
-        <div class="re-pagination">
-            <button class="re-page" data-dir="prev" type="button">Prev</button>
-            <span id="rePageInfo">—</span>
-            <button class="re-page" data-dir="next" type="button">Next</button>
-        </div>
-    </div>
-    <?php
-    return ob_get_clean();
-});
-
-/**
- * AJAX
- */
-add_action('wp_ajax_re_filter_porpertypi_dynamic_areas_areas', 're_filter_porpertypi_dynamic_areas');
-add_action('wp_ajax_nopriv_re_filter_porpertypi_dynamic_areas', 're_filter_porpertypi_dynamic_areas');
-
-function re_filter_porpertypi_dynamic_areas() {
-    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 're_filter_nonce')) {
-        wp_send_json_error(['message' => 'Invalid nonce']);
-    }
-
-    $paged = isset($_POST['paged']) ? max(1, (int)$_POST['paged']) : 1;
-    $s     = isset($_POST['s']) ? sanitize_text_field($_POST['s']) : '';
-
-    $purpose = isset($_POST['purpose']) ? sanitize_text_field($_POST['purpose']) : '';
-    $status  = isset($_POST['status'])  ? sanitize_text_field($_POST['status'])  : '';
-
-    $min_price = ($_POST['min_price'] ?? '') !== '' ? (int)$_POST['min_price'] : null;
-    $max_price = ($_POST['max_price'] ?? '') !== '' ? (int)$_POST['max_price'] : null;
-    $min_beds  = ($_POST['min_beds']  ?? '') !== '' ? (int)$_POST['min_beds']  : null;
-    $min_baths = ($_POST['min_baths'] ?? '') !== '' ? (int)$_POST['min_baths'] : null;
-    $min_size  = ($_POST['min_size']  ?? '') !== '' ? (int)$_POST['min_size']  : null;
-    $max_size  = ($_POST['max_size']  ?? '') !== '' ? (int)$_POST['max_size']  : null;
-
-    $sort = isset($_POST['sort']) ? sanitize_text_field($_POST['sort']) : 'newest';
-
-    $meta_query = ['relation' => 'AND'];
-
-    if ($purpose !== '') $meta_query[] = ['key' => RE_META_PURPOSE_AREAS, 'value' => $purpose, 'compare' => '='];
-    if ($status  !== '') $meta_query[] = ['key' => RE_META_STATUS_AREAS,  'value' => $status,  'compare' => '='];
-
-    if ($min_price !== null) $meta_query[] = ['key' => RE_META_PRICE_AREAS, 'value' => $min_price, 'type' => 'NUMERIC', 'compare' => '>='];
-    if ($max_price !== null) $meta_query[] = ['key' => RE_META_PRICE_AREAS, 'value' => $max_price, 'type' => 'NUMERIC', 'compare' => '<='];
-
-    if ($min_beds  !== null) $meta_query[] = ['key' => RE_META_BEDS_AREAS,  'value' => $min_beds,  'type' => 'NUMERIC', 'compare' => '>='];
-    if ($min_baths !== null) $meta_query[] = ['key' => RE_META_BATHS_AREAS, 'value' => $min_baths, 'type' => 'NUMERIC', 'compare' => '>='];
-
-    if ($min_size !== null) $meta_query[] = ['key' => RE_META_SIZE_AREAS, 'value' => $min_size, 'type' => 'NUMERIC', 'compare' => '>='];
-    if ($max_size !== null) $meta_query[] = ['key' => RE_META_SIZE_AREAS, 'value' => $max_size, 'type' => 'NUMERIC', 'compare' => '<='];
-
-    // sorting
-    $orderby = 'date';
-    $order = 'DESC';
-    $meta_key = '';
-
-    if ($sort === 'price_asc') {
-        $orderby = 'meta_value_num';
-        $order = 'ASC';
-        $meta_key = RE_META_PRICE_AREAS;
-    }
-    if ($sort === 'price_desc') {
-        $orderby = 'meta_value_num';
-        $order = 'DESC';
-        $meta_key = RE_META_PRICE_AREAS;
-    }
-
-    $args = [
-        'post_type'      => RE_CPT_AREAS,
-        'post_status'    => 'publish',
-        'posts_per_page' => 20,
-        'paged'          => $paged,
-        's'              => $s,
-        'meta_query'     => (count($meta_query) > 1) ? $meta_query : [],
-        'orderby'        => $orderby,
-        'order'          => $order,
-    ];
-    if ($meta_key) $args['meta_key'] = $meta_key;
-
-    $q = new WP_Query($args);
-
-    ob_start();
-    if ($q->have_posts()) {
-        echo '<div class="re-grid">';
-        while ($q->have_posts()) {
-            $q->the_post();
-            $id = get_the_ID();
-
-            $price = (int)get_post_meta($id, RE_META_PRICE_AREAS, true);
-            $beds  = (int)get_post_meta($id, RE_META_BEDS_AREAS, true);
-            $baths = (int)get_post_meta($id, RE_META_BATHS_AREAS, true);
-            $size  = (int)get_post_meta($id, RE_META_SIZE_AREAS, true);
-
-            $pval = get_post_meta($id, RE_META_PURPOSE_AREAS, true);
-            $sval = get_post_meta($id, RE_META_STATUS_AREAS, true);
-    ?>
-            <a class="re-card" href="<?php echo esc_url(get_permalink($id)); ?>">
-                <div class="re-card__img">
-                    <?php if (has_post_thumbnail($id)) echo get_the_post_thumbnail($id, 'large', ['loading' => 'lazy']);
-                    else echo '<div class="re-ph">No Image</div>'; ?>
-                    <div class="re-badges">
-                        <?php if ($pval !== ''): ?><span class="re-badge"><?php echo esc_html(re_pretty_label_areas($pval)); ?></span><?php endif; ?>
-                        <?php if ($sval !== ''): ?><span class="re-badge re-badge--dark"><?php echo esc_html(re_pretty_label_areas($sval)); ?></span><?php endif; ?>
-                    </div>
-                </div>
-
-                <div class="re-card__body">
-                    <div class="re-price"><?php echo esc_html(number_format_i18n($price)); ?> AED</div>
-                    <div class="re-title"><?php echo esc_html(get_the_title($id)); ?></div>
-                    <div class="author_details">
-                        <div class="avatar">
-                            <?php
-                            $aid = get_the_author_meta('ID');
-                            echo get_avatar($aid, 48);
-                            ?>
-                        </div>
-                        <div class="avatar-name">
-                            <h6>Listing by</h6>
-                            <?php
-                            $author_id = get_the_author_meta('ID');
-                            echo get_the_author_meta('display_name', $author_id);
-
-                            ?>
-                        </div>
-                    </div>
-                    <div class="re-meta">
-                        <span><?php echo esc_html($beds); ?> Beds</span>
-                        <span><?php echo esc_html($baths); ?> Baths</span>
-                        <span><?php echo esc_html($size); ?> sqft</span>
-                    </div>
-                    <div class="button-area">
-                        <button>Buy Property</button>
-                        <button>Rent Property</button>
-                    </div>
-                </div>
-            </a>
-<?php
-        }
-        echo '</div>';
-    } else {
-        echo '<div class="re-empty">No properties found.</div>';
-    }
-    wp_reset_postdata();
-
-    wp_send_json_success([
-        'html'      => ob_get_clean(),
-        'found'     => (int)$q->found_posts,
-        'max_pages' => (int)$q->max_num_pages,
-        'paged'     => $paged,
-    ]);
-}
-
-/**
- * ✅ Dynamic dropdown values from postmeta
- * Handles normal string meta values.
- * If your meta is saved serialized array, tell me — I'll update this to unserialize + merge.
- */
-function re_get_distinct_meta_values_areas($meta_key) {
-    global $wpdb;
-
-    $sql = $wpdb->prepare("
-    SELECT DISTINCT pm.meta_value
-    FROM {$wpdb->postmeta} pm
-    INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id
-    WHERE pm.meta_key = %s
-      AND p.post_type = %s
-      AND p.post_status = 'publish'
-      AND pm.meta_value <> ''
-    ORDER BY pm.meta_value ASC
-  ", $meta_key, RE_CPT_AREAS);
-
-    $vals = $wpdb->get_col($sql);
-    if (!is_array($vals)) return [];
-
-    $vals = array_map('sanitize_text_field', $vals);
-    $vals = array_filter($vals, fn($v) => $v !== '');
-    $vals = array_values(array_unique($vals));
-    return $vals;
-}
-
-function re_pretty_label_areas($v) {
-    $v = trim((string)$v);
-    $v = str_replace(['-', '_'], ' ', $v);
-    $v = preg_replace('/\s+/', ' ', $v);
-    return ucwords($v);
-}
-
-/**
- * CSS/JS (one file)
- */
 add_action('wp_enqueue_scripts', function () {
-    wp_register_style('re-style', false);
-    wp_enqueue_style('re-style');
-    wp_add_inline_style('re-style', "
-    :root{--f:Poppins,system-ui;--t:#0f172a;--m:#64748b;--l:#e5e7eb;--b:var(--clr-primary);--b2:#0a56b3;--s:0 10px 30px rgb(146 150 161 / 14%);--r:14px}
-    .re-wrap {max-width: 1200px;margin: 0 auto;padding: 16px;font-family: var(--f);margin-bottom: 60px;}
-    .re-hero{position:relative;border-radius:var(--r);overflow:hidden;box-shadow:var(--s);margin-bottom:14px}
-    .re-hero__bg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,8,23,.35),rgba(2,8,23,.12)),url('https://images.unsplash.com/photo-1504279577054-acfeccf8fc52?auto=format&fit=crop&w=1800&q=80');background-size:cover;background-position:center}
-    .re-hero__inner{position:relative;padding:24px}
-    .re-hero__title{margin:0 0 12px;text-align:center;color:#fff;font-size:34px;font-weight:900}
-    .re-filter{background:rgba(255,255,255,.88);backdrop-filter:blur(10px);border:1px solid rgba(229,231,235,.9);border-radius:14px;box-shadow:0 18px 40px rgba(2,8,23,.12);padding:12px}
-	form#reFilterForm {display: flex;flex-direction: column;gap: 9px;}
-    .re-row{display:grid;gap:10px}
-    .re-row--top{grid-template-columns:170px 170px 1fr 140px;align-items:center}
-    .re-row--bottom{grid-template-columns:repeat(6,minmax(0,1fr))}
-    .re-row--toolbar{grid-template-columns:1fr auto;align-items:center;margin-top:10px}
-    .re-input{width:100%;padding:12px;border:1px solid var(--l);border-radius:10px;font-family:var(--f)}
-    .re-input--small{padding:10px 12px}
-    .re-btn{padding:12px;border:0;border-radius:10px;background:var(--b);color:#fff;font-weight:900;cursor:pointer}
-    .re-btn:hover{background:var(--b2)}
-    .re-results {margin-top: 64px;min-height: 120px;margin-bottom: 58px;}
-    .re-results.is-loading{opacity:.6;pointer-events:none}
-    .re-grid {display: grid;grid-template-columns: repeat(3,minmax(0,1fr));gap: 40px;}
-    .re-card{display:block;text-decoration:none;background:#fff;border:1px solid var(--l);border-radius:var(--r);overflow:hidden;box-shadow:var(--s)}
-    .re-card__img img{width:100%;height:190px;object-fit:cover;display:block}
-    .re-ph{height:190px;display:grid;place-items:center;background:#f1f5f9;color:#64748b;font-weight:800}
-    .re-badges{position:absolute;left:12px;top:12px;display:flex;gap:8px}
-    .re-card__img{position:relative}
-    .re-badge{background:rgba(11,99,206,.95);color:#fff;font-size:11px;font-weight:900;padding:6px 10px;border-radius:999px}
-    .re-badge--dark{background:rgba(15,23,42,.85)}
-    .re-card__body{padding:12px}
-	.author_details {display:flex;gap: 5px;}
-	.avatar-name h6 {margin: 0px;}
-	.avatar-name {display: flex;flex-direction: column;justify-content: center;color: black;}
-	.re-card__body {display: flex;flex-direction: column;gap: 10px;}
-    .re-price{font-size:18px;font-weight:600;color:var(--b)}
-    .re-title{margin-top:6px;color:var(--t);font-weight:400;line-height:1.25}
-    .re-meta{display:flex;gap:12px;margin-top:8px;color:var(--m);font-size:12px;font-weight:700}
-    .re-empty{padding:18px;border:1px dashed #cbd5e1;border-radius:var(--r);background:#fff;color:var(--m);font-weight:700}
-    .re-count{color:var(--m);font-weight:900}
-    .re-pagination{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:14px}
-    .re-page{border:1px solid var(--l);background:#fff;border-radius:10px;padding:10px 12px;cursor:pointer;font-weight:900}
-    .re-page:disabled{opacity:.5;cursor:not-allowed}
-    @media(max-width:1024px){.re-row--top{grid-template-columns:1fr 1fr}.re-row--bottom{grid-template-columns:1fr 1fr}.re-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:640px){.re-grid{grid-template-columns:1fr}.re-row--toolbar{grid-template-columns:1fr}}
-  ");
+  wp_register_style('areas-inline', false, [], null);
+  wp_enqueue_style('areas-inline');
 
-    wp_register_script('re-js', false, ['jquery'], null, true);
-    wp_enqueue_script('re-js');
+  wp_register_script('areas-inline', false, [], null, true);
+  wp_enqueue_script('areas-inline');
 
-    $ajax_url = admin_url('admin-ajax.php');
+  // ---------- CSS ----------
+  $css = <<<CSS
+:root{
+  --areas-primary:#02B2EE;
+  --areas-black:#0b0f14;
+  --areas-text:#111827;
+  --areas-muted:#6b7280;
+  --areas-border:#e5e7eb;
+  --areas-bg:#ffffff;
+  --areas-radius:16px;
+  --areas-shadow: 0 16px 40px rgba(11,15,20,.10);
+  --areas-max:1200px;
+}
+.areas_container{max-width:var(--areas-max);margin:0 auto;padding:0 16px;}
+.areas_page{padding:22px 0 34px;background:var(--areas-bg);}
 
-    wp_add_inline_script('re-js', "
-    (function($){
-      const ajaxUrl = " . json_encode($ajax_url) . ";
+/* Hero */
+.areas_hero{position:relative;border-radius:var(--areas-radius);overflow:hidden;box-shadow:var(--areas-shadow);border:1px solid rgba(229,231,235,.9);background:#0b0f14;}
+.areas_hero_media{
+  min-height:240px;
+  background:linear-gradient(0deg, rgba(11,15,20,.55), rgba(11,15,20,.55)),
+    url('https://images.unsplash.com/photo-1504272017917-90b2b2677a0b?auto=format&fit=crop&w=1800&q=70');
+  background-size:cover;background-position:center;
+}
+.areas_hero_inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:18px;text-align:center;}
+.areas_hero_title{margin:0;font-weight:1000;letter-spacing:-.4px;color:#fff;font-size:clamp(22px,3vw,40px);text-shadow:0 10px 30px rgba(0,0,0,.25);}
 
-      function toObj(arr){ const o={}; arr.forEach(x=>o[x.name]=x.value); return o; }
-      function loading(on){ $('#reResults').toggleClass('is-loading', !!on); }
+/* Search */
+.areas_search_wrap{width:min(860px, 100%); position:relative;}
+.areas_search{
+  width:100%; padding:14px 16px 14px 44px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.20);
+  background:rgba(255,255,255,.92);
+  outline:none; font-weight:900; color:var(--areas-text);
+}
+.areas_search:focus{border-color:rgba(2,178,238,.55);box-shadow:0 0 0 6px rgba(2,178,238,.18);}
+.areas_search_icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;opacity:.65;}
+.areas_suggest{
+  position:absolute; top:calc(100% + 8px); left:0; right:0;
+  background:#fff; border:1px solid var(--areas-border); border-radius:12px;
+  box-shadow:0 18px 45px rgba(11,15,20,.12); overflow:hidden;
+  display:none; z-index:10;
+}
+.areas_suggest.is-open{display:block;}
+.areas_suggest_item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;cursor:pointer;font-weight:900;color:var(--areas-text);}
+.areas_suggest_item:hover{background:rgba(2,178,238,.08);}
+.areas_suggest_item small{color:var(--areas-muted);font-weight:800;}
 
-      function fetchProps(page){
-        const \$f = $('#reFilterForm'); if(!\$f.length) return;
-        const data = toObj(\$f.serializeArray());
-        data.action = 're_filter_porpertypi_dynamic_areas';
-        data.paged = page || 1;
+/* GRID (3/2/1) */
+.areas_grid{display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:16px;margin-top:18px;}
+@media (max-width:980px){.areas_grid{grid-template-columns:repeat(2, minmax(0,1fr));}.areas_hero_media{min-height:220px;}}
+@media (max-width:620px){.areas_grid{grid-template-columns:1fr;}.areas_hero_media{min-height:210px;}}
 
-        loading(true);
-        $.post(ajaxUrl, data).done(function(res){
-          loading(false);
-          if(!res || !res.success){ $('#reResults').html('<div class=\"re-empty\">Error</div>'); return; }
+/* Card */
+.areas_card{
+  background:#fff;border:1px solid rgba(229,231,235,.95);
+  border-radius:var(--areas-radius);overflow:hidden;
+  box-shadow:0 10px 24px rgba(11,15,20,.06);
+  transition:.18s ease; display:flex; flex-direction:column;
+}
+.areas_card:hover{transform:translateY(-2px);border-color:rgba(2,178,238,.35);box-shadow:0 16px 35px rgba(11,15,20,.10);}
+.areas_thumb{display:block;aspect-ratio:16/9;background:linear-gradient(135deg,#0b0f14,#1f2a37);}
+.areas_thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.areas_actions a {font-weight: 600;}
+.areas_actions .areas_btn_primary:hover {color: white;}
+.areas_body{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1;}
+.areas_title_link{color:var(--areas-text);text-decoration:none;font-weight:1000;letter-spacing:-.15px;font-size:16px;line-height:1.25;}
+.areas_title_link:hover{color:var(--areas-black);text-decoration:underline;}
+.areas_meta{margin:0;color:var(--areas-muted);font-weight:800;font-size:13px;}
+.areas_row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.areas_link{color:var(--areas-primary);font-weight:1000;text-decoration:none;font-size:13px;}
+.areas_link:hover{text-decoration:underline;}
+.areas_actions{margin-top:auto;display:flex;gap:10px;}
+.areas_btn{
+  flex:1 1 auto;border-radius:12px;padding:11px 12px;font-weight:1000;
+  border:1px solid var(--areas-border);background:#fff;cursor:pointer;
+  transition:.18s ease;text-align:center;text-decoration:none;color:var(--areas-text);
+}
+.areas_btn:hover{border-color:rgba(2,178,238,.45);box-shadow:0 12px 26px rgba(2,178,238,.14);}
+.areas_btn_primary{border:0;background:var(--areas-primary);color:#fff;}
+.areas_btn_primary:hover{box-shadow:0 14px 30px rgba(2,178,238,.25);}
 
-          $('#reResults').html(res.data.html);
-          $('#reCount').text((res.data.found||0) + ' results');
-          $('#rePageInfo').text((res.data.paged||1) + ' / ' + (res.data.max_pages||1));
+/* Pagination */
+.areas_pagination{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;margin-top:18px;}
+.areas_pagebtn{
+  min-width:40px;height:40px;padding:0 12px;
+  border-radius:12px;border:1px solid var(--areas-border);
+  background:#fff;color:var(--areas-text);
+  font-weight:1000;cursor:pointer;transition:.18s ease;
+  display:flex;align-items:center;justify-content:center;
+}
+.areas_pagebtn:hover{border-color:rgba(2,178,238,.45);box-shadow:0 12px 26px rgba(2,178,238,.12);}
+.areas_pagebtn.is-active{border-color:rgba(2,178,238,.55);box-shadow:0 0 0 6px rgba(2,178,238,.12);}
+.areas_pagebtn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none;}
 
-          const pg = res.data.paged||1, max=res.data.max_pages||1;
-          $('.re-page[data-dir=\"prev\"]').prop('disabled', pg<=1);
-          $('.re-page[data-dir=\"next\"]').prop('disabled', pg>=max);
+.areas_state{margin-top:14px;color:var(--areas-muted);font-weight:900;font-size:13px;}
+CSS;
 
-          \$f.find('input[name=\"paged\"]').val(pg);
-        }).fail(function(){
-          loading(false);
-          $('#reResults').html('<div class=\"re-empty\">Request failed</div>');
-        });
-      }
+  wp_add_inline_style('areas-inline', $css);
 
-      $(document).on('ready', function(){ fetchProps(1); });
+  wp_localize_script('areas-inline', 'AREAS_AJAX', [
+    'ajaxurl' => admin_url('admin-ajax.php'),
+    'nonce'   => wp_create_nonce('areas_nonce'),
+  ]);
 
-      $(document).on('submit', '#reFilterForm', function(e){
-        e.preventDefault(); fetchProps(1);
-      });
+  // ---------- JS ----------
+  $js = <<<JS
+(function(){
+  const input = document.querySelector('[data-areas-search]');
+  const suggestBox = document.querySelector('[data-areas-suggest]');
+  const grid = document.querySelector('[data-areas-grid]');
+  const state = document.querySelector('[data-areas-state]');
+  const pager = document.querySelector('[data-areas-pagination]');
+  if(!input || !suggestBox || !grid || !pager) return;
 
-      // auto update on dropdown change (professional UX)
-      $(document).on('change', '#reFilterForm select', function(){
-        fetchProps(1);
-      });
+  let tSuggest=null, tResults=null;
+  let currentPage = 1;
+  let currentQuery = '';
 
-      $(document).on('click', '.re-page', function(){
-        const dir = $(this).data('dir');
-        const cur = parseInt($('#reFilterForm input[name=\"paged\"]').val()||'1',10);
-        fetchProps(dir==='next' ? cur+1 : cur-1);
-      });
+  const esc = (s='') => (''+s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+  const closeSuggest = () => suggestBox.classList.remove('is-open');
+  const setState = (txt) => { if(state) state.textContent = txt || ''; };
 
-    })(jQuery);
-  ");
+  async function post(action, data){
+    const fd = new FormData();
+    fd.append('action', action);
+    fd.append('nonce', AREAS_AJAX.nonce);
+    Object.keys(data||{}).forEach(k => fd.append(k, data[k]));
+    const res = await fetch(AREAS_AJAX.ajaxurl, { method:'POST', body: fd });
+    return res.json();
+  }
+
+  function renderSuggest(items){
+    if(!items || !items.length){
+      suggestBox.innerHTML = '';
+      closeSuggest();
+      return;
+    }
+    suggestBox.innerHTML = items.map(it => (
+      '<div class="areas_suggest_item" data-areas-pick="'+esc(it.title)+'">' +
+        '<span>'+esc(it.title)+'</span>' +
+        '<small>Area</small>' +
+      '</div>'
+    )).join('');
+    suggestBox.classList.add('is-open');
+  }
+
+  function renderPagination(current, max){
+    if(!max || max <= 1){
+      pager.innerHTML = '';
+      return;
+    }
+
+    const windowSize = 5; // show 5 page numbers
+    let start = Math.max(1, current - Math.floor(windowSize/2));
+    let end = Math.min(max, start + windowSize - 1);
+    start = Math.max(1, end - windowSize + 1);
+
+    let html = '';
+    html += '<button class="areas_pagebtn" data-areas-page="'+(current-1)+'" '+(current<=1?'disabled':'')+'>Prev</button>';
+
+    if(start > 1){
+      html += '<button class="areas_pagebtn" data-areas-page="1">1</button>';
+      if(start > 2) html += '<button class="areas_pagebtn" disabled>…</button>';
+    }
+
+    for(let p=start; p<=end; p++){
+      html += '<button class="areas_pagebtn '+(p===current?'is-active':'')+'" data-areas-page="'+p+'">'+p+'</button>';
+    }
+
+    if(end < max){
+      if(end < max-1) html += '<button class="areas_pagebtn" disabled>…</button>';
+      html += '<button class="areas_pagebtn" data-areas-page="'+max+'">'+max+'</button>';
+    }
+
+    html += '<button class="areas_pagebtn" data-areas-page="'+(current+1)+'" '+(current>=max?'disabled':'')+'>Next</button>';
+    pager.innerHTML = html;
+  }
+
+  async function loadResults(q, page){
+    currentQuery = q || '';
+    currentPage = page || 1;
+
+    setState('Loading...');
+    const r = await post('areas_results', { q: currentQuery, page: currentPage });
+
+    if(r && r.success){
+      grid.innerHTML = r.data.html;
+      renderPagination(r.data.page, r.data.max_pages);
+      setState(r.data.total ? (r.data.total + ' area(s) found') : 'No areas found');
+    }else{
+      setState('Something went wrong');
+    }
+  }
+
+  async function loadSuggest(q){
+    const r = await post('areas_suggest', { q: q || '' });
+    if(r && r.success) renderSuggest(r.data.items || []);
+  }
+
+  input.addEventListener('input', function(){
+    const q = this.value.trim();
+
+    clearTimeout(tSuggest);
+    clearTimeout(tResults);
+
+    // suggestions
+    tSuggest = setTimeout(() => {
+      if(q.length < 1) { renderSuggest([]); return; }
+      loadSuggest(q);
+    }, 150);
+
+    // results (reset page=1)
+    tResults = setTimeout(() => {
+      loadResults(q, 1);
+    }, 250);
+  });
+
+  suggestBox.addEventListener('click', function(e){
+    const item = e.target.closest('[data-areas-pick]');
+    if(!item) return;
+    const val = item.getAttribute('data-areas-pick') || '';
+    input.value = val;
+    closeSuggest();
+    loadResults(val, 1);
+  });
+
+  document.addEventListener('click', function(e){
+    if(e.target.closest('[data-areas-search-wrap]')) return;
+    closeSuggest();
+  });
+
+  pager.addEventListener('click', function(e){
+    const btn = e.target.closest('[data-areas-page]');
+    if(!btn || btn.disabled) return;
+    const p = parseInt(btn.getAttribute('data-areas-page') || '1', 10);
+    if(!p || p < 1) return;
+    loadResults(currentQuery, p);
+  });
+
+  // initial load
+  loadResults('', 1);
+})();
+JS;
+
+  wp_add_inline_script('areas-inline', $js);
 });
+
+/* Shortcode */
+add_shortcode('areas_page', function () {
+  ob_start(); ?>
+  <section class="areas_page">
+    <div class="areas_container">
+
+      <div class="areas_hero">
+        <div class="areas_hero_media" aria-hidden="true"></div>
+        <div class="areas_hero_inner">
+          <h1 class="areas_hero_title">Areas in Dubai</h1>
+
+          <div class="areas_search_wrap" data-areas-search-wrap>
+            <svg class="areas_search_icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M21 21l-4.3-4.3M10.8 18.2a7.4 7.4 0 1 1 0-14.8 7.4 7.4 0 0 1 0 14.8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <input class="areas_search" type="search" placeholder="Search Area Name" data-areas-search />
+            <div class="areas_suggest" data-areas-suggest></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="areas_state" data-areas-state></div>
+      <div class="areas_grid" data-areas-grid></div>
+      <div class="areas_pagination" data-areas-pagination></div>
+
+    </div>
+  </section>
+  <?php
+  return ob_get_clean();
+});
+
+/* AJAX: Suggestions */
+add_action('wp_ajax_areas_suggest', 'areas_ajax_suggest');
+add_action('wp_ajax_nopriv_areas_suggest', 'areas_ajax_suggest');
+function areas_ajax_suggest() {
+  if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'areas_nonce')) {
+    wp_send_json_error(['msg' => 'bad nonce']);
+  }
+
+  $q = isset($_POST['q']) ? sanitize_text_field(wp_unslash($_POST['q'])) : '';
+  if ($q === '') wp_send_json_success(['items' => []]);
+
+  $posts = get_posts([
+    'post_type'      => 'area',
+    'post_status'    => 'publish',
+    's'              => $q,
+    'posts_per_page' => 8,
+  ]);
+
+  $items = array_map(function ($p) {
+    return ['id' => $p->ID, 'title' => get_the_title($p)];
+  }, $posts);
+
+  wp_send_json_success(['items' => $items]);
+}
+
+/* AJAX: Results + Pagination */
+add_action('wp_ajax_areas_results', 'areas_ajax_results');
+add_action('wp_ajax_nopriv_areas_results', 'areas_ajax_results');
+function areas_ajax_results() {
+  if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'areas_nonce')) {
+    wp_send_json_error(['msg' => 'bad nonce']);
+  }
+
+  $q    = isset($_POST['q']) ? sanitize_text_field(wp_unslash($_POST['q'])) : '';
+  $page = isset($_POST['page']) ? max(1, (int)$_POST['page']) : 1;
+
+  $args = [
+    'post_type'      => 'area',
+    'post_status'    => 'publish',
+    'posts_per_page' => 20,
+    'paged'          => $page,
+    'orderby'        => 'date',
+    'order'          => 'DESC',
+  ];
+
+  if ($q !== '') {
+    $args['s'] = $q;
+  }
+
+  $loop = new WP_Query($args);
+
+  ob_start();
+
+  if ($loop->have_posts()):
+    while ($loop->have_posts()): $loop->the_post();
+
+      $permalink = get_permalink();
+      $title     = get_the_title();
+      $thumb     = get_the_post_thumbnail_url(get_the_ID(), 'large');
+      $thumb_html = $thumb ? '<img src="' . esc_url($thumb) . '" alt="' . esc_attr($title) . '">' : '';
+
+      // optional metas
+      $price_from = get_post_meta(get_the_ID(), '_area_price_from', true);
+      $price_line = $price_from ? ('Price from ' . esc_html($price_from)) : '';
+
+      $guide_url  = get_post_meta(get_the_ID(), '_area_guide_url', true);
+      $guide_link = $guide_url ? '<a class="areas_link" href="' . esc_url($guide_url) . '" target="_blank" rel="noopener">Open Area Guide</a>' : '';
+
+  ?>
+      <article class="areas_card">
+        <a class="areas_thumb" href="<?php echo esc_url($permalink); ?>">
+          <?php echo $thumb_html; ?>
+        </a>
+
+        <div class="areas_body">
+          <a class="areas_title_link" href="<?php echo esc_url($permalink); ?>">
+            <?php echo esc_html($title); ?>
+          </a>
+
+          <?php if ($price_line): ?>
+            <p class="areas_meta"><?php echo esc_html($price_line); ?></p>
+          <?php endif; ?>
+
+          <div class="areas_row">
+            <span></span>
+            <?php echo $guide_link; ?>
+          </div>
+
+          <div class="areas_actions">
+            <a class="areas_btn areas_btn_primary" href="<?php echo esc_url(home_url('/buy')); ?>">Buy Property</a>
+            <a class="areas_btn" href="<?php echo esc_url(home_url('/rent')); ?>">Rent Property</a>
+          </div>
+        </div>
+      </article>
+<?php
+    endwhile;
+    wp_reset_postdata();
+  else:
+    echo '<div class="areas_state">No areas found.</div>';
+  endif;
+
+  $html = ob_get_clean();
+
+  wp_send_json_success([
+    'html'      => $html,
+    'total'     => (int) $loop->found_posts,
+    'page'      => (int) $page,
+    'max_pages' => (int) $loop->max_num_pages,
+  ]);
+}
