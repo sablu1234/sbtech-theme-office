@@ -13,6 +13,9 @@ function add_theme_scripts() {
     wp_enqueue_style('page-areas', get_template_directory_uri() . '/assets/css/page-areas.css', array(), '1.0.0', 'all');
     wp_enqueue_style('area-single', get_template_directory_uri() . '/assets/css/area-single.css', array(), '1.0.0', 'all');
     wp_enqueue_style('page-about', get_template_directory_uri() . '/assets/css/page-about.css', array(), '1.0.0', 'all');
+    wp_enqueue_style('page-media', get_template_directory_uri() . '/assets/css/page-media.css', array(), '1.0.0', 'all');
+    wp_enqueue_style('main-single', get_template_directory_uri() . '/assets/css/main-single.css', array(), '1.0.0', 'all');
+    wp_enqueue_style('page-careers', get_template_directory_uri() . '/assets/css/page-careers.css', array(), '1.0.0', 'all');
 
     wp_enqueue_style('style', get_stylesheet_uri());
 

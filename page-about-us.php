@@ -30,7 +30,6 @@
         </div>
     </div>
 </section>
-
 <!-- form start-->
 <div class="sell-modal" id="sellModal" aria-hidden="true">
     <div class="sell-modal__backdrop" data-sell-close="1"></div>

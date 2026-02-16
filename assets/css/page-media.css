@@ -1,0 +1,8 @@
+.media_hero{
+  position:relative;
+  width:100%;
+  min-height:520px;
+  background:url("http://sam91222.local/wp-content/uploads/2026/02/media-3-scaled.jpg") center/cover no-repeat;
+  display:flex;
+  align-items:center;
+}

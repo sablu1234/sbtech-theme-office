@@ -287,7 +287,7 @@ add_action('wp_enqueue_scripts', function () {
     .re-input{width:100%;padding:12px;border:1px solid var(--l);border-radius:10px;font-family:var(--f)}
     .re-input--small{padding:10px 12px}
     .re-btn{padding:12px;border:0;border-radius:10px;background:var(--b);color:#fff;font-weight:900;cursor:pointer}
-    .re-btn:hover{background:var(--b2)}
+    .re-btn:hover{background:var(--clr-black)!important}
     .re-results {margin-top: 64px;min-height: 120px;margin-bottom: 58px;}
     .re-results.is-loading{opacity:.6;pointer-events:none}
     .re-grid {display: grid;grid-template-columns: repeat(3,minmax(0,1fr));gap: 40px;}

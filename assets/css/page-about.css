@@ -1,5 +1,5 @@
 :root{
-  --about-primary:#02B2EE;
+  --about-primary: var(--clr-primary);
   --about-black:#0b0f14;
   --about-text:#ffffff;
   --about-muted:#cfd8e3;
@@ -52,7 +52,7 @@
 }
 
 .about_breadcrumb a{
-  color:var(--about-muted);
+  color:var(--clr-white);
   text-decoration:none;
 }
 
@@ -92,12 +92,12 @@
 }
 
 .about_primary{
-  background:var(--about-primary);
+  background:var(--clr-primary);
   border:none;
 }
 
 .about_primary:hover{
-  background:#028fc2;
+  background: var(--clr-black);
   color:#fff;
 }
 
