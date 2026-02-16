@@ -107,8 +107,9 @@ include_once get_template_directory() . '/template-parts/filter/commercial-ajax-
 include_once get_template_directory() . '/template-parts/filter/new-projects-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/areas-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/developer-ajax-filter.php';
+include_once get_template_directory() . '/template-parts/filter/media-ajax-filter.php';
 
-// Tushar bhai
+// Tushar bhai 14-06-2026
 
 include_once get_template_directory() . '/inc/developers-cpt.php';
 
@@ -145,6 +146,25 @@ add_action('wp_enqueue_scripts', function () {
 
 
 
+
+
+// Developer tushar 15/06/2026
+
+// Developer Single page assets + meta includes
+include_once get_template_directory() . '/inc/developer-meta.php';
+
+add_action('wp_enqueue_scripts', function () {
+
+	// single developer page only
+	if (!is_singular('developer')) return;
+
+	wp_enqueue_style(
+		'sbtech-developer-single',
+		get_template_directory_uri() . '/assets/css/developer-single.css',
+		[],
+		'1.0.0'
+	);
+}, 20);
 
 
 
