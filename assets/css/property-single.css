@@ -28,7 +28,7 @@
 
   /* links */
   .mp-wrap a{ color: var(--mp-blue); text-decoration: none; font-weight: 500; }
-  .mp-wrap a:hover{ color: var(--mp-blue2); text-decoration: underline; }
+  .mp-wrap a:hover{ color: var(--clr-black); text-decoration: underline; }
   .mp-wrap a:focus{ outline: 2px solid rgba(11,99,206,.35); outline-offset: 3px; border-radius: 6px; }
 
   /* MEDIA - desktop/tablet */
@@ -44,7 +44,7 @@
   .mp-badge{
     font-size:12px; font-weight:600; letter-spacing:.4px;
     padding:6px 10px; border-radius:999px;
-    background:#0b63ce; color:#fff;
+    background:var(--clr-primary); color:#fff;
   }
   .mp-badge--type{ background: rgba(15,23,42,.75); }
 
@@ -155,9 +155,14 @@
     cursor:pointer;
     white-space:nowrap;
   }
-  .mp-btn--primary{ background: var(--mp-blue); color: #fff !important; border-color: var(--mp-blue); }
-  .mp-btn--primary:hover{ background: var(--mp-blue2); border-color: var(--mp-blue2); }
-  .mp-btn--outline{ background:#fff; border-color: rgba(11,99,206,.35); color: var(--mp-blue) !important; }
+  .mp-btn--primary{ background: var(--clr-black); color: #fff !important; border-color: var(--clr-primary); }
+  .mp-wrap a:hover {
+    color: var(--clr-black)!important;
+    text-decoration: underline;
+    background: var(--clr-primary);
+}
+  .mp-btn--primary:hover{ background: var(--clr-blue2); border-color: var(--clr-blue2); }
+  .mp-btn--outline{ background:#fff; border-color: rgba(11,99,206,.35); color: var(--clr-primary) !important; }
   .mp-btn--ghost{
     background: rgba(255,255,255,.92);
     border-color: rgba(255,255,255,.65);
@@ -210,7 +215,7 @@
     background:#fff;
   }
   .mp-mort__right{
-    background: var(--mp-blue);
+    background: var(--clr-primary);
     border-radius: var(--mp-radius);
     padding: 18px;
     color:#fff;

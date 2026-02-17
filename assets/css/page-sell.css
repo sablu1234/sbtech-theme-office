@@ -100,7 +100,7 @@
   font-weight:800;
   font-size: clamp(44px, 4.4vw, 72px);
 }
-.sell-title__accent{ color: var(--sell-blue); }
+.sell-title__accent{ color: var(--clr-primary); }
 .sell-title__dark{ color: #111827; }
 
 .sell-desc{
@@ -118,7 +118,7 @@
   align-items:center;
   justify-content:center;
   gap:12px;
-  background: var(--sell-blue);
+  background: var(--clr-primary);
   color:#fff;
   text-decoration:none;
   font-weight:700;
@@ -592,7 +592,7 @@
   color:#0f172a;
 }
 .sell-why-title span{
-  color:#1ea7d6;
+  color:var(--clr-primary);
 }
 
 /* Layout */
@@ -706,7 +706,7 @@
   line-height:1.12;
 }
 .sell-mkt__title span{
-  color:#1ea7d6;
+  color:var(--clr-primary);
 }
 
 /* grid */
@@ -746,7 +746,7 @@
 .sell-mkt__icon svg{
   width: 22px;
   height: 22px;
-  fill:#1ea7d6;
+  fill:var(--clr-primary);
 }
 
 /* text */
@@ -820,7 +820,7 @@
 
 .val3-btn{
   display:inline-block;
-  background:#00a3e0;
+  background:var(--clr-primary);
   color:#ffffff;
   text-decoration:none;
   padding:14px 22px;

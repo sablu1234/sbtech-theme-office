@@ -296,7 +296,7 @@ add_action('wp_enqueue_scripts', function () {
     .re-ph{height:190px;display:grid;place-items:center;background:#f1f5f9;color:#64748b;font-weight:800}
     .re-badges{position:absolute;left:12px;top:12px;display:flex;gap:8px}
     .re-card__img{position:relative}
-    .re-badge{background:rgba(11,99,206,.95);color:#fff;font-size:11px;font-weight:900;padding:6px 10px;border-radius:999px}
+    .re-badge{background:var(--clr-primary);color:#fff;font-size:11px;font-weight:900;padding:6px 10px;border-radius:999px}
     .re-badge--dark{background:rgba(15,23,42,.85)}
     .re-card__body{padding:12px}
 	.author_details {display:flex;gap: 5px;}

@@ -30,6 +30,7 @@ function add_theme_scripts() {
     wp_enqueue_script('page-new-projects-js', get_template_directory_uri() . '/assets/js/page-new-projects-js.js', array('jquery'), "1.0.1", true);
     wp_enqueue_script('single-areas-js', get_template_directory_uri() . '/assets/js/single-areas-js.js', array('jquery'), "1.0.1", true);
     wp_enqueue_script('page-about-js', get_template_directory_uri() . '/assets/js/page-about-js.js', array('jquery'), "1.0.1", true);
+    wp_enqueue_script('page-careers-js', get_template_directory_uri() . '/assets/js/page-careers-js.js', array('jquery'), "1.0.1", true);
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
     }

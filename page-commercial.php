@@ -428,4 +428,8 @@
 </section>
 <!-- Faq section end -->
 
+<!-- Newsletter section start -->
+<?php echo do_shortcode('[newsletter_form]'); ?>
+<!-- Newsletter section end -->
+
 <?php get_footer();

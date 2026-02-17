@@ -38,7 +38,7 @@ if (is_single()) : ?>
                             <button class="mp-fab mp-fab--next" type="button" aria-label="Next image" data-nav="next">›</button>
 
                             <div class="mp-featured__actions">
-                                <a class="mp-btn mp-btn--ghost" href="#virtual">Get Virtual Tour</a>
+                                <!-- <a class="mp-btn mp-btn--ghost" href="#virtual">Get Virtual Tour</a> -->
                                 <button class="mp-btn mp-btn--ghost" type="button" id="mpOpenLightbox">View Photos</button>
                             </div>
 

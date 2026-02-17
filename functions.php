@@ -108,6 +108,7 @@ include_once get_template_directory() . '/template-parts/filter/new-projects-aja
 include_once get_template_directory() . '/template-parts/filter/areas-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/developer-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/media-ajax-filter.php';
+include_once get_template_directory() . '/template-parts/form/careers-form.php';
 
 // Tushar bhai 14-06-2026
 

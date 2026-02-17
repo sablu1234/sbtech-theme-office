@@ -31,7 +31,11 @@ body{
   align-items:center;
   justify-content:space-between;
 }
-.logo img{height:42px;}
+.logo img {
+    height: 60px;
+    border-radius: 8px;
+    border: 1px solid var(--clr-primary);
+}
 
 .top-actions{
   display:flex;

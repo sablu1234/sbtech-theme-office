@@ -93,7 +93,7 @@ add_action('wp_enqueue_scripts', function () {
   transition:.18s ease;text-align:center;text-decoration:none;color:var(--areas-text);
 }
 .areas_btn:hover{border-color:rgba(2,178,238,.45);box-shadow:0 12px 26px rgba(2,178,238,.14);}
-.areas_btn_primary{border:0;background:var(--areas-primary);color:#fff;}
+.areas_btn_primary{border:0;background:var(--clr-primary);color:#fff;}
 .areas_btn_primary:hover{box-shadow:0 14px 30px rgba(2,178,238,.25);}
 
 /* Pagination */

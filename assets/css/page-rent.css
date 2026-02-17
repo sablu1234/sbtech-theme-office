@@ -1,5 +1,5 @@
   :root{
-    --rent-accent:#27ABE2;
+    --rent-accent: var(--clr-primary);
     --rent-black:#000000;
     --rent-white:#ffffff;
     --rent-border:#e6e9ee;
@@ -68,8 +68,8 @@
     backdrop-filter: blur(10px);
   }
   .rent-cardx__badge--buy {
-    background: #1567C9;
-    border-color: #1567C9;
+    background: var(--clr-primary);
+    border-color: var(--clr-primary);
     color: #fff;
   }
   .rent-cardx__badge--type{
@@ -200,7 +200,7 @@
   }
   .rent-cardx__agentMark{
     width:22px; height:22px;
-    background: var(--rent-accent);
+    background: var(--clr-primary);
     border-radius: 6px;
     box-shadow: 0 10px 20px rgba(39,171,226,.25);
   }
@@ -224,12 +224,12 @@
     justify-content: center;
     padding: 13px 14px;
     border-radius: 12px;
-    background: var(--rent-accent);
+    background: var(--clr-primary);
     color: #fff;
     font-weight: 600;
     letter-spacing: .2px;
     text-decoration: none;
-    border: 1px solid var(--rent-accent);
+    border: 1px solid var(--clr-primary);
   }
   a.rent-cardx__btn:hover {
     color: var(--sell-white);

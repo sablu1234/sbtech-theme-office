@@ -166,7 +166,7 @@ add_action('wp_enqueue_scripts', function () {
 .developers_actions .developers_btn_primary {color: white;font-weight: 600;}
 .developers_btn_primary{
   border:0;
-  background: var(--developers-primary);
+  background: var(--clr-primary);
   color:#fff;
 }
 .developers_btn_primary:hover{box-shadow:0 14px 30px rgba(2,178,238,.25);}

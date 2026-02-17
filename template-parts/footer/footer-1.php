@@ -4,7 +4,7 @@
         <!-- 1 -->
         <div class="footer-col footer-brand">
             <a class="brand" href="<?php echo home_url('/'); ?>">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/header/logo-main.png" alt="Logo">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/header/logo-main.jpg" alt="Logo">
             </a>
 
             <p class="addr">
@@ -140,9 +140,11 @@
 
     /* brand column */
     .footer-brand .brand img {
-        height: 34px;
+        height: 60px;
         width: auto;
         display: block;
+        border-radius: 8px;
+        border: 1px solid var(--clr-primary);
     }
 
     .addr {

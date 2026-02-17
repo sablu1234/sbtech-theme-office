@@ -386,7 +386,10 @@
         </div>
     </div>
 </div>
-
 <!-- Reach More Buyers end -->
+
+<!-- Newsletter section start -->
+<?php echo do_shortcode('[newsletter_form]'); ?>
+<!-- Newsletter section end -->
 
 <?php get_footer();
