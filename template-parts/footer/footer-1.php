@@ -14,32 +14,32 @@
 
             <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
                 <a href="facebook.com/" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-     border:1px solid #cfe3ff;border-radius:8px;color:#0b63ce;text-decoration:none;">
+     border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
                     <i class="fa-brands fa-facebook-f"></i>
                 </a>
 
                 <a href="https://www.instagram.com/" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-     border:1px solid #cfe3ff;border-radius:8px;color:#0b63ce;text-decoration:none;">
+     border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
                     <i class="fab fa-instagram"></i>
                 </a>
 
                 <a href="https://youtube.com/" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-     border:1px solid #cfe3ff;border-radius:8px;color:#0b63ce;text-decoration:none;">
+     border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
                     <i class="fab fa-youtube"></i>
                 </a>
 
                 <a href="https://x.com/" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-     border:1px solid #cfe3ff;border-radius:8px;color:#0b63ce;text-decoration:none;">
+     border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
                     <i class="fab fa-twitter"></i>
                 </a>
 
                 <a href="linkedin.com" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-     border:1px solid #cfe3ff;border-radius:8px;color:#0b63ce;text-decoration:none;">
+     border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
                     <i class="fab fa-linkedin-in"></i>
                 </a>
 
                 <a href="https://web.telegram.org/" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-     border:1px solid #cfe3ff;border-radius:8px;color:#0b63ce;text-decoration:none;">
+     border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
                     <i class="fab fa-telegram-plane"></i>
                 </a>
             </div>
@@ -52,47 +52,63 @@
 
         <!-- 2 -->
         <nav class="footer-col" aria-label="Buy properties in Dubai">
-            <h4>Buy properties<br>in Dubai</h4>
-            <a href="#">Buy properties in UAE</a>
-            <a href="#">Abu Dhabi</a>
-            <a href="#">Sharjah</a>
-            <a href="#">Ajman</a>
-            <a href="#">Ras Al Khaimah</a>
-            <a href="#">Austria</a>
+            <h4>Links<br></h4>
+            <a href="<?php echo home_url('/buy'); ?>">Buy</a>
+            <a href="<?php echo home_url('/sell'); ?>">Sell</a>
+            <a href="<?php echo home_url('/rent'); ?>">Rent</a>
+            <a href="<?php echo home_url('/commercial'); ?>">Commercial</a>
+            <a href="<?php echo home_url('/new-projects'); ?>">New Projects</a>
         </nav>
 
         <!-- 3 -->
         <nav class="footer-col" aria-label="New projects in Dubai">
-            <h4>New projects in<br>Dubai</h4>
-            <a href="#">Off-plan properties in</a>
-            <a href="#">Abu Dhabi</a>
-            <a href="#">Oman</a>
-            <a href="#">Sharjah</a>
-            <a href="#">Ajman</a>
-            <a href="#">Ras Al Khaimah</a>
-            <a href="#">Maldives</a>
+            <h4>Links<br></h4>
+            <a href="<?php echo home_url('/areas'); ?>">Areas</a>
+            <a href="<?php echo home_url('/developer'); ?>">Developer</a>
+            <a href="<?php echo home_url('/services'); ?>">Services</a>
+            <a href="<?php echo home_url('/events'); ?>">Events</a>
         </nav>
 
         <!-- 4 -->
         <nav class="footer-col" aria-label="Media">
             <h4>Media</h4>
-            <a href="#">Dubai real estate blog</a>
-            <a href="#">Media</a>
-            <a href="#">News</a>
-            <a href="#">Press about us</a>
+            <a href="<?php echo home_url('/media'); ?>">Media</a>
+            <a href="<?php echo home_url('/about-us'); ?>">About Us</a>
+            <a href="<?php echo home_url('/careers'); ?>">Careers</a>
         </nav>
 
         <!-- 5 -->
         <nav class="footer-col" aria-label="Services">
             <h4>Services</h4>
-            <a href="#">Mortgage Assistance</a>
-            <a href="#">Interior Design and Furnishing</a>
-            <a href="#">Residency Visas</a>
-            <a href="#">Second Citizenship</a>
-            <a href="#">Developer Services</a>
-            <a href="#">Vienna Sales & Leasing</a>
-            <a href="#">Partnership Program</a>
-            <a href="#">Repairs and Cleaning</a>
+            <div class="iconlist">
+
+                <!-- Location -->
+                <div class="iconlist_item">
+                    <div class="iconlist_icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 21s7-4.4 7-10.5C19 6.1 15.9 3 12 3S5 6.1 5 10.5C5 16.6 12 21 12 21z" stroke="currentColor" stroke-width="2" />
+                            <path d="M12 12a2 2 0 100-4 2 2 0 000 4z" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div class="iconlist_text">
+                        100 S Main St, New York, NY
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="iconlist_item">
+                    <div class="iconlist_icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 4h16v16H4V4z" stroke="currentColor" stroke-width="2" />
+                            <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <div class="iconlist_text">
+                        <a href="mailto:contact@example.com">contact@example.com</a>
+                    </div>
+                </div>
+
+            </div>
         </nav>
 
     </div>
@@ -135,7 +151,7 @@
     }
 
     .footer-col a:hover {
-        color: #0b63ce;
+        color: var(--clr-primary);
     }
 
     /* brand column */
@@ -166,8 +182,8 @@
         height: 34px;
         display: grid;
         place-items: center;
-        border: 1px solid #cfe3ff;
-        color: #0b63ce;
+        border: 1px solid var(--clr-primary);
+        color: var(--clr-primary);
         border-radius: 8px;
         font-weight: 700;
         font-size: 12px;
@@ -208,6 +224,59 @@
 
         .footer-col h4 {
             font-size: 17px;
+        }
+    }
+
+    /* simple footer location */
+
+    .iconlist_item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 0;
+    }
+
+    .iconlist_icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: rgba(2, 178, 238, .12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+    }
+
+    .iconlist_icon svg {
+        width: 18px;
+        height: 18px;
+        color: var(--clr-primary);
+    }
+
+    .iconlist_text {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--clr-black);
+        line-height: 1.4;
+        word-break: break-word;
+    }
+
+    .iconlist_text a {
+        color: var(--clr-black);
+        text-decoration: none;
+    }
+
+    .iconlist_text a:hover {
+        color: var(--clr-primary);
+    }
+
+    @media(max-width:420px) {
+        .iconlist_item {
+            gap: 10px;
+        }
+
+        .iconlist_text {
+            font-size: 13px;
         }
     }
 </style>

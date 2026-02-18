@@ -11,12 +11,12 @@
             <div class="top-actions">
                 <a href="tel:+97144286151" class="phone">+971 4 428 6151</a>
 
-                <a href="#" class="cta">
+                <a href="<?php echo home_url(''); ?>" class="cta">
                     <span class="cta-plus">+</span>
                     List Your Property
                 </a>
 
-                <a href="#" class="fav">♡</a>
+                <a style="display:none;" href="#" class="fav">♡</a>
 
                 <!-- MOBILE -->
                 <div class="mobile-tools">

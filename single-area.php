@@ -13,7 +13,7 @@
                 </div>
 
                 <h1 class="new_projects_area_title">
-                    Properties for Sale<br>in Dubai Marina
+                    <?php the_title(); ?>
                 </h1>
 
                 <p class="new_projects_area_sub">
@@ -57,6 +57,9 @@
             <div class="np-track" id="npTrack">
                 <!-- loop wp for new-projects -->
                 <?php
+                // current Area ID (single area page)
+                $area_id = get_the_ID();
+
                 $q_new_projects = new WP_Query([
                     'post_type'      => 'porpertypi',
                     'posts_per_page' => 10,
@@ -66,13 +69,14 @@
 
                     'meta_query' => [
                         [
-                            'key'     => '_area_id', // meta field নাম
-                            'value'   => 'New Projects',
+                            'key'     => '_area_id',   // meta field
+                            'value'   => $area_id,     // current area ID (numeric)
                             'compare' => '='
                         ]
                     ]
                 ]);
                 ?>
+
                 <!-- Card -->
                 <?php
 

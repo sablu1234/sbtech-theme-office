@@ -76,28 +76,6 @@ $args = [
     'post_type'      => 'event',
     'posts_per_page' => 12,
     'post_status'    => 'publish',
-    'meta_query'     => [
-        'relation' => 'OR',
-        [
-            'key'     => '_sbtech_event_end_date',
-            'value'   => $today,
-            'compare' => '<',
-            'type'    => 'DATE',
-        ],
-        [
-            'relation' => 'AND',
-            [
-                'key'     => '_sbtech_event_end_date',
-                'compare' => 'NOT EXISTS',
-            ],
-            [
-                'key'     => '_sbtech_event_start_date',
-                'value'   => $today,
-                'compare' => '<',
-                'type'    => 'DATE',
-            ],
-        ],
-    ],
     'meta_key'       => '_sbtech_event_start_date',
     'orderby'        => 'meta_value',
     'order'          => 'DESC',
@@ -109,7 +87,7 @@ $q = new WP_Query($args);
 <main class="sbtech-events-archive">
 
     <!-- HERO -->
-    <section class="sbtech-events-hero" style="<?php echo $banner_image ? 'background-image:url(' . esc_url($banner_image) . ');' : ''; ?>">
+    <section class="sbtech-events-hero" style="background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=70');">
         <div class="sbtech-events-hero__overlay"></div>
 
         <div class="sbtech-events-hero__inner">

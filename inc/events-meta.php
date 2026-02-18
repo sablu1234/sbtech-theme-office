@@ -282,59 +282,11 @@ add_action('add_meta_boxes', function () {
             }
         </style>
 
-        <div class="sbtech-grid">
-            <div class="sbtech-field">
-                <label><?php esc_html_e('Location Tag (e.g., Dubai)', 'sbtech'); ?></label>
-                <input type="text" name="sbtech_event_location_tag" value="<?php echo esc_attr($location_tag); ?>" placeholder="Dubai">
-            </div>
 
-            <div class="sbtech-field">
-                <label><?php esc_html_e('Venue / Location (for pill)', 'sbtech'); ?></label>
-                <input type="text" name="sbtech_event_venue" value="<?php echo esc_attr($venue); ?>" placeholder="Rosewood Vienna, Vienna">
-            </div>
-
-            <div class="sbtech-field">
-                <label><?php esc_html_e('Start Date', 'sbtech'); ?></label>
-                <input type="date" name="sbtech_event_start_date" value="<?php echo esc_attr($start_date); ?>">
-            </div>
-
-            <div class="sbtech-field">
-                <label><?php esc_html_e('End Date', 'sbtech'); ?></label>
-                <input type="date" name="sbtech_event_end_date" value="<?php echo esc_attr($end_date); ?>">
-            </div>
-
-            <div class="sbtech-field">
-                <label><?php esc_html_e('Button Text (card)', 'sbtech'); ?></label>
-                <input type="text" name="sbtech_event_btn_text" value="<?php echo esc_attr($btn_text); ?>" placeholder="See how it was">
-            </div>
-
-            <div class="sbtech-field">
-                <label><?php esc_html_e('Button URL (optional)', 'sbtech'); ?></label>
-                <input type="url" name="sbtech_event_btn_url" value="<?php echo esc_attr($btn_url); ?>" placeholder="https://...">
-            </div>
-        </div>
 
         <hr style="margin:16px 0;">
 
-        <div class="sbtech-field">
-            <label><?php esc_html_e('Event Gallery Images (for single page grid)', 'sbtech'); ?></label>
 
-            <input type="hidden" id="sbtech_event_gallery_ids" name="sbtech_event_gallery_ids" value="<?php echo esc_attr($gallery_ids); ?>">
-
-            <p style="margin:0 0 8px;color:#666;">Select multiple images. They will appear in the single event page grid.</p>
-
-            <button type="button" class="button" id="sbtech_gallery_pick"><?php esc_html_e('Choose Images', 'sbtech'); ?></button>
-            <button type="button" class="button" id="sbtech_gallery_clear"><?php esc_html_e('Clear', 'sbtech'); ?></button>
-
-            <div class="sbtech-gallery" id="sbtech_gallery_preview">
-                <?php foreach ($ids_array as $id):
-                    $url = wp_get_attachment_image_url($id, 'thumbnail');
-                    if (!$url) continue;
-                ?>
-                    <img src="<?php echo esc_url($url); ?>" alt="">
-                <?php endforeach; ?>
-            </div>
-        </div>
 
         <p style="margin: 10px 0 0; color:#666;">
             Tip: Featured Image will be used as fallback if gallery is empty.

@@ -101,10 +101,11 @@ body{
   align-items:center;
 }
 
-.menu{
-  list-style:none;
-  display:flex;
-  gap:22px;
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 22px;
+    padding-top: 14px;
 }
 
 .menu a{

@@ -357,7 +357,7 @@
     height: 40px;
     border-radius: 14px;
     border: 1px solid rgba(39,171,226,.28);
-    background: rgba(39,171,226,.10);
+    background: var(--clr-black);
     position:relative;
     flex: 0 0 40px;
     transition: transform .25s ease, background .25s ease, border-color .25s ease;
@@ -369,7 +369,7 @@
     left:50%;
     top:50%;
     transform: translate(-50%,-50%);
-    background: var(--rent-accent);
+    background: var(--clr-primary);
     border-radius: 2px;
     transition: opacity .2s ease, transform .25s ease;
   }
