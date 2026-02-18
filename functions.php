@@ -206,3 +206,69 @@ add_action('wp_enqueue_scripts', function () {
 		true
 	);
 }, 20);
+
+
+
+//tushar///
+
+// ===== Includes =====
+require_once get_template_directory() . '/inc/sbtech-single-event-cpt.php';
+require_once get_template_directory() . '/inc/sbtech-single-event-meta.php';
+
+require_once get_template_directory() . '/sbtech-events/sbtech-events.php';
+
+
+if (file_exists(get_template_directory() . '/inc/sbtech-events-archive-meta.php')) {
+  require_once get_template_directory() . '/inc/sbtech-events-archive-meta.php';
+}
+
+
+
+
+
+add_action('admin_enqueue_scripts', function ($hook) {
+
+  if (!in_array($hook, ['post.php', 'post-new.php'], true)) return;
+
+  $screen = get_current_screen();
+  if (!$screen) return;
+
+  if (!in_array($screen->post_type, ['event', 'single_event', 'page'], true)) return;
+
+  wp_enqueue_media();
+
+  $js_path = get_template_directory() . '/sbtech-events/assets/js/sbtech-events-admin.js';
+  $js_url  = get_template_directory_uri() . '/sbtech-events/assets/js/sbtech-events-admin.js';
+
+  wp_enqueue_script(
+    'sbtech-events-admin',
+    $js_url,
+    ['jquery'],
+    file_exists($js_path) ? filemtime($js_path) : '1.0.0',
+    true
+  );
+
+}, 20);
+
+
+
+
+
+
+
+
+
+
+
+
+// ===== Front-end CSS for single event =====
+add_action('wp_enqueue_scripts', function () {
+  if (is_singular('single_event')) {
+    wp_enqueue_style(
+      'sbtech-single-event',
+      get_template_directory_uri() . '/assets/css/sbtech-single-event.css',
+      [],
+      '1.0.0'
+    );
+  }
+});

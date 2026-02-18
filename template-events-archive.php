@@ -138,9 +138,9 @@ $q = new WP_Query($args);
         <div class="sbtech-events-container">
             <h2 class="sbtech-events-heading">Past Events</h2>
 
-            <?php if ($q->have_posts()): ?>
-                <div class="sbtech-events-grid">
-                    <?php while ($q->have_posts()): $q->the_post();
+                    <?php if ($q->have_posts()): ?>
+                    <div class="sbtech-events-grid">
+                        <?php while ($q->have_posts()): $q->the_post();
 
                         $event_id = get_the_ID();
                         $thumb    = get_the_post_thumbnail_url($event_id, 'large');
@@ -154,12 +154,25 @@ $q = new WP_Query($args);
 
                         $date_line = sbtech_format_event_range($start_date, $end_date);
 
-                        // If btn url not set, go to single event page
-                        $card_link = $btn_url ? $btn_url : get_permalink($event_id);
+                        $single_event_id = (int) get_post_meta($event_id, '_sbtech_event_single_event_id', true);
+
+                        if ($single_event_id) {
+                            $card_link = get_permalink($single_event_id);
+                        } else {
+                            // If single_event is linked, open that page on "See it"
+$single_event_id = (int) get_post_meta($event_id, '_sbtech_event_single_event_id', true);
+
+if ($single_event_id) {
+  $card_link = get_permalink($single_event_id);
+} else {
+  $card_link = $btn_url ? $btn_url : get_permalink($event_id);
+}
+                        }
 
                         // Default text
                         $btn_text = $btn_text ? $btn_text : 'See how it was';
-                    ?>
+                        ?>
+
                         <article class="sbtech-event-card">
                             <a class="sbtech-event-card__media" href="<?php echo esc_url($card_link); ?>">
                                 <?php if ($thumb): ?>
