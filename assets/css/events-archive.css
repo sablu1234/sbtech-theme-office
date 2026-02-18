@@ -162,7 +162,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-<<<<<<< HEAD
     height: 45px;
     border-radius: 10px;
     border: 1px solid rgb(233 65 14 / 35%);
@@ -175,22 +174,6 @@
   border-color: #19191a;
   color: #000000;
 
-=======
-    height: 40px;
-    border-radius: 10px;
-    border: 1px solid rgba(14,165,233,.35);
-    color: var(--clr-white);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 13px;
-    background: var(--clr-primary);
-    border: 1px solid var(--clr-primary);
-}
-.sbtech-event-card__btn:hover {
-    border-color: var(--clr-black);
-    background: var(--clr-black);
-    color: var(--clr-white);
->>>>>>> 1f3d4117af54e3abf6fc080d38e2eddacc512344
 }
 .sbtech-events-empty{
   padding: 30px;

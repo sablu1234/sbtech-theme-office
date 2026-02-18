@@ -584,15 +584,9 @@ form#reFilterForm{
 }
 
 @media(max-width:640px){
-  .re-hero{height:460px}
+  .re-hero{height:580px}
   .re-grid{grid-template-columns:1fr}
   .re-row--toolbar{grid-template-columns:1fr}
-}
-
-@media (max-width: 640px) {
-    .re-hero {
-        height: 580px;
-    }
 }
 
 

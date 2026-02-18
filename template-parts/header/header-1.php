@@ -1,8 +1,8 @@
 <header class="header">
 
     <!-- TOP BAR -->
-    <div class="topbar px-1">
-        <div class="container topbar-inner">
+    <div class="topbar">
+        <div class="container topbar-inner px-2">
 
             <a class="logo" href="<?php echo home_url('/'); ?>">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/header/logo-main.jpg" alt="Logo">

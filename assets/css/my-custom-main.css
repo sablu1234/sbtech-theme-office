@@ -22,7 +22,6 @@ body{
 }
 
 /* ===== TOPBAR ===== */
-
 .topbar{
   border-bottom:1px solid var(--clr-line);
 }
@@ -96,16 +95,13 @@ body{
 }
 
 /* ===== NAV ===== */
-.nav-inner {
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.nav-inner{
+  height:56px;
+  display:flex;
+  align-items:center;
+  justify-content: center;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 1f3d4117af54e3abf6fc080d38e2eddacc512344
 .menu {
     list-style: none;
     display: flex;
