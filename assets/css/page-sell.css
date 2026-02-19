@@ -129,7 +129,7 @@
   transition: transform .12s ease, background .12s ease;
 }
 .sell-btn:hover {
-    background: var(--sell-blue2);
+    background: var(--clr-black);
     transform: translateY(-1px);
     color: var(--sell-white);
 }
@@ -833,8 +833,8 @@
 
 .val3-btn:hover {
     color: var(--sell-white);
+    background: var(--clr-black);
 }
-
 /* ===== RIGHT ===== */
 .val3-right{
   flex:1;

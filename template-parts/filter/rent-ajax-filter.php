@@ -491,7 +491,9 @@ add_shortcode('reaf_recent_properties', function ($atts) {
                                 src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>"
                                 alt="Property">
                             <div class="rent-cardx__badges">
+                                <?php if (!empty($status)) :?>
                                 <span class="rent-cardx__badge rent-cardx__badge--buy"><?php echo $status; ?></span>
+                                <?php endif; ?>
                                 <span class="rent-cardx__badge rent-cardx__badge--type"><?php echo $purpose; ?></span>
                             </div>
 
