@@ -39,7 +39,7 @@
 
                 <!-- MOBILE CLOSE -->
                 <button class="menu-close" id="menuClose">✕</button>
-                <li><a href="<?php echo home_url('/'); ?>">Buy</a></li>
+                <li><a href="<?php echo home_url('/buy'); ?>">Buy</a></li>
                 <li><a href="<?php echo home_url('/sell'); ?>">Sell</a></li>
                 <li><a href="<?php echo home_url('/rent'); ?>">Rent</a></li>
                 <li><a href="<?php echo home_url('/commercial'); ?>">Commercial</a></li>

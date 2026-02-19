@@ -393,7 +393,7 @@ if (is_single()) : ?>
                     $_re_whatsapp    = get_post_meta($post->ID, '_re_whatsapp', true);
                     ?>
                     <a class="mp-btn mp-btn--primary mp-btn--full" href="mailto:<?php echo $_re_email; ?>"><?php echo $_re_email; ?></a>
-                    <a class="mp-btn mp-btn--outline mp-btn--full" href="<?php echo esc_url($_re_whatsapp); ?>">Get callback</a>
+
                 </div>
 
                 <div class="mp-sideCard">
