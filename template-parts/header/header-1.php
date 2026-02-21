@@ -43,11 +43,20 @@
                 <li><a href="<?php echo home_url('/sell'); ?>">Sell</a></li>
                 <li><a href="<?php echo home_url('/rent'); ?>">Rent</a></li>
                 <li><a href="<?php echo home_url('/commercial'); ?>">Commercial</a></li>
-                <li><a href="<?php echo home_url('/new-projects'); ?>">New Projects</a></li>
-                <li><a href="<?php echo home_url('/areas'); ?>">Areas</a></li>
+                <li class="has-sub">
+                    <a href="#" class="sub-toggle">Commercial ▾</a>
+                    <ul class="submenu">
+                        <li>
+                            <div>
+                                <img src="http://sam91222.local/wp-content/themes/sbtech-main/assets/header/logo-main.jpg" alt="">
+                            </div>
+                        </li>
+                        <li><a href="#">Retail</a></li>
+                        <li><a href="#">Warehouse</a></li>
+                    </ul>
+                </li>
                 <li><a href="<?php echo home_url('/developer'); ?>">Developers</a></li>
                 <li><a href="<?php echo home_url('/services'); ?>">Services</a></li>
-                <li><a href="<?php echo home_url('/events'); ?>">Events</a></li>
                 <li><a href="<?php echo home_url('/media'); ?>">Media</a></li>
                 <li><a href="<?php echo home_url('/about-us'); ?>">About Us</a></li>
                 <li><a href="<?php echo home_url('/careers'); ?>">Careers</a></li>

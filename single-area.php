@@ -37,9 +37,7 @@
         </div>
     </div>
 </section>
-
 <!-- hero area end -->
-
 
 <!-- Office for sate start -->
 <section class="np-wrap np-sec">
@@ -129,5 +127,19 @@
     </div>
 </section>
 <!-- Office for sate end -->
+
+<?php
+$items = get_post_meta(get_the_ID(), 'pp_repeat_items', true);
+if (is_array($items) && !empty($items)) {
+    echo '<ul>';
+    $num = 0;
+    foreach ($items as $item) {
+        $num++;
+        echo '<li>' . $num . ' name: ' . esc_html($item) . '</li>';
+    }
+    echo '</ul>';
+}
+
+?>
 
 <?php get_footer();

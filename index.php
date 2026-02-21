@@ -95,7 +95,7 @@
 </section>
 <!-- Property for sale end -->
 
-<!-- Property for sale start -->
+<!-- Property for Commercial start -->
 <style>
     :root {
         --sale-primary: #02B2EE;
@@ -382,7 +382,7 @@
 
     })();
 </script>
-<!-- Property for sale end -->
+<!-- Property for Commercial end -->
 
 
 
