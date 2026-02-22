@@ -1,0 +1,201 @@
+/* Popular Area in Dubai start ======================================================================*/
+:root{
+  --popular_area_primary:#EF3C26;
+  --popular_area_black:#0b0b0c;
+  --popular_area_white:#ffffff;
+
+  --popular_area_radius:18px;
+  --popular_area_shadow: 0 18px 55px rgba(16,24,40,.12);
+  --popular_area_shadow_hover: 0 26px 85px rgba(16,24,40,.18);
+}
+
+.popular_area_section{
+  padding:56px 16px;
+  background:var(--popular_area_white);
+  font-family:'Poppins',sans-serif;
+  color:var(--popular_area_black);
+}
+
+.popular_area_container{
+  max-width:1200px;
+  width:100%;
+  margin:0 auto;
+}
+
+/* HEADER */
+.popular_area_header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:22px;
+}
+.popular_area_title{
+  margin:0;
+  font-size:34px;
+  line-height:1.15;
+  font-weight:600;
+  letter-spacing:-.4px;
+}
+
+/* BUTTON */
+.popular_area_btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:12px 18px;
+  border-radius:12px;
+  border:1.5px solid rgba(239,60,38,.45);
+  background:#fff;
+  color:var(--popular_area_primary);
+  text-decoration:none;
+  font-size:14px;
+  font-weight:600;
+  box-shadow: 0 10px 25px rgba(239,60,38,.08);
+  transition: .25s ease;
+}
+.popular_area_btn:hover{
+  background:var(--popular_area_primary);
+  color:#fff;
+  box-shadow: 0 16px 40px rgba(239,60,38,.22);
+  transform: translateY(-1px);
+}
+.popular_area_btn_icon{ transform: translateY(-1px); }
+
+/* MOBILE BUTTON WRAP */
+.popular_area_btn_mobile_wrap{ display:none; margin-top:18px; }
+.popular_area_btn_mobile{ width:100%; }
+.popular_area_btn_desktop{ display:inline-flex; }
+
+/* ✅ FLEX WRAP */
+.popular_area_wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    justify-content: space-between;
+}
+
+/* ✅ 3 COLUMN EXACT (NO RIGHT GAP) */
+.popular_area_card{
+  position:relative;
+  display:flex;
+  overflow:hidden;
+  border-radius:var(--popular_area_radius);
+  background:#f6f7f8;
+  box-shadow:var(--popular_area_shadow);
+  border:1px solid rgba(255,255,255,.65);
+  text-decoration:none;
+  transform: translateZ(0);
+  transition: .35s ease;
+
+  /* KEY: 3 columns */
+  flex: 1 1 calc(31.333% - 12px);
+  max-width: calc(31.333% - 12px);
+  min-height: 290px;
+}
+
+.popular_area_card:focus-visible{
+  outline:3px solid rgba(239,60,38,.35);
+  outline-offset:3px;
+}
+
+/* IMAGE */
+.popular_area_media{ position:absolute; inset:0; }
+.popular_area_media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  transform: scale(1.03);
+  transition: transform .75s ease;
+}
+
+/* OVERLAY (premium) */
+.popular_area_overlay{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(900px 260px at 18% 18%, rgba(239,60,38,.22), transparent 55%),
+    linear-gradient(180deg, rgba(0,0,0,.02) 0%, rgba(0,0,0,.45) 72%, rgba(0,0,0,.80) 100%);
+  pointer-events:none;
+}
+
+/* BADGE */
+.popular_area_badge{
+  position:absolute;
+  top:14px;
+  left:14px;
+  padding:8px 10px;
+  border-radius:999px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(239,60,38,.22);
+  color: var(--popular_area_black);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.2px;
+  backdrop-filter: blur(6px);
+}
+
+/* CONTENT */
+.popular_area_content{
+  margin-top:auto;
+  padding:18px;
+  width:100%;
+  z-index:2;
+  color:#fff;
+}
+.popular_area_name{
+  margin:0 0 6px 0;
+  font-size:18px;
+  font-weight:600;
+  letter-spacing:.1px;
+}
+.popular_area_price{
+  margin:0;
+  font-size:13px;
+  font-weight:400;
+  opacity:.95;
+}
+.popular_area_price strong{ font-weight:600; }
+
+/* HOVER */
+.popular_area_card:hover{
+  transform: translateY(-4px);
+  box-shadow:var(--popular_area_shadow_hover);
+}
+.popular_area_card:hover .popular_area_media img{
+  transform: scale(1.12);
+}
+
+/* ✅ TABLET: 2 columns */
+@media (max-width: 992px){
+  .popular_area_title{ font-size:28px; }
+  .popular_area_wrap{ gap:14px; }
+
+  .popular_area_card{
+    flex: 1 1 calc(48% - 7px);
+    max-width: calc(48% - 7px);
+    min-height: 260px;
+  }
+}
+
+/* ✅ MOBILE: 1 column + button bottom */
+@media (max-width: 600px){
+  .popular_area_section{ padding:40px 14px; }
+
+  /* button goes bottom */
+  .popular_area_btn_desktop{ display:none; }
+  .popular_area_btn_mobile_wrap{ display:block; }
+
+  .popular_area_title{ font-size:24px; }
+
+  .popular_area_wrap{ gap:14px; }
+
+  .popular_area_card{
+    flex: 1 1 100%;
+    max-width: 100%;
+    min-height: 220px;
+  }
+}
+/* Popular Area in Dubai end ======================================================================*/

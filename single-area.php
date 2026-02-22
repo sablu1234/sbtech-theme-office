@@ -21,7 +21,7 @@
                 </p>
 
                 <div class="new_projects_area_actions">
-                    <a class="new_projects_area_btn new_projects_area_btn_primary" href="#">
+                    <a class="new_projects_area_btn new_projects_area_btn_primary" href="<?php echo esc_url(home_url('/')); ?>">
                         Find Property
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                             <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -39,107 +39,209 @@
 </section>
 <!-- hero area end -->
 
-<!-- Office for sate start -->
-<section class="np-wrap np-sec">
-    <div class="np-container">
+<!-- about area start -->
+<section class="area_single_section">
+    <div class="area_single_container">
 
-        <div class="np-head">
-            <h2 class="np-title">Offices for Sale in Dubai</h2>
-            <div class="np-nav">
-                <button class="np-btn" id="npPrev">‹</button>
-                <button class="np-btn" id="npNext">›</button>
+        <?php if (!empty(get_the_title())): ?>
+            <div class="area_single_header">
+                <span class="area_single_label">Community Overview</span>
+                <h2 class="area_single_title">About <?php the_title(); ?></h2>
             </div>
-        </div>
+        <?php endif; ?>
 
-        <div class="np-slider">
-            <div class="np-track" id="npTrack">
-                <!-- loop wp for new-projects -->
-                <?php
-                // current Area ID (single area page)
-                $area_id = get_the_ID();
-
-                $q_new_projects = new WP_Query([
-                    'post_type'      => 'porpertypi',
-                    'posts_per_page' => 10,
-                    'post_status'    => 'publish',
-                    'orderby'        => 'date',
-                    'order'          => 'DESC',
-
-                    'meta_query' => [
-                        [
-                            'key'     => '_area_id',   // meta field
-                            'value'   => $area_id,     // current area ID (numeric)
-                            'compare' => '='
-                        ]
-                    ]
-                ]);
-                ?>
-
-                <!-- Card -->
-                <?php
-
-
-
-                while ($q_new_projects->have_posts()) : $q_new_projects->the_post();
-
-                    $purpose = get_post_meta(get_the_ID(), 'pp_purpose', true);
-                    $status = get_post_meta(get_the_ID(), 'pp_status', true);
-                    $price = get_post_meta(get_the_ID(), '_re_price', true);
-                    $beds = get_post_meta(get_the_ID(), '_re_beds', true);
-                    $baths = get_post_meta(get_the_ID(), '_re_baths', true);
-                    $size = get_post_meta(get_the_ID(), '_re_size_sqft', true);
-                    $location = get_post_meta(get_the_ID(), 'pp_address', true);
-
-
-                ?>
-                    <div class="np-card">
-                        <div class="np-img bg-cover" style="background-image: url(<?php echo get_the_post_thumbnail_url(get_the_ID(), 'large'); ?>);">
-                            <div class="np-badges">
-                                <?php if (!empty($status)) :  ?>
-                                    <span class="np-badge primary"><?php echo $status; ?></span>
-                                <?php endif; ?>
-
-                                <?php if (!empty($purpose)) :  ?>
-                                    <span class="np-badge"><?php echo $purpose; ?></span>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        <div class="np-body">
-                            <div class="np-price"><?php echo $price; ?> AED</div>
-                            <div class="np-specs"><?php echo $baths; ?> Bath • <?php echo $size; ?> ft²</div>
-                            <div class="np-name"><?php the_title(); ?></div>
-                            <div class="np-loc"><?php echo $location; ?></div>
-                            <div class="np-agent">
-                                <div class="np-avatar"><?php echo get_avatar(get_the_author_meta('ID')); ?></div>
-                                <div>
-                                    <small>Listing by</small><br>
-                                    <strong><?php echo get_the_author_meta('display_name', get_the_author_meta("ID")); ?></strong>
-                                </div>
-                            </div>
-                            <div class="np-cta"><button><a href="<?php the_permalink(); ?>">Enquire Now</a></button></div>
-                        </div>
-                    </div>
-                <?php endwhile;
-                wp_reset_postdata(); ?>
+        <?php if (!empty(get_the_content())): ?>
+            <div class="area_single_content">
+                <p>
+                    <?php the_content(); ?>
+                </p>
             </div>
-        </div>
+        <?php endif; ?>
 
     </div>
 </section>
-<!-- Office for sate end -->
+<!-- about area end -->
 
-<?php
-$items = get_post_meta(get_the_ID(), 'pp_repeat_items', true);
-if (is_array($items) && !empty($items)) {
-    echo '<ul>';
-    $num = 0;
-    foreach ($items as $item) {
-        $num++;
-        echo '<li>' . $num . ' name: ' . esc_html($item) . '</li>';
-    }
-    echo '</ul>';
-}
+<!-- slider start -->
+<section class="area_single_slider">
+    <div class="wrap-anywhere" style="height:420px;">
+        <div class="box-slider" data-autoplay="true" data-interval="3500">
+            <div class="box-slider__viewport">
+                <div class="box-slider__track">
+                    <?php
+                    $ids = get_post_meta(get_the_ID(), 'area_gallery', true);
 
-?>
+                    if ($ids) {
+                        foreach (array_filter(array_map('absint', explode(',', $ids))) as $id) {
 
+                    ?>
+
+                            <figure class="box-slide"><img src="<?php echo wp_get_attachment_url($id); ?>" alt=""></figure>
+                    <?php
+                        }
+                    }
+                    ?>
+
+
+                </div>
+
+                <button class="box-nav box-prev" type="button" aria-label="Previous"></button>
+                <button class="box-nav box-next" type="button" aria-label="Next"></button>
+
+                <div class="box-dots" aria-label="Pagination"></div>
+            </div>
+        </div>
+</section>
+<script>
+    (() => {
+        const root = document.querySelector(".box-slider");
+        if (!root) return;
+
+        const track = root.querySelector(".box-slider__track");
+        const slides = Array.from(root.querySelectorAll(".box-slide"));
+        const prevBtn = root.querySelector(".box-prev");
+        const nextBtn = root.querySelector(".box-next");
+        const dotsWrap = root.querySelector(".box-dots");
+
+        const autoplay = root.dataset.autoplay === "true";
+        const interval = parseInt(root.dataset.interval || "3500", 10);
+
+        let index = 0,
+            timer = null,
+            hover = false;
+
+        // build dots
+        slides.forEach((_, i) => {
+            const b = document.createElement("button");
+            b.type = "button";
+            b.className = "box-dot" + (i === 0 ? " is-active" : "");
+            b.setAttribute("aria-label", "Go to slide " + (i + 1));
+            b.addEventListener("click", () => goTo(i, true));
+            dotsWrap.appendChild(b);
+        });
+
+        const dots = Array.from(root.querySelectorAll(".box-dot"));
+        const setDot = (i) => dots.forEach((d, di) => d.classList.toggle("is-active", di === i));
+
+        function goTo(i, fromUser = false) {
+            index = (i + slides.length) % slides.length;
+            track.style.transform = `translateX(-${index * 100}%)`;
+            setDot(index);
+            if (fromUser) restart();
+        }
+
+        const next = () => goTo(index + 1);
+        const prev = () => goTo(index - 1);
+
+        prevBtn.addEventListener("click", () => {
+            prev();
+            restart();
+        });
+        nextBtn.addEventListener("click", () => {
+            next();
+            restart();
+        });
+
+        // hover pause
+        root.addEventListener("mouseenter", () => {
+            hover = true;
+            stop();
+        });
+        root.addEventListener("mouseleave", () => {
+            hover = false;
+            start();
+        });
+
+        // touch swipe
+        let sx = 0,
+            dx = 0,
+            dragging = false;
+        root.addEventListener("touchstart", (e) => {
+            dragging = true;
+            sx = e.touches[0].clientX;
+            dx = 0;
+            stop();
+        }, {
+            passive: true
+        });
+        root.addEventListener("touchmove", (e) => {
+            if (!dragging) return;
+            dx = e.touches[0].clientX - sx;
+        }, {
+            passive: true
+        });
+        root.addEventListener("touchend", () => {
+            dragging = false;
+            if (Math.abs(dx) > 50) {
+                dx < 0 ? next() : prev();
+                restart();
+            } else start();
+        });
+
+        function start() {
+            if (!autoplay || hover) return;
+            stop();
+            timer = setInterval(next, interval);
+        }
+
+        function stop() {
+            if (timer) {
+                clearInterval(timer);
+                timer = null;
+            }
+        }
+
+        function restart() {
+            stop();
+            start();
+        }
+
+        goTo(0);
+        start();
+
+        document.addEventListener("visibilitychange", () => document.hidden ? stop() : start());
+    })();
+</script>
+<!-- slider end -->
+
+<!-- Faq section start -->
+<section class="rent-faqs" aria-label="rent faq">
+    <div class="rent-container">
+
+        <div class="rent-faqs__wrap" id="rentFaq">
+            <?php
+            $faqs = get_post_meta(get_the_ID(), 'area_faqs', true);
+
+            if (!empty($faqs) && is_array($faqs)) :
+            ?>
+                <div class="area-faq">
+                    <?php foreach ($faqs as $faq) : ?>
+                        <div class="faq-item">
+                            <h4><?php echo esc_html($faq['question']); ?></h4>
+                            <p><?php echo esc_html($faq['answer']); ?></p>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <div class="rent-faq" data-open="true">
+                    <button class="rent-faq__q" type="button" aria-expanded="true">
+                        <?php echo esc_html($faq['question']); ?>
+                        <span class="rent-faq__icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="rent-faq__a" role="region">
+                        <div class="rent-faq__aInner">
+                            <?php echo esc_html($faq['answer']); ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+<!-- Faq section end -->
+
+
+
+<!-- Newsletter section start -->
+<?php echo do_shortcode('[newsletter_form]'); ?>
+<!-- Newsletter section end -->
 <?php get_footer();

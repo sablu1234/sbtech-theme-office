@@ -69,271 +69,208 @@ function register_cpt_area() {
 }
 register_cpt_area();
 
+// meta field for area cpt
+function meta_box_for_area() {
 
-// loop meta field=================================================================
-function repeatable_meta_of_area() {
+    function area_meta_box() {
+        add_action('add_meta_boxes', function () {
+            add_meta_box(
+                'area_meta', //id
+                'Area Price start AED', //label
+                'area_meta_callback', //calback
+                'area' //cpt
+            );
+        });
+
+        function area_meta_callback($post) {
+            $price_start = get_post_meta($post->ID, 'price_start', true);
+?>
+            <p><input type="text" name="price_start" value="<?php echo esc_attr($price_start); ?>" placeholder="Price start AED"></p>
+        <?php
+        }
+
+        add_action('save_post', function ($post_id) {
+            if (isset($_POST['price_start'])) update_post_meta($post_id, 'price_start', sanitize_text_field($_POST['price_start']));
+        });
+    }
+    area_meta_box();
+
+    // gallery meta box add
+    add_action('add_meta_boxes', function () {
+        add_meta_box('area_gallery', 'Gallery', 'area_gallery_cb', 'area');
+    });
+
+    function area_gallery_cb($post) {
+        wp_nonce_field('area_gallery', 'area_gallery_n');
+        $v = get_post_meta($post->ID, 'area_gallery', true);
+
+        echo "<p>
+    <input type='hidden' class='pp-gids' name='area_gallery' value='" . esc_attr($v) . "'>
+    <button class='button pp-gadd'>Add Images</button>
+    <button class='button pp-gclear'>Clear</button>
+    <span class='pp-gprev'>";
+
+        foreach (array_filter(array_map('absint', explode(',', $v))) as $id) {
+            $src = wp_get_attachment_image_url($id, 'thumbnail');
+            if ($src) echo "<img src='$src' style='margin-left:6px;max-width:60px;vertical-align:middle'>";
+        }
+        echo "</span></p>";
+    }
+
+    add_action('admin_enqueue_scripts', function () {
+        wp_enqueue_media();
+        wp_add_inline_script('jquery', "
+    jQuery(document).on('click','.pp-gadd',function(e){
+      e.preventDefault();
+      var p=jQuery(this).closest('p'),
+          i=p.find('.pp-gids'),
+          prev=p.find('.pp-gprev'),
+          ids=(i.val()||'').split(',').map(Number).filter(Boolean);
+
+      var f=wp.media({multiple:true});
+
+      f.on('open',function(){
+        var s=f.state().get('selection'); s.reset();
+        ids.forEach(function(id){ var a=wp.media.attachment(id); a.fetch(); s.add(a); });
+      });
+
+      f.on('select',function(){
+        ids=[]; prev.empty();
+        f.state().get('selection').each(function(a){
+          ids.push(a.id);
+          var u=a.get('sizes')?.thumbnail?.url || a.get('url');
+          prev.append(\"<img src='\"+u+\"' style='margin-left:6px;max-width:60px;vertical-align:middle'>\");
+        });
+        i.val(ids.join(','));
+      });
+
+      f.open();
+    });
+
+    jQuery(document).on('click','.pp-gclear',function(e){
+      e.preventDefault();
+      var p=jQuery(this).closest('p');
+      p.find('.pp-gids').val(''); p.find('.pp-gprev').empty();
+    });
+  ");
+    });
+
+    add_action('save_post_area', function ($id) {
+        if (!isset($_POST['area_gallery_n']) || !wp_verify_nonce($_POST['area_gallery_n'], 'area_gallery')) return;
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+        if (!current_user_can('edit_post', $id)) return;
+
+        $raw = wp_unslash($_POST['area_gallery'] ?? '');
+        $val = implode(',', array_filter(array_map('absint', explode(',', $raw))));
+        $val === '' ? delete_post_meta($id, 'area_gallery') : update_post_meta($id, 'area_gallery', $val);
+    });
+}
+meta_box_for_area();
 
 
+
+// Add Repeatable FAQ Meta Box (Area CPT)
+function repeatable_faq_meta_box() {
+    // ✅ Add Meta Box
     add_action('add_meta_boxes', function () {
         add_meta_box(
-            'pp_repeat_gallery_box',
-            'Repeatable Gallery (3 Images + Description)',
-            'pp_repeat_gallery_metabox_cb',
+            'area_faq_box',
+            'Area FAQs',
+            'area_faq_box_callback',
             'area',
             'normal',
             'default'
         );
     });
 
-    function pp_repeat_gallery_metabox_cb($post) {
-        wp_nonce_field('pp_repeat_gallery_nonce_action', 'pp_repeat_gallery_nonce');
+    function area_faq_box_callback($post) {
 
-        // Load media uploader
-        wp_enqueue_media();
+        wp_nonce_field('area_faq_nonce', 'area_faq_nonce_field');
 
-        $rows = get_post_meta($post->ID, 'pp_repeat_gallery', true);
-        if (!is_array($rows)) $rows = [];
-
-        // show at least 1 row
-        if (empty($rows)) {
-            $rows = [
-                ['desc' => '', 'img1' => 0, 'img2' => 0, 'img3' => 0]
-            ];
+        $faqs = get_post_meta($post->ID, 'area_faqs', true);
+        if (!is_array($faqs)) {
+            $faqs = [];
         }
+        ?>
 
-        echo '<style>
-    .pp-row{border:1px solid #dcdcde;border-radius:8px;padding:12px;margin:12px 0;background:#fff;}
-    .pp-row-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
-    .pp-row-title{font-weight:600;}
-    .pp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px;}
-    .pp-imgbox{border:1px dashed #c3c4c7;border-radius:8px;padding:10px;text-align:center;background:#fafafa;}
-    .pp-imgbox img{max-width:100%;height:auto;border-radius:6px;display:block;margin:0 auto 8px;}
-    .pp-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
-    .pp-btn{padding:6px 10px;border:1px solid #c3c4c7;background:#f6f7f7;border-radius:6px;cursor:pointer;}
-    .pp-btn-danger{border-color:#d63638;color:#d63638;background:#fff;}
-    .pp-desc{width:100%;min-height:90px;}
-    .pp-footer{margin-top:12px;}
-  </style>';
+        <div id="faq-wrapper">
+            <?php foreach ($faqs as $index => $faq) : ?>
+                <div class="faq-item">
+                    <input type="text"
+                        name="area_faqs[<?php echo $index; ?>][question]"
+                        value="<?php echo esc_attr($faq['question']); ?>"
+                        placeholder="Question"
+                        style="width:100%; margin-bottom:5px;" />
 
-        echo '<div id="pp-repeat-gallery-wrap">';
+                    <textarea name="area_faqs[<?php echo $index; ?>][answer]"
+                        placeholder="Answer"
+                        style="width:100%; height:80px;"><?php echo esc_textarea($faq['answer']); ?></textarea>
 
-        foreach ($rows as $i => $row) {
-            $desc = isset($row['desc']) ? (string)$row['desc'] : '';
-            $img1 = isset($row['img1']) ? (int)$row['img1'] : 0;
-            $img2 = isset($row['img2']) ? (int)$row['img2'] : 0;
-            $img3 = isset($row['img3']) ? (int)$row['img3'] : 0;
+                    <button type="button" class="remove-faq">Remove</button>
+                    <hr>
+                </div>
+            <?php endforeach; ?>
+        </div>
 
-            echo '<div class="pp-row" data-index="' . esc_attr($i) . '">';
-            echo '<div class="pp-row-head">
-              <div class="pp-row-title">Item #' . ($i + 1) . '</div>
-              <button type="button" class="pp-btn pp-btn-danger pp-remove-row">Remove</button>
-            </div>';
+        <button type="button" id="add-faq">Add FAQ</button>
 
-            echo '<label><strong>Description</strong></label><br/>';
-            echo '<textarea class="pp-desc" name="pp_repeat_gallery[' . $i . '][desc]" placeholder="Write description...">' . esc_textarea($desc) . '</textarea>';
-
-            echo '<div class="pp-grid">';
-            pp_repeat_gallery_imgbox($i, 1, $img1);
-            pp_repeat_gallery_imgbox($i, 2, $img2);
-            pp_repeat_gallery_imgbox($i, 3, $img3);
-            echo '</div>';
-            echo '</div>';
-        }
-
-        echo '</div>';
-
-        echo '<div class="pp-footer">
-          <button type="button" class="pp-btn" id="pp-add-gallery-row">+ Add More</button>
-        </div>';
-
-        // Row template (JS will replace __i__)
-        $template = pp_repeat_gallery_row_template();
-?>
         <script>
-            (function() {
-                const wrap = document.getElementById('pp-repeat-gallery-wrap');
-                const addBtn = document.getElementById('pp-add-gallery-row');
-                const rowTemplate = <?php echo json_encode($template); ?>;
+            document.addEventListener("DOMContentLoaded", function() {
+                let wrapper = document.getElementById("faq-wrapper");
+                let addBtn = document.getElementById("add-faq");
 
-                function renumberTitles() {
-                    const rows = wrap.querySelectorAll('.pp-row');
-                    rows.forEach((row, idx) => {
-                        row.dataset.index = idx;
-                        const title = row.querySelector('.pp-row-title');
-                        if (title) title.textContent = 'Item #' + (idx + 1);
+                addBtn.addEventListener("click", function() {
 
-                        // update name attributes to keep array indexes consistent
-                        row.querySelectorAll('[name]').forEach(el => {
-                            el.name = el.name.replace(/pp_repeat_gallery\[\d+\]/, 'pp_repeat_gallery[' + idx + ']');
-                        });
-                    });
-                }
+                    let index = wrapper.children.length;
 
-                function openMediaPicker(onSelect) {
-                    const frame = wp.media({
-                        title: 'Select Image',
-                        button: {
-                            text: 'Use this image'
-                        },
-                        multiple: false
-                    });
-                    frame.on('select', function() {
-                        const att = frame.state().get('selection').first().toJSON();
-                        onSelect(att);
-                    });
-                    frame.open();
-                }
+                    let html = `
+                <div class="faq-item">
+                    <input type="text" 
+                           name="area_faqs[${index}][question]" 
+                           placeholder="Question"
+                           style="width:100%; margin-bottom:5px;" />
 
-                function initRow(row) {
-                    // remove row
-                    row.querySelector('.pp-remove-row')?.addEventListener('click', function() {
-                        const rows = wrap.querySelectorAll('.pp-row');
-                        if (rows.length <= 1) {
-                            // reset first row instead of removing last
-                            row.querySelector('textarea').value = '';
-                            row.querySelectorAll('input.pp-img-id').forEach(inp => inp.value = '');
-                            row.querySelectorAll('.pp-preview').forEach(p => p.innerHTML = '<div style="opacity:.6;">No image</div>');
-                            return;
-                        }
-                        row.remove();
-                        renumberTitles();
-                    });
+                    <textarea name="area_faqs[${index}][answer]" 
+                              placeholder="Answer"
+                              style="width:100%; height:80px;"></textarea>
 
-                    // select / remove image buttons
-                    row.querySelectorAll('.pp-select-img').forEach(btn => {
-                        btn.addEventListener('click', function() {
-                            const box = btn.closest('.pp-imgbox');
-                            const input = box.querySelector('input.pp-img-id');
-                            const preview = box.querySelector('.pp-preview');
+                    <button type="button" class="remove-faq">Remove</button>
+                    <hr>
+                </div>
+            `;
 
-                            openMediaPicker(function(att) {
-                                input.value = att.id;
-                                preview.innerHTML = '<img src="' + att.url + '" alt="" />';
-                            });
-                        });
-                    });
-
-                    row.querySelectorAll('.pp-clear-img').forEach(btn => {
-                        btn.addEventListener('click', function() {
-                            const box = btn.closest('.pp-imgbox');
-                            box.querySelector('input.pp-img-id').value = '';
-                            box.querySelector('.pp-preview').innerHTML = '<div style="opacity:.6;">No image</div>';
-                        });
-                    });
-                }
-
-                // init existing rows
-                wrap.querySelectorAll('.pp-row').forEach(initRow);
-
-                // add new row
-                addBtn.addEventListener('click', function() {
-                    const idx = wrap.querySelectorAll('.pp-row').length;
-                    const html = rowTemplate.replace(/__i__/g, idx);
-                    const temp = document.createElement('div');
-                    temp.innerHTML = html.trim();
-                    const row = temp.firstElementChild;
-                    wrap.appendChild(row);
-                    initRow(row);
-                    renumberTitles();
+                    wrapper.insertAdjacentHTML("beforeend", html);
                 });
 
-                // ensure names are consistent on load
-                renumberTitles();
-            })();
+                wrapper.addEventListener("click", function(e) {
+                    if (e.target.classList.contains("remove-faq")) {
+                        e.target.closest(".faq-item").remove();
+                    }
+                });
+            });
         </script>
-    <?php
-    }
 
-    function pp_repeat_gallery_imgbox($i, $n, $img_id) {
-        $input_name = 'pp_repeat_gallery[' . $i . '][img' . $n . ']';
-        $preview = $img_id ? wp_get_attachment_image($img_id, 'medium') : '<div style="opacity:.6;">No image</div>';
-
-        echo '<div class="pp-imgbox">
-          <div><strong>Image ' . $n . '</strong></div>
-          <div class="pp-preview" style="margin-top:8px;">' . $preview . '</div>
-          <input class="pp-img-id" type="hidden" name="' . esc_attr($input_name) . '" value="' . esc_attr($img_id) . '" />
-          <div class="pp-actions" style="margin-top:8px;">
-            <button type="button" class="pp-btn pp-select-img">Select</button>
-            <button type="button" class="pp-btn pp-btn-danger pp-clear-img">Remove</button>
-          </div>
-        </div>';
-    }
-
-    function pp_repeat_gallery_row_template() {
-        // HTML template for new row (index placeholder: __i__)
-        ob_start(); ?>
-        <div class="pp-row" data-index="__i__">
-            <div class="pp-row-head">
-                <div class="pp-row-title">Item #__i__</div>
-                <button type="button" class="pp-btn pp-btn-danger pp-remove-row">Remove</button>
-            </div>
-
-            <label><strong>Description</strong></label><br />
-            <textarea class="pp-desc" name="pp_repeat_gallery[__i__][desc]" placeholder="Write description..."></textarea>
-
-            <div class="pp-grid">
-                <?php for ($n = 1; $n <= 3; $n++): ?>
-                    <div class="pp-imgbox">
-                        <div><strong>Image <?php echo $n; ?></strong></div>
-                        <div class="pp-preview" style="margin-top:8px;">
-                            <div style="opacity:.6;">No image</div>
-                        </div>
-                        <input class="pp-img-id" type="hidden" name="pp_repeat_gallery[__i__][img<?php echo $n; ?>]" value="" />
-                        <div class="pp-actions" style="margin-top:8px;">
-                            <button type="button" class="pp-btn pp-select-img">Select</button>
-                            <button type="button" class="pp-btn pp-btn-danger pp-clear-img">Remove</button>
-                        </div>
-                    </div>
-                <?php endfor; ?>
-            </div>
-        </div>
 <?php
-        return ob_get_clean();
     }
 
-    // SAVE (reliable)
     add_action('save_post', function ($post_id) {
 
-        if (get_post_type($post_id) !== 'porpertypi') return;
-
         if (
-            !isset($_POST['pp_repeat_gallery_nonce']) ||
-            !wp_verify_nonce($_POST['pp_repeat_gallery_nonce'], 'pp_repeat_gallery_nonce_action')
+            !isset($_POST['area_faq_nonce_field']) ||
+            !wp_verify_nonce($_POST['area_faq_nonce_field'], 'area_faq_nonce')
         ) {
             return;
         }
 
-        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-        if (wp_is_post_revision($post_id)) return;
-        if (!current_user_can('edit_post', $post_id)) return;
-
-        $raw = isset($_POST['pp_repeat_gallery']) ? (array) $_POST['pp_repeat_gallery'] : [];
-        $clean = [];
-
-        foreach ($raw as $row) {
-            if (!is_array($row)) continue;
-
-            $desc = isset($row['desc']) ? sanitize_textarea_field($row['desc']) : '';
-            $img1 = isset($row['img1']) ? absint($row['img1']) : 0;
-            $img2 = isset($row['img2']) ? absint($row['img2']) : 0;
-            $img3 = isset($row['img3']) ? absint($row['img3']) : 0;
-
-            // keep row if has any content
-            if ($desc !== '' || $img1 || $img2 || $img3) {
-                $clean[] = [
-                    'desc' => $desc,
-                    'img1' => $img1,
-                    'img2' => $img2,
-                    'img3' => $img3,
-                ];
-            }
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            return;
         }
 
-        if (!empty($clean)) {
-            update_post_meta($post_id, 'pp_repeat_gallery', $clean);
+        if (isset($_POST['area_faqs'])) {
+            update_post_meta($post_id, 'area_faqs', $_POST['area_faqs']);
         } else {
-            delete_post_meta($post_id, 'pp_repeat_gallery');
+            delete_post_meta($post_id, 'area_faqs');
         }
-    }, 20);
+    });
 };
-repeatable_meta_of_area();
+repeatable_faq_meta_box();

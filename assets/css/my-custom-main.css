@@ -270,9 +270,9 @@ body{
 
 
 
-/* single page for area */
+/* single page for area ===================================================================================*/
   :root{
-    --new_projects-primary:#01AEE5;
+    --new_projects-primary: var(--clr-primary);
     --new_projects-black:#0b0f14;
     --new_projects-text:#111827;
     --new_projects-muted:#6b7280;

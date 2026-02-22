@@ -384,6 +384,76 @@
 </script>
 <!-- Property for Commercial end -->
 
+<!-- Popular Area in Dubai start -->
+<section class="popular_area_section">
+    <div class="popular_area_container">
+
+        <div class="popular_area_header">
+            <h2 class="popular_area_title">Popular Areas in Dubai</h2>
+
+            <!-- Desktop button -->
+            <a class="popular_area_btn popular_area_btn_desktop" href="#">
+                Show All Areas <span class="popular_area_btn_icon" aria-hidden="true">→</span>
+            </a>
+        </div>
+
+        <div class="popular_area_wrap">
+            <!-- ✅ LOOP CARD (repeat this block in WP loop) -->
+            <?php
+            // current cpt "area"
+            $query = new WP_Query([
+                'post_type' => 'area',
+                'posts_per_page' => 6,
+                'post_status' => 'publish',
+                'orderby'        => 'rand'
+            ]);
+
+
+            if ($query->have_posts()) :
+                while ($query->have_posts()) : $query->the_post();
+
+                    $price_start = get_post_meta(get_the_ID(), 'price_start', true);
+
+            ?>
+
+                    <a class="popular_area_card" href="<?php the_permalink(); ?>">
+                        <div class="popular_area_media">
+                            <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'large'); ?>" alt="<?php the_title(); ?>">
+                        </div>
+                        <div class="popular_area_overlay"></div>
+                        <div class="popular_area_badge">Featured</div>
+                        <div class="popular_area_content">
+                            <?php if (the_title()) : ?>
+                                <h3 class="popular_area_name"><?php the_title(); ?></h3>
+                            <?php endif; ?>
+                            <?php if (!empty($price_start)) : ?>
+                                <p class="popular_area_price">Price from <strong><?php echo esc_html($price_start); ?> AED</strong></p>
+                            <?php endif; ?>
+                        </div>
+                    </a>
+                <?php
+                endwhile;
+                wp_reset_postdata();
+            else : ?>
+
+                <div class="popular_area_no_post">
+                    <h5>No Areas Found</h5>
+                </div>
+
+            <?php endif; ?>
+        </div>
+
+        <!-- Mobile button -->
+        <div class="popular_area_btn_mobile_wrap">
+            <a class="popular_area_btn popular_area_btn_mobile" href="#">
+                Show All Areas <span class="popular_area_btn_icon" aria-hidden="true">→</span>
+            </a>
+        </div>
+
+    </div>
+</section>
+<!-- Popular Area in Dubai end -->
+
 
 
 
