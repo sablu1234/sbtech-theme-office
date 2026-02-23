@@ -454,6 +454,339 @@
 </section>
 <!-- Popular Area in Dubai end -->
 
+<!-- About us start -->
+<section class="about_stats_section">
+    <div class="about_stats_container">
+
+        <!-- HEADER -->
+        <div class="about_stats_header">
+            <div>
+                <h2 class="about_stats_title">About Us</h2>
+                <p class="about_stats_desc">
+                    Established to serve modern buyers, sellers, and investors, our real estate team delivers premium support,
+                    market expertise, and a smooth property journey—from first enquiry to final handover.
+                    We focus on trust, performance, and long-term relationships.
+                </p>
+            </div>
+        </div>
+
+        <!-- STATS GRID -->
+        <div class="about_stats_grid">
+
+            <!-- Card 1 -->
+            <div class="about_stats_card">
+                <div class="about_stats_icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                </div>
+                <h3 class="about_stats_value"><span class="hl">120,000</span>+ customers</h3>
+                <p class="about_stats_note">Trusted by clients across the UAE for buying, selling, and renting.</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="about_stats_card">
+                <div class="about_stats_icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M3 21h18" />
+                        <path d="M5 21V7l7-4 7 4v14" />
+                        <path d="M9 21v-6h6v6" />
+                    </svg>
+                </div>
+                <h3 class="about_stats_value"><span class="hl">6,000</span>+ properties</h3>
+                <p class="about_stats_note">Sold, rented, and leased through our network and trusted partners.</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="about_stats_card">
+                <div class="about_stats_icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Z" />
+                        <path d="M19 21a7 7 0 0 0-14 0" />
+                        <path d="M16 6h5" />
+                        <path d="M18.5 3.5v5" />
+                    </svg>
+                </div>
+                <h3 class="about_stats_value"><span class="hl">250</span>+ top agents</h3>
+                <p class="about_stats_note">Specialists across prime communities, off-plan, and investment deals.</p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="about_stats_card">
+                <div class="about_stats_icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M8 2v4" />
+                        <path d="M16 2v4" />
+                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                        <path d="M3 10h18" />
+                    </svg>
+                </div>
+                <h3 class="about_stats_value"><span class="hl">15</span>+ years</h3>
+                <p class="about_stats_note">A proven track record of performance and client satisfaction.</p>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="about_stats_card">
+                <div class="about_stats_icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M12 21s7-4.35 7-11a7 7 0 0 0-14 0c0 6.65 7 11 7 11Z" />
+                        <path d="M12 10a2.5 2.5 0 1 0-2.5-2.5A2.5 2.5 0 0 0 12 10Z" />
+                    </svg>
+                </div>
+                <h3 class="about_stats_value"><span class="hl">AED 11B</span> volume</h3>
+                <p class="about_stats_note">Total real estate volume achieved through strong market reach.</p>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="about_stats_card">
+                <div class="about_stats_icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M21 12a9 9 0 1 1-9-9" />
+                        <path d="M22 2 12 12" />
+                    </svg>
+                </div>
+                <h3 class="about_stats_value"><span class="hl">40</span>+ languages</h3>
+                <p class="about_stats_note">A diverse team built to support local and international clients.</p>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="about_stats_card">
+                <div class="about_stats_icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M3 21h18" />
+                        <path d="M7 21V5h10v16" />
+                        <path d="M9 9h2" />
+                        <path d="M13 9h2" />
+                        <path d="M9 13h2" />
+                        <path d="M13 13h2" />
+                    </svg>
+                </div>
+                <h3 class="about_stats_value"><span class="hl">18</span> offices</h3>
+                <p class="about_stats_note">Presence across key locations to serve clients efficiently.</p>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="about_stats_card">
+                <div class="about_stats_icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <rect x="3" y="5" width="18" height="14" rx="2" />
+                        <path d="M7 15h6" />
+                        <path d="M16 15h2" />
+                    </svg>
+                </div>
+                <h3 class="about_stats_value"><span class="hl">Top</span> selling partner</h3>
+                <p class="about_stats_note">Strong partnerships with leading UAE developers and brands.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- About us end -->
+
+<!-- agets of the monthe start -->
+<section class="agents_month_section">
+    <div class="agents_month_container">
+
+        <div class="agents_month_header">
+            <div>
+                <h2 class="agents_month_title">Agents of the Month</h2>
+                <p class="agents_month_sub">
+                    Meet our top-performing agents selected for outstanding results, client satisfaction, and market expertise.
+                </p>
+            </div>
+        </div>
+
+        <div class="agents_month_grid">
+            <?php
+            $agent_query = new WP_Query([
+                'post_type' => 'agent',
+                'posts_per_page' => 4,
+                'post_status' => 'publish',
+                'orderby' => 'rand'
+            ]);
+            while ($agent_query->have_posts()) : $agent_query->the_post(); ?>
+                <a class="agent_card" href="<?php echo get_permalink(get_the_ID()); ?>">
+                    <div class="agent_card_media">
+                        <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" alt="Agent">
+                        <div class="agent_card_tag d-none">Top Performer</div>
+                    </div>
+                    <div class="agent_card_body">
+                        <h3 class="agent_name"><?php echo get_the_title(); ?></h3>
+                        <p class="agent_meta"><strong>Speaks:</strong>
+                            <?php
+                            $speaking_language = get_post_meta(get_the_ID(), 'agent_repeat_items', true);
+                            if (is_array($speaking_language) && !empty($speaking_language)) {
+                                foreach ($speaking_language as $item) {
+                                    echo esc_html($item) . ', ';
+                                }
+                            }
+                            ?>
+                        </p>
+                    </div>
+                    <div class="agent_card_footer">
+                        <span class="agent_btn">View Profile →</span>
+                    </div>
+                </a>
+            <?php endwhile; ?>
+        </div>
+
+    </div>
+</section>
+<!-- agets of the monthe end -->
+
+<!-- Media shortcode start -->
+<section class="container">
+    <?php echo do_shortcode('[media_loop_ajax]'); ?>
+</section>
+<!-- Media shortcode end -->
+
+<!-- review about start -->
+<section class="review_sec">
+    <div class="review_container">
+
+        <div class="review_head">
+            <div>
+                <h2 class="review_title">Reviews About Our Company</h2>
+                <p class="review_sub">Trusted feedback from real clients. Professional service. Clear communication.</p>
+            </div>
+
+            <div class="review_controls">
+                <button class="review_btn" id="prevBtn" aria-label="Previous">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                </button>
+                <button class="review_btn" id="nextBtn" aria-label="Next">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="review_viewport" id="viewport">
+            <div class="review_track" id="track">
+
+                <!-- cards -->
+                <article class="review_card">
+                    <div class="review_top">
+                        <div class="review_rating">
+                            <div class="review_score">5</div>
+                            <div class="review_stars">
+                                <svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg>
+                                <svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg>
+                                <svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg>
+                                <svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg>
+                                <svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="review_time">2 months ago</div>
+                    </div>
+                    <p class="review_text">I had a superb experience. The team was quick, efficient, responsive and professional. They guided me through every step and made the process smooth.</p>
+                    <div class="review_footer">
+                        <div class="review_name">Kenneth Whitelaw-Jones</div>
+                        <div class="review_google"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div>
+                    </div>
+                </article>
+
+                <article class="review_card">
+                    <div class="review_top">
+                        <div class="review_rating">
+                            <div class="review_score">5</div>
+                            <div class="review_stars">
+                                <svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg><svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg><svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg><svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg><svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="review_time">3 weeks ago</div>
+                    </div>
+                    <p class="review_text">Excellent support throughout the process. Professional, patient, and clear communication. Everything was handled carefully and on time.</p>
+                    <div class="review_footer">
+                        <div class="review_name">Neda Motamedi</div>
+                        <div class="review_google"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div>
+                    </div>
+                </article>
+
+                <article class="review_card">
+                    <div class="review_top">
+                        <div class="review_rating">
+                            <div class="review_score">5</div>
+                            <div class="review_stars">
+                                <svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg><svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg><svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg><svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg><svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="review_time">3 weeks ago</div>
+                    </div>
+                    <p class="review_text">Truly excellent experience. Step-by-step guidance and trustworthy support. Highly recommended for anyone looking for quality service.</p>
+                    <div class="review_footer">
+                        <div class="review_name">Parmiss Hejazian</div>
+                        <div class="review_google"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div>
+                    </div>
+                </article>
+
+                <!-- duplicate some cards so loop looks obvious -->
+                <article class="review_card">
+                    <div class="review_top">
+                        <div class="review_rating">
+                            <div class="review_score">5</div>
+                            <div class="review_stars">
+                                <svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg><svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg><svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg><svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg><svg viewBox="0 0 20 20">
+                                    <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="review_time">1 month ago</div>
+                    </div>
+                    <p class="review_text">Very professional team. Quick updates, clear answers, and the entire experience was smooth. Would definitely work with them again.</p>
+                    <div class="review_footer">
+                        <div class="review_name">Aisha M.</div>
+                        <div class="review_google"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- review about end -->
 
 
 
