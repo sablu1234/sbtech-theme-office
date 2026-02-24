@@ -199,7 +199,7 @@ function index_filter_porpertypi_dynamic() {
               ?>
             </div>
             <div class="avatar-name">
-              <h6>Listing by</h6>
+              <!-- <h6>Listing by</h6> -->
               <?php
               $author_id = get_the_author_meta('ID');
               echo get_the_author_meta('display_name', $author_id);

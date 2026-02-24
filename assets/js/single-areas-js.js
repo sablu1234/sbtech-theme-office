@@ -104,4 +104,3 @@
 
 // area slier js
 
-alert("area slider js");

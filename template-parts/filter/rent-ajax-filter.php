@@ -199,7 +199,7 @@ function re_filter_porpertypi_dynamic_rent() {
                             ?>
                         </div>
                         <div class="avatar-name">
-                            <h6>Listing by</h6>
+                            <!-- <h6>Listing by</h6> -->
                             <?php
                             $author_id = get_the_author_meta('ID');
                             echo get_the_author_meta('display_name', $author_id);
@@ -491,8 +491,8 @@ add_shortcode('reaf_recent_properties', function ($atts) {
                                 src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>"
                                 alt="Property">
                             <div class="rent-cardx__badges">
-                                <?php if (!empty($status)) :?>
-                                <span class="rent-cardx__badge rent-cardx__badge--buy"><?php echo $status; ?></span>
+                                <?php if (!empty($status)) : ?>
+                                    <span class="rent-cardx__badge rent-cardx__badge--buy"><?php echo $status; ?></span>
                                 <?php endif; ?>
                                 <span class="rent-cardx__badge rent-cardx__badge--type"><?php echo $purpose; ?></span>
                             </div>
@@ -552,7 +552,7 @@ add_shortcode('reaf_recent_properties', function ($atts) {
                                     <?php echo get_avatar(get_the_author_meta('ID')); ?>
                                 </div>
                                 <div class="rent-cardx__agentText">
-                                    <div class="rent-cardx__agentTop">Listing by</div>
+                                    <!-- <div class="rent-cardx__agentTop">Listing by</div> -->
                                     <div class="rent-cardx__agentName"><?php echo get_the_author_meta('display_name', get_the_author_meta("ID")); ?></div>
                                 </div>
                             </div>

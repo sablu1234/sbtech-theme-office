@@ -64,33 +64,38 @@
 
 <!-- slider start -->
 <section class="area_single_slider">
-    <div class="wrap-anywhere" style="height:420px;">
-        <div class="box-slider" data-autoplay="true" data-interval="3500">
-            <div class="box-slider__viewport">
-                <div class="box-slider__track">
-                    <?php
-                    $ids = get_post_meta(get_the_ID(), 'area_gallery', true);
+    <?php
+    $ids = get_post_meta(get_the_ID(), 'area_gallery', true);
+    if (!empty($ids)) : ?>
+        <div class="wrap-anywhere" style="height:420px;">
+            <div class="box-slider" data-autoplay="true" data-interval="3500">
+                <div class="box-slider__viewport">
+                    <div class="box-slider__track">
+                        <?php
+                        $ids = get_post_meta(get_the_ID(), 'area_gallery', true);
 
-                    if ($ids) {
-                        foreach (array_filter(array_map('absint', explode(',', $ids))) as $id) {
+                        if ($ids) {
+                            foreach (array_filter(array_map('absint', explode(',', $ids))) as $id) {
 
-                    ?>
+                        ?>
 
-                            <figure class="box-slide"><img src="<?php echo wp_get_attachment_url($id); ?>" alt=""></figure>
-                    <?php
+                                <figure class="box-slide"><img src="<?php echo wp_get_attachment_url($id); ?>" alt=""></figure>
+                        <?php
+                            }
                         }
-                    }
-                    ?>
+                        ?>
 
 
+                    </div>
+
+                    <button class="box-nav box-prev" type="button" aria-label="Previous"></button>
+                    <button class="box-nav box-next" type="button" aria-label="Next"></button>
+
+                    <div class="box-dots" aria-label="Pagination"></div>
                 </div>
-
-                <button class="box-nav box-prev" type="button" aria-label="Previous"></button>
-                <button class="box-nav box-next" type="button" aria-label="Next"></button>
-
-                <div class="box-dots" aria-label="Pagination"></div>
             </div>
         </div>
+    <?php endif; ?>
 </section>
 <script>
     (() => {
@@ -205,41 +210,119 @@
 <!-- slider end -->
 
 <!-- Faq section start -->
-<section class="rent-faqs" aria-label="rent faq">
-    <div class="rent-container">
+<?php
+$faqs = get_post_meta(get_the_ID(), 'area_faqs', true);
+if (!empty($faqs)): ?>
+    <section class="area_faq_section">
+        <div class="area_faq_container">
 
-        <div class="rent-faqs__wrap" id="rentFaq">
+            <div class="area_faq_header d-none">
+                <div>
+                    <h2 class="area_faq_title">Frequently Asked Questions</h2>
+                    <p class="area_faq_subtitle">Answers based on your selected area details.</p>
+                </div>
+            </div>
+
             <?php
             $faqs = get_post_meta(get_the_ID(), 'area_faqs', true);
+            $has_valid = false;
 
-            if (!empty($faqs) && is_array($faqs)) :
+            if (!empty($faqs) && is_array($faqs)) {
+                foreach ($faqs as $f) {
+                    $q = isset($f['question']) ? trim($f['question']) : '';
+                    $a = isset($f['answer']) ? trim($f['answer']) : '';
+                    if ($q !== '' && $a !== '') {
+                        $has_valid = true;
+                        break;
+                    }
+                }
+            }
+
+            if ($has_valid) :
             ?>
-                <div class="area-faq">
-                    <?php foreach ($faqs as $faq) : ?>
-                        <div class="faq-item">
-                            <h4><?php echo esc_html($faq['question']); ?></h4>
-                            <p><?php echo esc_html($faq['answer']); ?></p>
+
+                <div class="acc_list" id="accFAQ">
+                    <?php
+                    $i = 1;
+                    foreach ($faqs as $faq) :
+
+                        $question = isset($faq['question']) ? trim($faq['question']) : '';
+                        $answer   = isset($faq['answer']) ? trim($faq['answer']) : '';
+
+                        if ($question === '' || $answer === '') continue;
+
+                        $is_open = ($i === 1) ? ' is-open' : '';
+                        $aria    = ($i === 1) ? 'true' : 'false';
+                        $path_d  = ($i === 1) ? 'M6 12H18' : 'M12 6V18M6 12H18';
+                    ?>
+
+                        <div class="acc_item<?php echo esc_attr($is_open); ?>">
+                            <button class="acc_btn" type="button" aria-expanded="<?php echo esc_attr($aria); ?>">
+                                <h3 class="acc_title"><?php echo esc_html($i . '. ' . $question); ?></h3>
+
+                                <span class="acc_icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="<?php echo esc_attr($path_d); ?>" stroke-width="2.6" stroke-linecap="round"></path>
+                                    </svg>
+                                </span>
+                            </button>
+
+                            <div class="acc_panel">
+                                <div class="acc_content">
+                                    <?php echo wp_kses_post(wpautop($answer)); ?>
+                                </div>
+                            </div>
                         </div>
-                    <?php endforeach; ?>
+
+                    <?php
+                        $i++;
+                    endforeach;
+                    ?>
                 </div>
-                <div class="rent-faq" data-open="true">
-                    <button class="rent-faq__q" type="button" aria-expanded="true">
-                        <?php echo esc_html($faq['question']); ?>
-                        <span class="rent-faq__icon" aria-hidden="true"></span>
-                    </button>
-                    <div class="rent-faq__a" role="region">
-                        <div class="rent-faq__aInner">
-                            <?php echo esc_html($faq['answer']); ?>
-                        </div>
-                    </div>
+
+            <?php else : ?>
+
+                <div class="area_faq_empty">
+                    <h4>No FAQs Found</h4>
+                    <p>Please add FAQs from the Area post editor (Question + Answer).</p>
                 </div>
+
             <?php endif; ?>
+
         </div>
-    </div>
-</section>
+    </section>
+<?php endif; ?>
+<script>
+    (function() {
+        const acc = document.getElementById('accFAQ');
+        if (!acc) return;
+
+        acc.addEventListener('click', (e) => {
+            const btn = e.target.closest('.acc_btn');
+            if (!btn) return;
+
+            const item = btn.closest('.acc_item');
+            const isOpen = item.classList.contains('is-open');
+
+            // ✅ Single open at a time
+            acc.querySelectorAll('.acc_item').forEach(i => {
+                i.classList.remove('is-open');
+                const b = i.querySelector('.acc_btn');
+                if (b) b.setAttribute('aria-expanded', 'false');
+                const path = i.querySelector('.acc_icon svg path');
+                if (path) path.setAttribute('d', 'M12 6V18M6 12H18'); // plus
+            });
+
+            if (!isOpen) {
+                item.classList.add('is-open');
+                btn.setAttribute('aria-expanded', 'true');
+                const path = item.querySelector('.acc_icon svg path');
+                if (path) path.setAttribute('d', 'M6 12H18'); // minus
+            }
+        });
+    })();
+</script>
 <!-- Faq section end -->
-
-
 
 <!-- Newsletter section start -->
 <?php echo do_shortcode('[newsletter_form]'); ?>

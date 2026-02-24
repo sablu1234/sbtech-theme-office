@@ -119,6 +119,12 @@
             </p>
         </div>
 
+        <?php           
+            $commercial_experience = get_option('commercial_experience');            
+            $commercial_verified_listings = get_option('commercial_Verified_listings');            
+            $commercial_worldwide = get_option('commercial_worldwide');            
+            $commercial_quick_shortlist = get_option('commercial_quick_shortlist');            
+        ?>
         <!-- Cards -->
         <div class="commercial-whoGrid">
 
@@ -130,7 +136,7 @@
                         <path d="M2 12h20" />
                     </svg>
                 </div>
-                <p class="commercial-whoValue">10+ Years</p>
+                <p class="commercial-whoValue"><?php echo !empty($commercial_experience) ? esc_html($commercial_experience) : '100';?>+ Years</p>
                 <p class="commercial-whoLabel">Commercial real estate experience</p>
             </div>
 
@@ -142,7 +148,7 @@
                         <path d="M16 7h3a2 2 0 0 1 2 2v12" />
                     </svg>
                 </div>
-                <p class="commercial-whoValue">2,000+</p>
+                <p class="commercial-whoValue"><?php echo !empty($commercial_verified_listings) ? esc_html($commercial_verified_listings) : '2,000+';?></p>
                 <p class="commercial-whoLabel">Verified commercial listings</p>
             </div>
 
@@ -153,7 +159,7 @@
                         <path d="M3.6 9h16.8M3.6 15h16.8" />
                     </svg>
                 </div>
-                <p class="commercial-whoValue">Global Clients</p>
+                <p class="commercial-whoValue"><?php echo !empty($commercial_worldwide) ? esc_html($commercial_worldwide) : 'Global Clients';?></p>
                 <p class="commercial-whoLabel">Multi-language support & worldwide reach</p>
             </div>
 
@@ -163,7 +169,7 @@
                         <path d="M13 2 3 14h7l-1 8 12-14h-7l-1-6Z" />
                     </svg>
                 </div>
-                <p class="commercial-whoValue">Fast Response</p>
+                <p class="commercial-whoValue"><?php echo !empty($commercial_quick_shortlist) ? esc_html($commercial_quick_shortlist) : 'Fast Response';?></p>
                 <p class="commercial-whoLabel">Quick shortlist & viewing coordination</p>
             </div>
 

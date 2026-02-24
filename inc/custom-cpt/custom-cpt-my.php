@@ -164,66 +164,63 @@ function meta_box_for_area() {
         $val = implode(',', array_filter(array_map('absint', explode(',', $raw))));
         $val === '' ? delete_post_meta($id, 'area_gallery') : update_post_meta($id, 'area_gallery', $val);
     });
-}
-meta_box_for_area();
 
 
+    // Add Repeatable FAQ Meta Box (Area CPT)
+    function repeatable_faq_meta_box() {
+        // ✅ Add Meta Box
+        add_action('add_meta_boxes', function () {
+            add_meta_box(
+                'area_faq_box',
+                'Area FAQs',
+                'area_faq_box_callback',
+                'area',
+                'normal',
+                'default'
+            );
+        });
 
-// Add Repeatable FAQ Meta Box (Area CPT)
-function repeatable_faq_meta_box() {
-    // ✅ Add Meta Box
-    add_action('add_meta_boxes', function () {
-        add_meta_box(
-            'area_faq_box',
-            'Area FAQs',
-            'area_faq_box_callback',
-            'area',
-            'normal',
-            'default'
-        );
-    });
+        function area_faq_box_callback($post) {
 
-    function area_faq_box_callback($post) {
+            wp_nonce_field('area_faq_nonce', 'area_faq_nonce_field');
 
-        wp_nonce_field('area_faq_nonce', 'area_faq_nonce_field');
-
-        $faqs = get_post_meta($post->ID, 'area_faqs', true);
-        if (!is_array($faqs)) {
-            $faqs = [];
-        }
+            $faqs = get_post_meta($post->ID, 'area_faqs', true);
+            if (!is_array($faqs)) {
+                $faqs = [];
+            }
         ?>
 
-        <div id="faq-wrapper">
-            <?php foreach ($faqs as $index => $faq) : ?>
-                <div class="faq-item">
-                    <input type="text"
-                        name="area_faqs[<?php echo $index; ?>][question]"
-                        value="<?php echo esc_attr($faq['question']); ?>"
-                        placeholder="Question"
-                        style="width:100%; margin-bottom:5px;" />
+            <div id="faq-wrapper">
+                <?php foreach ($faqs as $index => $faq) : ?>
+                    <div class="faq-item">
+                        <input type="text"
+                            name="area_faqs[<?php echo $index; ?>][question]"
+                            value="<?php echo esc_attr($faq['question']); ?>"
+                            placeholder="Question"
+                            style="width:100%; margin-bottom:5px;" />
 
-                    <textarea name="area_faqs[<?php echo $index; ?>][answer]"
-                        placeholder="Answer"
-                        style="width:100%; height:80px;"><?php echo esc_textarea($faq['answer']); ?></textarea>
+                        <textarea name="area_faqs[<?php echo $index; ?>][answer]"
+                            placeholder="Answer"
+                            style="width:100%; height:80px;"><?php echo esc_textarea($faq['answer']); ?></textarea>
 
-                    <button type="button" class="remove-faq">Remove</button>
-                    <hr>
-                </div>
-            <?php endforeach; ?>
-        </div>
+                        <button type="button" class="remove-faq">Remove</button>
+                        <hr>
+                    </div>
+                <?php endforeach; ?>
+            </div>
 
-        <button type="button" id="add-faq">Add FAQ</button>
+            <button type="button" id="add-faq">Add FAQ</button>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                let wrapper = document.getElementById("faq-wrapper");
-                let addBtn = document.getElementById("add-faq");
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    let wrapper = document.getElementById("faq-wrapper");
+                    let addBtn = document.getElementById("add-faq");
 
-                addBtn.addEventListener("click", function() {
+                    addBtn.addEventListener("click", function() {
 
-                    let index = wrapper.children.length;
+                        let index = wrapper.children.length;
 
-                    let html = `
+                        let html = `
                 <div class="faq-item">
                     <input type="text" 
                            name="area_faqs[${index}][question]" 
@@ -239,38 +236,43 @@ function repeatable_faq_meta_box() {
                 </div>
             `;
 
-                    wrapper.insertAdjacentHTML("beforeend", html);
-                });
+                        wrapper.insertAdjacentHTML("beforeend", html);
+                    });
 
-                wrapper.addEventListener("click", function(e) {
-                    if (e.target.classList.contains("remove-faq")) {
-                        e.target.closest(".faq-item").remove();
-                    }
+                    wrapper.addEventListener("click", function(e) {
+                        if (e.target.classList.contains("remove-faq")) {
+                            e.target.closest(".faq-item").remove();
+                        }
+                    });
                 });
-            });
-        </script>
+            </script>
 
 <?php
-    }
-
-    add_action('save_post', function ($post_id) {
-
-        if (
-            !isset($_POST['area_faq_nonce_field']) ||
-            !wp_verify_nonce($_POST['area_faq_nonce_field'], 'area_faq_nonce')
-        ) {
-            return;
         }
 
-        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-            return;
-        }
+        add_action('save_post', function ($post_id) {
 
-        if (isset($_POST['area_faqs'])) {
-            update_post_meta($post_id, 'area_faqs', $_POST['area_faqs']);
-        } else {
-            delete_post_meta($post_id, 'area_faqs');
-        }
-    });
-};
-repeatable_faq_meta_box();
+            if (
+                !isset($_POST['area_faq_nonce_field']) ||
+                !wp_verify_nonce($_POST['area_faq_nonce_field'], 'area_faq_nonce')
+            ) {
+                return;
+            }
+
+            if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+                return;
+            }
+
+            if (isset($_POST['area_faqs'])) {
+                update_post_meta($post_id, 'area_faqs', $_POST['area_faqs']);
+            } else {
+                delete_post_meta($post_id, 'area_faqs');
+            }
+        });
+    };
+    repeatable_faq_meta_box();
+}
+meta_box_for_area();
+
+
+// 

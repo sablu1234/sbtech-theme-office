@@ -199,3 +199,514 @@
   }
 }
 /* Popular Area in Dubai end ======================================================================*/
+
+/* About us start ======================================================================*/
+  :root{
+    --about_stats_primary:var(--clr-primary);
+    --about_stats_black:var(--clr-primaryblack);
+    --about_stats_white:var(--clr-white);
+    --about_stats_bg:#f6fbff;
+    --about_stats_border:#e8eef5; 
+    --about_stats_shadow: 0 18px 50px rgba(16,24,40,.10);
+    --about_stats_shadow_hover: 0 26px 80px rgba(16,24,40,.15);
+    --about_stats_radius:16px;
+  }
+
+  .about_stats_section{
+    font-family:'Poppins',sans-serif;
+    background:var(--about_stats_bg);
+    padding:60px 16px;
+    color:var(--about_stats_black);
+  }
+
+  .about_stats_container{
+    max-width:1200px;
+    margin:0 auto;
+    width:100%;
+  }
+
+  .about_stats_header{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:24px;
+    margin-bottom:26px;
+  }
+
+  .about_stats_title{
+    margin:0 0 12px 0;
+    font-size:38px;
+    line-height:1.1;
+    font-weight:600;
+    letter-spacing:-.4px;
+  }
+
+  .about_stats_desc{
+    margin:0;
+    max-width:720px;
+    font-size:15px;
+    line-height:1.7;
+    font-weight:400;
+    color:rgba(11,11,12,.78);
+  }
+
+  /* GRID */
+  .about_stats_grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:18px;
+    margin-top:22px;
+  }
+
+  /* CARD */
+  .about_stats_card{
+    background:var(--about_stats_white);
+    border:1px solid var(--about_stats_border);
+    border-radius:var(--about_stats_radius);
+    padding:22px 20px;
+    box-shadow:var(--about_stats_shadow);
+    position:relative;
+    overflow:hidden;
+    transition:.25s ease;
+    min-height:180px;
+  }
+
+  /* subtle corner glow */
+  .about_stats_card::before{
+    content:"";
+    position:absolute;
+    inset:-60px -60px auto auto;
+    width:160px;
+    height:160px;
+    background:radial-gradient(circle, rgba(239,60,38,.18), transparent 60%);
+    pointer-events:none;
+  }
+
+  .about_stats_card:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--about_stats_shadow_hover);
+  }
+
+  .about_stats_icon{
+    width:46px;
+    height:46px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(239,60,38,.10);
+    border:1px solid rgba(239,60,38,.18);
+    margin-bottom:14px;
+  }
+
+  .about_stats_icon svg{
+    width:24px;
+    height:24px;
+    stroke:var(--about_stats_primary);
+  }
+
+  .about_stats_value{
+    margin:0 0 6px 0;
+    font-size:18px;
+    font-weight:600;
+    color:var(--about_stats_black);
+  }
+
+  .about_stats_value .hl{
+    color:var(--about_stats_primary);
+  }
+
+  .about_stats_note{
+    margin:0;
+    font-size:13px;
+    line-height:1.6;
+    font-weight:400;
+    color:rgba(11,11,12,.72);
+  }
+
+  /* TABLET */
+  @media (max-width: 992px){
+    .about_stats_title{ font-size:32px; }
+    .about_stats_grid{ grid-template-columns:repeat(2, 1fr); }
+  }
+
+  /* MOBILE */
+  @media (max-width: 600px){
+    .about_stats_section{ padding:44px 14px; }
+    .about_stats_header{ flex-direction:column; }
+    .about_stats_title{ font-size:26px; }
+    .about_stats_grid{ grid-template-columns:1fr; gap:14px; }
+    .about_stats_card{ padding:18px; }
+  }
+/* About us end ======================================================================*/
+
+/* agents of the month start ======================================================================*/
+:root{
+  --aom_primary:#EF3C26;
+  --aom_black:#0b0b0c;
+  --aom_white:#ffffff;
+  --aom_border:#e9eef3;
+  --aom_shadow: 0 18px 55px rgba(16,24,40,.10);
+  --aom_shadow_hover: 0 26px 85px rgba(16,24,40,.16);
+  --aom_radius:16px;
+}
+
+.agents_month_section{
+  font-family:'Poppins',sans-serif;
+  background:var(--aom_white);
+  padding:60px 16px;
+  color:var(--aom_black);
+}
+
+.agents_month_container{
+  max-width:1200px;
+  width:100%;
+  margin:0 auto;
+}
+
+/* Header */
+.agents_month_header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:16px;
+  margin-bottom:20px;
+}
+
+.agents_month_title{
+  margin:0;
+  font-size:40px;
+  line-height:1.1;
+  font-weight:600;
+  letter-spacing:-.5px;
+}
+
+.agents_month_sub{
+  margin:0;
+  font-size:14px;
+  line-height:1.6;
+  color:rgba(11,11,12,.75);
+  max-width:520px;
+}
+
+/* Grid */
+.agents_month_grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:18px;
+  margin-top:18px;
+}
+
+/* Card */
+.agent_card{
+  background:var(--aom_white);
+  border:1px solid var(--aom_border);
+  border-radius:var(--aom_radius);
+  overflow:hidden;
+  box-shadow:var(--aom_shadow);
+  transition:.25s ease;
+  display:flex;
+  flex-direction:column;
+  text-decoration:none;
+  color:inherit;
+}
+
+.agent_card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--aom_shadow_hover);
+}
+
+/* Image */
+.agent_card_media{
+  position:relative;
+  height:230px; /* same height */
+  overflow:hidden;
+  background:#f6f7f8;
+}
+
+.agent_card_media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  transition:transform .7s ease;
+}
+
+.agent_card:hover .agent_card_media img{
+  transform:scale(1.08);
+}
+
+/* small top tag */
+.agent_card_tag{
+  position:absolute;
+  top:12px;
+  left:12px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(239,60,38,.22);
+  color:var(--aom_black);
+  padding:7px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:600;
+  backdrop-filter: blur(6px);
+}
+
+/* Body */
+.agent_card_body{
+  padding:16px 16px 18px;
+}
+
+.agent_name{
+  margin:0 0 6px 0;
+  font-size:18px;
+  font-weight:600;
+  letter-spacing:-.2px;
+}
+
+.agent_meta{
+  margin:0;
+  font-size:13px;
+  line-height:1.6;
+  color:rgba(11,11,12,.75);
+}
+
+.agent_meta strong{
+  color:var(--aom_primary);
+  font-weight:600;
+}
+
+/* CTA row */
+.agent_card_footer{
+  padding:0 16px 16px;
+  margin-top:auto;
+}
+
+.agent_btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:100%;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1.5px solid rgba(239,60,38,.45);
+  color:var(--aom_primary);
+  background:#fff;
+  font-weight:600;
+  font-size:13px;
+  text-decoration:none;
+  transition:.2s ease;
+}
+.agent_btn:hover{
+  background:var(--aom_primary);
+  color:#fff;
+}
+
+/* Tablet */
+@media (max-width: 992px){
+  .agents_month_title{ font-size:32px; }
+  .agents_month_grid{ grid-template-columns:repeat(2, 1fr); }
+  .agent_card_media{ height:240px; }
+}
+
+/* Mobile */
+@media (max-width: 600px){
+  .agents_month_section{ padding:44px 14px; }
+  .agents_month_header{ flex-direction:column; align-items:flex-start; }
+  .agents_month_title{ font-size:26px; }
+  .agents_month_grid{ grid-template-columns:1fr; gap:14px; }
+  .agent_card_media{ height:240px; }
+}
+/* agents of the month end ======================================================================*/
+
+/* review about start ======================================================================*/
+:root{
+  --primary:#EF3C26;
+  --black:#0b0b0c;
+  --white:#fff;
+  --border:#e9eef3;
+  --shadow: 0 16px 55px rgba(16,24,40,.10);
+  --shadowH: 0 26px 85px rgba(16,24,40,.14);
+  --radius: 16px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:#fff;
+  color:var(--black);
+}
+
+.review_sec{
+  padding:56px 16px;
+  background:var(--white);
+}
+.review_container{
+  max-width:1200px;
+  margin:0 auto;
+  width:100%;
+}
+
+.review_head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  margin-bottom:18px;
+}
+.review_title{
+  margin:0;
+  font-size:34px;
+  font-weight:600;
+  letter-spacing:-.4px;
+  line-height:1.15;
+}
+.review_sub{
+  margin:10px 0 0;
+  font-size:14px;
+  color:rgba(11,11,12,.65);
+}
+
+.review_controls{
+  display:flex;
+  gap:10px;
+  flex-shrink:0;
+}
+.review_btn{
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:#fff;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  box-shadow:0 10px 25px rgba(16,24,40,.08);
+  transition:.2s ease;
+}
+.review_btn:hover{
+  border-color:rgba(239,60,38,.35);
+  transform:translateY(-1px);
+  box-shadow:0 16px 40px rgba(239,60,38,.12);
+}
+.review_btn svg{width:18px;height:18px}
+
+/* ✅ VIEWPORT (scroll slider) */
+.review_viewport{
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type:x mandatory;
+  border-radius:18px;
+  padding-bottom:4px;
+}
+.review_viewport::-webkit-scrollbar{height:0;}
+.review_viewport{scrollbar-width:none;}
+
+/* TRACK */
+.review_track{
+  display:flex;
+  gap:18px;
+  padding:10px 2px 16px;
+}
+
+/* CARD */
+.review_card{
+  scroll-snap-align:start;
+  flex:0 0 calc((100% - 36px)/3); /* desktop 3 */
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:18px 18px 14px;
+  min-height:260px;
+  display:flex;
+  flex-direction:column;
+  transition:.25s ease;
+}
+.review_card:hover{
+  box-shadow:var(--shadowH);
+  transform:translateY(-2px);
+  border-color:rgba(239,60,38,.25);
+}
+
+.review_top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+.review_rating{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.review_score{
+  font-size:22px;
+  font-weight:600;
+  line-height:1;
+}
+.review_stars{display:flex;gap:3px;transform:translateY(1px)}
+.review_stars svg{width:16px;height:16px;fill:#f5b301}
+.review_time{
+  font-size:12px;
+  color:rgba(11,11,12,.55);
+  white-space:nowrap;
+}
+
+.review_text{
+  font-size:13px;
+  line-height:1.7;
+  color:rgba(11,11,12,.78);
+  margin:6px 0 16px;
+  display:-webkit-box;
+  -webkit-line-clamp:6;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+.review_footer{
+  margin-top:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding-top:14px;
+  border-top:1px solid var(--border);
+}
+.review_name{
+  font-size:13px;
+  font-weight:600;
+  color:rgba(11,11,12,.78);
+}
+.review_google{
+  font-weight:600;
+  font-size:12px;
+}
+.review_google span:nth-child(1){color:#4285F4}
+.review_google span:nth-child(2){color:#EA4335}
+.review_google span:nth-child(3){color:#FBBC05}
+.review_google span:nth-child(4){color:#4285F4}
+.review_google span:nth-child(5){color:#34A853}
+.review_google span:nth-child(6){color:#EA4335}
+
+.review_note{
+  text-align:center;
+  margin-top:14px;
+  font-size:12px;
+  color:rgba(11,11,12,.55);
+}
+
+/* RESPONSIVE */
+@media (max-width:992px){
+  .review_title{font-size:28px;}
+  .review_card{flex-basis:calc((100% - 18px)/2);} /* 2 */
+}
+@media (max-width:600px){
+  .review_head{flex-direction:column;align-items:flex-start;}
+  .review_controls{width:100%;justify-content:flex-end;}
+  .review_title{font-size:24px;}
+  .review_card{flex-basis:100%;min-height:240px;} /* 1 */
+}
+/* review about end ======================================================================*/

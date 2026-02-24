@@ -186,37 +186,44 @@
             <div class="sell-why-media">
                 <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80" alt="Real estate team">
             </div>
-
+            <?php 
+                $sell_property_percent = get_option('sell_property_percent');
+                $sell_experience = get_option('sell_experience');            
+                $sell_successful_properties = get_option('sell_successful_properties');            
+                $sell_active_buyers = get_option('sell_active_buyers');            
+                $sell_client_support = get_option('sell_client_support');            
+                $sell_transparent_selling = get_option('sell_transparent_selling');            
+            ?>
             <!-- Right Stats -->
             <div class="sell-why-stats">
 
                 <div class="sell-stat">
-                    <h3>98%</h3>
+                    <h3><?php echo !empty($sell_property_percent) ? esc_html($sell_property_percent) : '100';?>%</h3>
                     <p>Properties sold at market value</p>
                 </div>
 
                 <div class="sell-stat">
-                    <h3>10+ years</h3>
+                    <h3><?php echo !empty($sell_experience) ? esc_html($sell_experience) : '15';?>+ years</h3>
                     <p>Experience in property sales</p>
                 </div>
 
                 <div class="sell-stat">
-                    <h3>450+</h3>
+                    <h3><?php echo !empty($sell_successful_properties) ? esc_html($sell_successful_properties) : '450';?>+</h3>
                     <p>Successful property transactions</p>
                 </div>
 
                 <div class="sell-stat">
-                    <h3>350+</h3>
+                    <h3><?php echo !empty($sell_active_buyers) ? esc_html($sell_active_buyers) : '350';?>+</h3>
                     <p>Active buyers in our network</p>
                 </div>
 
                 <div class="sell-stat">
-                    <h3>24/7</h3>
+                    <h3><?php echo !empty($sell_client_support) ? esc_html($sell_client_support) : '24/7';?></h3>
                     <p>Client support & consultation</p>
                 </div>
 
                 <div class="sell-stat">
-                    <h3>100%</h3>
+                    <h3><?php echo !empty($sell_transparent_selling) ? esc_html($sell_transparent_selling) : '100';?>%</h3>
                     <p>Transparent selling process</p>
                 </div>
 

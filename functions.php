@@ -111,6 +111,9 @@ include_once get_template_directory() . '/template-parts/filter/media-ajax-filte
 include_once get_template_directory() . '/template-parts/filter/index-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/form/careers-form.php';
 
+// admin-setting-api
+include_once get_template_directory() . '/inc/admin-setting-api/admin-setting-api.php';
+
 // Tushar bhai 14-06-2026
 
 include_once get_template_directory() . '/inc/developers-cpt.php';
@@ -118,6 +121,7 @@ include_once get_template_directory() . '/inc/developers-cpt.php';
 include_once get_template_directory() . '/template-parts/developers/developers-ajax.php';
 include_once get_template_directory() . '/inc/developers-options.php';
 include_once get_template_directory() . '/inc/custom-cpt/custom-cpt-my.php';
+include_once get_template_directory() . '/inc/custom-cpt/agent-cpt.php';
 
 
 add_action('wp_enqueue_scripts', function () {

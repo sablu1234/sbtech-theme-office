@@ -75,7 +75,7 @@
                             <div class="np-agent">
                                 <div class="np-avatar"><?php echo get_avatar(get_the_author_meta('ID')); ?></div>
                                 <div>
-                                    <small>Listing by</small><br>
+                                    <!-- <small>Listing by</small><br> -->
                                     <strong><?php echo get_the_author_meta('display_name', get_the_author_meta("ID")); ?></strong>
                                 </div>
                             </div>
