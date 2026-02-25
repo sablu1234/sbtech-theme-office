@@ -135,7 +135,7 @@ add_action('wp_enqueue_scripts', function () {
 .developers_thumb img {
     width: 100%;
     height: 100%;
-    object-fit: none;
+    object-fit: contain;
     display: block;
     background: #ededed;
 }

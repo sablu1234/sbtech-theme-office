@@ -55,7 +55,7 @@
                         <li><a href="#">Warehouse</a></li>
                     </ul>
                 </li>
-                <li><a href="<?php echo home_url('/developer'); ?>">Developers</a></li>
+                <li><a href="<?php echo home_url('/developers'); ?>">Developers</a></li>
                 <li><a href="<?php echo home_url('/services'); ?>">Services</a></li>
                 <li><a href="<?php echo home_url('/media'); ?>">Media</a></li>
                 <li><a href="<?php echo home_url('/about-us'); ?>">About Us</a></li>

@@ -36,8 +36,10 @@ class About_Pages_Dynamic_Data {
             'commercial-pages-dynamic-data',//menu slug
             [$this, 'admin_commercial_page_content']// callback
         );
-    }
+        
 
+    }
+    
     // Parent Page Content
     public function parent_page() {
         echo '<div class="wrap"><h1>Theme Settings</h1></div>';
@@ -211,6 +213,7 @@ class About_Pages_Dynamic_Data {
         </div>
         <?php
     }
+    
 }
 
 new About_Pages_Dynamic_Data();

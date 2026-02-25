@@ -39,7 +39,7 @@ function agent_cpt_area() {
             'pp_repeat_box', // ID
             'Repeatable Speaking Languages', // Title
             'pp_repeat_metabox_cb', // Callback
-            'Agent', // Screen (post type)
+            'agent', // Screen (post type)
             'normal', // Context
             'default' // Priority
         );
