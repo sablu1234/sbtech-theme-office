@@ -2,16 +2,16 @@
 <?php get_header(); ?>
 <!-- Hero area start -->
     <style>
-    .property_management_hero{
+    .mortgages_hero{
     position:relative;
     width:100%;
     min-height:520px;
-    background:url("http://sam91222.local/wp-content/uploads/2026/02/house-loan-estate-sell-mortgage-concept-1-scaled.jpg") center/cover no-repeat;
+    background:url("http://sam91222.local/wp-content/uploads/2026/02/4386398-scaled.jpg") center/cover no-repeat;
     display:flex;
     align-items:center;
     }
     </style>
-    <section class="property_management_hero">
+    <section class="mortgages_hero">
         <div class="about_overlay"></div>
 
         <div class="about_container">
@@ -26,12 +26,12 @@
                 </div>
 
                 <h1 class="about_title">
-                    Property Management with a  <br>Personal Touch
+                    ProDiscover Competitive Mortgage & Home Loan <br>Solutions in Dubai
                 </h1>
 
                 <p class="about_desc">
-                    We’re developing a modern, high-end WordPress real estate website inspired by metropolitan.realestate—focused on clean UX, fast performance, and long-term scalability. From AJAX-powered Buy/Rent listings to New Projects, Area guides, Developers directory, and API-driven property automation—everything is structured for growth.
-
+                    Access tailored financing options with attractive rates and flexible terms across the UAE—start your homeownership journey with confidence.
+                </p>
                 <div class="about_buttons">
                     <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary">View Properties</a>
                     <button class="sell-cta-btn" id="sellOpenModal" class="about_btn">Contact Us</button>
