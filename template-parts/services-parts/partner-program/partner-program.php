@@ -1,0 +1,2 @@
+<?php echo get_template_part('template-parts/services-parts/partner-program/sections/partner-about-cba'); ?>
+<?php echo get_template_part('template-parts/services-parts/partner-program/sections/why-partner-with-cba'); ?>

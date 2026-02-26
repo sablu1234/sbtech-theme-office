@@ -2,16 +2,16 @@
 <?php get_header(); ?>
 <!-- Hero area start -->
     <style>
-    .mortgages_hero{
+    .conveyancing_hero{
     position:relative;
     width:100%;
     min-height:520px;
-    background:url("http://sam91222.local/wp-content/uploads/2026/02/4386398-scaled.jpg") center/cover no-repeat;
+    background:url("http://sam91222.local/wp-content/uploads/2026/02/hands-agent-client-shaking-hands-after-signed-contract-buy-new-apartment-1-scaled.jpg") center/cover no-repeat;
     display:flex;
     align-items:center;
     }
     </style>
-    <section class="mortgages_hero">
+    <section class="conveyancing_hero">
         <div class="about_overlay"></div>
 
         <div class="about_container">
@@ -20,17 +20,17 @@
                 <div class="about_breadcrumb">
                     <a href="<?php echo home_url(); ?>">Home</a>
                     <span>•</span>
-                    <a href="<?php echo home_url(); ?>">services</a>
+                    <a href="<?php echo home_url(); ?>">conveyancing</a>
                     <span>•</span>
-                    <a href="<?php echo home_url('/property-management'); ?>">property-management</a>
+                    <a href="<?php echo home_url('/conveyancing'); ?>">conveyancing</a>
                 </div>
 
                 <h1 class="about_title">
-                    ProDiscover Competitive Mortgage & Home Loan <br>Solutions in Dubai
+                    A Smarter Way to Handle  <br>Property Transactions
                 </h1>
 
                 <p class="about_desc">
-                    Access tailored financing options with attractive rates and flexible terms across the UAE—start your homeownership journey with confidence.
+                    We combine market expertise and financial support to make buying, selling, and financing property in Dubai smooth and efficient.
                 </p>
                 <div class="about_buttons">
                     <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary">View Properties</a>
@@ -113,23 +113,24 @@
     <!-- form end-->
 <!-- Hero area end -->
 
-<!-- Why choose mortgage start -->
-<section class="container">
-    <?php echo do_shortcode('[why_choose_mortgage_shortcode]'); ?>
-</section>
-<!-- why choose mortgage end -->
 
-<!-- mortgage calculator start -->
+<!-- About Conveyancing start -->
 <section class="container">
-    <?php echo do_shortcode('[mortgage_calculator_shortcode]'); ?>
+    <?php echo do_shortcode('[conveyance_conveyancing_shortcode]'); ?>
 </section>  
-<!-- mortgage calculator end -->
+<!-- About Conveyancing end -->
 
-<!-- mortgage faq start -->
+<!-- our_sercie start -->
 <section class="container">
-    <?php echo do_shortcode('[mortgage_faq_shortcode]'); ?>
+    <?php echo do_shortcode('[conveyancing_our_sercies_shortcode]'); ?>
 </section>  
-<!-- mortgage faq end -->
+<!-- our_sercie end -->
+
+<!-- conveyancing faq start -->
+<section class="container">
+    <?php echo do_shortcode('[conveyancing_faq_shortcode]'); ?>
+</section>  
+<!-- conveyancing faq end -->
 
 <!-- review start -->
 <section class="container">

@@ -123,6 +123,9 @@ include_once get_template_directory() . '/inc/custom-cpt/agent-cpt.php';
 include_once get_template_directory() . '/template-parts/services-parts/property-management/property-management.php';
 include_once get_template_directory() . '/template-parts/services-parts/list-your-property/list-your-property.php';
 include_once get_template_directory() . '/template-parts/services-parts/mortgages/mortgages.php';
+include_once get_template_directory() . '/template-parts/services-parts/conveyancing/conveyancing.php';
+include_once get_template_directory() . '/template-parts/services-parts/snagging/snagging.php';
+include_once get_template_directory() . '/template-parts/services-parts/partner-program/partner-program.php';
 
 
 // admin-setting-api
