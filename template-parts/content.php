@@ -138,6 +138,7 @@ if (is_single()) : ?>
 
                             </ul>
                         </div>
+                        
                         <div>
                             <ul class="mp-list">
                                 <?php if (!empty($pp_property_name)) : ?>
@@ -153,6 +154,18 @@ if (is_single()) : ?>
                                 <?php endif; ?>
 
                             </ul>
+                        </div>
+                        <div>
+                            <?php
+                                $img_id = (int) get_post_meta(get_the_ID(), '_porpertypi_qr_img_id', true);
+
+                                if ($img_id) {
+                                echo wp_get_attachment_image($img_id, 'medium', false, [
+                                    'style' => 'max-width:150px;height:auto;'
+                                ]);
+                            }
+                            ?>
+                            
                         </div>
                     </div>
                 </section>

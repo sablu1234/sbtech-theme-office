@@ -140,7 +140,7 @@
                     </div>
 
                     <div class="about_stat">
-                        <div class="about_stat_value">AED 15M+</div>
+                        <div class="about_stat_value">AED 2B+</div>
                         <div class="about_stat_label">transaction value</div>
                     </div>
                 </div>

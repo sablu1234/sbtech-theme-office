@@ -1,17 +1,16 @@
-
 <?php get_header(); ?>
 <!-- Hero area start -->
     <style>
-    .partner_program_hero{
+    .contact_hero{
     position:relative;
     width:100%;
     min-height:520px;
-    background:url("http://sam91222.local/wp-content/uploads/2026/02/two-business-people-meeting-street-2-scaled.jpg") center/cover no-repeat;
+    background:url("http://sam91222.local/wp-content/uploads/2026/02/contact-us-communication-support-service-assistance-concept-1-scaled.jpg") center/cover no-repeat;
     display:flex;
     align-items:center;
     }
     </style>
-    <section class="partner_program_hero">
+    <section class="contact_hero">
         <div class="about_overlay"></div>
 
         <div class="about_container">
@@ -20,21 +19,19 @@
                 <div class="about_breadcrumb">
                     <a href="<?php echo home_url(); ?>">Home</a>
                     <span>•</span>
-                    <a href="<?php echo home_url(); ?>">property-snagging</a>
-                    <span>•</span>
-                    <a href="<?php echo home_url('/partner-program'); ?>">Partner Program</a>
+                    <a href="<?php echo home_url('/contact-us'); ?>">Contact Us</a>
                 </div>
 
                 <h1 class="about_title">
-                    CBA Real Estate  <br>Partner Program
+                    Get in Touch with  <br>CBA Real Estate
                 </h1>
 
                 <p class="about_desc">
-                    Collaborate with a trusted brand and capitalize on Dubai’s thriving property market.
-                </p>
+                    Have a question about buying, selling, renting, or new projects in Dubai? Send us a message and our team will get back to you quickly with the right guidance and next steps.
+
                 <div class="about_buttons">
                     <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary">View Properties</a>
-                    <button class="sell-cta-btn" id="sellOpenModal" class="about_btn">Contact Us</button>
+                    <button class="sell-cta-btn d-none" id="sellOpenModal" class="about_btn">Contact Us</button>
                 </div>
 
             </div>
@@ -113,23 +110,11 @@
     <!-- form end-->
 <!-- Hero area end -->
 
-<!-- about_cba start -->
+<!-- contact start -->
 <section class="container">
-    <?php echo do_shortcode('[partner_about_cba_shortcode]'); ?>
-</section>  
-<!-- about_cba end -->
-
-<!-- why_partner_with_cba start -->
-<section class="container">
-    <?php echo do_shortcode('[why_partner_with_cba_shortcode]'); ?>
-</section>  
-<!-- why_partner_with_cba end -->
-
-<!-- snagging faq start -->
-<section class="container">
-    <?php echo do_shortcode('[property_faq_shortcode]'); ?>
-</section>  
-<!-- snagging faq end -->
+    <?php echo do_shortcode('[contact_us_form]'); ?>
+</section>
+<!-- contact end -->
 
 <!-- review start -->
 <section class="container">
@@ -137,11 +122,11 @@
 </section>
 <!-- review end -->
 
-<!-- contact form start -->
+<!-- map start -->
 <section class="container">
-    <?php echo do_shortcode('[reaf_contact_form]'); ?>
+    <?php echo do_shortcode('[contact_us_map]'); ?>
 </section>
-<!-- contact form end -->
+<!-- map end -->
 
 
 <?php get_footer();

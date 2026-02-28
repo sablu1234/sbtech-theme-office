@@ -100,7 +100,7 @@ if (class_exists('Kirki')) {
 
 
 
-
+// all filters
 include_once get_template_directory() . '/template-parts/filter/buy-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/rent-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/commercial-ajax-filter.php';
@@ -109,13 +109,16 @@ include_once get_template_directory() . '/template-parts/filter/areas-ajax-filte
 include_once get_template_directory() . '/template-parts/filter/developer-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/media-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/index-ajax-filter.php';
+include_once get_template_directory() . '/template-parts/filter/agents-ajax-filter.php';
 
 // form
 include_once get_template_directory() . '/template-parts/form/careers-form.php';
 include_once get_template_directory() . '/template-parts/form/developer_page_form.php';
+include_once get_template_directory() . '/template-parts/form/contact-us-form.php';
+include_once get_template_directory() . '/template-parts/form/button-contact-form.php';
 
 // cpt-added
-// include_once get_template_directory() . '/inc/custom-cpt/areas-cpt.php';
+include_once get_template_directory() . '/inc/custom-cpt/custom-cpt-my.php';
 include_once get_template_directory() . '/inc/custom-cpt/developer-cpt.php';
 include_once get_template_directory() . '/inc/custom-cpt/agent-cpt.php';
 
@@ -127,6 +130,14 @@ include_once get_template_directory() . '/template-parts/services-parts/conveyan
 include_once get_template_directory() . '/template-parts/services-parts/snagging/snagging.php';
 include_once get_template_directory() . '/template-parts/services-parts/partner-program/partner-program.php';
 
+// More pages
+include_once get_template_directory() . '/template-parts/more/contact-us/contact-us.php';
+include_once get_template_directory() . '/template-parts/more/complaints/complaints.php';
+include_once get_template_directory() . '/template-parts/more/testimonial/testimonial.php';
+
 
 // admin-setting-api
 include_once get_template_directory() . '/inc/admin-setting-api/admin-setting-api.php';
+
+
+

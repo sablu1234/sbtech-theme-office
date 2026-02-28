@@ -160,10 +160,16 @@ function agent_extra_meta() {
         $team_status = get_post_meta($post->ID, 'team_status', true);
         $sale_property = get_post_meta($post->ID, 'sale_property', true);
         $rent_property = get_post_meta($post->ID, 'rent_property', true);
+        $agent_experience = get_post_meta($post->ID, 'agent_experience', true);
+        $agent_country = get_post_meta($post->ID, 'agent_country', true);
+        $agent_whatsapp = get_post_meta($post->ID, 'agent_whatsapp', true);
     ?>
         <p><input type="text" name="team_status" value="<?php echo esc_attr($team_status); ?>" placeholder="Team Status"></p>
         <p><input type="number" name="sale_property" value="<?php echo esc_attr($sale_property); ?>" placeholder="Sale Property Number"></p>
         <p><input type="number" name="rent_property" value="<?php echo esc_attr($rent_property); ?>" placeholder="Rent Property Number"></p>
+        <p><input type="number" name="agent_experience" value="<?php echo esc_attr($agent_experience); ?>" placeholder="Agent experice"></p>
+        <p><input type="text" name="agent_country" value="<?php echo esc_attr($agent_country); ?>" placeholder="Agent country Name"></p>
+        <p><input type="text" name="agent_whatsapp" value="<?php echo esc_attr($agent_whatsapp); ?>" placeholder="Agent Whatsapp"></p>
     <?php
     }
 
@@ -171,6 +177,9 @@ function agent_extra_meta() {
         if (isset($_POST['team_status'])) update_post_meta($post_id, 'team_status', sanitize_text_field($_POST['team_status']));
         if (isset($_POST['sale_property'])) update_post_meta($post_id, 'sale_property', sanitize_text_field($_POST['sale_property']));
         if (isset($_POST['rent_property'])) update_post_meta($post_id, 'rent_property', sanitize_text_field($_POST['rent_property']));
+        if (isset($_POST['agent_experience'])) update_post_meta($post_id, 'agent_experience', sanitize_text_field($_POST['agent_experience']));
+        if (isset($_POST['agent_country'])) update_post_meta($post_id, 'agent_country', sanitize_text_field($_POST['agent_country']));
+        if (isset($_POST['agent_whatsapp'])) update_post_meta($post_id, 'agent_whatsapp', sanitize_text_field($_POST['agent_whatsapp']));
     });
 }
 agent_extra_meta();
