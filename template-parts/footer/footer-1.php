@@ -57,29 +57,34 @@
             <a href="<?php echo home_url('/sell'); ?>">Sell</a>
             <a href="<?php echo home_url('/rent'); ?>">Rent</a>
             <a href="<?php echo home_url('/commercial'); ?>">Commercial</a>
-            <a href="<?php echo home_url('/new-projects'); ?>">New Projects</a>
+            <a href="<?php echo home_url('/developers'); ?>">Developers</a>
+            <a href="<?php echo home_url('/media'); ?>">Media</a>
         </nav>
 
         <!-- 3 -->
         <nav class="footer-col" aria-label="New projects in Dubai">
-            <h4>Links<br></h4>
-            <a href="<?php echo home_url('/areas'); ?>">Areas</a>
-            <a href="<?php echo home_url('/developer'); ?>">Developer</a>
-            <a href="<?php echo home_url('/services'); ?>">Services</a>
-            <a href="<?php echo home_url('/events'); ?>">Events</a>
+            <h4>Services<br></h4>
+            <a href="<?php echo home_url('/property-management'); ?>">Property Management</a>
+            <a href="<?php echo home_url('/list-your-property'); ?>">List Your Property</a>
+            <a href="<?php echo home_url('/mortgages'); ?>">Mortgages</a>
+            <a href="<?php echo home_url('/conveyancing'); ?>">Conveyancing</a>
+            <a href="<?php echo home_url('/conveyancing'); ?>">Property Snagging</a>
+            <a href="<?php echo home_url('/partner-program'); ?>">Partner Program</a>
         </nav>
 
         <!-- 4 -->
         <nav class="footer-col" aria-label="Media">
-            <h4>Media</h4>
-            <a href="<?php echo home_url('/media'); ?>">Media</a>
+            <h4>More</h4>
             <a href="<?php echo home_url('/about-us'); ?>">About Us</a>
-            <a href="<?php echo home_url('/careers'); ?>">Careers</a>
+            <a href="<?php echo home_url('/about-us'); ?>">Meet The Team</a>
+            <a href="<?php echo home_url('/contact-us'); ?>">Contact Us</a>
+            <a href="<?php echo home_url('/complaints-procedure'); ?>">Complaints Procedure</a>
+            <a href="<?php echo home_url('/Testimonial'); ?>">Testimonial</a>
         </nav>
 
         <!-- 5 -->
         <nav class="footer-col" aria-label="Services">
-            <h4>Services</h4>
+            <h4>Address</h4>
             <div class="iconlist">
 
                 <!-- Location -->

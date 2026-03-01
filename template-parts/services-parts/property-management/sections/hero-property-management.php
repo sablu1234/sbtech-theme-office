@@ -30,7 +30,7 @@ function property_management_hello_shortcode() {
             </div>
 
             <div class="property-management-actions">
-            <a class="property-management-btn property-management-btn--primary" href="#">
+            <a class="property-management-btn property-management-btn--primary d-none" href="#">
                 Get a Quote
                 <span class="property-management-btn-icon" aria-hidden="true">→</span>
             </a>

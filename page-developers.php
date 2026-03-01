@@ -9,7 +9,7 @@
 
 
 <!-- Office for sate start -->
-<section class="np-wrap np-sec">
+<section class="np-wrap np-sec d-none">
     <div class="np-container">
 
         <div class="np-head">

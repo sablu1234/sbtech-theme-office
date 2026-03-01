@@ -9,7 +9,7 @@ add_shortcode('button_contact_form_direct', function($atts){
 
   $a = shortcode_atts([
     'title'     => 'List your property with CBA Real Estate',
-    'subtitle'  => 'Share your details and our team will contact you shortly with the best options for selling or renting your property.',
+    'subtitle'  => '',
     'image_url' => '', // optional
   ], $atts);
 
