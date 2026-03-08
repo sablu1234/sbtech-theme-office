@@ -64,7 +64,12 @@
 <!-- hero area end -->
 
 <!-- about area start -->
-<section class="area_single_section">
+    <?php
+        $the_content = get_the_content(); // the_content() পরিবর্তে get_the_content() ব্যবহার করুন
+
+        $display = $the_content ? 'd-block' : 'd-none';
+    ?>
+<section class="area_single_section <?php echo $display; ?>">
     <div class="area_single_container">
 
         <?php if (!empty(get_the_title())): ?>
