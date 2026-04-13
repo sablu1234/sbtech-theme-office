@@ -2,6 +2,7 @@
 
 function why_choose_function() {
     ob_start();
+    $property_snagging_wc_img = get_theme_mod('property_snagging_wc_img', get_template_directory_uri().'/assets/services/property-snagging/property_snagging_why_choose.avif');
     ?>
     <section class="property-snagging-why-section" aria-label="Why choose our snagging service">
     <div class="property-snagging-why-container">
@@ -13,7 +14,7 @@ function why_choose_function() {
             <!-- Replace with your image -->
             <img
                 class="property-snagging-why-img"
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80"
+                src="<?php echo $property_snagging_wc_img; ?>"
                 alt="Property inspection discussion"
                 loading="lazy"
             />

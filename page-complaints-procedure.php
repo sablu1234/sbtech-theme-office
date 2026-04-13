@@ -1,11 +1,14 @@
 <?php get_header(); ?>
 <!-- Hero area start -->
+    <?php
+    $complaints_procedure_hero_bg = get_theme_mod('complaints_procedure_hero_bg', get_template_directory_uri().'/assets/complaints_procedure/complaints_procedure_bg.webp');
+    ?>
     <style>
     .complaints_hero{
     position:relative;
     width:100%;
     min-height:520px;
-    background:url("http://sam91222.local/wp-content/uploads/2026/02/business-man-using-digital-tablet-1-scaled.jpg") center/cover no-repeat;
+    background:url("<?php echo $complaints_procedure_hero_bg; ?>") center/cover no-repeat;
     display:flex;
     align-items:center;
     }

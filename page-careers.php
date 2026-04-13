@@ -1,47 +1,60 @@
 <?php get_header(); ?>
 
 <!-- Hero area start -->
-<section class="careers_hero">
-    <div class="about_overlay"></div>
+    <?php
+    $careers_hero_bg = get_theme_mod('careers_hero_bg', get_template_directory_uri().'/assets/media_press/media_press.jpg');
+    ?>
+    <style>
+    .careers_hero{
+      position:relative;
+      width:100%;
+      min-height:520px;
+      background:url("<?php echo $careers_hero_bg; ?>") center/cover no-repeat;
+      display:flex;
+      align-items:center;
+    }
+    </style>
+    <section class="careers_hero">
+        <div class="about_overlay"></div>
 
-    <div class="about_container">
-        <div class="about_content">
+        <div class="about_container">
+            <div class="about_content">
 
-            <div class="about_breadcrumb">
-                <a href="<?php echo home_url(); ?>">Home</a>
-                <span>•</span>
-                <a href="<?php echo home_url('/careers'); ?>">Careers</a>
+                <div class="about_breadcrumb">
+                    <a href="<?php echo home_url(); ?>">Home</a>
+                    <span>•</span>
+                    <a href="<?php echo home_url('/careers'); ?>">Careers</a>
+                </div>
+
+                <h1 class="about_title">
+                    Careers & <br>Opportunities
+                </h1>
+
+                <p class="about_desc">
+                    Build your future with us. Join a dynamic team, grow your skills, and explore exciting career opportunities in a professional and supportive environment.
+                </p>
+
+                <div class="about_buttons">
+                    <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary">View Properties</a>
+                    <button class="sell-cta-btn" id="sellOpenModal" class="about_btn">Contact Us</button>
+                </div>
+
             </div>
+        </div>
+    </section>
+    <!-- form start-->
+        <div class="sell-modal" id="sellModal" aria-hidden="true">
+            <div class="sell-modal__backdrop" data-sell-close="1"></div>
 
-            <h1 class="about_title">
-                Careers & <br>Opportunities
-            </h1>
+            <div class="sell-modal__dialog" role="dialog" aria-modal="true" aria-label="List your property form">
+                <button class="sell-modal__close" type="button" aria-label="Close" data-sell-close="1">✕</button>
 
-            <p class="about_desc">
-                Build your future with us. Join a dynamic team, grow your skills, and explore exciting career opportunities in a professional and supportive environment.
-            </p>
-
-            <div class="about_buttons">
-                <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary">View Properties</a>
-                <button class="sell-cta-btn" id="sellOpenModal" class="about_btn">Contact Us</button>
+                <div class="sell-modal__grid">
+                        <?php echo do_shortcode('[button_contact_form_direct]'); ?>
+                    </div>
             </div>
-
         </div>
-    </div>
-</section>
-<!-- form start-->
-<div class="sell-modal" id="sellModal" aria-hidden="true">
-    <div class="sell-modal__backdrop" data-sell-close="1"></div>
-
-    <div class="sell-modal__dialog" role="dialog" aria-modal="true" aria-label="List your property form">
-        <button class="sell-modal__close" type="button" aria-label="Close" data-sell-close="1">✕</button>
-
-        <div class="sell-modal__grid">
-                <?php echo do_shortcode('[button_contact_form_direct]'); ?>
-        </div>
-    </div>
-</div>
-<!-- form end-->
+    <!-- form end-->
 <!-- Hero area end -->
 
 <!-- Great Place To Work start -->
@@ -113,63 +126,80 @@
 </section>
 <!-- Great Place To Work end -->
 
+<!-- what_makes section start -->
+ <?php echo do_shortcode('[careers_section_what_makes]'); ?>
+<!-- what_makes section end -->
+
 <!-- Our team start -->
-<section class="careers_gallery">
-    <div class="careers_container">
+    <?php
+    $careers_team_1 = get_theme_mod('careers_team_1', get_template_directory_uri().'/assets/careers/team_img_1.avif');
+    $careers_team_2 = get_theme_mod('careers_team_2', get_template_directory_uri().'/assets/careers/team_img_2.avif');
+    $careers_team_3 = get_theme_mod('careers_team_3', get_template_directory_uri().'/assets/careers/team_img_3.avif');
+    $careers_team_4 = get_theme_mod('careers_team_4', get_template_directory_uri().'/assets/careers/team_img_4.avif');
+    $careers_team_5 = get_theme_mod('careers_team_5', get_template_directory_uri().'/assets/careers/team_img_5.avif');
+    $careers_team_6 = get_theme_mod('careers_team_6', get_template_directory_uri().'/assets/careers/team_img_6.avif');
+    $careers_team_7 = get_theme_mod('careers_team_7', get_template_directory_uri().'/assets/careers/team_img_7.avif');
+    ?>
+    <section class="careers_gallery">
+        <div class="careers_container">
 
-        <div class="careers_gallery__head">
-            <h2 class="careers_gallery__title">Our Team</h2>
-            <p class="careers_gallery__sub">
-                A glimpse into our culture—team achievements, events, and the people who make everything possible.
-            </p>
+            <div class="careers_gallery__head">
+                <h2 class="careers_gallery__title">Our Team</h2>
+                <p class="careers_gallery__sub">
+                    A glimpse into our culture—team achievements, events, and the people who make everything possible.
+                </p>
+            </div>
+
+            <div class="careers_gallery__grid">
+
+                <!-- BIG LEFT -->
+                <a class="careers_gallery__item careers_gallery__item--lg" href="#" aria-label="Team gallery image 1">
+                    <span class="careers_gallery__tag">Team Moments</span>
+                    <img src="<?php echo $careers_team_1; ?>" alt="Team event photo">
+                </a>
+
+                <!-- TOP RIGHT 2 -->
+                <a class="careers_gallery__item careers_gallery__item--md" href="#" aria-label="Team gallery image 2">
+                    <span class="careers_gallery__tag">Awards</span>
+                    <img src="<?php echo $careers_team_2; ?>" alt="Team group photo">
+                </a>
+
+                <a class="careers_gallery__item careers_gallery__item--md" href="#" aria-label="Team gallery image 3">
+                    <span class="careers_gallery__tag">Culture</span>
+                    <img src="<?php echo $careers_team_3; ?>" alt="Team celebrating photo">
+                </a>
+
+                <!-- MID RIGHT WIDE -->
+                <a class="careers_gallery__item careers_gallery__item--wide" href="#" aria-label="Team gallery image 4">
+                    <span class="careers_gallery__tag">Community</span>
+                    <img src="<?php echo $careers_team_4; ?>" alt="Team community event">
+                </a>
+
+                <!-- BOTTOM RIGHT LARGE-ish -->
+                <a class="careers_gallery__item careers_gallery__item--wide" href="#" aria-label="Team gallery image 5">
+                    <span class="careers_gallery__tag">Leadership</span>
+                    <img src="<?php echo $careers_team_5; ?>" alt="Leadership team photo">
+                </a>
+
+                <!-- BOTTOM LEFT 2 SMALL -->
+                <a class="careers_gallery__item careers_gallery__item--sm" href="#" aria-label="Team gallery image 6">
+                    <span class="careers_gallery__tag">Events</span>
+                    <img src="<?php echo $careers_team_6; ?>" alt="Office event photo">
+                </a>
+
+                <a class="careers_gallery__item careers_gallery__item--sm" href="#" aria-label="Team gallery image 7">
+                    <span class="careers_gallery__tag">Celebrations</span>
+                    <img src="<?php echo $careers_team_7; ?>" alt="Team celebration photo">
+                </a>
+
+            </div>
         </div>
-
-        <div class="careers_gallery__grid">
-
-            <!-- BIG LEFT -->
-            <a class="careers_gallery__item careers_gallery__item--lg" href="#" aria-label="Team gallery image 1">
-                <span class="careers_gallery__tag">Team Moments</span>
-                <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80" alt="Team event photo">
-            </a>
-
-            <!-- TOP RIGHT 2 -->
-            <a class="careers_gallery__item careers_gallery__item--md" href="#" aria-label="Team gallery image 2">
-                <span class="careers_gallery__tag">Awards</span>
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80" alt="Team group photo">
-            </a>
-
-            <a class="careers_gallery__item careers_gallery__item--md" href="#" aria-label="Team gallery image 3">
-                <span class="careers_gallery__tag">Culture</span>
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt="Team celebrating photo">
-            </a>
-
-            <!-- MID RIGHT WIDE -->
-            <a class="careers_gallery__item careers_gallery__item--wide" href="#" aria-label="Team gallery image 4">
-                <span class="careers_gallery__tag">Community</span>
-                <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1600&q=80" alt="Team community event">
-            </a>
-
-            <!-- BOTTOM RIGHT LARGE-ish -->
-            <a class="careers_gallery__item careers_gallery__item--wide" href="#" aria-label="Team gallery image 5">
-                <span class="careers_gallery__tag">Leadership</span>
-                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1600&q=80" alt="Leadership team photo">
-            </a>
-
-            <!-- BOTTOM LEFT 2 SMALL -->
-            <a class="careers_gallery__item careers_gallery__item--sm" href="#" aria-label="Team gallery image 6">
-                <span class="careers_gallery__tag">Events</span>
-                <img src="https://images.unsplash.com/photo-1528605105345-5344ea20e269?auto=format&fit=crop&w=1200&q=80" alt="Office event photo">
-            </a>
-
-            <a class="careers_gallery__item careers_gallery__item--sm" href="#" aria-label="Team gallery image 7">
-                <span class="careers_gallery__tag">Celebrations</span>
-                <img src="https://images.unsplash.com/photo-1528605105345-5344ea20e269?auto=format&fit=crop&w=1200&q=80" alt="Team celebration photo">
-            </a>
-
-        </div>
-    </div>
-</section>
+    </section>
 <!-- Our team end -->
+
+<!-- faq section start -->
+ <?php echo do_shortcode('[career_faq_shortcode]'); ?>
+<!-- faq section end -->
 
 <!-- Hear form our team start -->
 <section class="careers_testimonials" id="careers_testimonials">

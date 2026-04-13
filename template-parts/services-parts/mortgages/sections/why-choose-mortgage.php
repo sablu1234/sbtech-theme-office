@@ -2,6 +2,13 @@
 
 function why_choose_mortgage_function() {
     ob_start();
+    $property_snagging_hero_bg = get_theme_mod('property_snagging_hero_bg', get_template_directory_uri().'/assets/services/mortgages/mortgages-support.avif');
+    $mortgages_ms_img = get_theme_mod('mortgages_ms_img', get_template_directory_uri().'/assets/services/mortgages/mortgages-support.avif');
+
+    $mortage_sub_title = get_theme_mod( 'wwd_sub_title', 'What we deliver' );
+    $mortage_title = get_theme_mod( 'wwd_title', 'Explore what we do Real estate property management' );
+    $mortage_desc = get_theme_mod( 'wwd_desc', '<p>We help buyers and investors in Dubai access competitive mortgage solutions with clear guidance—from eligibility checks to approvals and final documentation.</p> <p>Whether you’re purchasing your first home, upgrading, or investing, our process is designed to be fast,transparent, and aligned with your property goals.</p> <p> You’ll get tailored options from trusted lenders, competitive rates and terms, and a smooth end-to-end experience—so you can focus on choosing the right property with confidence. </p>' );
+
     ?>
     <section class="why-choose-mortgage-section" aria-label="Why choose mortgage">
     <div class="why-choose-mortgage-container">
@@ -13,7 +20,7 @@ function why_choose_mortgage_function() {
             <!-- Replace image URL with your own -->
             <img
                 class="why-choose-mortgage-img"
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80"
+                src="<?php echo $mortgages_ms_img; ?>"
                 alt="Mortgage consultation and professional guidance"
                 loading="lazy"
             />
@@ -22,27 +29,18 @@ function why_choose_mortgage_function() {
 
         <!-- Right content -->
         <div class="why-choose-mortgage-content">
-            <p class="why-choose-mortgage-kicker">Mortgage Support</p>
+            <?php if(!empty($mortage_sub_title)) : ?>
+            <p class="why-choose-mortgage-kicker"><?php echo esc_html( $mortage_sub_title )?></p>
+            <?php endif;?>
 
-            <h2 class="why-choose-mortgage-title">
-            Why choose mortgage support with CBA Real Estate?
-            </h2>
+            <?php if(!empty($mortage_title)) : ?>
+            <h2 class="why-choose-mortgage-title"><?php echo esc_html( $mortage_title )?></h2>
+            <?php endif;?>
 
+            <?php if(!empty($mortage_desc)) : ?>
             <div class="why-choose-mortgage-text">
-            <p>
-                We help buyers and investors in Dubai access competitive mortgage solutions with clear guidance—from
-                eligibility checks to approvals and final documentation.
-            </p>
-
-            <p>
-                Whether you’re purchasing your first home, upgrading, or investing, our process is designed to be fast,
-                transparent, and aligned with your property goals.
-            </p>
-
-            <p>
-                You’ll get tailored options from trusted lenders, competitive rates and terms, and a smooth end-to-end
-                experience—so you can focus on choosing the right property with confidence.
-            </p>
+            <?php echo sbtech_kses( $mortage_desc )?>
+            <?php endif;?>
             </div>
 
             <div class="why-choose-mortgage-actions d-none">

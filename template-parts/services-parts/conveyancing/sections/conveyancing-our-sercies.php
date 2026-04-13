@@ -1,6 +1,7 @@
 <?php
 function conveyancing_our_sercies_shortcode() {
     ob_start();
+    $conveyancing_services_img = get_theme_mod('conveyancing_services_img', get_template_directory_uri().'/assets/services/conveyancing/conveyancing_services.webp');
     ?>
     <section class="conveyance-services-section" aria-label="Conveyance services">
     <div class="conveyance-services-container">
@@ -12,7 +13,7 @@ function conveyancing_our_sercies_shortcode() {
             <!-- Replace with your image -->
             <img
                 class="conveyance-services-img"
-                src="http://sam91222.local/wp-content/uploads/2026/02/group-of-business-people-doing-paperwork-sitting-i-2024-01-26-13-50-42-utc-1024x683-1.webp"
+                src="<?php echo $conveyancing_services_img; ?>"
                 alt="Professional conveyancing services"
                 loading="lazy"
             />

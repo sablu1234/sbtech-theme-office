@@ -185,15 +185,29 @@ add_shortcode('client_trust', function () {
       </div>
 
       <div class="client-trust-grid">
-        <?php foreach($items as $t):
-          $initials = strtoupper(mb_substr($t['name'], 0, 1));
+        <?php
+
+        $q_achievements = new WP_Query([
+            'post_type'      => 'review',
+            'posts_per_page' => 40,
+            'post_status'    => 'publish',
+            'orderby'        => 'date',
+            'order'          => 'DESC',
+        ]);
+        
+        if ($q_achievements->have_posts()) :
+        while ($q_achievements->have_posts()) : $q_achievements->the_post();
+            
+        $date_publish = get_post_meta(get_the_ID(), 'date_publish', true);
         ?>
-          <article class="client-trust-card">
+
+        <!-- Card start -->
+        <article class="client-trust-card">
             <div class="client-trust-top">
-              <div class="client-trust-avatar"><?php echo esc_html($initials); ?></div>
+              <div class="client-trust-avatar d-none"><?php ?></div>
               <div class="client-trust-meta">
-                <p class="client-trust-name"><?php echo esc_html($t['name']); ?></p>
-                <p class="client-trust-time"><?php echo esc_html($t['time']); ?></p>
+                <p class="client-trust-name"><?php the_title(); ?></p>
+                <p class="client-trust-time"><?php echo $date_publish; ?></p>
 
                 <div class="client-trust-stars" aria-label="5 star rating">
                   <?php for($i=0;$i<5;$i++): ?>
@@ -205,12 +219,19 @@ add_shortcode('client_trust', function () {
               </div>
             </div>
 
-            <h3 class="client-trust-cardTitle"><?php echo esc_html($t['title']); ?></h3>
-            <p class="client-trust-text"><?php echo esc_html($t['text']); ?></p>
+            <h3 class="client-trust-cardTitle"><?php  ?></h3>
+            <p class="client-trust-text"><?php the_content(); ?></p>
 
             <a class="client-trust-more d-none" href="#" onclick="return false;">more</a>
           </article>
-        <?php endforeach; ?>
+        <!-- Card end -->
+        <?php
+        endwhile;
+        else :
+            echo 'No properties found.';
+        endif;
+        ?>
+        <?php wp_reset_postdata(); ?>
       </div>
 
     </div>

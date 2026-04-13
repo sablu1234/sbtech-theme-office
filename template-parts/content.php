@@ -11,86 +11,112 @@ if (is_single()) : ?>
     $_re_baths = get_post_meta(get_the_ID(), '_re_baths', true);
     $parking = get_post_meta(get_the_ID(), 'parking', true);
     $unit_reference = get_post_meta(get_the_ID(), 'unit_reference', true);
-
     ?>
     <div class="mp-wrap">
+        <section class="mp-media" aria-label="Property media">
+            <?php echo do_shortcode('[single_page_shortcode]'); ?>
+        </section>
+
         <div class="mp-grid">
 
             <!-- LEFT -->
             <main class="mp-main">
 
-                <!-- MEDIA -->
-                <section class="mp-media" aria-label="Property media">
-                    <div class="mp-media__top">
-
-                        <!-- Featured -->
-                        <figure class="mp-featured" aria-label="Featured image">
-                            <div class="mp-badges">
-                                <span class="mp-badge mp-badge--buy">BUY</span>
-                                <span class="mp-badge mp-badge--type">APARTMENT</span>
-                            </div>
-
-                            <img id="mpFeaturedImg"
-                                src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=2000&q=80"
-                                alt="Featured property image" />
-
-                            <button class="mp-fab mp-fab--prev" type="button" aria-label="Previous image" data-nav="prev">‹</button>
-                            <button class="mp-fab mp-fab--next" type="button" aria-label="Next image" data-nav="next">›</button>
-
-                            <div class="mp-featured__actions">
-                                <!-- <a class="mp-btn mp-btn--ghost" href="#virtual">Get Virtual Tour</a> -->
-                                <button class="mp-btn mp-btn--ghost" type="button" id="mpOpenLightbox">View Photos</button>
-                            </div>
-
-                            <div class="mp-counter" id="mpCounter">1 / 5</div>
-                        </figure>
-
-                        <!-- Thumbs -->
-                        <aside class="mp-thumbs" aria-label="Thumbnails">
-                            <?php
-                            $gallery = get_post_meta(get_the_ID(), '_re_gallery_ids', true);
-                            $gallery = is_array($gallery) ? ($gallery[0] ?? '') : $gallery;
-                            $ids = array_filter(array_map('absint', explode(',', (string)$gallery)));
-
-                            $first = true;
-                            foreach ($ids as $id) {
-                                $url = wp_get_attachment_image_url($id, 'large');
-                                if (!$url) continue;
-                            ?>
-                                <button class="mp-thumb mp-thumb--big <?php echo $first ? 'is-active' : ''; ?>" type="button"
-                                    data-src="<?php echo esc_url($url); ?>"
-                                    data-alt="">
-                                    <img src="<?php echo esc_url($url); ?>" alt="">
-                                </button>
-                            <?php
-                                $first = false;
-                            }
-                            ?>
-                        </aside>
-
-
-                    </div>
-                </section>
-
                 <!-- HEADER -->
                 <section class="mp-head">
                     <h1 class="mp-title"><?php the_title(); ?></h1>
 
-
                     <div class="mp-priceRow">
                         <div>
-                            <div class="mp-price"><?php echo $_re_price ?></div>
-                            <div class="mp-subprice"><?php echo $_re_size_sqft ?> AED per ft²</div>
+                            <div class="mp-price" id="mpPrice"><?php echo number_format((float)$_re_price, 0); ?> AED</div>
+
+                            <?php
+                            if ($_re_price > 0 && $_re_size_sqft > 0) {
+                                $per_square_price = $_re_price / $_re_size_sqft;
+                            } else {
+                                $per_square_price = 0;
+                            }
+
+                            $per_square_price_rounded = round($per_square_price, 0);
+                            ?>
+
+                            <div class="mp-subprice" id="subprice"><?php echo number_format($per_square_price_rounded, 0); ?> AED per ft²</div>
                         </div>
+
                         <div class="mp-pill">
                             <span>Payout Currency</span>
-                            <select class="mp-select" id="mpCurrency" aria-label="Payout currency">
-                                <option value="AED" selected>AED</option>
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                            </select>
+
+                            <form action="">
+                                <select class="mp-select" id="mpCurrency" aria-label="Payout currency">
+                                    <option value="AED" selected>AED</option>
+                                    <option value="USD">USD</option>
+                                    <option value="EUR">EUR</option>
+                                </select>
+                            </form>
                         </div>
                     </div>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', async function () {
+                            const currencySelect = document.getElementById('mpCurrency');
+                            const priceEl = document.getElementById('mpPrice');
+                            const subpriceEl = document.getElementById('subprice');
+
+                            const basePriceAED = <?php echo (float) $_re_price; ?>;
+                            const perSquarePriceAED = <?php echo (float) $per_square_price_rounded; ?>;
+
+                            let exchangeRates = {
+                                AED: 1,
+                                USD: null,
+                                EUR: null
+                            };
+
+                            function formatPrice(amount) {
+                                return new Intl.NumberFormat('en-US', {
+                                    minimumFractionDigits: 0,
+                                    maximumFractionDigits: 0
+                                }).format(amount);
+                            }
+
+                            function updatePrices(currency) {
+                                let convertedMainPrice = basePriceAED;
+                                let convertedPerSqft = perSquarePriceAED;
+
+                                if (currency !== 'AED' && exchangeRates[currency]) {
+                                    convertedMainPrice = basePriceAED * exchangeRates[currency];
+                                    convertedPerSqft = perSquarePriceAED * exchangeRates[currency];
+                                }
+
+                                priceEl.textContent = `${formatPrice(convertedMainPrice)} ${currency}`;
+                                subpriceEl.textContent = `${formatPrice(convertedPerSqft)} ${currency} per ft²`;
+                            }
+
+                            async function loadRates() {
+                                try {
+                                    const response = await fetch('https://v6.exchangerate-api.com/v6/9efd8f74f342da8c3e35b705/latest/AED');
+                                    const data = await response.json();
+
+                                    if (data && data.result === 'success' && data.conversion_rates) {
+                                        exchangeRates.AED = 1;
+                                        exchangeRates.USD = data.conversion_rates.USD;
+                                        exchangeRates.EUR = data.conversion_rates.EUR;
+                                    } else {
+                                        console.error('Invalid exchange rate API response:', data);
+                                    }
+                                } catch (error) {
+                                    console.error('Currency rate load failed:', error);
+                                }
+                            }
+
+                            await loadRates();
+
+                            currencySelect.addEventListener('change', function () {
+                                updatePrices(this.value);
+                            });
+
+                            updatePrices(currencySelect.value);
+                        });
+                    </script>
 
                     <div class="mp-stats">
                         <div class="mp-stat"><span class="mp-stat__n"><?php echo $_re_beds ?></span><span class="mp-stat__t">Bedrooms</span></div>
@@ -116,7 +142,6 @@ if (is_single()) : ?>
                             $pp_property_name = get_post_meta(get_the_ID(), 'pp_property_name', true);
                             $pp_parking_slot = get_post_meta(get_the_ID(), 'pp_parking_slot', true);
                             $pp_added_on = get_post_meta(get_the_ID(), 'pp_added_on', true);
-
                             ?>
                             <h3 class="mp-h3">Property Details</h3>
                             <ul class="mp-list">
@@ -135,10 +160,9 @@ if (is_single()) : ?>
                                 <?php if (!empty($pp_emirate)) : ?>
                                     <li><strong>Emirate:</strong> <?php echo $pp_emirate; ?></li>
                                 <?php endif; ?>
-
                             </ul>
                         </div>
-                        
+
                         <div>
                             <ul class="mp-list">
                                 <?php if (!empty($pp_property_name)) : ?>
@@ -152,20 +176,19 @@ if (is_single()) : ?>
                                 <?php if (!empty($pp_added_on)) : ?>
                                     <li><strong>Added On:</strong> <?php echo $pp_added_on; ?></li>
                                 <?php endif; ?>
-
                             </ul>
                         </div>
+
                         <div>
                             <?php
-                                $img_id = (int) get_post_meta(get_the_ID(), '_porpertypi_qr_img_id', true);
+                            $img_id = (int) get_post_meta(get_the_ID(), '_porpertypi_qr_img_id', true);
 
-                                if ($img_id) {
+                            if ($img_id) {
                                 echo wp_get_attachment_image($img_id, 'medium', false, [
                                     'style' => 'max-width:150px;height:auto;'
                                 ]);
                             }
                             ?>
-                            
                         </div>
                     </div>
                 </section>
@@ -185,7 +208,6 @@ if (is_single()) : ?>
                             $indor_6 = get_post_meta(get_the_ID(), 'indor_6', true);
                             $indor_7 = get_post_meta(get_the_ID(), 'indor_7', true);
                             $indor_8 = get_post_meta(get_the_ID(), 'indor_8', true);
-
                             ?>
                             <ul class="mp-list">
                                 <?php if (!empty($indor_1)) : ?>
@@ -221,6 +243,7 @@ if (is_single()) : ?>
                                 <?php endif; ?>
                             </ul>
                         </div>
+
                         <div class="mp-amen">
                             <h3 class="mp-h3">Outdoor</h3>
                             <?php
@@ -236,8 +259,7 @@ if (is_single()) : ?>
                             $outdoor_10 = get_post_meta(get_the_ID(), 'outdoor_10', true);
                             ?>
                             <ul class="mp-list">
-
-                                <?php if (!empty($indor_1)) : ?>
+                                <?php if (!empty($outdoor_1)) : ?>
                                     <li><?php echo $outdoor_1; ?></li>
                                 <?php endif; ?>
 
@@ -276,9 +298,9 @@ if (is_single()) : ?>
                                 <?php if (!empty($outdoor_10)) : ?>
                                     <li><?php echo $outdoor_10; ?></li>
                                 <?php endif; ?>
-
                             </ul>
                         </div>
+
                         <div class="mp-amen">
                             <h3 class="mp-h3">Services</h3>
                             <?php
@@ -294,7 +316,6 @@ if (is_single()) : ?>
                             $services_10 = get_post_meta(get_the_ID(), 'services_10', true);
                             ?>
                             <ul class="mp-list">
-
                                 <?php if (!empty($services_1)) : ?>
                                     <li><?php echo $services_1; ?></li>
                                 <?php endif; ?>
@@ -340,14 +361,12 @@ if (is_single()) : ?>
                 </section>
 
                 <!-- COMMUNITY -->
-                <?php if (!empty($community_description)) : ?>
+                <?php
+                $community_description = get_post_meta(get_the_ID(), 'community_description', true);
+                if (!empty($community_description)) : ?>
                     <section class="mp-card" id="community">
                         <h2 class="mp-h2">Community Description</h2>
-                        <?php
-                        $community_description = get_post_meta(get_the_ID(), 'community_description', true)
-                        ?>
                         <p class="mp-text">
-
                             <?php echo $community_description; ?>
                         </p>
                     </section>
@@ -355,38 +374,7 @@ if (is_single()) : ?>
 
                 <!-- MORTGAGE (DYNAMIC) -->
                 <section class="mp-card" id="mortgage">
-                    <h2 class="mp-h2">Mortgage Calculator</h2>
-
-                    <div class="mp-mort">
-                        <div class="mp-mort__left">
-                            <label class="mp-label" for="mpLoan">Property Price / Loan Amount</label>
-                            <input class="mp-input" id="mpLoan" type="number" value="3946000" min="0" step="1000" />
-
-                            <label class="mp-label" for="mpDown">Down Payment (%)</label>
-                            <input class="mp-input" id="mpDown" type="number" value="29" min="0" max="95" step="1" />
-
-                            <label class="mp-label" for="mpYears">Loan Period (Years)</label>
-                            <input class="mp-input" id="mpYears" type="number" value="20" min="1" max="40" step="1" />
-
-                            <label class="mp-label" for="mpRate">Interest Rate (%)</label>
-                            <input class="mp-input" id="mpRate" type="number" value="4" min="0" max="25" step="0.1" />
-                        </div>
-
-                        <div class="mp-mort__right">
-                            <div>
-                                <div class="mp-mort__title">Monthly Payment</div>
-                                <div class="mp-mort__val" id="mpMonthly">—</div>
-
-                                <div class="mp-mort__meta">
-                                    <div><span>Total Loan Amount</span><strong id="mpTotalLoan">—</strong></div>
-                                    <div><span>Interest</span><strong id="mpInterest">—</strong></div>
-                                    <div><span>Loan Period</span><strong id="mpPeriod">—</strong></div>
-                                </div>
-                            </div>
-
-                            <button class="mp-btn mp-btn--primary" type="button">Send Application</button>
-                        </div>
-                    </div>
+                    <?php echo do_shortcode('[singlePageMortageForm_shortcode]'); ?>
                 </section>
 
             </main>
@@ -398,24 +386,23 @@ if (is_single()) : ?>
                         <div class="mp-agent__logo" aria-hidden="true">🏢</div>
                         <div class="mp-agent__meta">
                             <div class="mp-agent__label">Listing by</div>
-                            <div class="mp-agent__name">Metropolitan Premium Properties</div>
+                            <div class="mp-agent__name">CBA Real Estate</div>
                         </div>
                     </div>
                     <?php
-                    $_re_email    = get_post_meta($post->ID, '_re_email', true);
-                    $_re_whatsapp    = get_post_meta($post->ID, '_re_whatsapp', true);
+                    $_re_email = get_post_meta($post->ID, '_re_email', true);
+                    $_re_whatsapp = get_post_meta($post->ID, '_re_whatsapp', true);
                     ?>
-                    <a class="mp-btn mp-btn--primary mp-btn--full" href="mailto:<?php echo $_re_email; ?>"><?php echo $_re_email; ?></a>
-
+                    <!-- <a class="mp-btn mp-btn--primary mp-btn--full" href="mailto:<?php echo $_re_email; ?>"><?php echo $_re_email; ?></a> -->
                 </div>
 
                 <div class="mp-sideCard">
-                    <div class="mp-fin">
+                    <div class="mp-fin d-none">
                         <div class="mp-fin__title">Own this property from just</div>
                         <div class="mp-fin__price" id="mpSideFrom">— <span>/ month</span></div>
                         <div class="mp-fin__note">Fixed rates from: <strong id="mpSideRate">—</strong></div>
                     </div>
-                    <a class="mp-btn mp-btn--primary mp-btn--full" href="#preapprove">Get pre-approved</a>
+                    <a class="mp-btn mp-btn--primary mp-btn--full" href="<?php echo home_url(''); ?>">Back TO Property</a>
                 </div>
             </aside>
 
@@ -435,8 +422,6 @@ if (is_single()) : ?>
         </div>
     </div>
 
-
-
 <?php else : ?>
 
     <div id="post-<?php the_ID(); ?>" <?php post_class('post format-standard-image'); ?>>
@@ -453,4 +438,4 @@ if (is_single()) : ?>
         </div>
     </div>
 
-<?php endif ?>
+<?php endif; ?>

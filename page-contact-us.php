@@ -1,11 +1,14 @@
 <?php get_header(); ?>
 <!-- Hero area start -->
+    <?php
+    $Contact_us_hero_bg = get_theme_mod('Contact_us_hero_bg', get_template_directory_uri().'/assets/contact_us/contact_us_bg.webp');
+    ?>
     <style>
     .contact_hero{
     position:relative;
     width:100%;
     min-height:520px;
-    background:url("http://sam91222.local/wp-content/uploads/2026/02/contact-us-communication-support-service-assistance-concept-1-scaled.jpg") center/cover no-repeat;
+    background:url("<?php echo $Contact_us_hero_bg; ?>") center/cover no-repeat;
     display:flex;
     align-items:center;
     }

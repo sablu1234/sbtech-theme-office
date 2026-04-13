@@ -276,6 +276,9 @@ add_shortcode('contact_us_form', function () {
             </div>
           </div>
 
+          <!-- Google reCAPTCHA -->
+            <div class="g-recaptcha" data-sitekey="6Lcy44osAAAAACYEfxBwfbFgj3-UD1MBKdYpNPn7"></div>
+
           <div class="contact-us-submitWrap">
             <button class="contact-us-btn" type="submit">Submit</button>
             <p class="contact-us-small">
@@ -287,6 +290,9 @@ add_shortcode('contact_us_form', function () {
       </div>
     </div>
   </section>
+
+  <!-- Google reCAPTCHA Script -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
   <?php
   return ob_get_clean();
@@ -302,7 +308,7 @@ add_action('admin_post_nopriv_contact_us_form_submit', 'contact_us_form_submit_h
 function contact_us_form_submit_handler() {
 
   // Basic nonce check
-  if (!isset($_POST['contact_us_nonce']) || !wp_verify_nonce($_POST['contact_us_nonce'], 'contact_us_form_nonce')) {
+  if (!isset($_POST['contact_us_nonce']) || !wp_verify_nonce($_POST['contact_us_nonce'], 'contact_us_form_nonce')) { 
     contact_us_redirect_back('invalid_nonce');
   }
 
@@ -322,50 +328,86 @@ function contact_us_form_submit_handler() {
   $message       = isset($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
 
   $source_url = isset($_POST['contact_us_source_url']) ? esc_url_raw($_POST['contact_us_source_url']) : home_url('/');
+  $recaptcha_response = isset($_POST['g-recaptcha-response']) ? sanitize_text_field($_POST['g-recaptcha-response']) : '';
 
-  // Required validation
-  if ($title === '' || $first_name === '' || $last_name === '' || $email === '' || $phone === '') {
-    contact_us_redirect_back('missing_required');
-  }
+  if (empty($recaptcha_response)) {
+        echo "Please complete the reCAPTCHA.";
+    } elseif (!is_email($email)) {
+        echo "Invalid email address.";
+    } else {
 
-  if (!is_email($email)) {
-    contact_us_redirect_back('invalid_email');
-  }
+        $secret_key = '6Lcy44osAAAAAMSL93rG8eC0aLVmnkG03AVvDgjO';
 
-  // Email to admin
-  $admin_email = get_option('admin_email');
+        $verify_response = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
+            'body' => [
+                'secret'   => $secret_key, 
+                'response' => $recaptcha_response,
+                'remoteip' => $_SERVER['REMOTE_ADDR'],
+            ]
+        ]);
 
-  $subject = 'New Contact Enquiry - CBA Real Estate';
+        if (is_wp_error($verify_response)) {
+            echo "reCAPTCHA verification failed. Please try again.";
+        } else {
+            $response_body = wp_remote_retrieve_body($verify_response);
+            $result = json_decode($response_body, true);
 
-  $body  = "New enquiry received:\n\n";
-  $body .= "Name: {$title} {$first_name} {$last_name}\n";
-  $body .= "Email: {$email}\n";
-  $body .= "Phone: {$phone}\n\n";
-  $body .= "Property Information:\n";
-  $body .= "Type: {$property_type}\n";
-  $body .= "Zip: {$zip}\n";
-  $body .= "City: {$city}\n";
-  $body .= "Bedrooms: {$bedrooms}\n";
-  $body .= "Bathrooms: {$bathrooms}\n";
-  $body .= "Budget: {$budget}\n\n";
-  $body .= "Message:\n{$message}\n\n";
-  $body .= "Source Page:\n{$source_url}\n";
+            if (isset($result['success']) && $result['success'] === true) {
 
-  $headers = [];
-  $headers[] = 'Content-Type: text/plain; charset=UTF-8';
-  // Reply-to user so admin can reply directly
-  $headers[] = 'Reply-To: ' . $first_name . ' ' . $last_name . ' <' . $email . '>';
+              // Required validation
+              if ($title === '' || $first_name === '' || $last_name === '' || $email === '' || $phone === '') {
+                contact_us_redirect_back('missing_required');
+              }
 
-  $sent = wp_mail($admin_email, $subject, $body, $headers);
+              if (!is_email($email)) {
+                contact_us_redirect_back('invalid_email');
+              }
 
-  if (!$sent) {
-    contact_us_redirect_back('mail_failed');
-  }
+              // Email to admin
+              $investor_inquiries_mail = get_theme_mod('investor_inquiries_mail',__('investors@cbaestate.com','sbtech'));
+              $recipients = array_filter([
+                get_option('admin_email'),
+                $investor_inquiries_mail,
+                // 'complaints@yourdomain.com',
+              ]);
 
-  // success
-  $redirect = add_query_arg('contact-us-success', '1', $source_url);
-  wp_safe_redirect($redirect);
-  exit;
+              $subject = 'New Contact Enquiry - CBA Real Estate';
+
+              $body  = "New enquiry received:\n\n";
+              $body .= "Name: {$title} {$first_name} {$last_name}\n";
+              $body .= "Email: {$email}\n";
+              $body .= "Phone: {$phone}\n\n";
+              $body .= "Property Information:\n";
+              $body .= "Type: {$property_type}\n";
+              $body .= "Zip: {$zip}\n";
+              $body .= "City: {$city}\n";
+              $body .= "Bedrooms: {$bedrooms}\n";
+              $body .= "Bathrooms: {$bathrooms}\n";
+              $body .= "Budget: {$budget}\n\n";
+              $body .= "Message:\n{$message}\n\n";
+              $body .= "Source Page:\n{$source_url}\n";
+
+              $headers = [];
+              $headers[] = 'Content-Type: text/plain; charset=UTF-8';
+              // Reply-to user so admin can reply directly
+              $headers[] = 'Reply-To: ' . $first_name . ' ' . $last_name . ' <' . $email . '>';
+
+              $sent = wp_mail($recipients, $subject, $body, $headers);
+
+              if (!$sent) {
+                contact_us_redirect_back('mail_failed');
+              }
+
+              // success
+              $redirect = add_query_arg('contact-us-success', '1', $source_url);
+              wp_safe_redirect($redirect);
+              exit;
+
+            } else {
+                echo "reCAPTCHA validation failed. Please try again.";
+            }
+        }
+    }
 }
 
 

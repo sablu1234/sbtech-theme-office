@@ -1,6 +1,13 @@
 <?php
 function property_management_hello_shortcode() {
     ob_start();
+
+    $property_management_about_image = get_theme_mod('property_management_about_image', get_template_directory_uri().'/assets/services/property-management/property-management_about.avif');
+
+    $management_subtilte = get_theme_mod( 'management_subtilte', 'Property Management' );
+    $management_title = get_theme_mod( 'management_title', 'Welcome to CBA Property Management Services' );
+    $management_desc = get_theme_mod( 'management_desc', 'At CBA Real Estate, we understand that property management can be complex and demanding. We provide comprehensive property management solutions designed to ease your burdens and enhance the value of your investments. Whether you own a single property or a diverse portfolio, our expert team is committed to handling every aspect with unmatched professionalism and precision. Trust us to take care of the details, so you can concentrate on your broader financial goals.' );
+
     ?>
     <section class="property-management-section" aria-label="Property Management CTA">
     <div class="property-management-container">
@@ -8,25 +15,21 @@ function property_management_hello_shortcode() {
         
         <!-- Left Content -->
         <div class="property-management-content">
-            <p class="property-management-kicker">Property Management</p>
+            
+            <?php if(!empty($management_subtilte)) : ?>
+            <p class="property-management-kicker"><?php echo esc_html( $management_subtilte )?></p>
+            <?php endif;?>
 
-            <h2 class="property-management-title">
-            Do you need a premium real estate platform that scales?
-            </h2>
+            <?php if(!empty($management_title)) : ?>
+            <h2 class="property-management-title"><?php echo esc_html( $management_title )?> </h2>
+            <?php endif;?>
 
             <div class="property-management-text">
-            <p>
-                We’re building a high-end WordPress real estate website inspired by metropolitan.realestate—designed for
-                speed, clean UX, and long-term growth.
-            </p>
-            <p>
-                The platform supports Buy & Rent listings with AJAX filtering, New Projects (off-plan) modules, Area/Community
-                guides, Developer profiles, and lead capture—structured for large inventory and expansion.
-            </p>
-            <p>
-                It’s built to be performance-focused, Cloudflare compatible, SEO-ready (schema + structured content), and
-                capable of pulling listings from external APIs/CRMs for automation.
-            </p>
+            
+            <?php if(!empty($management_desc)) : ?>
+            <p><?php echo esc_html( $management_desc )?></p>
+            <?php endif;?>
+
             </div>
 
             <div class="property-management-actions">
@@ -45,7 +48,7 @@ function property_management_hello_shortcode() {
             <!-- Replace this image url with your own -->
             <img
                 class="property-management-image"
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80"
+                src="<?php echo $property_management_about_image; ?>"
                 alt="Professional real estate team discussing a project"
                 loading="lazy"
             />

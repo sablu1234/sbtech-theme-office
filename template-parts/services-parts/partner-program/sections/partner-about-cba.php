@@ -1,6 +1,7 @@
 <?php
 function partner_about_cba_function() {
     ob_start();
+    $partner_program_about_img = get_theme_mod('partner_program_about_img', get_template_directory_uri().'/assets/services/partner-program/partner_program_about.avif');
     ?>
     <section class="partner-program-section" aria-label="About CBA Partner Program">
     <div class="partner-program-container">
@@ -60,7 +61,7 @@ function partner_about_cba_function() {
             <!-- Replace image URL -->
             <img
                 class="partner-program-img"
-                src="https://images.unsplash.com/photo-1523958203904-cdcb402031fd?auto=format&fit=crop&w=1600&q=80"
+                src="<?php echo $partner_program_about_img; ?>"
                 alt="Business partnership handshake"
                 loading="lazy"
             />

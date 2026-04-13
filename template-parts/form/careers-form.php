@@ -57,7 +57,7 @@ add_action('init', function () {
         'public' => false,
         'show_ui' => true,
         'menu_icon' => 'dashicons-id-alt',
-        'supports' => ['title'], // title will be auto-set, rest saved as meta
+        'supports' => ['title'],
         'show_in_rest' => false,
     ]);
 });
@@ -66,7 +66,6 @@ add_action('init', function () {
   2) Shortcode: [careers_form]
 ========================= */
 add_shortcode('careers_form', function () {
-    // enqueue font only when shortcode used
     wp_enqueue_style('careers-poppins', 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap', [], null);
 
     $success = !empty($_GET['career_success']);
@@ -221,6 +220,15 @@ add_shortcode('careers_form', function () {
             background: rgba(239, 68, 68, .06);
         }
 
+        .career_recaptcha_wrap{
+            display:none;
+            margin-top:14px;
+        }
+
+        .career_recaptcha_wrap.is-visible{
+            display:block;
+        }
+
         @media(max-width:820px) {
             .career_grid {
                 grid-template-columns: 1fr;
@@ -248,6 +256,7 @@ add_shortcode('careers_form', function () {
                 <form class="career_form" method="post" enctype="multipart/form-data" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
                     <input type="hidden" name="action" value="career_submit_form">
                     <?php wp_nonce_field('career_submit_form', 'career_nonce'); ?>
+                    <input type="hidden" name="complaints_source_url" value="<?php echo esc_url(home_url(add_query_arg([], $_SERVER['REQUEST_URI']))); ?>">
 
                     <div class="career_grid">
                         <div class="career_field">
@@ -267,7 +276,13 @@ add_shortcode('careers_form', function () {
 
                         <div class="career_field">
                             <label class="career_label">Position *</label>
-                            <input class="career_input" type="text" name="position" placeholder="e.g., Sales Executive" required>
+                            <select class="career_select" name="position">
+                                <option value="">Select</option>
+                                <option>Property Manager</option>
+                                <option>Real Estate Agent</option>
+                                <option>Real Estate Consultant</option>
+                                <option>Content Strategist</option>
+                            </select>
                         </div>
 
                         <div class="career_field">
@@ -299,8 +314,12 @@ add_shortcode('careers_form', function () {
                         </div>
                     </div>
 
+                    <div class="career_recaptcha_wrap" id="careerRecaptchaWrap">
+                        <div class="g-recaptcha py-3" data-sitekey="6Lcy44osAAAAACYEfxBwfbFgj3-UD1MBKdYpNPn7"></div>
+                    </div>
+
                     <div class="career_actions">
-                        <button class="career_btn" type="submit">Submit Application</button>
+                        <button class="career_btn" type="submit" id="careerSubmitBtn">Submit Application</button>
                         <p class="career_note">By submitting, you agree your details will be used for recruitment purposes.</p>
                     </div>
                 </form>
@@ -308,6 +327,27 @@ add_shortcode('careers_form', function () {
             </div>
         </div>
     </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('.career_form');
+        const wrap = document.getElementById('careerRecaptchaWrap');
+
+        if (!form || !wrap) return;
+
+        form.addEventListener('submit', function(e){
+            const recaptchaResponse = form.querySelector('textarea[name="g-recaptcha-response"]');
+
+            if (!recaptchaResponse || !recaptchaResponse.value) {
+                e.preventDefault();
+                wrap.classList.add('is-visible');
+                wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+    });
+    </script>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <?php
     return ob_get_clean();
 });
@@ -330,105 +370,136 @@ function career_handle_submit() {
     $location  = isset($_POST['location']) ? sanitize_text_field(wp_unslash($_POST['location'])) : '';
     $experience = isset($_POST['experience']) ? sanitize_text_field(wp_unslash($_POST['experience'])) : '';
     $message   = isset($_POST['message']) ? sanitize_textarea_field(wp_unslash($_POST['message'])) : '';
+    $source_url = isset($_POST['complaints_source_url']) ? esc_url_raw($_POST['complaints_source_url']) : home_url('/');
+    $recaptcha_response = isset($_POST['g-recaptcha-response']) ? sanitize_text_field($_POST['g-recaptcha-response']) : '';
 
-    if (!$full_name || !$email || !$phone || !$position) {
-        career_redirect_error('Please fill required fields.');
-    }
+    if (empty($recaptcha_response)) {
+        echo "Please complete the reCAPTCHA.";
+    } elseif (!is_email($email)) {
+        echo "Invalid email address.";
+    } else {
 
-    // -------- File upload
-    if (empty($_FILES['cv_file']['name'])) {
-        career_redirect_error('Please upload your CV.');
-    }
+        $secret_key = '6Lcy44osAAAAAMSL93rG8eC0aLVmnkG03AVvDgjO';
 
-    $allowed = ['pdf', 'doc', 'docx'];
-    $ext = strtolower(pathinfo($_FILES['cv_file']['name'], PATHINFO_EXTENSION));
-    if (!in_array($ext, $allowed, true)) {
-        career_redirect_error('Invalid file type. Only PDF/DOC/DOCX allowed.');
-    }
+        $verify_response = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
+            'body' => [
+                'secret'   => $secret_key,
+                'response' => $recaptcha_response,
+                'remoteip' => $_SERVER['REMOTE_ADDR'],
+            ]
+        ]);
 
-    require_once ABSPATH . 'wp-admin/includes/file.php';
-    $upload_overrides = ['test_form' => false];
-    $movefile = wp_handle_upload($_FILES['cv_file'], $upload_overrides);
-
-    if (isset($movefile['error'])) {
-        career_redirect_error('Upload failed: ' . $movefile['error']);
-    }
-
-    // Create attachment so it’s stored in Media Library
-    $attachment_id = 0;
-    if (!empty($movefile['file'])) {
-        require_once ABSPATH . 'wp-admin/includes/image.php';
-        $filetype = wp_check_filetype(basename($movefile['file']), null);
-
-        $attachment_id = wp_insert_attachment([
-            'post_mime_type' => $filetype['type'],
-            'post_title'     => sanitize_file_name(basename($movefile['file'])),
-            'post_content'   => '',
-            'post_status'    => 'inherit',
-        ], $movefile['file']);
-
-        if ($attachment_id && !is_wp_error($attachment_id)) {
-            $attach_data = wp_generate_attachment_metadata($attachment_id, $movefile['file']);
-            wp_update_attachment_metadata($attachment_id, $attach_data);
+        if (is_wp_error($verify_response)) {
+            echo "reCAPTCHA verification failed. Please try again.";
         } else {
-            $attachment_id = 0;
+            $response_body = wp_remote_retrieve_body($verify_response);
+            $result = json_decode($response_body, true);
+
+            if (isset($result['success']) && $result['success'] === true) {
+
+                if (!$full_name || !$email || !$phone || !$position) {
+                    career_redirect_error('Please fill required fields.');
+                }
+
+                if (empty($_FILES['cv_file']['name'])) {
+                    career_redirect_error('Please upload your CV.');
+                }
+
+                $allowed = ['pdf', 'doc', 'docx'];
+                $ext = strtolower(pathinfo($_FILES['cv_file']['name'], PATHINFO_EXTENSION));
+                if (!in_array($ext, $allowed, true)) {
+                    career_redirect_error('Invalid file type. Only PDF/DOC/DOCX allowed.');
+                }
+
+                require_once ABSPATH . 'wp-admin/includes/file.php';
+                $upload_overrides = ['test_form' => false];
+                $movefile = wp_handle_upload($_FILES['cv_file'], $upload_overrides);
+
+                if (isset($movefile['error'])) {
+                    career_redirect_error('Upload failed: ' . $movefile['error']);
+                }
+
+                $attachment_id = 0;
+                if (!empty($movefile['file'])) {
+                    require_once ABSPATH . 'wp-admin/includes/image.php';
+                    $filetype = wp_check_filetype(basename($movefile['file']), null);
+
+                    $attachment_id = wp_insert_attachment([
+                        'post_mime_type' => $filetype['type'],
+                        'post_title'     => sanitize_file_name(basename($movefile['file'])),
+                        'post_content'   => '',
+                        'post_status'    => 'inherit',
+                    ], $movefile['file']);
+
+                    if ($attachment_id && !is_wp_error($attachment_id)) {
+                        $attach_data = wp_generate_attachment_metadata($attachment_id, $movefile['file']);
+                        wp_update_attachment_metadata($attachment_id, $attach_data);
+                    } else {
+                        $attachment_id = 0;
+                    }
+                }
+
+                $cv_url = !empty($movefile['url']) ? esc_url_raw($movefile['url']) : '';
+
+                $title = $full_name . ' — ' . $position;
+
+                $post_id = wp_insert_post([
+                    'post_type'   => 'career_application',
+                    'post_status' => 'publish',
+                    'post_title'  => $title,
+                ]);
+
+                if (!$post_id || is_wp_error($post_id)) {
+                    career_redirect_error('Could not save application.');
+                }
+
+                update_post_meta($post_id, '_career_full_name', $full_name);
+                update_post_meta($post_id, '_career_email', $email);
+                update_post_meta($post_id, '_career_phone', $phone);
+                update_post_meta($post_id, '_career_position', $position);
+                update_post_meta($post_id, '_career_location', $location);
+                update_post_meta($post_id, '_career_experience', $experience);
+                update_post_meta($post_id, '_career_message', $message);
+                update_post_meta($post_id, '_career_cv_url', $cv_url);
+                update_post_meta($post_id, '_career_cv_attachment_id', (int)$attachment_id);
+
+                $property_leads_necessary_mail = get_theme_mod('property_leads_necessary_mail', __('careers@cbaestate.com','sbtech'));
+                $recipients = array_filter([
+                    get_option('admin_email'),
+                    $property_leads_necessary_mail,
+                ]);
+
+                $subject = 'New Career Application: ' . $position . ' — ' . $full_name;
+
+                $body =
+                    "New career application received:\n\n" .
+                    "Name: {$full_name}\n" .
+                    "Email: {$email}\n" .
+                    "Phone: {$phone}\n" .
+                    "Position: {$position}\n" .
+                    "Location: {$location}\n" .
+                    "Experience: {$experience}\n\n" .
+                    "Message:\n{$message}\n\n" .
+                    "CV Link: {$cv_url}\n" .
+                    "Page Url: " . $source_url . "\n";
+
+                $headers = ['Content-Type: text/plain; charset=UTF-8'];
+
+                $attachments = [];
+                if (!empty($movefile['file']) && file_exists($movefile['file'])) {
+                    $attachments[] = $movefile['file'];
+                }
+
+                wp_mail($recipients, $subject, $body, $headers, $attachments);
+
+                wp_safe_redirect(add_query_arg('career_success', 1, wp_get_referer() ?: home_url('/careers/')));
+                exit;
+
+            } else {
+                echo "reCAPTCHA validation failed. Please try again.";
+            }
         }
     }
-
-    $cv_url = !empty($movefile['url']) ? esc_url_raw($movefile['url']) : '';
-
-    // -------- Save to CPT (title + meta fields)
-    $title = $full_name . ' — ' . $position;
-
-    $post_id = wp_insert_post([
-        'post_type'   => 'career_application',
-        'post_status' => 'publish',
-        'post_title'  => $title,
-    ]);
-
-    if (!$post_id || is_wp_error($post_id)) {
-        career_redirect_error('Could not save application.');
-    }
-
-    update_post_meta($post_id, '_career_full_name', $full_name);
-    update_post_meta($post_id, '_career_email', $email);
-    update_post_meta($post_id, '_career_phone', $phone);
-    update_post_meta($post_id, '_career_position', $position);
-    update_post_meta($post_id, '_career_location', $location);
-    update_post_meta($post_id, '_career_experience', $experience);
-    update_post_meta($post_id, '_career_message', $message);
-    update_post_meta($post_id, '_career_cv_url', $cv_url);
-    update_post_meta($post_id, '_career_cv_attachment_id', (int)$attachment_id);
-
-    // -------- Email to admin
-    $admin_email = get_option('admin_email');
-    $subject = 'New Career Application: ' . $position . ' — ' . $full_name;
-
-    $body =
-        "New career application received:\n\n" .
-        "Name: {$full_name}\n" .
-        "Email: {$email}\n" .
-        "Phone: {$phone}\n" .
-        "Position: {$position}\n" .
-        "Location: {$location}\n" .
-        "Experience: {$experience}\n\n" .
-        "Message:\n{$message}\n\n" .
-        "CV Link: {$cv_url}\n" .
-        "Admin Entry: " . admin_url('post.php?post=' . $post_id . '&action=edit') . "\n";
-
-    $headers = ['Content-Type: text/plain; charset=UTF-8'];
-
-    // Attach file to email (optional but requested)
-    $attachments = [];
-    if (!empty($movefile['file']) && file_exists($movefile['file'])) {
-        $attachments[] = $movefile['file'];
-    }
-
-    wp_mail($admin_email, $subject, $body, $headers, $attachments);
-
-    // redirect success
-    wp_safe_redirect(add_query_arg('career_success', 1, wp_get_referer() ?: home_url('/careers/')));
-    exit;
 }
 
 function career_redirect_error($msg) {
@@ -437,7 +508,7 @@ function career_redirect_error($msg) {
 }
 
 /* =========================
-  4) Admin list columns (optional but useful)
+  4) Admin list columns
 ========================= */
 add_filter('manage_career_application_posts_columns', function ($cols) {
     $cols['app_email'] = 'Email';
@@ -453,10 +524,9 @@ add_action('manage_career_application_posts_custom_column', function ($col, $pos
 }, 10, 2);
 
 
-// newsletter start
 /* =========================
    NEWSLETTER SHORTCODE
-   ========================= */
+========================= */
 
 add_shortcode('newsletter_form', function () {
 
@@ -530,6 +600,16 @@ add_shortcode('newsletter_form', function () {
             font-weight: 700;
         }
 
+        .newsletter_recaptcha_wrap{
+            display:none;
+            width:100%;
+            margin-top:10px;
+        }
+
+        .newsletter_recaptcha_wrap.is-visible{
+            display:block;
+        }
+
         @media(max-width:680px) {
             .newsletter_form {
                 width: 100%;
@@ -552,33 +632,91 @@ add_shortcode('newsletter_form', function () {
             <form class="newsletter_form" method="post">
                 <input class="newsletter_input" type="text" name="newsletter_name" placeholder="Enter your Name*" required>
                 <input class="newsletter_input" type="email" name="newsletter_email" placeholder="Enter your E-mail*" required>
-                <button class="newsletter_btn" type="submit" name="newsletter_submit">SUBSCRIBE</button>
+
+                <div class="newsletter_recaptcha_wrap" id="newsletterRecaptchaWrap">
+                    <div class="g-recaptcha" data-sitekey="6Lcy44osAAAAACYEfxBwfbFgj3-UD1MBKdYpNPn7"></div>
+                </div>
+
+                <button class="newsletter_btn" type="submit" name="newsletter_submit" id="newsletterSubmitBtn">SUBSCRIBE</button>
             </form>
 
         </div>
 
         <div class="newsletter_msg">
             <?php
+            $complaints_procedure_mail = get_theme_mod('complaints_procedure_mail', __('care@cbaestate.com','sbtech'));
+            $recipients = array_filter([
+                get_option('admin_email'),
+                $complaints_procedure_mail,
+            ]);
+
             if (isset($_POST['newsletter_submit'])) {
+
                 $name  = sanitize_text_field($_POST['newsletter_name']);
                 $email = sanitize_email($_POST['newsletter_email']);
+                $recaptcha_response = isset($_POST['g-recaptcha-response']) ? sanitize_text_field($_POST['g-recaptcha-response']) : '';
 
-                if (is_email($email)) {
-
-                    $subject = "Newsletter Subscription";
-                    $message = "Hi $name,\n\nThank you for subscribing to our newsletter.\nYou will receive updates, new projects and market insights.\n\nRegards";
-                    $headers = ['Content-Type: text/plain; charset=UTF-8'];
-
-                    wp_mail($email, $subject, $message, $headers);
-
-                    echo "Subscription successful. Please check your email.";
-                } else {
+                if (empty($recaptcha_response)) {
+                    echo "Please complete the reCAPTCHA.";
+                } elseif (!is_email($email)) {
                     echo "Invalid email address.";
+                } else {
+
+                    $secret_key = '6Lcy44osAAAAAMSL93rG8eC0aLVmnkG03AVvDgjO';
+
+                    $verify_response = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
+                        'body' => [
+                            'secret'   => $secret_key,
+                            'response' => $recaptcha_response,
+                            'remoteip' => $_SERVER['REMOTE_ADDR'],
+                        ]
+                    ]);
+
+                    if (is_wp_error($verify_response)) {
+                        echo "reCAPTCHA verification failed. Please try again.";
+                    } else {
+                        $response_body = wp_remote_retrieve_body($verify_response);
+                        $result = json_decode($response_body, true);
+
+                        if (isset($result['success']) && $result['success'] === true) {
+
+                            $subject = "Newsletter Subscription";
+                            $message = "Hi,\n\nNew Subscriber Name: $name\nEmail: $email\n\nRegards";
+                            $headers = ['Content-Type: text/plain; charset=UTF-8'];
+
+                            wp_mail($recipients, $subject, $message, $headers);
+
+                            echo "Subscription successful. Please check your email.";
+                        } else {
+                            echo "reCAPTCHA validation failed. Please try again.";
+                        }
+                    }
                 }
             }
             ?>
         </div>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('.newsletter_form');
+        const wrap = document.getElementById('newsletterRecaptchaWrap');
+
+        if (!form || !wrap) return;
+
+        form.addEventListener('submit', function(e){
+            const recaptchaResponse = form.querySelector('textarea[name="g-recaptcha-response"]');
+
+            if (!recaptchaResponse || !recaptchaResponse.value) {
+                e.preventDefault();
+                wrap.classList.add('is-visible');
+                wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+    });
+    </script>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <?php
     return ob_get_clean();

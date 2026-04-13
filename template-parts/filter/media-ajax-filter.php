@@ -216,7 +216,7 @@ JS;
 add_shortcode('media_loop_ajax', function ($atts) {
     $atts = shortcode_atts([
         'posts_per_page' => 6,     // per page
-        'title'          => 'Latest Media',
+        'title'          => 'Market Insights',
     ], $atts);
 
     // Categories list

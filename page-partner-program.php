@@ -1,12 +1,15 @@
 
 <?php get_header(); ?>
 <!-- Hero area start -->
+    <?php
+    $partner_program_hero_bg = get_theme_mod('partner_program_hero_bg', get_template_directory_uri().'/assets/services/partner-program/partner_program_bg.webp');
+    ?>
     <style>
     .partner_program_hero{
     position:relative;
     width:100%;
     min-height:520px;
-    background:url("http://sam91222.local/wp-content/uploads/2026/02/two-business-people-meeting-street-2-scaled.jpg") center/cover no-repeat;
+    background:url("<?php echo $partner_program_hero_bg; ?>") center/cover no-repeat;
     display:flex;
     align-items:center;
     }

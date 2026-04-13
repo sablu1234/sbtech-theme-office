@@ -110,17 +110,23 @@ include_once get_template_directory() . '/template-parts/filter/developer-ajax-f
 include_once get_template_directory() . '/template-parts/filter/media-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/index-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/agents-ajax-filter.php';
+include_once get_template_directory() . '/template-parts/filter/media-press-filter.php';
+include_once get_template_directory() . '/template-parts/filter/commercial-2-filter.php';
 
 // form
 include_once get_template_directory() . '/template-parts/form/careers-form.php';
 include_once get_template_directory() . '/template-parts/form/developer_page_form.php';
 include_once get_template_directory() . '/template-parts/form/contact-us-form.php';
 include_once get_template_directory() . '/template-parts/form/button-contact-form.php';
+include_once get_template_directory() . '/template-parts/form/mortage-singlePageForm.php';
 
 // cpt-added
 include_once get_template_directory() . '/inc/custom-cpt/custom-cpt-my.php';
 include_once get_template_directory() . '/inc/custom-cpt/developer-cpt.php';
 include_once get_template_directory() . '/inc/custom-cpt/agent-cpt.php';
+include_once get_template_directory() . '/inc/custom-cpt/press-media-cpt.php';
+include_once get_template_directory() . '/inc/custom-cpt/achievements-cpt.php';
+include_once get_template_directory() . '/inc/custom-cpt/review-cpt.php';
 
 // service pages 
 include_once get_template_directory() . '/template-parts/services-parts/property-management/property-management.php';
@@ -135,9 +141,15 @@ include_once get_template_directory() . '/template-parts/more/contact-us/contact
 include_once get_template_directory() . '/template-parts/more/complaints/complaints.php';
 include_once get_template_directory() . '/template-parts/more/testimonial/testimonial.php';
 
+// single page gallery 
+include_once get_template_directory() . '/template-parts/single-gallery/single-gallery.php';
+
 
 // admin-setting-api
 include_once get_template_directory() . '/inc/admin-setting-api/admin-setting-api.php';
 
+// faq list
+include_once get_template_directory() . '/template-parts/faq/faq-careers.php';
 
-
+// pages sections
+include_once get_template_directory() . '/template-parts/pages-sections/whats-makes.php';

@@ -1,6 +1,27 @@
 <?php get_header(); ?>
 
 <!-- Hero area start -->
+    <?php
+    $about_us_hero_bg = get_theme_mod('about_us_hero_bg', get_template_directory_uri().'/assets/about_us/about_us_bg.jpg');
+    $about_us_wwa_img = get_theme_mod('about_us_wwa_img', get_template_directory_uri().'/assets/about_us/about_us_who_we_are.avif');
+    $about_us_wsell = get_theme_mod('about_us_wsell', get_template_directory_uri().'/assets/about_us/about_us_wsell.avif');
+    $about_us_mv = get_theme_mod('about_us_mv',__('98'));
+    $about_us_experience = get_theme_mod('about_us_experience',__('10'));
+    $about_us_sptrans = get_theme_mod('about_us_sptrans',__('450'));
+    $about_us_active_buyers = get_theme_mod('about_us_active_buyers',__('350'));
+    $about_us_client_support = get_theme_mod('about_us_client_support',__('24/7'));
+    $about_us_transparent_selling_process = get_theme_mod('about_us_transparent_selling_process',__('100'));
+    ?>
+    <style>
+        .about_hero{
+        position:relative;
+        width:100%;
+        min-height:520px;
+        background:url("<?php echo $about_us_hero_bg; ?>") center/cover no-repeat;
+        display:flex;
+        align-items:center;
+        }
+    </style>
 <section class="about_hero">
     <div class="about_overlay"></div>
 
@@ -46,6 +67,12 @@
 <!-- Hero area end -->
 
 <!-- Who we are start -->
+    <?php
+    $about_us_clients_served = get_theme_mod('about_us_clients_served',__('200,000'));
+    $about_us_expertise = get_theme_mod('about_us_expertise',__('12'));
+    $about_us_successful_closings = get_theme_mod('about_us_successful_closings',__('3,000'));
+    $about_us_transaction = get_theme_mod('about_us_transaction',__('2B'));
+    ?>
 <section class="about_who">
     <div class="about_container">
 
@@ -67,22 +94,22 @@
 
                 <div class="about_stats">
                     <div class="about_stat about_stat_primary">
-                        <div class="about_stat_value">200,000+</div>
+                        <div class="about_stat_value"><?php echo $about_us_clients_served; ?>+</div>
                         <div class="about_stat_label">clients served</div>
                     </div>
 
                     <div class="about_stat">
-                        <div class="about_stat_value">12+ Years</div>
+                        <div class="about_stat_value"><?php echo $about_us_expertise; ?>+ Years</div>
                         <div class="about_stat_label">market expertise</div>
                     </div>
 
                     <div class="about_stat">
-                        <div class="about_stat_value">3,000+</div>
+                        <div class="about_stat_value"><?php echo $about_us_successful_closings; ?>+</div>
                         <div class="about_stat_label">successful closings</div>
                     </div>
 
                     <div class="about_stat">
-                        <div class="about_stat_value">AED 2B+</div>
+                        <div class="about_stat_value">AED <?php echo $about_us_transaction; ?>+</div>
                         <div class="about_stat_label">transaction value</div>
                     </div>
                 </div>
@@ -93,7 +120,7 @@
                 <div class="about_img_box">
                     <img
                         class="about_img"
-                        src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=70"
+                        src="<?php echo $about_us_wwa_img; ?>"
                         alt="Our Team">
                 </div>
             </div>
@@ -117,39 +144,39 @@
 
             <!-- Left Image -->
             <div class="sell-why-media">
-                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80" alt="Real estate team">
+                <img src="<?php echo $about_us_wsell; ?>" alt="Real estate team">
             </div>
 
             <!-- Right Stats -->
             <div class="sell-why-stats">
 
                 <div class="sell-stat">
-                    <h3>98%</h3>
+                    <h3><?php echo $about_us_mv; ?>%</h3>
                     <p>Properties sold at market value</p>
                 </div>
 
                 <div class="sell-stat">
-                    <h3>10+ years</h3>
+                    <h3><?php echo $about_us_experience; ?>+ years</h3>
                     <p>Experience in property sales</p>
                 </div>
 
                 <div class="sell-stat">
-                    <h3>450+</h3>
+                    <h3><?php echo $about_us_sptrans; ?>+</h3>
                     <p>Successful property transactions</p>
                 </div>
 
                 <div class="sell-stat">
-                    <h3>350+</h3>
+                    <h3><?php echo $about_us_active_buyers; ?>+</h3>
                     <p>Active buyers in our network</p>
                 </div>
 
                 <div class="sell-stat">
-                    <h3>24/7</h3>
+                    <h3><?php echo $about_us_client_support; ?></h3>
                     <p>Client support & consultation</p>
                 </div>
 
                 <div class="sell-stat">
-                    <h3>100%</h3>
+                    <h3><?php echo $about_us_transparent_selling_process; ?>%</h3>
                     <p>Transparent selling process</p>
                 </div>
 
@@ -267,81 +294,71 @@
 <!-- powerful Marketing end -->
 
 <!-- Our Achievements start -->
-<section class="about_ach">
-    <div class="about_container">
+    <?php
+    $switch_about_us_achivement = get_theme_mod('switch_about_us_achivement', false);
+    ?>
+    <?php if(!empty($switch_about_us_achivement)) : ?>
+    <section class="about_ach">
+        <div class="about_container">
 
-        <div class="about_ach_head">
-            <h2 class="about_ach_title">Our Achievements</h2>
+            <div class="about_ach_head">
+                <h2 class="about_ach_title">Our Achievements</h2>
 
-            <div class="about_ach_nav">
-                <button class="about_ach_btn" type="button" aria-label="Previous" data-ach-prev>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-                <button class="about_ach_btn about_ach_btn_primary" type="button" aria-label="Next" data-ach-next>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
+                <div class="about_ach_nav">
+                    <button class="about_ach_btn" type="button" aria-label="Previous" data-ach-prev>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <button class="about_ach_btn about_ach_btn_primary" type="button" aria-label="Next" data-ach-next>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="about_ach_track" data-ach-track>
+                <?php
+
+                $q_achievements = new WP_Query([
+                    'post_type'      => 'achievements',
+                    'posts_per_page' => 10,
+                    'post_status'    => 'publish',
+                    'orderby'        => 'date',
+                    'order'          => 'DESC',
+                ]);
+                
+                if ($q_achievements->have_posts()) :
+                while ($q_achievements->have_posts()) : $q_achievements->the_post();
+                    
+                $award = get_post_meta(get_the_ID(), 'award', true);
+                ?>
+
+                <!-- Card start -->
+                <article class="about_ach_card">
+                    <div class="about_ach_imgwrap">
+                        <img class="about_ach_img" src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'large'); ?>" alt="Award trophy">
+                    </div>
+                    <div class="about_ach_badge"><?php echo $award; ?></div>
+                    <h3 class="about_ach_name"><?php the_title(); ?></h3>
+                    <p class="about_ach_desc"><?php the_content(); ?></p>
+                </article>
+                <!-- Card end -->
+                <?php
+                endwhile;
+                else :
+                    echo 'No properties found.';
+                endif;
+                ?>
+                <?php wp_reset_postdata(); ?>
+
+                
+
             </div>
         </div>
-
-        <div class="about_ach_track" data-ach-track>
-
-            <!-- Card 1 -->
-            <article class="about_ach_card">
-                <div class="about_ach_imgwrap">
-                    <img class="about_ach_img" src="https://metropolitan.realestate/wp-content/uploads/2025/10/02-1-300x300.png" alt="Award trophy">
-                </div>
-                <div class="about_ach_badge">1st Place</div>
-                <h3 class="about_ach_name">Arada Broker Awards 2025</h3>
-                <p class="about_ach_desc">Recognized for outstanding brokerage performance and client service excellence.</p>
-            </article>
-
-            <!-- Card 2 -->
-            <article class="about_ach_card">
-                <div class="about_ach_imgwrap">
-                    <img class="about_ach_img" src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=800&q=70" alt="Award trophy">
-                </div>
-                <div class="about_ach_badge">2nd Place</div>
-                <h3 class="about_ach_name">Top Broker Group 2024</h3>
-                <p class="about_ach_desc">Celebrated for consistent market leadership and high-volume transactions.</p>
-            </article>
-
-            <!-- Card 3 -->
-            <article class="about_ach_card">
-                <div class="about_ach_imgwrap">
-                    <img class="about_ach_img" src="https://metropolitan.realestate/wp-content/uploads/2025/10/02-1-300x300.png" alt="Award trophy">
-                </div>
-                <div class="about_ach_badge">1st Place</div>
-                <h3 class="about_ach_name">The Black Onyx Awards 2024</h3>
-                <p class="about_ach_desc">Awarded for premium client outcomes and exceptional deal execution.</p>
-            </article>
-
-            <!-- Card 4 -->
-            <article class="about_ach_card">
-                <div class="about_ach_imgwrap">
-                    <img class="about_ach_img" src="https://metropolitan.realestate/wp-content/uploads/2025/10/02-1-300x300.png" alt="Award trophy">
-                </div>
-                <div class="about_ach_badge">2nd Place</div>
-                <h3 class="about_ach_name">Omniyat Broker Awards 2024</h3>
-                <p class="about_ach_desc">Recognized for excellence in luxury property advisory and investor trust.</p>
-            </article>
-
-            <!-- Card 5 -->
-            <article class="about_ach_card">
-                <div class="about_ach_imgwrap">
-                    <img class="about_ach_img" src="https://metropolitan.realestate/wp-content/uploads/2025/10/02-1-300x300.png" alt="Award trophy">
-                </div>
-                <div class="about_ach_badge">Recognition</div>
-                <h3 class="about_ach_name">Service Excellence Award 2023</h3>
-                <p class="about_ach_desc">Acknowledged for transparent guidance, responsiveness, and client satisfaction.</p>
-            </article>
-
-        </div>
-    </div>
-</section>
+    </section>
+    <?php endif;?>
 <!-- Our Achievements end -->
 
 <!-- Newsletter section start -->

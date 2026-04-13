@@ -2,7 +2,19 @@
 
 function property_faq_function() {
     ob_start();
+
+        $property_management_wwd_card_6_title = get_theme_mod( 'property_management_wwd_card_6_title', 'Regular Inspections' );
+        $property_management_wwd_card_6_desc = get_theme_mod( 'property_management_wwd_card_6_desc', 'To preserve and enhance the value of your property, we conduct regular inspections and provide comprehensive reports. This proactive strategy allows us to identify and resolve potential issues early, preventing them from escalating into significant problems.' );
+        
+        $items = get_theme_mod('repeater_setting_2');
+        
+        
     ?>
+
+    
+    
+
+    
     <!-- Faq section start -->
     <section class="rent-faqs" aria-label="rent faq">
         <div class="rent-container">
@@ -15,8 +27,9 @@ function property_faq_function() {
             </div>
 
             <div class="rent-faqs__wrap" id="rentFaq">
-                <!-- Item -->
-                <div class="rent-faq" data-open="true">
+
+             <!-- Item -->
+                <!-- <div class="rent-faq" data-open="true">
                     <button class="rent-faq__q" type="button" aria-expanded="true">
                         1. How do I schedule a viewing for a property?
                         <span class="rent-faq__icon" aria-hidden="true"></span>
@@ -26,54 +39,34 @@ function property_faq_function() {
                             You can request a viewing directly from the property page using the enquiry form. Our team will confirm availability and arrange a suitable time for you.
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="rent-faq">
-                    <button class="rent-faq__q" type="button" aria-expanded="false">
-                        2. Are the property prices negotiable?
-                        <span class="rent-faq__icon" aria-hidden="true"></span>
-                    </button>
-                    <div class="rent-faq__a" role="region">
-                        <div class="rent-faq__aInner">
-                           Some properties allow negotiation depending on demand, unit type, and seller/landlord terms. We’ll advise you on realistic pricing and the best offer strategy.
-                        </div>
-                    </div>
-                </div>
+                <?php 
+                if (!empty($items)) :
+                    foreach ($items as $index => $item) : 
+                        $is_open = ($index === 0) ? 'true' : 'false';
+                ?>
 
-                <div class="rent-faq">
-                    <button class="rent-faq__q" type="button" aria-expanded="false">
-                        3. What documents do I need to rent a property in Dubai?
-                        <span class="rent-faq__icon" aria-hidden="true"></span>
-                    </button>
-                    <div class="rent-faq__a" role="region">
-                        <div class="rent-faq__aInner">
-                            Common requirements include Emirates ID/passport, visa page, and proof of income. Additional documents may be needed depending on the building and landlord.
-                        </div>
-                    </div>
-                </div>
-                <div class="rent-faq">
-                    <button class="rent-faq__q" type="button" aria-expanded="false">
-                        4. What are the typical buying costs besides the property price?
-                        <span class="rent-faq__icon" aria-hidden="true"></span>
-                    </button>
-                    <div class="rent-faq__a" role="region">
-                        <div class="rent-faq__aInner">
-                            Additional costs may include registration fees, agency fees, and mortgage-related charges (if applicable). We can share a clear breakdown based on your selected property.
-                        </div>
-                    </div>
-                </div>
+                    <div class="rent-faq" data-open="<?php echo $is_open; ?>">
+                        <button class="rent-faq__q" type="button" aria-expanded="<?php echo $is_open; ?>">
+                            
+                            <?php echo ($index + 1) . '. ' . sbtech_kses($item['faq_question']); ?>
 
-                <div class="rent-faq">
-                    <button class="rent-faq__q" type="button" aria-expanded="false">
-                        5. Can I buy a property in Dubai as a non-resident?
-                        <span class="rent-faq__icon" aria-hidden="true"></span>
-                    </button>
-                    <div class="rent-faq__a" role="region">
-                        <div class="rent-faq__aInner">
-                            Yes, non-residents can purchase property in eligible areas. The process and financing options vary, and we’ll guide you through the requirements and next steps.
+                            <span class="rent-faq__icon" aria-hidden="true"></span>
+                        </button>
+
+                        <div class="rent-faq__a" role="region">
+                            <div class="rent-faq__aInner">
+                                <?php echo sbtech_kses($item['faq_answer']); ?>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                <?php 
+                    endforeach;
+                endif; 
+                ?>
+        
             </div>
         </div>
     </section>

@@ -1,5 +1,7 @@
 <?php
 function conveyance_conveyancing_funciton() {
+    $conveyancing_about_img = get_theme_mod('conveyancing_about_img', get_template_directory_uri().'/assets/services/mortgages/mortgages-support.avif');
+    $conveyancing_services_img = get_theme_mod('conveyancing_services_img', get_template_directory_uri().'/assets/services/mortgages/mortgages-support.avif');
     ob_start();
     ?>
     <section class="conveyance-section" aria-label="About Conveyancing">
@@ -59,7 +61,7 @@ function conveyance_conveyancing_funciton() {
             <!-- Replace this image URL with your own -->
             <img
                 class="conveyance-img"
-                src="http://sam91222.local/wp-content/uploads/2026/02/1035983-scaled.jpg"
+                    src="<?php echo $conveyancing_about_img; ?>"
                 alt="Professional conveyancing support"
                 loading="lazy"
             />

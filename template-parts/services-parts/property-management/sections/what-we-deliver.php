@@ -1,17 +1,55 @@
 <?php
 function property_management_what_we_deliver() {
     ob_start();
+    $property_management_wwd_card_1 = get_theme_mod('property_management_wwd_card_1', get_template_directory_uri().'/assets/services/property-management/card_p_1.avif');
+    $property_management_wwd_card_2 = get_theme_mod('property_management_wwd_card_2', get_template_directory_uri().'/assets/services/property-management/card_p_2.avif');
+    $property_management_wwd_card_3 = get_theme_mod('property_management_wwd_card_3', get_template_directory_uri().'/assets/services/property-management/card_p_3.avif');
+    $property_management_wwd_card_4 = get_theme_mod('property_management_wwd_card_4', get_template_directory_uri().'/assets/services/property-management/card_p_4.avif');
+    $property_management_wwd_card_5 = get_theme_mod('property_management_wwd_card_5', get_template_directory_uri().'/assets/services/property-management/card_p_5.avif');
+    $property_management_wwd_card_6 = get_theme_mod('property_management_wwd_card_6', get_template_directory_uri().'/assets/services/property-management/card_p_6.avif');
+
+    $wwd_sub_title = get_theme_mod( 'wwd_sub_title', 'What we deliver' );
+    $wwd_title = get_theme_mod( 'wwd_title', 'Explore what we do Real estate property management' );
+    $wwd_desc = get_theme_mod( 'wwd_desc', 'A scalable WordPress build inspired by metropolitan.realestate—focused on speed, clean UX, advanced search, and API-ready data automation.' );
+
+    $property_management_wwd_card_1_title = get_theme_mod( 'property_management_wwd_card_1_title', 'Property Marketing and Listing' );
+    $property_management_wwd_card_1_desc = get_theme_mod( 'property_management_wwd_card_1_desc', 'We use advanced marketing strategies to ensure your property stands out in a competitive market. From professional photography to targeted online advertising, we effectively showcase your property to attract the right tenants.' );
+
+    $property_management_wwd_card_2_title = get_theme_mod( 'property_management_wwd_card_2_title', 'Tenant Search and Selection' );
+    $property_management_wwd_card_2_desc = get_theme_mod( 'property_management_wwd_card_2_desc', 'Securing the right tenants is key to the success of your property investment. We perform comprehensive background checks and screenings to ensure that we find reliable and responsible tenants for your property.' );
+
+    $property_management_wwd_card_3_title = get_theme_mod( 'property_management_wwd_card_3_title', 'Tenancy Contract Management' );
+    $property_management_wwd_card_3_desc = get_theme_mod( 'property_management_wwd_card_3_desc', 'Our team expertly manages all legal aspects of tenancy contracts to ensure full compliance with local regulations and safeguard your interests. We handle lease agreements, renewals, and terminations efficiently and transparently, providing you with peace of mind throughout the tenancy lifecycle.' );
+
+    $property_management_wwd_card_4_title = get_theme_mod( 'property_management_wwd_card_4_title', 'Maintenance and Repairs' );
+    $property_management_wwd_card_4_desc = get_theme_mod( 'property_management_wwd_card_4_desc', 'We provide round-the-clock maintenance services to address any issues swiftly and effectively. Our extensive network of reliable contractors guarantees that your property remains well-maintained and that all repairs meet the highest standards of quality.' );
+
+    $property_management_wwd_card_5_title = get_theme_mod( 'property_management_wwd_card_5_title', 'Financial Management' );
+    $property_management_wwd_card_5_desc = get_theme_mod( 'property_management_wwd_card_5_desc', 'We handle all financial aspects of your property management, from collecting rent to managing utility payments and producing financial reports. Our approach to transparent, real-time financial reporting ensures you are always well-informed about the performance of your property.' );
+
+    $property_management_wwd_card_6_title = get_theme_mod( 'property_management_wwd_card_6_title', 'Regular Inspections' );
+    $property_management_wwd_card_6_desc = get_theme_mod( 'property_management_wwd_card_6_desc', 'To preserve and enhance the value of your property, we conduct regular inspections and provide comprehensive reports. This proactive strategy allows us to identify and resolve potential issues early, preventing them from escalating into significant problems.' );
+
+
     ?>
+    
 
     <section class="what-we-deliver-section" aria-label="What We Deliver">
     <div class="what-we-deliver-container">
         
         <div class="what-we-deliver-head">
-        <p class="what-we-deliver-kicker">What we deliver</p>
-        <h2 class="what-we-deliver-title">Explore what we deliver for a premium real estate platform</h2>
-        <p class="what-we-deliver-subtitle">
-            A scalable WordPress build inspired by metropolitan.realestate—focused on speed, clean UX, advanced search, and API-ready data automation.
-        </p>
+        <?php if(!empty($wwd_sub_title)) : ?>
+        <p class="what-we-deliver-kicker"><?php echo esc_html( $wwd_sub_title )?></p>
+        <?php endif;?>
+
+        <?php if(!empty($wwd_title)) : ?>
+        <h2 class="what-we-deliver-title"><?php echo esc_html( $wwd_title )?></h2>
+        <?php endif;?>
+
+        <?php if(!empty($wwd_desc)) : ?>
+        <p class="what-we-deliver-subtitle"><?php echo esc_html( $wwd_desc )?> </p>
+        <?php endif;?>
+
         </div>
 
         <div class="what-we-deliver-grid">
@@ -19,84 +57,104 @@ function property_management_what_we_deliver() {
         <article class="what-we-deliver-card">
             <div class="what-we-deliver-media">
             <img class="what-we-deliver-img" 
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80"
+                src="<?php echo $property_management_wwd_card_1; ?>"
                 alt="Team planning a premium real estate platform" loading="lazy">
             </div>
             <div class="what-we-deliver-body">
-            <h3 class="what-we-deliver-card-title">Custom WordPress Theme</h3>
-            <p class="what-we-deliver-text">
-                Fully custom, modern UI built for a luxury property brand—clean layout, mobile-first responsiveness, and maintainable code.
-            </p>
+            
+            <?php if(!empty($property_management_wwd_card_1_title)) : ?>
+            <h3 class="what-we-deliver-card-title"><?php echo $property_management_wwd_card_1_title; ?></h3>
+            <?php endif;?>
+
+            <?php if(!empty($property_management_wwd_card_1_desc)) : ?>
+            <p class="what-we-deliver-text"><?php echo $property_management_wwd_card_1_desc; ?> </p>
+            <?php endif;?>
+
             </div>
         </article>
 
         <article class="what-we-deliver-card">
             <div class="what-we-deliver-media">
             <img class="what-we-deliver-img" 
-                src="https://images.unsplash.com/photo-1554774853-b414d0c11b35?auto=format&fit=crop&w=1600&q=80"
+                src="<?php echo $property_management_wwd_card_2; ?>"
                 alt="Advanced property search experience" loading="lazy">
             </div>
             <div class="what-we-deliver-body">
-            <h3 class="what-we-deliver-card-title">AJAX Buy & Rent Search</h3>
-            <p class="what-we-deliver-text">
-                Fast filtering and pagination for large inventories—location, type, beds, price ranges, amenities, and more.
-            </p>
+            <?php if(!empty($property_management_wwd_card_2_title)) : ?>
+            <h3 class="what-we-deliver-card-title"><?php echo $property_management_wwd_card_2_title; ?></h3>
+            <?php endif;?>
+
+            <?php if(!empty($property_management_wwd_card_2_desc)) : ?>
+            <p class="what-we-deliver-text"><?php echo $property_management_wwd_card_2_desc; ?> </p>
+            <?php endif;?>
             </div>
         </article>
 
         <article class="what-we-deliver-card">
             <div class="what-we-deliver-media">
             <img class="what-we-deliver-img" 
-                src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1600&q=80"
+                src="<?php echo $property_management_wwd_card_3; ?>"
                 alt="API and CRM integration" loading="lazy">
             </div>
             <div class="what-we-deliver-body">
-            <h3 class="what-we-deliver-card-title">API / CRM Integration Ready</h3>
-            <p class="what-we-deliver-text">
-                Structured for syncing listings from external sources (CRM/portals), enabling automation and scalable content updates.
-            </p>
+            <?php if(!empty($property_management_wwd_card_3_title)) : ?>
+            <h3 class="what-we-deliver-card-title"><?php echo $property_management_wwd_card_3_title; ?></h3>
+            <?php endif;?>
+
+            <?php if(!empty($property_management_wwd_card_3_desc)) : ?>
+            <p class="what-we-deliver-text"><?php echo $property_management_wwd_card_3_desc; ?> </p>
+            <?php endif;?>
             </div>
         </article>
 
         <article class="what-we-deliver-card">
             <div class="what-we-deliver-media">
             <img class="what-we-deliver-img" 
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80"
+                src="<?php echo $property_management_wwd_card_4; ?>"
                 alt="SEO content and analytics growth" loading="lazy">
             </div>
             <div class="what-we-deliver-body">
-            <h3 class="what-we-deliver-card-title">SEO-Driven Area Pages</h3>
-            <p class="what-we-deliver-text">
-                Community/area guides designed for organic growth with structured content, internal linking, and related properties.
-            </p>
+            <?php if(!empty($property_management_wwd_card_4_title)) : ?>
+            <h3 class="what-we-deliver-card-title"><?php echo $property_management_wwd_card_4_title; ?></h3>
+            <?php endif;?>
+
+            <?php if(!empty($property_management_wwd_card_4_desc)) : ?>
+            <p class="what-we-deliver-text"><?php echo $property_management_wwd_card_4_desc; ?> </p>
+            <?php endif;?>
             </div>
         </article>
 
         <article class="what-we-deliver-card">
             <div class="what-we-deliver-media">
             <img class="what-we-deliver-img" 
-                src="https://images.unsplash.com/photo-1523952578875-e6bb18b26645?auto=format&fit=crop&w=1600&q=80"
+                src="<?php echo $property_management_wwd_card_5; ?>"
                 alt="New projects and off-plan module" loading="lazy">
             </div>
             <div class="what-we-deliver-body">
-            <h3 class="what-we-deliver-card-title">New Projects Module</h3>
-            <p class="what-we-deliver-text">
-                Dedicated off-plan/projects section with bulk upload options (CSV/admin/API), developer association, and detail pages.
-            </p>
+            <?php if(!empty($property_management_wwd_card_5_title)) : ?>
+            <h3 class="what-we-deliver-card-title"><?php echo $property_management_wwd_card_5_title; ?></h3>
+            <?php endif;?>
+
+            <?php if(!empty($property_management_wwd_card_5_desc)) : ?>
+            <p class="what-we-deliver-text"><?php echo $property_management_wwd_card_5_desc; ?> </p>
+            <?php endif;?>
             </div>
         </article>
 
         <article class="what-we-deliver-card">
             <div class="what-we-deliver-media">
             <img class="what-we-deliver-img" 
-                src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=80"
+                src="<?php echo $property_management_wwd_card_6; ?>"
                 alt="Lead capture and enquiry management" loading="lazy">
             </div>
             <div class="what-we-deliver-body">
-            <h3 class="what-we-deliver-card-title">Lead Capture & Management</h3>
-            <p class="what-we-deliver-text">
-                Enquiry forms across listings/projects with backend management and export-ready lead records—built for sales workflows.
-            </p>
+            <?php if(!empty($property_management_wwd_card_6_title)) : ?>
+            <h3 class="what-we-deliver-card-title"><?php echo $property_management_wwd_card_6_title; ?></h3>
+            <?php endif;?>
+
+            <?php if(!empty($property_management_wwd_card_6_desc)) : ?>
+            <p class="what-we-deliver-text"><?php echo $property_management_wwd_card_6_desc; ?> </p>
+            <?php endif;?>
             </div>
         </article>
 

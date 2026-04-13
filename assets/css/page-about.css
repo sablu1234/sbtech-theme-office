@@ -6,14 +6,7 @@
   --about-max:1200px;
 }
 
-.about_hero{
-  position:relative;
-  width:100%;
-  min-height:520px;
-  background:url("https://metropolitan.realestate/wp-content/uploads/2025/10/about-bg.jpg") center/cover no-repeat;
-  display:flex;
-  align-items:center;
-}
+
 
 .about_overlay{
   position:absolute;

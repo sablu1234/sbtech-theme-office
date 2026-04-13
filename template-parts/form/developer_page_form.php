@@ -6,6 +6,9 @@
 
 add_shortcode('reaf_contact_form', function () {
 
+    $sbtech_mail = get_theme_mod( 'sbtech_mail', '+97144286151' );
+    $sbtech_phone = get_theme_mod( 'sbtech_phone', '+97144286151' );
+    $sbtech_address = get_theme_mod( 'sbtech_address', '+97144286151' );
   // Handle POST submit
   $success = '';
   $error   = '';
@@ -19,35 +22,65 @@ add_shortcode('reaf_contact_form', function () {
       $email   = sanitize_email($_POST['email'] ?? '');
       $phone   = sanitize_text_field($_POST['phone'] ?? '');
       $message = sanitize_textarea_field($_POST['message'] ?? '');
+      $recaptcha_response = isset($_POST['g-recaptcha-response']) ? sanitize_text_field($_POST['g-recaptcha-response']) : '';
 
-      if (empty($name) || empty($email) || empty($message) || !is_email($email)) {
-        $error = 'Please fill in required fields correctly.';
-      } else {
-        $admin_email = get_option('admin_email');
-        $site_name   = wp_specialchars_decode(get_bloginfo('name'), ENT_QUOTES);
+    if (empty($recaptcha_response)) {
+        echo "Please complete the reCAPTCHA.";
+    } elseif (!is_email($email)) {
+        echo "Invalid email address.";
+    } else {
 
-        $subject = "New Inquiry - {$site_name}";
-        $body    = "You received a new inquiry:\n\n";
-        $body   .= "Name: {$name}\n";
-        $body   .= "Email: {$email}\n";
-        $body   .= "Phone: {$phone}\n\n";
-        $body   .= "Message:\n{$message}\n\n";
-        $body   .= "— Sent from: " . home_url() . "\n";
+        $secret_key = '6Lcy44osAAAAAMSL93rG8eC0aLVmnkG03AVvDgjO';
 
-        // Set headers (Reply-To user email)
-        $headers = [
-          'Content-Type: text/plain; charset=UTF-8',
-          'Reply-To: ' . $name . ' <' . $email . '>',
-        ];
+        $verify_response = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
+            'body' => [
+                'secret'   => $secret_key, 
+                'response' => $recaptcha_response,
+                'remoteip' => $_SERVER['REMOTE_ADDR'],
+            ]
+        ]);
 
-        $sent = wp_mail($admin_email, $subject, $body, $headers);
-
-        if ($sent) {
-          $success = 'Thank you! Your message has been sent successfully.';
+        if (is_wp_error($verify_response)) {
+            echo "reCAPTCHA verification failed. Please try again.";
         } else {
-          $error = 'Sorry, email could not be sent. Please try again.';
+            $response_body = wp_remote_retrieve_body($verify_response);
+            $result = json_decode($response_body, true);
+
+            if (isset($result['success']) && $result['success'] === true) {
+               if (empty($name) || empty($email) || empty($message) || !is_email($email)) {
+              $error = 'Please fill in required fields correctly.';
+            } else {
+              $admin_email = get_option('admin_email');
+              $site_name   = wp_specialchars_decode(get_bloginfo('name'), ENT_QUOTES);
+
+              $subject = "New Inquiry - {$site_name}";
+              $body    = "You received a new inquiry:\n\n";
+              $body   .= "Name: {$name}\n";
+              $body   .= "Email: {$email}\n";
+              $body   .= "Phone: {$phone}\n\n";
+              $body   .= "Message:\n{$message}\n\n";
+              $body   .= "— Sent from: " . home_url() . "\n";
+
+              // Set headers (Reply-To user email)
+              $headers = [
+                'Content-Type: text/plain; charset=UTF-8',
+                'Reply-To: ' . $name . ' <' . $email . '>',
+              ];
+
+              $sent = wp_mail($admin_email, $subject, $body, $headers);
+
+              if ($sent) {
+                $success = 'Thank you! Your message has been sent successfully.';
+              } else {
+                $error = 'Sorry, email could not be sent. Please try again.';
+              }
+            }
+            } else {
+                echo "reCAPTCHA validation failed. Please try again.";
+            }
         }
-      }
+    }
+      
     }
   }
 
@@ -158,7 +191,7 @@ add_shortcode('reaf_contact_form', function () {
             </div>
             <div>
               <strong>Email</strong>
-              <span><?php echo esc_html(get_option('admin_email')); ?></span>
+              <a style="color:white; text-decoration:none;" href="tel:<?php echo $sbtech_mail; ?>"><?php echo $sbtech_mail; ?></a>
             </div>
           </div>
 
@@ -168,7 +201,7 @@ add_shortcode('reaf_contact_form', function () {
             </div>
             <div>
               <strong>Phone</strong>
-              <span>+971 4 428 6151</span>
+              <a style="color:white; text-decoration:none;" href="tel:<?php echo $sbtech_phone; ?>"><?php echo $sbtech_phone; ?></a>
             </div>
           </div>
 
@@ -177,8 +210,7 @@ add_shortcode('reaf_contact_form', function () {
               <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg>
             </div>
             <div>
-              <strong>Address</strong>
-              <span>Dubai, UAE</span>
+              <?php echo $sbtech_address; ?>
             </div>
           </div>
         </div>
@@ -211,6 +243,8 @@ add_shortcode('reaf_contact_form', function () {
             <div class="reaf-field reaf-grid-2">
               <textarea name="message" placeholder="Message*" required></textarea>
             </div>
+            <!-- Google reCAPTCHA -->
+            <div class="g-recaptcha" data-sitekey="6Lcy44osAAAAACYEfxBwfbFgj3-UD1MBKdYpNPn7"></div>
           </div>
 
           <label class="reaf-check">
@@ -225,6 +259,8 @@ add_shortcode('reaf_contact_form', function () {
           <button class="reaf-btn" type="submit" name="reaf_cf_submit" value="1">Property Inquiry</button>
           <div style="clear:both"></div>
         </form>
+        <!-- Google reCAPTCHA Script -->
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
       </div>
 
     </div>

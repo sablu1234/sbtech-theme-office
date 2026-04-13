@@ -1,6 +1,7 @@
 <?php
 function why_snagging_function() {
     ob_start();
+    $property_snagging_ws_img = get_theme_mod('property_snagging_ws_img', get_template_directory_uri().'/assets/services/property-snagging/property_snagging_why_snagging.avif');
     ?>
     <section class="property-snagging-section" aria-label="Property snagging and inspection">
     <div class="property-snagging-container">
@@ -55,7 +56,7 @@ function why_snagging_function() {
             <!-- Replace this image URL with your own -->
             <img
                 class="property-snagging-img"
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80"
+                src="<?php echo $property_snagging_ws_img; ?>"
                 alt="Property inspection and snagging"
                 loading="lazy"
             />

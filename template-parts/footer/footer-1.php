@@ -1,47 +1,26 @@
+<?php
+    $sbtech_ft_short_des = get_theme_mod( 'sbtech_ft_short_des', '36-38 Floor, Al Salam Tecom Tower, Dubai, UAE' );
+    $sbtech_address = get_theme_mod( 'sbtech_address', '100 S Main St, New York, NY' );
+    $sbtech_mail = get_theme_mod( 'sbtech_mail', 'contact@example.com' ); 
+    $sbtech_phone = get_theme_mod( 'sbtech_phone', '+971 4 572 5273' ); 
+?>
 <footer class="site-footer">
     <div class="footer-wrap">
 
         <!-- 1 -->
         <div class="footer-col footer-brand">
             <a class="brand" href="<?php echo home_url('/'); ?>">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/header/logo-main.jpg" alt="Logo">
+                <img src="https://sam91222.wpvence.com/wp-content/uploads/2026/03/logo-2.jpg" alt="Logo">
             </a>
 
+            <?php if(!empty($sbtech_ft_short_des)) : ?>
             <p class="addr">
-                36-38 Floor, Al Salam Tecom<br>
-                Tower, Dubai, UAE
+                <?php echo esc_html( $sbtech_ft_short_des )?>
             </p>
+            <?php endif; ?>
 
             <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
-                <a href="facebook.com/" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-     border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </a>
-
-                <a href="https://www.instagram.com/" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-     border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
-                    <i class="fab fa-instagram"></i>
-                </a>
-
-                <a href="https://youtube.com/" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-     border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
-                    <i class="fab fa-youtube"></i>
-                </a>
-
-                <a href="https://x.com/" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-     border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
-                    <i class="fab fa-twitter"></i>
-                </a>
-
-                <a href="linkedin.com" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-     border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-
-                <a href="https://web.telegram.org/" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-     border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
-                    <i class="fab fa-telegram-plane"></i>
-                </a>
+                <?php sbtech_social_media(); ?>
             </div>
 
 
@@ -88,6 +67,7 @@
             <div class="iconlist">
 
                 <!-- Location -->
+                <?php if(!empty($sbtech_address)) : ?>
                 <div class="iconlist_item">
                     <div class="iconlist_icon">
                         <svg viewBox="0 0 24 24" fill="none">
@@ -95,12 +75,17 @@
                             <path d="M12 12a2 2 0 100-4 2 2 0 000 4z" stroke="currentColor" stroke-width="2" />
                         </svg>
                     </div>
+                    
+                    
                     <div class="iconlist_text">
-                        100 S Main St, New York, NY
+                        <?php echo esc_html( $sbtech_address )?>
                     </div>
+                    
                 </div>
+                <?php endif;?>
 
                 <!-- Email -->
+                <?php if(!empty($sbtech_address)) : ?>
                 <div class="iconlist_item">
                     <div class="iconlist_icon">
                         <svg viewBox="0 0 24 24" fill="none">
@@ -108,10 +93,27 @@
                             <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         </svg>
                     </div>
+                    
                     <div class="iconlist_text">
-                        <a href="mailto:contact@example.com">contact@example.com</a>
+                        <a href="mailto:<?php echo esc_url( $sbtech_mail )?>"><?php echo esc_html( $sbtech_mail )?></a>
                     </div>
                 </div>
+                <?php endif;?>
+                <!-- Email -->
+                <?php if(!empty($sbtech_address)) : ?>
+                <div class="iconlist_item">
+                    <div class="iconlist_icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                        </svg>
+
+                    </div>
+                    
+                    <div class="iconlist_text">
+                        <a href="tel:<?php echo esc_url( $sbtech_phone )?>"><?php echo esc_html( $sbtech_phone )?></a>
+                    </div>
+                </div>
+                <?php endif;?>
 
             </div>
         </nav>
@@ -165,7 +167,7 @@
         width: auto;
         display: block;
         border-radius: 8px;
-        border: 1px solid var(--clr-primary);
+/*         border: 1px solid var(--clr-primary); */
     }
 
     .addr {

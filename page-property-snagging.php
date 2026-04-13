@@ -1,12 +1,15 @@
 
 <?php get_header(); ?>
 <!-- Hero area start -->
+    <?php
+    $property_snagging_hero_bg = get_theme_mod('property_snagging_hero_bg', );
+    ?>
     <style>
     .partner_program_hero{
     position:relative;
     width:100%;
     min-height:520px;
-    background:url("http://sam91222.local/wp-content/uploads/2026/02/person-with-hammer-front-house-1-scaled.jpg") center/cover no-repeat;
+    background:url("<?php echo $property_snagging_hero_bg; ?>") center/cover no-repeat;
     display:flex;
     align-items:center;
     }

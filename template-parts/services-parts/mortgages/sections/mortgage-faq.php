@@ -2,6 +2,9 @@
 
 function mortgage_faq_funciton() {
     ob_start();
+
+    
+
     ?>
     <!-- Faq section start -->
     <section class="rent-faqs" aria-label="rent faq">

@@ -2,103 +2,59 @@
 
 
 <!-- hero section start -->
-<section class="commercial-hero">
-    <div class="commercial-container">
+    <?php
+    $commercial_point_title = get_theme_mod( 'commercial_point_title', 'Commercial Properties • Prime Locations' );
+    $commercial_title = get_theme_mod( 'commercial_title', 'Commercial Properties' );
+    $commercial_subtitle = get_theme_mod( 'commercial_subtitle', 'Find the right commercial space with confidence.' );
+    $commercial_desc = get_theme_mod( 'commercial_desc', 'Explore premium offices, retail, warehouses, and mixed-use spaces across prime business districts. Clean presentation, fast response, and curated options tailored to your requirements.' );
+    $commercial_button_text = get_theme_mod( 'commercial_button_text', 'Contact Us' );
+    ?>
+    <section class="commercial-hero">
+        <div class="commercial-container">
 
-        <div class="commercial-pill">
-            <span class="commercial-pillDot"></span>
-            Commercial Properties • Prime Locations
-        </div>
-
-        <h1 class="commercial-title">Commercial Properties</h1>
-
-        <div class="commercial-sub">
-            Find the right commercial space with confidence.
-        </div>
-
-        <p class="commercial-desc">
-            Explore premium offices, retail, warehouses, and mixed-use spaces across prime business districts.
-            Clean presentation, fast response, and curated options tailored to your requirements.
-        </p>
-
-        <button class="commercial-btn" class="commercial-cta-btn" id="commercialOpenModal" type="button">
-            Send a Request <span class="commercial-arrow">›</span>
-        </button>
-
-    </div>
-</section>
-<!-- form start-->
-<div class="commercial-modal" id="commercialModal" aria-hidden="true">
-    <div class="commercial-modal__backdrop" data-commercial-close="1"></div>
-
-    <div class="commercial-modal__dialog" role="dialog" aria-modal="true" aria-label="List your property form">
-        <button class="commercial-modal__close" type="button" aria-label="Close" data-commercial-close="1">✕</button>
-
-        <div class="commercial-modal__grid">
-            <!-- LEFT: form -->
-            <div class="commercial-modal__left">
-                <h3 class="commercial-modal__title">List your property with <span>Metropolitan</span></h3>
-
-                <form class="commercial-form" action="#" method="post">
-                    <label class="<!-- SELL MODAL CONTACT FORM (Pro) | Prefix: commercial- | Button -> Modal with animatcommercial-field">
-                        <span class="commercial-label">Full Name<span class="commercial-req">*</span></span>
-                        <input class="commercial-input" type="text" name="full_name" required placeholder="Your full name">
-                    </label>
-
-                    <label class="commercial-field">
-                        <span class="commercial-label">E-Mail<span class="commercial-req">*</span></span>
-                        <input class="commercial-input" type="email" name="email" required placeholder="name@email.com">
-                    </label>
-
-                    <label class="commercial-field">
-                        <span class="commercial-label">Phone<span class="commercial-req">*</span></span>
-                        <div class="commercial-phone">
-                            <select class="commercial-select" name="country_code" aria-label="Country code">
-                                <option value="+971">🇦🇪 +971</option>
-                                <option value="+880" selected>🇧🇩 +880</option>
-                                <option value="+91">🇮🇳 +91</option>
-                                <option value="+1">🇺🇸 +1</option>
-                                <option value="+44">🇬🇧 +44</option>
-                            </select>
-                            <input class="commercial-input commercial-input--phone" type="tel" name="phone" required placeholder="1812-345678">
-                        </div>
-                    </label>
-
-                    <label class="commercial-field">
-                        <span class="commercial-label">Message</span>
-                        <textarea class="commercial-textarea" name="message" rows="4"
-                            placeholder="Tell us about your property; location, size, price..."></textarea>
-                    </label>
-
-                    <label class="commercial-check">
-                        <input type="checkbox" name="offers">
-                        <span>I agree to receive information about offers, deals and services from this website (optional).</span>
-                    </label>
-
-                    <button class="commercial-submit" type="submit">Get In Touch</button>
-
-                    <p class="commercial-legal">
-                        By clicking the submit button, I accept and provide my personal information,
-                        and agree to the Metropolitan Group <a href="#">Privacy Policy</a>, applicable data
-                        protection laws, and <a href="#">Terms of Use</a>.
-                    </p>
-                </form>
+            <?php if(!empty($commercial_point_title)) : ?>
+            <div class="commercial-pill">
+                <span class="commercial-pillDot"></span><?php echo esc_html( $commercial_point_title )?>
             </div>
+            <?php endif;?>
 
-            <!-- RIGHT: image -->
-            <div class="commercial-modal__right" aria-hidden="true">
-                <div class="commercial-agent">
-                    <img class="commercial-agent__img"
-                        src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?auto=format&fit=crop&w=1200&q=80"
-                        alt="">
-                    <div class="commercial-agent__shape"></div>
+
+            <?php if(!empty($commercial_title)) : ?>
+            <h1 class="commercial-title"><?php echo esc_html( $commercial_title )?></h1>
+            <?php endif;?>
+
+            <?php if(!empty($commercial_subtitle)) : ?>
+            <div class="commercial-sub"><?php echo esc_html( $commercial_subtitle )?> </div>
+            <?php endif;?>
+
+            <?php if(!empty($commercial_desc)) : ?>
+            <p class="commercial-desc"><?php echo esc_html( $commercial_desc )?> </p>
+            <?php endif;?>
+
+            <?php if(!empty($commercial_button_text)) : ?>
+            <button class="sell-cta-btn" id="sellOpenModal" class="about_btn"><?php echo esc_html( $commercial_button_text )?></button>
+            <?php endif;?>
+
+        </div>
+    </section>
+    <!-- form start-->
+    <div class="sell-modal" id="sellModal" aria-hidden="true">
+        <div class="sell-modal__backdrop" data-sell-close="1"></div>
+
+        <div class="sell-modal__dialog" role="dialog" aria-modal="true" aria-label="List your property form">
+            <button class="sell-modal__close" type="button" aria-label="Close" data-sell-close="1">✕</button>
+
+            <div class="sell-modal__grid">
+                    <?php echo do_shortcode('[button_contact_form_direct]'); ?>
                 </div>
-            </div>
         </div>
     </div>
-</div>
-<!-- form end-->
+    <!-- form end-->
 <!-- hero section end -->
+
+<section class="container">
+    <?php echo do_shortcode('[porpertypi_ajax_filter_dynamic_commercial]'); ?>
+</section>
 
 <!-- Recent commercial Property start -->
 <section class="container commercial-recent">

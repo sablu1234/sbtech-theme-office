@@ -1,11 +1,18 @@
 <?php get_header(); ?>
 <!-- Hero area start -->
+    <?php
+    $property_management_section_hero_bg = get_theme_mod('property_management_section_hero_bg', get_template_directory_uri().'/assets/services/property-management/property-management.webp');
+    $hero_title = get_theme_mod( 'hero_title', 'Property Management with a  <br>Personal Touch' );      
+    $hero_desc = get_theme_mod( 'hero_desc', 'Property Management with a  <br>Personal Touch' );      
+    $hero_button_1_text = get_theme_mod( 'hero_button_1_text', 'View Properties' );      
+    $hero_button_2_text = get_theme_mod( 'hero_button_2_text', 'Contact Us' );      
+    ?>
     <style>
     .property_management_hero{
     position:relative;
     width:100%;
     min-height:520px;
-    background:url("http://sam91222.local/wp-content/uploads/2026/02/house-loan-estate-sell-mortgage-concept-1-scaled.jpg") center/cover no-repeat;
+    background:url("<?php echo $property_management_section_hero_bg; ?>") center/cover no-repeat;
     display:flex;
     align-items:center;
     }
@@ -24,16 +31,24 @@
                     <a href="<?php echo home_url('/property-management'); ?>">property-management</a>
                 </div>
 
-                <h1 class="about_title">
-                    Property Management with a  <br>Personal Touch
-                </h1>
+                <?php if(!empty($hero_title)) : ?>
+                <h1 class="about_title"><?php echo sbtech_kses( $hero_title )?> </h1>
+                <?php endif;?>
 
-                <p class="about_desc">
-                    We’re developing a modern, high-end WordPress real estate website inspired by metropolitan.realestate—focused on clean UX, fast performance, and long-term scalability. From AJAX-powered Buy/Rent listings to New Projects, Area guides, Developers directory, and API-driven property automation—everything is structured for growth.
+                <?php if(!empty($hero_desc)) : ?>
+                <p class="about_desc"><?php echo esc_html( $hero_desc )?> </p>
+                <?php endif;?>
 
                 <div class="about_buttons">
-                    <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary">View Properties</a>
-                    <button class="sell-cta-btn" id="sellOpenModal" class="about_btn">Contact Us</button>
+                    
+                    <?php if(!empty($hero_button_1_text)) : ?>
+                    <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary"><?php echo esc_html( $hero_button_1_text )?></a>
+                    <?php endif;?>
+
+                    <?php if(!empty($hero_button_2_text)) : ?>
+                    <button class="sell-cta-btn" id="sellOpenModal" class="about_btn"><?php echo esc_html( $hero_button_2_text )?></button>
+                    <?php endif;?>
+                    
                 </div>
 
             </div>
@@ -65,6 +80,14 @@
     <?php echo do_shortcode('[property_management_what_we_deliver]'); ?>
 </section>
 <!-- what we deliver end -->
+
+
+
+<!-- review start -->
+<section class="container">
+    <?php echo do_shortcode('[property_faq_shortcode]'); ?>
+</section>
+<!-- review end -->
 
 <!-- review start -->
 <section class="container">

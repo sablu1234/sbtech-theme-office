@@ -1,12 +1,16 @@
 
 <?php get_header(); ?>
 <!-- Hero area start -->
+    <?php
+    $conveyancing_hero_bg = get_theme_mod('conveyancing_hero_bg', get_template_directory_uri().'/assets/services/conveyancing/conveyancing_BG.webp');
+    $conveyancing_about_img = get_theme_mod('conveyancing_about_img', get_template_directory_uri().'/assets/services/conveyancing/conveyancing_about.webp');
+    ?>
     <style>
     .conveyancing_hero{
     position:relative;
     width:100%;
     min-height:520px;
-    background:url("http://sam91222.local/wp-content/uploads/2026/02/hands-agent-client-shaking-hands-after-signed-contract-buy-new-apartment-1-scaled.jpg") center/cover no-repeat;
+    background:url("<?php echo $conveyancing_hero_bg; ?>") center/cover no-repeat;
     display:flex;
     align-items:center;
     }
