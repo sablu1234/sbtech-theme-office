@@ -4,6 +4,11 @@
     <?php
     $conveyancing_hero_bg = get_theme_mod('conveyancing_hero_bg', get_template_directory_uri().'/assets/services/conveyancing/conveyancing_BG.webp');
     $conveyancing_about_img = get_theme_mod('conveyancing_about_img', get_template_directory_uri().'/assets/services/conveyancing/conveyancing_about.webp');
+
+    $conveyancing_hero_title = get_theme_mod( 'conveyancing_hero_title', __('A Smarter Way to Handle  <br>Property Transactions', 'sbtech') );
+    $conveyancing_hero_desc = get_theme_mod( 'conveyancing_hero_desc', __('We combine market expertise and financial support to make buying, selling, and financing property in Dubai smooth and efficient.', 'sbtech') );
+    $conveyancing_hero_btn_text_1 = get_theme_mod( 'conveyancing_hero_btn_text_1', __('View Properties', 'sbtech') );
+    $conveyancing_hero_btn_text_2 = get_theme_mod( 'conveyancing_hero_btn_text_2', __('Contact', 'sbtech') );
     ?>
     <style>
     .conveyancing_hero{
@@ -29,16 +34,23 @@
                     <a href="<?php echo home_url('/conveyancing'); ?>">conveyancing</a>
                 </div>
 
-                <h1 class="about_title">
-                    A Smarter Way to Handle  <br>Property Transactions
-                </h1>
+                <?php if (!empty($conveyancing_hero_title)) : ?>
+                <h1 class="about_title"> <?php echo sbtech_kses($conveyancing_hero_title); ?> </h1>
+                <?php endif; ?>
 
-                <p class="about_desc">
-                    We combine market expertise and financial support to make buying, selling, and financing property in Dubai smooth and efficient.
-                </p>
+                <?php if (!empty($conveyancing_hero_desc)) : ?>
+                <p class="about_desc"><?php echo sbtech_kses($conveyancing_hero_desc); ?> </p>
+                <?php endif; ?>
+
                 <div class="about_buttons">
-                    <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary">View Properties</a>
-                    <button class="sell-cta-btn" id="sellOpenModal" class="about_btn">Contact Us</button>
+                    <?php if (!empty($conveyancing_hero_btn_text_1)) : ?>
+                    <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary"><?php echo sbtech_kses($conveyancing_hero_btn_text_1); ?></a>
+                    <?php endif; ?>
+
+                    <?php if (!empty($conveyancing_hero_btn_text_2)) : ?>
+                    <button class="sell-cta-btn" id="sellOpenModal" class="about_btn"><?php echo sbtech_kses($conveyancing_hero_btn_text_2); ?></button>
+                    <?php endif; ?>
+
                 </div>
 
             </div>

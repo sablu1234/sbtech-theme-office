@@ -1006,12 +1006,25 @@ form#buyFilterForm{
         (function($){
             const ajaxUrl = " . json_encode($ajax_url) . ";
 
+            const buy_img_1 = " . json_encode(get_theme_mod('buy_img_1',get_template_directory_uri() . '/assets/filter_bg_image/nelemson-guevarra-3Pu21dk2e1Y-unsplash.jpg')) . ";
+            const buy_img_2 = " . json_encode(get_theme_mod('buy_img_2',get_template_directory_uri() . '/assets/filter_bg_image/nelemson-guevarra-eCS02JdJBuI-unsplash.jpg')) . ";
+            const buy_img_3 = " . json_encode(get_theme_mod('buy_img_3',get_template_directory_uri() . '/assets/filter_bg_image/riyas-mohammed-syA-NZnb2pA-unsplash.jpg')) . ";
+            const buy_img_4 = " . json_encode(get_theme_mod('buy_img_4',get_template_directory_uri() . '/assets/filter_bg_image/shibin-joseph-GsTqt8M0fls-unsplash.jpg')) . ";
+            const buy_img_5 = " . json_encode(get_theme_mod('buy_img_5',get_template_directory_uri() . '/assets/filter_bg_image/shibin-joseph-yP8oPC3_v38-unsplash.jpg')) . ";
+            const buy_img_6 = " . json_encode(get_theme_mod('buy_img_6',get_template_directory_uri() . '/assets/filter_bg_image/thomas-haas-wfANLGIhOtM-unsplash.jpg')) . ";
+            const buy_img_7 = " . json_encode(get_theme_mod('buy_img_7',get_template_directory_uri() . '/assets/filter_bg_image/upscalemedia-transformed.jpg')) . ";
+            const buy_img_8 = " . json_encode(get_theme_mod('buy_img_7',get_template_directory_uri() . '/assets/filter_bg_image/wmremove-transformed.jpg')) . ";
+
             const buyHeroImages = [
-                'https://sam91222.wpvence.com/wp-content/uploads/2026/04/property-3-scaled.jpg',
-                'https://sam91222.wpvence.com/wp-content/uploads/2026/04/property-4-scaled.jpg',
-                'https://sam91222.wpvence.com/wp-content/uploads/2026/04/property-1-scaled.jpg',
-                'https://sam91222.wpvence.com/wp-content/uploads/2026/04/property-2-scaled.jpg'
-            ];
+                buy_img_1,
+                buy_img_2,
+                buy_img_3,
+                buy_img_4,
+                buy_img_5,
+                buy_img_6,
+                buy_img_7,
+                buy_img_8,
+            ].filter(Boolean);
 
             let buyHeroStarted = false;
             let buyHeroCurrentLayer = 1;

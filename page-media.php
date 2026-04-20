@@ -3,6 +3,11 @@
 <!-- Hero area start -->
     <?php
     $media_hero_bg = get_theme_mod('media_hero_bg', get_template_directory_uri().'/assets/media/media-3-scaled.webp');
+
+    $media_hero_title = get_theme_mod( 'media_hero_title', __('Media & <br> Latest Updates', 'sbtech') );
+    $media_hero_desc = get_theme_mod( 'media_hero_desc', __('Stay informed with our latest news, market insights, project announcements, and company updates. Explore expert analysis, real estate trends, and key developments shaping the future of property and investment.', 'sbtech') );
+    $media_hero_btn_text_1 = get_theme_mod( 'media_hero_btn_text_1', __('View Properties', 'sbtech') );
+    $media_hero_btn_text_2 = get_theme_mod( 'media_hero_btn_text_2', __('Contact', 'sbtech') );
     ?>
     <style>
         .media_hero{
@@ -26,17 +31,22 @@
                 <a href="<?php echo home_url('/media'); ?>">Media</a>
             </div>
 
-            <h1 class="about_title">
-                Media & <br> Latest Updates
-            </h1>
+            <?php if (!empty($media_hero_title)) : ?>
+            <h1 class="about_title"><?php echo sbtech_kses($media_hero_title); ?></h1>
+            <?php endif; ?>
 
-            <p class="about_desc">
-                Stay informed with our latest news, market insights, project announcements, and company updates. Explore expert analysis, real estate trends, and key developments shaping the future of property and investment.
-            </p>
+            <?php if (!empty($media_hero_desc)) : ?>
+            <p class="about_desc"><?php echo esc_html($media_hero_desc); ?> </p>
+            <?php endif; ?>
 
             <div class="about_buttons">
-                <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary">View Properties</a>
-                <button class="sell-cta-btn" id="sellOpenModal" class="about_btn">Contact Us</button>
+                <?php if (!empty($media_hero_btn_text_1)) : ?>
+                <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary"><?php echo esc_html($media_hero_btn_text_1); ?></a>
+                <?php endif; ?>
+
+                <?php if (!empty($media_hero_btn_text_2)) : ?>
+                <button class="sell-cta-btn" id="sellOpenModal" class="about_btn"><?php echo esc_html($media_hero_btn_text_2); ?></button>
+                <?php endif; ?>
             </div>
 
         </div>

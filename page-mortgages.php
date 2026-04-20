@@ -37,7 +37,7 @@
                 <?php endif;?>
 
                 <?php if(!empty($mortage_hero_title)) : ?>
-                <h1 class="about_title"><?php echo esc_html( $mortage_hero_title )?></h1>
+                <h1 class="about_title"><?php echo sbtech_kses( $mortage_hero_title )?></h1>
                 <?php endif;?>
 
                 <?php if(!empty($mortage_hero_desc)) : ?>

@@ -2,6 +2,10 @@
 
 function career_faq_shortcode_function() {
     ob_start();
+    $faq_title = get_theme_mod( 'faq_title', __('Join Our Team & Build Your Future With Us', 'sbtech') );
+    $faq_description = get_theme_mod( 'faq_description', __('We are always looking for passionate, talented, and driven individuals who are ready to grow and make an impact. At our company, you’ll work in a dynamic environment where innovation, collaboration, and professional development are at the core of everything we do.', 'sbtech') );
+
+    $repeater_careers_page_faq_items = get_theme_mod('repeater_careers_page_faq');
     ?>
     <!-- Faq section start -->
     <section class="rent-faqs" aria-label="rent faq">
@@ -9,70 +13,36 @@ function career_faq_shortcode_function() {
             <div class="rent-faqs__head">
                 <div>
                     <span class="rent-faqs__kicker">FAQ</span>
-                    <h2 class="rent-faqs__title">Join Our Team & Build Your Future With Us</h2>
-                    <p class="rent-faqs__sub">We are always looking for passionate, talented, and driven individuals who are ready to grow and make an impact. At our company, you’ll work in a dynamic environment where innovation, collaboration, and professional development are at the core of everything we do.</p>
+                    <?php if (!empty($faq_title)) : ?>
+                    <h2 class="rent-faqs__title"><?php echo esc_html( $faq_title ); ?></h2>
+                    <?php endif; ?>
+
+                    <?php if (!empty($faq_description)) : ?>
+                    <p class="rent-faqs__sub"><?php echo esc_html( $faq_description ); ?></p>
+                    <?php endif; ?>
                 </div>
             </div>
 
             <div class="rent-faqs__wrap" id="rentFaq">
                 <!-- Item -->
+                <?php
+                 if ( ! empty( $repeater_careers_page_faq_items ) ) : foreach ( $repeater_careers_page_faq_items as $item ) : 
+                ?>
                 <div class="rent-faq" data-open="true">
                     <button class="rent-faq__q" type="button" aria-expanded="true">
-                        1. How can I apply for a job?
+                        <?php echo esc_html( $item['faq_question'] ); ?>
                         <span class="rent-faq__icon" aria-hidden="true"></span>
                     </button>
                     <div class="rent-faq__a" role="region">
                         <div class="rent-faq__aInner">
-                            You can apply directly through our careers page by submitting your resume and filling out the application form for the position that matches your skills.
+                             <?php echo esc_html( $item['faq_answer'] ); ?>
                         </div>
                     </div>
                 </div>
-
-                <div class="rent-faq">
-                    <button class="rent-faq__q" type="button" aria-expanded="false">
-                        2. What kind of roles do you offer?
-                        <span class="rent-faq__icon" aria-hidden="true"></span>
-                    </button>
-                    <div class="rent-faq__a" role="region">
-                        <div class="rent-faq__aInner">
-                           We offer a wide range of roles across different departments including development, design, marketing, sales, and operations.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="rent-faq">
-                    <button class="rent-faq__q" type="button" aria-expanded="false">
-                       3. Do you offer remote or flexible work options?
-                        <span class="rent-faq__icon" aria-hidden="true"></span>
-                    </button>
-                    <div class="rent-faq__a" role="region">
-                        <div class="rent-faq__aInner">
-                          Yes, depending on the role, we offer flexible working arrangements including remote and hybrid opportunities.
-                        </div>
-                    </div>
-                </div>
-                <div class="rent-faq">
-                    <button class="rent-faq__q" type="button" aria-expanded="false">
-                        4. What is your hiring process like?
-                        <span class="rent-faq__icon" aria-hidden="true"></span>
-                    </button>
-                    <div class="rent-faq__a" role="region">
-                        <div class="rent-faq__aInner">
-                            Our hiring process typically includes an initial screening, one or more interviews, and a final evaluation before making an offer.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="rent-faq">
-                    <button class="rent-faq__q" type="button" aria-expanded="false">
-                        5. Do you provide training or career growth opportunities?
-                        <span class="rent-faq__icon" aria-hidden="true"></span>
-                    </button>
-                    <div class="rent-faq__a" role="region">
-                        <div class="rent-faq__aInner">
-                            Absolutely. We believe in continuous learning and provide training programs, mentorship, and growth opportunities for all team members.
-                    </div>
-                </div>
+                <?php 
+                endforeach;
+                endif; 
+                ?>
             </div>
         </div>
     </section>

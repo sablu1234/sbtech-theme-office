@@ -2,6 +2,10 @@
 <!-- Hero area start -->
     <?php
     $complaints_procedure_hero_bg = get_theme_mod('complaints_procedure_hero_bg', get_template_directory_uri().'/assets/complaints_procedure/complaints_procedure_bg.webp');
+
+    $complaints_procedure_hero_title = get_theme_mod( 'complaints_procedure_hero_title', __('Get in Touch with  <br>CBA Real Estate', 'sbtech') );
+    $complaints_procedure_hero_desc = get_theme_mod( 'complaints_procedure_hero_desc', __('Have a question about buying, selling, renting, or new projects in Dubai? Send us a message and our team will get back to you quickly with the right guidance and next steps.', 'sbtech') );
+    $complaints_procedure_btn_text_1 = get_theme_mod( 'complaints_procedure_btn_text_1', __('View Properties', 'sbtech') );
     ?>
     <style>
     .complaints_hero{
@@ -22,18 +26,26 @@
                 <div class="about_breadcrumb">
                     <a href="<?php echo home_url(); ?>">Home</a>
                     <span>•</span>
-                    <a href="<?php echo home_url('/contact-us'); ?>">Contact Us</a>
+                    <a href="<?php echo home_url('/complaints-procedure'); ?>">complaints-procedure</a>
                 </div>
 
+                <?php if (!empty($complaints_procedure_hero_title)) : ?>
                 <h1 class="about_title">
-                    Get in Touch with  <br>CBA Real Estate
+                    <?php echo $complaints_procedure_hero_title; ?>
                 </h1>
+                <?php endif; ?>
 
+                <?php if (!empty($complaints_procedure_hero_desc)) : ?>
                 <p class="about_desc">
-                    Have a question about buying, selling, renting, or new projects in Dubai? Send us a message and our team will get back to you quickly with the right guidance and next steps.
+                    <?php echo $complaints_procedure_hero_desc; ?>
+                </p>
+                <?php endif; ?>
 
                 <div class="about_buttons">
-                    <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary">View Properties</a>
+                    <?php if (!empty($complaints_procedure_btn_text_1)) : ?>
+                    <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary"><?php echo $complaints_procedure_btn_text_1; ?></a>
+                    <?php endif; ?>
+
                     <button class="sell-cta-btn d-none" id="sellOpenModal" class="about_btn">Contact Us</button>
                 </div>
 

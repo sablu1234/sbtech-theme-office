@@ -11,6 +11,12 @@
     $about_us_active_buyers = get_theme_mod('about_us_active_buyers',__('350'));
     $about_us_client_support = get_theme_mod('about_us_client_support',__('24/7'));
     $about_us_transparent_selling_process = get_theme_mod('about_us_transparent_selling_process',__('100'));
+
+    $about_us_hero_title = get_theme_mod( 'about_us_hero_title', __('About Our <br> Premium Properties', 'sbtech') );
+    $about_us_hero_desc = get_theme_mod( 'about_us_hero_desc', __('Award-winning real estate agency in Dubai, offering expert services in sales, rentals, and property management. We help clients from all over the world.', 'sbtech') );
+    $about_us_hero_btn_text_1 = get_theme_mod( 'about_us_hero_btn_text_1', __('View Properties', 'sbtech') );
+    $about_us_hero_btn_text_2 = get_theme_mod( 'about_us_hero_btn_text_2', __('Contact', 'sbtech') );
+    
     ?>
     <style>
         .about_hero{
@@ -34,18 +40,23 @@
                 <a href="<?php echo home_url('/about-us'); ?>">About Us</a>
             </div>
 
-            <h1 class="about_title">
-                About Our <br> Premium Properties
-            </h1>
+            <?php if (!empty($about_us_hero_title)) : ?>
+            <h1 class="about_title"><?php echo sbtech_kses($about_us_hero_title); ?></h1>
+            <?php endif; ?>
 
-            <p class="about_desc">
-                Award-winning real estate agency in Dubai, offering expert services in
-                sales, rentals, and property management. We help clients from all over the world.
-            </p>
+            <?php if (!empty($about_us_hero_desc)) : ?>
+            <p class="about_desc"><?php echo sbtech_kses($about_us_hero_desc); ?></p>
+            <?php endif; ?>
 
             <div class="about_buttons">
-                <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary">View Properties</a>
-                <button class="sell-cta-btn" id="sellOpenModal" class="about_btn">Contact Us</button>
+                <?php if (!empty($about_us_hero_btn_text_1)) : ?>
+                <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary"><?php echo esc_html($about_us_hero_btn_text_1); ?></a>
+                <?php endif; ?>
+
+                <?php if (!empty($about_us_hero_btn_text_2)) : ?>
+                <button class="sell-cta-btn" id="sellOpenModal" class="about_btn"><?php echo esc_html($about_us_hero_btn_text_2); ?></button>
+                <?php endif; ?>
+
             </div>
 
         </div>
@@ -72,6 +83,33 @@
     $about_us_expertise = get_theme_mod('about_us_expertise',__('12'));
     $about_us_successful_closings = get_theme_mod('about_us_successful_closings',__('3,000'));
     $about_us_transaction = get_theme_mod('about_us_transaction',__('2B'));
+
+    $who_wa_title = get_theme_mod( 'who_wa_title', __('Who We Are', 'sbtech') );
+    $who_wa_desc = get_theme_mod( 'who_wa_desc', __('<p class="about_text">We are a Dubai-based real estate consultancy focused on premium residential and investment opportunities. Our team blends local market expertise with clear guidance—helping buyers, sellers, and investors move with confidence. </p> <p class="about_text"> From discovery to closing, we deliver a seamless experience with verified listings, strong developer relationships, and responsive support tailored to your goals. </p>', 'sbtech') );
+
+    $about_us_clients_served_text = get_theme_mod( 'about_us_clients_served_text', __('clients served', 'sbtech') );
+    $about_us_expertise_text = get_theme_mod( 'about_us_expertise_text', __('Clients Expertise', 'sbtech') );
+    $about_us_successful_closings_text = get_theme_mod( 'about_us_successful_closings_text', __('successful closings', 'sbtech') );
+    $about_us_transaction_text = get_theme_mod( 'about_us_transaction_text', __('Transaction Value', 'sbtech') );
+
+    $why_sell_title = get_theme_mod( 'why_sell_title', __('Why sell your property <span>with us?</span>', 'sbtech') );
+    $about_us_mv_text = get_theme_mod( 'about_us_mv_text', __('Properties sold at market value', 'sbtech') );
+    $about_us_experience_text = get_theme_mod( 'about_us_experience_text', __('Experience in property sales', 'sbtech') );
+    $about_us_sptrans_text = get_theme_mod( 'about_us_sptrans_text', __('Successful property transactions', 'sbtech') );
+    $about_us_active_buyers_text = get_theme_mod( 'about_us_active_buyers_text', __('Successful property transactions', 'sbtech') );
+    $about_us_client_support_text = get_theme_mod( 'about_us_client_support_text', __('Successful property transactions', 'sbtech') );
+    $about_us_transparent_selling_process_text = get_theme_mod( 'about_us_transparent_selling_process_text', __('Transparent selling process', 'sbtech') );
+    $powerful_m_title = get_theme_mod( 'powerful_m_title', __('Powerful Marketing. <span>Real Results.</span>', 'sbtech') );
+
+    $powerful_m_item_1 = get_theme_mod( 'powerful_m_item_1', __('Professional photography, videography, and high-converting property presentations.', 'sbtech') );
+    $powerful_m_item_2 = get_theme_mod( 'powerful_m_item_2', __('Optimized website visibility and SEO-ready listing pages to attract organic buyers.', 'sbtech') );
+    $powerful_m_item_3 = get_theme_mod( 'powerful_m_item_3', __('Targeted social media campaigns across key channels to reach serious buyers fast.', 'sbtech') );
+    $powerful_m_item_4 = get_theme_mod( 'powerful_m_item_4', __('WhatsApp & email outreach to our engaged database for immediate exposure.', 'sbtech') );
+    $powerful_m_item_5 = get_theme_mod( 'powerful_m_item_5', __('Qualified buyer leads from portals, remarketing, and high-intent ad funnels.', 'sbtech') );
+    $powerful_m_item_6 = get_theme_mod( 'powerful_m_item_6', __('PR-ready listing assets and premium branding for stronger buyer trust.', 'sbtech') );
+    $powerful_m_item_7 = get_theme_mod( 'powerful_m_item_7', __('Private viewings, open houses, and guided buyer tours that convert.', 'sbtech') );
+    $powerful_m_item_8 = get_theme_mod( 'powerful_m_item_8', __('Dedicated support from listing to closing, with clear updates and reporting.', 'sbtech') );
+    $powerful_m_item_9 = get_theme_mod( 'powerful_m_item_9', __('Dedicated support from listing to closing, with clear updates and reporting.', 'sbtech') );
     ?>
 <section class="about_who">
     <div class="about_container">
@@ -80,38 +118,42 @@
 
             <!-- LEFT -->
             <div class="about_left">
-                <h2 class="about_title">Who We Are</h2>
+                <?php if (!empty($who_wa_title)) : ?>
+                <h2 class="about_title"><?php echo esc_html($who_wa_title); ?></h2>
+                <?php endif; ?>
 
-                <p class="about_text">
-                    We are a Dubai-based real estate consultancy focused on premium residential and investment opportunities.
-                    Our team blends local market expertise with clear guidance—helping buyers, sellers, and investors move with confidence.
-                </p>
-
-                <p class="about_text">
-                    From discovery to closing, we deliver a seamless experience with verified listings, strong developer relationships,
-                    and responsive support tailored to your goals.
-                </p>
+                <?php if (!empty($who_wa_desc)) : ?>
+                <p class="about_text"><?php echo sbtech_kses($who_wa_desc); ?></p>
+                <?php endif; ?>
 
                 <div class="about_stats">
+                    <?php if (!empty($about_us_clients_served_text)) : ?>
                     <div class="about_stat about_stat_primary">
                         <div class="about_stat_value"><?php echo $about_us_clients_served; ?>+</div>
-                        <div class="about_stat_label">clients served</div>
+                        <div class="about_stat_label"><?php echo esc_html($about_us_clients_served_text); ?></div>
                     </div>
+                    <?php endif; ?>
 
+                    <?php if (!empty($about_us_expertise_text)) : ?>
                     <div class="about_stat">
                         <div class="about_stat_value"><?php echo $about_us_expertise; ?>+ Years</div>
-                        <div class="about_stat_label">market expertise</div>
+                        <div class="about_stat_label"><?php echo esc_html($about_us_expertise_text); ?></div>
                     </div>
+                    <?php endif; ?>
 
+                    <?php if (!empty($about_us_successful_closings_text)) : ?>
                     <div class="about_stat">
                         <div class="about_stat_value"><?php echo $about_us_successful_closings; ?>+</div>
-                        <div class="about_stat_label">successful closings</div>
+                        <div class="about_stat_label"><?php echo esc_html($about_us_successful_closings_text); ?></div>
                     </div>
+                    <?php endif; ?>
 
+                    <?php if (!empty($about_us_transaction_text)) : ?>
                     <div class="about_stat">
                         <div class="about_stat_value">AED <?php echo $about_us_transaction; ?>+</div>
-                        <div class="about_stat_label">transaction value</div>
+                        <div class="about_stat_label"><?php echo esc_html($about_us_transaction_text); ?></div>
                     </div>
+                    <?php endif; ?>
                 </div>
             </div>
 
@@ -135,9 +177,9 @@
     <div class="sell-why-container">
 
         <header class="sell-why-head">
-            <h2 class="sell-why-title">
-                Why sell your property <span>with us?</span>
-            </h2>
+            <?php if (!empty($why_sell_title)) : ?>
+            <h2 class="sell-why-title"><?php echo sbtech_kses($why_sell_title); ?></h2>
+            <?php endif; ?>
         </header>
 
         <div class="sell-why-grid">
@@ -150,35 +192,47 @@
             <!-- Right Stats -->
             <div class="sell-why-stats">
 
+                <?php if (!empty($about_us_mv_text)) : ?>
                 <div class="sell-stat">
                     <h3><?php echo $about_us_mv; ?>%</h3>
-                    <p>Properties sold at market value</p>
+                    <p><?php echo esc_html($about_us_mv_text); ?></p>
                 </div>
+                <?php endif; ?>
 
+                <?php if (!empty($about_us_experience_text)) : ?>
                 <div class="sell-stat">
                     <h3><?php echo $about_us_experience; ?>+ years</h3>
-                    <p>Experience in property sales</p>
+                    <p><?php echo esc_html($about_us_experience_text); ?></p>
                 </div>
+                <?php endif; ?>
 
+                <?php if (!empty($about_us_sptrans_text)) : ?>
                 <div class="sell-stat">
                     <h3><?php echo $about_us_sptrans; ?>+</h3>
-                    <p>Successful property transactions</p>
+                    <p><?php echo esc_html($about_us_sptrans_text); ?></p>
                 </div>
+                <?php endif; ?>
 
+                <?php if (!empty($about_us_active_buyers_text)) : ?>
                 <div class="sell-stat">
                     <h3><?php echo $about_us_active_buyers; ?>+</h3>
-                    <p>Active buyers in our network</p>
+                    <p><?php echo esc_html($about_us_active_buyers_text); ?></p>
                 </div>
+                <?php endif; ?>
 
+                <?php if (!empty($about_us_client_support_text)) : ?>
                 <div class="sell-stat">
                     <h3><?php echo $about_us_client_support; ?></h3>
-                    <p>Client support & consultation</p>
+                    <p><?php echo esc_html($about_us_client_support_text); ?></p>
                 </div>
+                <?php endif; ?>
 
+                <?php if (!empty($about_us_transparent_selling_process_text)) : ?>
                 <div class="sell-stat">
                     <h3><?php echo $about_us_transparent_selling_process; ?>%</h3>
-                    <p>Transparent selling process</p>
+                    <p><?php echo esc_html($about_us_transparent_selling_process_text); ?></p>
                 </div>
+                <?php endif; ?>
 
             </div>
 
@@ -191,13 +245,14 @@
 <section class="sell-mkt">
     <div class="sell-mkt__container">
         <header class="sell-mkt__head">
-            <h2 class="sell-mkt__title">
-                Powerful Marketing. <span>Real Results.</span>
-            </h2>
+            <?php if (!empty($powerful_m_title)) : ?>
+            <h2 class="sell-mkt__title"><?php echo sbtech_kses($powerful_m_title); ?> </h2>
+            <?php endif; ?>
         </header>
 
         <div class="sell-mkt__grid">
 
+            <?php if (!empty($powerful_m_item_1)) : ?>
             <article class="sell-mkt__card">
                 <div class="sell-mkt__icon" aria-hidden="true">
                     <!-- camera -->
@@ -205,9 +260,11 @@
                         <path d="M7 7h2l1-2h4l1 2h2a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3Zm5 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0-2a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z" />
                     </svg>
                 </div>
-                <p class="sell-mkt__text">Professional photography, videography, and high-converting property presentations.</p>
+                <p class="sell-mkt__text"><?php echo esc_html($powerful_m_item_1); ?></p>
             </article>
-
+            <?php endif; ?>
+            
+            <?php if (!empty($powerful_m_item_2)) : ?>
             <article class="sell-mkt__card">
                 <div class="sell-mkt__icon" aria-hidden="true">
                     <!-- screen -->
@@ -215,9 +272,11 @@
                         <path d="M4 5a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-4l1 2h2v2H8v-2h2l1-2H7a3 3 0 0 1-3-3V5Zm3-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H7Z" />
                     </svg>
                 </div>
-                <p class="sell-mkt__text">Optimized website visibility and SEO-ready listing pages to attract organic buyers.</p>
+                <p class="sell-mkt__text"><?php echo esc_html($powerful_m_item_2); ?></p>
             </article>
+            <?php endif; ?>
 
+            <?php if (!empty($powerful_m_item_3)) : ?>
             <article class="sell-mkt__card">
                 <div class="sell-mkt__icon" aria-hidden="true">
                     <!-- megaphone -->
@@ -225,9 +284,11 @@
                         <path d="M3 11a4 4 0 0 0 4 4h1l2 6h2l-1.6-6H17l4 3V6l-4 3H7a4 4 0 0 0-4 2Zm14 2H7a2 2 0 1 1 0-4h10v4Z" />
                     </svg>
                 </div>
-                <p class="sell-mkt__text">Targeted social media campaigns across key channels to reach serious buyers fast.</p>
+                <p class="sell-mkt__text"><?php echo esc_html($powerful_m_item_3); ?></p>
             </article>
+            <?php endif; ?>
 
+            <?php if (!empty($powerful_m_item_4)) : ?>
             <article class="sell-mkt__card">
                 <div class="sell-mkt__icon" aria-hidden="true">
                     <!-- whatsapp/chat -->
@@ -235,9 +296,11 @@
                         <path d="M12 2a10 10 0 0 0-8.7 14.9L2 22l5.3-1.3A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3.1-.2-.3A8 8 0 1 1 12 20Zm4.6-5.4c-.2-.1-1.2-.6-1.3-.6-.2-.1-.3-.1-.5.1l-.6.8c-.1.2-.2.2-.4.1a6.5 6.5 0 0 1-1.9-1.2 7.3 7.3 0 0 1-1.3-1.7c-.1-.2 0-.3.1-.4l.4-.5c.1-.1.1-.2.2-.3.1-.1 0-.2 0-.4l-.6-1.4c-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.7-.8 1.8 0 1 .8 2.1.9 2.2.1.2 1.6 2.5 3.9 3.5.5.2 1 .4 1.3.5.6.2 1.2.2 1.6.1.5-.1 1.2-.5 1.4-1 .2-.5.2-1 .1-1.1-.1-.1-.2-.1-.4-.2Z" />
                     </svg>
                 </div>
-                <p class="sell-mkt__text">WhatsApp & email outreach to our engaged database for immediate exposure.</p>
+                <p class="sell-mkt__text"><?php echo esc_html($powerful_m_item_4); ?></p>
             </article>
+            <?php endif; ?>
 
+            <?php if (!empty($powerful_m_item_5)) : ?>
             <article class="sell-mkt__card">
                 <div class="sell-mkt__icon" aria-hidden="true">
                     <!-- chart/target -->
@@ -245,9 +308,11 @@
                         <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8Zm0-14a6 6 0 1 0 6 6 6 6 0 0 0-6-6Zm0 10a4 4 0 1 1 4-4 4 4 0 0 1-4 4Zm6-11-2 2-1-1 2-2 1 1Z" />
                     </svg>
                 </div>
-                <p class="sell-mkt__text">Qualified buyer leads from portals, remarketing, and high-intent ad funnels.</p>
+                <p class="sell-mkt__text"><?php echo esc_html($powerful_m_item_5); ?></p>
             </article>
+            <?php endif; ?>
 
+            <?php if (!empty($powerful_m_item_6)) : ?>
             <article class="sell-mkt__card">
                 <div class="sell-mkt__icon" aria-hidden="true">
                     <!-- newspaper -->
@@ -255,9 +320,11 @@
                         <path d="M4 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4Zm2 2v12h10V6H6Zm14 2h2v10a4 4 0 0 1-4 4H6v-2h12a2 2 0 0 0 2-2V8ZM8 8h6v2H8V8Zm0 4h10v2H8v-2Zm0 4h10v2H8v-2Z" />
                     </svg>
                 </div>
-                <p class="sell-mkt__text">PR-ready listing assets and premium branding for stronger buyer trust.</p>
+                <p class="sell-mkt__text"><?php echo esc_html($powerful_m_item_6); ?></p>
             </article>
+            <?php endif; ?>
 
+            <?php if (!empty($powerful_m_item_7)) : ?>
             <article class="sell-mkt__card">
                 <div class="sell-mkt__icon" aria-hidden="true">
                     <!-- house -->
@@ -265,9 +332,11 @@
                         <path d="M12 3 2 12h3v9h6v-6h2v6h6v-9h3L12 3Zm5 16h-2v-6H9v6H7v-8.2l5-4.6 5 4.6V19Z" />
                     </svg>
                 </div>
-                <p class="sell-mkt__text">Private viewings, open houses, and guided buyer tours that convert.</p>
+                <p class="sell-mkt__text"><?php echo esc_html($powerful_m_item_7); ?></p>
             </article>
+            <?php endif; ?>
 
+            <?php if (!empty($powerful_m_item_8)) : ?>
             <article class="sell-mkt__card">
                 <div class="sell-mkt__icon" aria-hidden="true">
                     <!-- headset -->
@@ -275,9 +344,11 @@
                         <path d="M12 2a8 8 0 0 0-8 8v5a3 3 0 0 0 3 3h1v-8H7a1 1 0 0 0-1 1v5a1 1 0 0 1-1-1v-5a7 7 0 0 1 14 0v5a1 1 0 0 1-1 1v-5a1 1 0 0 0-1-1h-1v8h1a3 3 0 0 0 3-3v-5a8 8 0 0 0-8-8Zm-1 20h4v-2h-4v2Z" />
                     </svg>
                 </div>
-                <p class="sell-mkt__text">Dedicated support from listing to closing, with clear updates and reporting.</p>
+                <p class="sell-mkt__text"><?php echo esc_html($powerful_m_item_8); ?></p>
             </article>
+            <?php endif; ?>
 
+            <?php if (!empty($powerful_m_item_9)) : ?>
             <article class="sell-mkt__card">
                 <div class="sell-mkt__icon" aria-hidden="true">
                     <!-- calendar -->
@@ -285,8 +356,9 @@
                         <path d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V2Zm14 8H3v10h18V10ZM4 6v2h16V6H4Z" />
                     </svg>
                 </div>
-                <p class="sell-mkt__text">Smart scheduling, follow-ups, and negotiation strategy to close faster.</p>
+                <p class="sell-mkt__text"><?php echo esc_html($powerful_m_item_9); ?></p>
             </article>
+            <?php endif; ?>
 
         </div>
     </div>

@@ -4,6 +4,8 @@
  * Shortcode: [reaf_contact_form]
  */
 
+
+
 add_shortcode('reaf_contact_form', function () {
 
     $sbtech_mail = get_theme_mod( 'sbtech_mail', '+97144286151' );
@@ -177,48 +179,78 @@ add_shortcode('reaf_contact_form', function () {
     }
   </style>
 
+  <?php
+  $fls_title = get_theme_mod( 'fls_title', 'Contact Us' );
+  $fls_desc = get_theme_mod( 'fls_desc', 'Premium Properties — quick response & professional support.' );
+  $fls_email = get_theme_mod( 'fls_email', 'hello@cbaestate.com' );
+  $fls_phone = get_theme_mod( 'fls_phone', '+971 4 572 5273' );
+  $fls_address = get_theme_mod( 'fls_address', 'DAMAC Smart Heights - Office 1205 - Al Thanyah First - Barsha Heights - Dubai' );
+
+  $frs_title = get_theme_mod( 'frs_title', 'Get A Free Consultation' );
+  $frs_desc = get_theme_mod( 'frs_desc', 'Ready for your new home? Send us a message.' );
+  $frs_checkbox_text = get_theme_mod( 'frs_checkbox_text', 'I agree to receive information about offers, deals and services (optional).' );
+  $frs_btn_text = get_theme_mod( 'frs_btn_text', 'Property Inquiry' );
+  ?>
+
   <div class="reaf-wrap">
     <div class="reaf-card">
 
       <div class="reaf-left">
-        <h3>Contact Us</h3>
-        <p>Premium Properties — quick response & professional support.</p>
+        <?php if(!empty($fls_title)) : ?>
+        <h3> <?php echo esc_html( $fls_title ); ?></h3>
+        <?php endif;?>
+        
+        <?php if(!empty($fls_desc)) : ?>
+        <p><?php echo esc_html( $fls_desc ); ?></p>
+        <?php endif;?>
 
         <div class="reaf-info">
+          <?php if(!empty($fls_email)) : ?>
           <div class="reaf-item">
             <div class="reaf-ico">
               <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
             </div>
             <div>
               <strong>Email</strong>
-              <a style="color:white; text-decoration:none;" href="tel:<?php echo $sbtech_mail; ?>"><?php echo $sbtech_mail; ?></a>
+              <a style="color:white; text-decoration:none;" href="tel:<?php echo $fls_email; ?>"><?php echo $fls_email; ?></a>
             </div>
           </div>
+          <?php endif;?>
 
+          <?php if(!empty($fls_phone)) : ?>
           <div class="reaf-item">
             <div class="reaf-ico">
               <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.59a1 1 0 01-.25 1.01l-2.2 2.19z"/></svg>
             </div>
             <div>
               <strong>Phone</strong>
-              <a style="color:white; text-decoration:none;" href="tel:<?php echo $sbtech_phone; ?>"><?php echo $sbtech_phone; ?></a>
+              <a style="color:white; text-decoration:none;" href="tel:<?php echo $fls_phone; ?>"><?php echo $fls_phone; ?></a>
             </div>
           </div>
+          <?php endif;?>
 
+          <?php if(!empty($fls_address)) : ?>
           <div class="reaf-item">
             <div class="reaf-ico">
               <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg>
             </div>
             <div>
-              <?php echo $sbtech_address; ?>
+              <?php echo $fls_address; ?>
             </div>
           </div>
+          <?php endif;?>
+
         </div>
       </div>
 
       <div class="reaf-right">
-        <h3>Get A Free Consultation</h3>
-        <p>Ready for your new home? Send us a message.</p>
+        <?php if(!empty($frs_title)) : ?>
+        <h3><?php echo $frs_title; ?></h3>
+        <?php endif;?>
+
+        <?php if(!empty($frs_desc)) : ?>
+        <p><?php echo $frs_desc; ?></p>
+        <?php endif;?>
 
         <?php if ($success): ?>
           <div class="reaf-msg reaf-success"><?php echo esc_html($success); ?></div>
@@ -248,15 +280,17 @@ add_shortcode('reaf_contact_form', function () {
           </div>
 
           <label class="reaf-check">
+            <?php if(!empty($frs_checkbox_text)) : ?>
             <input type="checkbox" name="offers_opt_in" value="1">
-            <span>I agree to receive information about offers, deals and services (optional).</span>
+            <span><?php echo esc_html($frs_checkbox_text); ?></span>
+            <?php endif; ?>
+
           </label>
 
-          <div class="reaf-note">
-            By clicking submit, you agree to our <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.
-          </div>
+          <?php if(!empty($frs_btn_text)) : ?>
+          <button class="reaf-btn" type="submit" name="reaf_cf_submit" value="1"><?php echo esc_html($frs_btn_text); ?></button>
+          <?php endif; ?>
 
-          <button class="reaf-btn" type="submit" name="reaf_cf_submit" value="1">Property Inquiry</button>
           <div style="clear:both"></div>
         </form>
         <!-- Google reCAPTCHA Script -->

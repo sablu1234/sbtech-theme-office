@@ -3,6 +3,14 @@
 function why_choose_function() {
     ob_start();
     $property_snagging_wc_img = get_theme_mod('property_snagging_wc_img', get_template_directory_uri().'/assets/services/property-snagging/property_snagging_why_choose.avif');
+    
+    $property_snagging_why_c_sub_title = get_theme_mod( 'property_snagging_why_c_sub_title', __('Property Snagging', 'sbtech') );
+    $property_snagging_why_c_title = get_theme_mod( 'property_snagging_why_c_title', __('Why Choose Us?', 'sbtech') );
+
+    $property_snagging_why_c_point_1 = get_theme_mod( 'property_snagging_why_c_point_1', __('<strong>Experienced Inspectors:</strong> Our team understands real-world handover issues and knows what to check—so defects don’t get missed.', 'sbtech') );
+    $property_snagging_why_c_point_2 = get_theme_mod( 'property_snagging_why_c_point_2', __('<strong>Thorough & Detailed:</strong> We inspect finishes, fittings, doors/windows, plumbing points, electrical outlets, and visible workmanship to ensure quality standards.', 'sbtech') );
+    $property_snagging_why_c_point_3 = get_theme_mod( 'property_snagging_why_c_point_3', __('<strong>Clear Reporting:</strong> You receive an actionable snag list with priorities—making it easy to request rectifications from the developer or contractor.', 'sbtech') );
+    $property_snagging_why_c_point_4 = get_theme_mod( 'property_snagging_why_c_point_4', __('<strong>Peace of Mind:</strong> Move in with confidence, knowing your property was checked properly and issues were identified before handover.', 'sbtech') );
     ?>
     <section class="property-snagging-why-section" aria-label="Why choose our snagging service">
     <div class="property-snagging-why-container">
@@ -23,37 +31,44 @@ function why_choose_function() {
 
         <!-- Right content -->
         <div class="property-snagging-why-content">
-            <p class="property-snagging-why-kicker">Property Snagging</p>
-            <h2 class="property-snagging-why-title">Why Choose Us?</h2>
+            <?php if (!empty($property_snagging_why_c_sub_title)) : ?>
+            <p class="property-snagging-why-kicker"><?php echo esc_html($property_snagging_why_c_sub_title); ?></p>
+            <?php endif; ?>
+
+            <?php if (!empty($property_snagging_why_c_title)) : ?>
+            <h2 class="property-snagging-why-title"><?php echo esc_html($property_snagging_why_c_title); ?></h2>
+            <?php endif; ?>
 
             <ul class="property-snagging-why-list">
-            <li class="property-snagging-why-item">
-                <span class="property-snagging-why-dot" aria-hidden="true"></span>
-                <div class="property-snagging-why-text">
-                <strong>Experienced Inspectors:</strong> Our team understands real-world handover issues and knows what to check—so defects don’t get missed.
-                </div>
-            </li>
 
-            <li class="property-snagging-why-item">
-                <span class="property-snagging-why-dot" aria-hidden="true"></span>
-                <div class="property-snagging-why-text">
-                <strong>Thorough & Detailed:</strong> We inspect finishes, fittings, doors/windows, plumbing points, electrical outlets, and visible workmanship to ensure quality standards.
-                </div>
-            </li>
+                <?php if (!empty($property_snagging_why_c_point_1)) : ?>
+                <li class="property-snagging-why-item">
+                    <span class="property-snagging-why-dot" aria-hidden="true"></span>
+                    <div class="property-snagging-why-text"><?php echo sbtech_kses($property_snagging_why_c_point_1); ?></div>
+                </li>
+                <?php endif; ?>
 
-            <li class="property-snagging-why-item">
-                <span class="property-snagging-why-dot" aria-hidden="true"></span>
-                <div class="property-snagging-why-text">
-                <strong>Clear Reporting:</strong> You receive an actionable snag list with priorities—making it easy to request rectifications from the developer or contractor.
-                </div>
-            </li>
+                <?php if (!empty($property_snagging_why_c_point_2)) : ?>
+                <li class="property-snagging-why-item">
+                    <span class="property-snagging-why-dot" aria-hidden="true"></span>
+                    <div class="property-snagging-why-text"><?php echo sbtech_kses($property_snagging_why_c_point_2); ?></div>
+                </li>
+                <?php endif; ?>
 
-            <li class="property-snagging-why-item">
-                <span class="property-snagging-why-dot" aria-hidden="true"></span>
-                <div class="property-snagging-why-text">
-                <strong>Peace of Mind:</strong> Move in with confidence, knowing your property was checked properly and issues were identified before handover.
-                </div>
-            </li>
+                <?php if (!empty($property_snagging_why_c_point_3)) : ?>
+                <li class="property-snagging-why-item">
+                    <span class="property-snagging-why-dot" aria-hidden="true"></span>
+                    <div class="property-snagging-why-text"><?php echo sbtech_kses($property_snagging_why_c_point_3); ?></div>
+                </li>
+                <?php endif; ?>
+
+                <?php if (!empty($property_snagging_why_c_point_4)) : ?>
+                <li class="property-snagging-why-item">
+                    <span class="property-snagging-why-dot" aria-hidden="true"></span>
+                    <div class="property-snagging-why-text"><?php echo sbtech_kses($property_snagging_why_c_point_4); ?> </div>
+                </li>
+                <?php endif; ?>
+
             </ul>
 
             <div class="property-snagging-why-actions d-none">

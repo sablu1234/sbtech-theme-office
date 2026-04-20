@@ -3,6 +3,11 @@
 <!-- Hero area start -->
     <?php
     $partner_program_hero_bg = get_theme_mod('partner_program_hero_bg', get_template_directory_uri().'/assets/services/partner-program/partner_program_bg.webp');
+
+    $partner_program_hero_title = get_theme_mod( 'partner_program_hero_title', __('CBA Real Estate  <br>Partner Program', 'sbtech') );
+    $partner_program_hero_desc = get_theme_mod( 'partner_program_hero_desc', __('Collaborate with a trusted brand and capitalize on Dubai’s thriving property market.', 'sbtech') );
+    $partner_program_hero_btn_text_1 = get_theme_mod( 'partner_program_hero_btn_text_1', __('View Properties', 'sbtech') );
+    $partner_program_hero_btn_text_2 = get_theme_mod( 'partner_program_hero_btn_text_2', __('Contact', 'sbtech') );
     ?>
     <style>
     .partner_program_hero{
@@ -28,16 +33,22 @@
                     <a href="<?php echo home_url('/partner-program'); ?>">Partner Program</a>
                 </div>
 
-                <h1 class="about_title">
-                    CBA Real Estate  <br>Partner Program
-                </h1>
+                <?php if (!empty($partner_program_hero_title)) : ?>
+                <h1 class="about_title"><?php echo sbtech_kses($partner_program_hero_title); ?></h1>
+                <?php endif; ?>
 
-                <p class="about_desc">
-                    Collaborate with a trusted brand and capitalize on Dubai’s thriving property market.
-                </p>
+                <?php if (!empty($partner_program_hero_desc)) : ?>
+                <p class="about_desc"><?php echo sbtech_kses($partner_program_hero_desc); ?></p>
+                <?php endif; ?>
+
                 <div class="about_buttons">
-                    <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary">View Properties</a>
-                    <button class="sell-cta-btn" id="sellOpenModal" class="about_btn">Contact Us</button>
+                    <?php if (!empty($partner_program_hero_btn_text_1)) : ?>
+                    <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary"><?php echo esc_html($partner_program_hero_btn_text_1); ?></a>
+                    <?php endif; ?>
+
+                    <?php if (!empty($partner_program_hero_btn_text_2)) : ?>
+                    <button class="sell-cta-btn" id="sellOpenModal" class="about_btn"><?php echo esc_html($partner_program_hero_btn_text_2); ?></button>
+                    <?php endif; ?>
                 </div>
 
             </div>
@@ -72,7 +83,7 @@
 
 <!-- snagging faq start -->
 <section class="container">
-    <?php echo do_shortcode('[property_faq_shortcode]'); ?>
+    <?php echo do_shortcode('[partner_faq_shortcode]'); ?>
 </section>  
 <!-- snagging faq end -->
 

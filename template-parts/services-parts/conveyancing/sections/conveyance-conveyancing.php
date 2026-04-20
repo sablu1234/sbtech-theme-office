@@ -2,6 +2,10 @@
 function conveyance_conveyancing_funciton() {
     $conveyancing_about_img = get_theme_mod('conveyancing_about_img', get_template_directory_uri().'/assets/services/mortgages/mortgages-support.avif');
     $conveyancing_services_img = get_theme_mod('conveyancing_services_img', get_template_directory_uri().'/assets/services/mortgages/mortgages-support.avif');
+
+    $conveyancing_sub_title = get_theme_mod( 'conveyancing_sub_title', __('Conveyancing', 'sbtech') );
+    $conveyancing_about_title = get_theme_mod( 'conveyancing_about_title', __('About Conveyancing with CBA Real Estate', 'sbtech') );
+    $conveyancing_about_desc = get_theme_mod( 'conveyancing_about_desc', __('<p>Our conveyancing support helps buyers, sellers, and investors move through the transfer process with clarity and confidence. We coordinate documentation, timelines, and required steps with all relevant stakeholders to reduce delays and surprises. With a structured workflow and proactive communication, we help keep your transaction efficient, aligned with local regulations, and delivered with a premium client experience.</p>', 'sbtech') );
     ob_start();
     ?>
     <section class="conveyance-section" aria-label="About Conveyancing">
@@ -10,32 +14,18 @@ function conveyance_conveyancing_funciton() {
 
         <!-- Left Content -->
         <div class="conveyance-content">
-            <p class="conveyance-kicker">Conveyancing</p>
 
-            <h2 class="conveyance-title">
-            About Conveyancing with CBA Real Estate
-            </h2>
+            <?php if (!empty($conveyancing_sub_title)) : ?>
+            <p class="conveyance-kicker"><?php echo sbtech_kses($conveyancing_sub_title); ?></p>
+            <?php endif; ?>
 
-            <p class="conveyance-lead">
-            Streamlined, compliant, and transparent support—built to simplify your Dubai property transaction from start to finish.
-            </p>
+            <?php if (!empty($conveyancing_about_title)) : ?>
+            <h2 class="conveyance-title"><?php echo sbtech_kses($conveyancing_about_title); ?></h2>
+            <?php endif; ?>
 
-            <div class="conveyance-text">
-            <p>
-                Our conveyancing support helps buyers, sellers, and investors move through the transfer process with clarity and confidence.
-                We coordinate documentation, timelines, and required steps with all relevant stakeholders to reduce delays and surprises.
-            </p>
-
-            <p>
-                Whether it’s a cash purchase, financed transaction, or an investment transfer, we focus on smooth execution—ensuring you
-                understand each stage, the required approvals, and the handover process.
-            </p>
-
-            <p>
-                With a structured workflow and proactive communication, we help keep your transaction efficient, aligned with local regulations,
-                and delivered with a premium client experience.
-            </p>
-            </div>
+            <?php if (!empty($conveyancing_about_desc)) : ?>
+            <div class="conveyance-text"><?php echo sbtech_kses($conveyancing_about_desc); ?> </div>
+            <?php endif; ?>
 
             <div class="conveyance-actions d-none">
             <a class="conveyance-btn conveyance-btn--primary" href="#">

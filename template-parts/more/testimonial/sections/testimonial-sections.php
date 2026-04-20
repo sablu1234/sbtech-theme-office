@@ -174,14 +174,21 @@ add_shortcode('client_trust', function () {
     }
   </style>
 
+  <?php
+    $testimonial_title = get_theme_mod('testimonial_title', __('Why Our Clients Trust Us', 'sbtech'));
+    $testimonial_desc = get_theme_mod('testimonial_desc', __('Discover what our customers are saying about their experiences — trusted guidance, fast communication, and smooth transactions.', 'sbtech'));
+  ?>
   <section class="client-trust-section" aria-label="Testimonials">
     <div class="client-trust-container">
 
       <div class="client-trust-head">
-        <h2 class="client-trust-title">Why Our Clients Trust Us</h2>
-        <p class="client-trust-subtitle">
-          Discover what our customers are saying about their experiences — trusted guidance, fast communication, and smooth transactions.
-        </p>
+        <?php if (!empty($testimonial_title)) : ?>
+        <h2 class="client-trust-title"><?php echo $testimonial_title; ?></h2>
+        <?php endif; ?>
+
+        <?php if (!empty($testimonial_desc)) : ?>
+        <p class="client-trust-subtitle"><?php echo $testimonial_desc; ?></p>
+        <?php endif; ?>
       </div>
 
       <div class="client-trust-grid">

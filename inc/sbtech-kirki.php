@@ -815,6 +815,50 @@ function sbtech_media(){
             'priority'    => 160,
         ]
     );
+       
+    // media hero title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'media_hero_title',
+            'label'    => esc_html__( 'media Title', 'sbtech' ),
+            'section'  => 'media_section',
+            'default'  => esc_html__( ' Media & <br> Latest Updates', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // media hero description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'media_hero_desc',
+            'label'    => esc_html__( 'media Descripiton', 'sbtech' ),
+            'section'  => 'media_section',
+            'default'  => esc_html__( 'Stay informed with our latest news, market insights, project announcements, and company updates. Explore expert analysis, real estate trends, and key developments shaping the future of property and investment.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // media button text 1
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'media_hero_btn_text_1',
+            'label'    => esc_html__( 'media Button text 1', 'sbtech' ),
+            'section'  => 'media_section',
+            'default'  => esc_html__( 'View Properties', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // media button text 2
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'media_hero_btn_text_2',
+            'label'    => esc_html__( 'media Button text 2', 'sbtech' ),
+            'section'  => 'media_section',
+            'default'  => esc_html__( 'Contact', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
 
     // Hero bg image
     new \Kirki\Field\Image(
@@ -843,6 +887,50 @@ function sbtech_media_press(){
             'description' => esc_html__( 'Media Press page Section.', 'sbtech' ),
             'panel'       => 'sbtech_panel',
             'priority'    => 160,
+        ]
+    );
+      
+    // media_press hero title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'media_press_hero_title',
+            'label'    => esc_html__( 'media_press Title', 'sbtech' ),
+            'section'  => 'media_press_section',
+            'default'  => esc_html__( 'Media & Press <br> Latest Updates', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // partner-media hero description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'media_press_hero_desc',
+            'label'    => esc_html__( 'media_press Descripiton', 'sbtech' ),
+            'section'  => 'media_press_section',
+            'default'  => esc_html__( 'Stay updated with our latest news, press releases, project highlights, and industry insights. Discover key developments, market trends, and company announcements shaping the future of property.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // media_press button text 1
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'media_press_hero_btn_text_1',
+            'label'    => esc_html__( 'partner_program Button text 1', 'sbtech' ),
+            'section'  => 'media_press_section',
+            'default'  => esc_html__( 'View Properties', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // media_press button text 2
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'media_press_hero_btn_text_2',
+            'label'    => esc_html__( 'media_press Button text 2', 'sbtech' ),
+            'section'  => 'media_press_section',
+            'default'  => esc_html__( 'Contact', 'sbtech' ),
+            'priority' => 10,
         ]
     );
 
@@ -1242,9 +1330,6 @@ function sbtech_property_management(){
             ],
         ]
     );
-
-
-
     
 }
 sbtech_property_management();
@@ -1420,7 +1505,7 @@ function sbtech_list_your_property(){
     // How does it work step 3 description
     new \Kirki\Field\Textarea(
         [
-            'settings' => 'hdiw_step_2_desc',
+            'settings' => 'hdiw_step_3_desc',
             'label'    => esc_html__( 'How does it work step 3 description', 'sbtech' ),
             'section'  => 'list_your_property_section',
             'default'  => esc_html__( 'Your property is promoted to qualified buyers and tenants through targeted exposure and trusted channels.', 'sbtech' ),
@@ -1442,7 +1527,7 @@ function sbtech_list_your_property(){
     // How does it work step 4 description
     new \Kirki\Field\Textarea(
         [
-            'settings' => 'hdiw_step_2_desc',
+            'settings' => 'hdiw_step_4_desc',
             'label'    => esc_html__( 'How does it work step 4 description', 'sbtech' ),
             'section'  => 'list_your_property_section',
             'default'  => esc_html__( 'We manage enquiries, arrange viewings, negotiate offers, and guide you through to a smooth closing or tenant move-in.', 'sbtech' ),
@@ -1494,7 +1579,7 @@ function sbtech_list_your_property(){
         ]
     );
 
-    // reapeater
+    // reapeater List Your Property section
     new \Kirki\Field\Repeater(
         [
             'settings'     => 'list_yp_repeater',
@@ -1594,7 +1679,7 @@ function sbtech_mortgages(){
     new \Kirki\Field\Text(
         [
             'settings' => 'mortage_sub_title',
-            'label'    => esc_html__( 'Mortage subtitle', 'sbtech' ),
+            'label'    => esc_html__( 'What we Deliver Mortage subtitle', 'sbtech' ),
             'section'  => 'mortgages_section',
             'default'  => esc_html__( 'Mortgage Support', 'sbtech' ),
             'priority' => 10,
@@ -1604,8 +1689,8 @@ function sbtech_mortgages(){
     // Mortage title
     new \Kirki\Field\Text(
         [
-            'settings' => 'mortage_title',
-            'label'    => esc_html__( 'Mortage title', 'sbtech' ),
+            'settings' => 'mortage_suppoer_title',
+            'label'    => esc_html__( 'Mortage Support title', 'sbtech' ),
             'section'  => 'mortgages_section',
             'default'  => esc_html__( 'Why choose mortgage support with CBA Real Estate?', 'sbtech' ),
             'priority' => 10,
@@ -1615,10 +1700,32 @@ function sbtech_mortgages(){
     // Mortage description
     new \Kirki\Field\Textarea(
         [
-            'settings' => 'mortage_desc',
+            'settings' => 'mortage_support_desc',
             'label'    => esc_html__( 'Mortage description', 'sbtech' ),
             'section'  => 'mortgages_section',
             'default'  => esc_html__( '<p>We help buyers and investors in Dubai access competitive mortgage solutions with clear guidance—from eligibility checks to approvals and final documentation.</p> <p>Whether you’re purchasing your first home, upgrading, or investing, our process is designed to be fast,transparent, and aligned with your property goals.</p> <p> You’ll get tailored options from trusted lenders, competitive rates and terms, and a smooth end-to-end experience—so you can focus on choosing the right property with confidence. </p>', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // Mortage calculator title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'mortage_calculator_title',
+            'label'    => esc_html__( 'Calculator title', 'sbtech' ),
+            'section'  => 'mortgages_section',
+            'default'  => esc_html__( 'Mortgage Calculator', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // Mortage calculator description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'mortage_calculator_desc',
+            'label'    => esc_html__( 'Calculator description', 'sbtech' ),
+            'section'  => 'mortgages_section',
+            'default'  => esc_html__( 'Estimate your monthly mortgage payment instantly. Adjust price, down payment, interest rate, and loan term.', 'sbtech' ),
             'priority' => 10,
         ]
     );
@@ -1644,6 +1751,65 @@ function sbtech_mortgages(){
             'default'     => get_template_directory_uri().'/assets/services/mortgages/mortgages-support.avif',
         ]
     );
+
+    // Mortage Faq title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'mortage_title',
+            'label'    => esc_html__( 'Faq title', 'sbtech' ),
+            'section'  => 'mortgages_section',
+            'default'  => esc_html__( 'Mortgage Frequently Asked Questions', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+  
+    // Mortage Faq Description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'mortage_desc',
+            'label'    => esc_html__( 'Faq Description', 'sbtech' ),
+            'section'  => 'mortgages_section',
+            'default'  => esc_html__( 'Find clear answers to common mortgage queries, eligibility requirements, repayment terms, and financing options to help you make confident property decisions in Dubai.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+     // reapeater List Your Property section
+    new \Kirki\Field\Repeater(
+        [
+            'settings'     => 'mortage_repeater',
+            'label'        => esc_html__( 'Repeater Control', 'sbtech' ),
+            'section'      => 'mortgages_section',
+            'priority'     => 10,
+            'row_label'    => [
+                'type'  => 'field',
+                'value' => esc_html__( 'Your Custom Value', 'sbtech' ),
+                'field' => 'link_text',
+            ],
+            'button_label' => esc_html__( '"Add new" button label (optional) ', 'sbtech' ),
+            'default'      => [
+                [
+                    'mortage_question'   => esc_html__( 'Question', 'sbtech' ),
+                    'mortage_answer'   => esc_html__( 'Answer', 'sbtech' ),
+                ],
+            ],
+            'fields'       => [
+                'mortage_question'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Faq Question', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+                'mortage_answer'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Faq Answer', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+            ],
+        ]
+    );
+
 }
 sbtech_mortgages();
 
@@ -1658,6 +1824,205 @@ function sbtech_conveyancing(){
             'description' => esc_html__( 'Conveyancing page', 'sbtech' ),
             'panel'       => 'sbtech_panel',
             'priority'    => 160,
+        ]
+    );
+
+       
+    // conveyancing hero title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'conveyancing_hero_title',
+            'label'    => esc_html__( 'conveyancing Title', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'A Smarter Way to Handle  <br>Property Transactions', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // hero description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'conveyancing_hero_desc',
+            'label'    => esc_html__( 'conveyancing Descripiton', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'We combine market expertise and financial support to make buying, selling, and financing property in Dubai smooth and efficient.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // button text 1
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'conveyancing_hero_btn_text_1',
+            'label'    => esc_html__( 'conveyancing Button text 1', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'View Properties', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // button text 2
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'conveyancing_hero_btn_text_2',
+            'label'    => esc_html__( 'conveyancing Button text 2', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'Contact', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Conveyancing about area subtitle
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'conveyancing_sub_title',
+            'label'    => esc_html__( 'conveyancing about subtitle', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'Conveyancing', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // conveyancing title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'conveyancing_about_title',
+            'label'    => esc_html__( 'Conveyancing about area title', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'About Conveyancing with CBA Real Estate', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // conveyancing description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'conveyancing_about_desc',
+            'label'    => esc_html__( 'Conveyancing about description', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( '<p>Our conveyancing support helps buyers, sellers, and investors move through the transfer process with clarity and confidence. We coordinate documentation, timelines, and required steps with all relevant stakeholders to reduce delays and surprises. With a structured workflow and proactive communication, we help keep your transaction efficient, aligned with local regulations, and delivered with a premium client experience.</p>', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Conveyancing Our services subtitle
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'conveyancing_our_services_sub_title',
+            'label'    => esc_html__( 'Conveyancing Our services subtitle', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'Conveyancing', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // Conveyancing Our services title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'conveyancing_our_services_title',
+            'label'    => esc_html__( 'Conveyancing Our services title', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'Our Services', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // Conveyancing Our services description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'conveyancing_our_services_desc',
+            'label'    => esc_html__( 'Conveyancing Our services description', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'Practical legal and transfer support designed to simplify your Dubai property journey—clear steps, fast handling, and professional guidance.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Conveyancing Our services item 1
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'conveyancing_our_services_item_1',
+            'label'    => esc_html__( 'Conveyancing Our services item 1', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'Gifting Services', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+      
+    // Conveyancing Our services item 2
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'conveyancing_our_services_item_2',
+            'label'    => esc_html__( 'Conveyancing Our services item 2', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'Power of Attorney Management', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Conveyancing Our services item 3
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'conveyancing_our_services_item_3',
+            'label'    => esc_html__( 'Conveyancing Our services item 3', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'Translation of Legal Documents', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Conveyancing Our services item 4
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'conveyancing_our_services_item_4',
+            'label'    => esc_html__( 'Conveyancing Our services item 4', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'Property Investment Wills', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Conveyancing Our services item 5
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'conveyancing_our_services_item_5',
+            'label'    => esc_html__( 'Conveyancing Our services item 5', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'Legal Eviction Notices', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Conveyancing Our services item 6
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'conveyancing_our_services_item_6',
+            'label'    => esc_html__( 'Conveyancing Our services item 6', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'Online Power of Attorney Cancellation', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Conveyancing Our services item 7
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'conveyancing_our_services_item_7',
+            'label'    => esc_html__( 'Conveyancing Our services item 7', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'MOFA Document Attestation', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Conveyancing Our services item 8
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'conveyancing_our_services_item_8',
+            'label'    => esc_html__( 'Conveyancing Our services item 8', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'Property Transfer Consulting', 'sbtech' ),
+            'priority' => 10,
         ]
     );
 
@@ -1693,6 +2058,65 @@ function sbtech_conveyancing(){
             'default'     => get_template_directory_uri().'/assets/services/conveyancing/conveyancing_services.webp',
         ]
     );
+
+    
+    // conveyancing Faq title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'conveyancing_title',
+            'label'    => esc_html__( 'Faq title', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'Mortgage Frequently Asked Questions', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+  
+    // conveyancing Faq Description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'conveyancing_desc',
+            'label'    => esc_html__( 'conveyancing Description', 'sbtech' ),
+            'section'  => 'conveyancing_section',
+            'default'  => esc_html__( 'Find clear answers to common mortgage queries, eligibility requirements, repayment terms, and financing options to help you make confident property decisions in Dubai.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+     // reapeater conveyancing section
+    new \Kirki\Field\Repeater(
+        [
+            'settings'     => 'conveyancing_repeater',
+            'label'        => esc_html__( 'Repeater Control', 'sbtech' ),
+            'section'      => 'conveyancing_section',
+            'priority'     => 10,
+            'row_label'    => [
+                'type'  => 'field',
+                'value' => esc_html__( 'Your Custom Value', 'sbtech' ),
+                'field' => 'link_text',
+            ],
+            'button_label' => esc_html__( '"Add new" button label (optional) ', 'sbtech' ),
+            'default'      => [
+                [
+                    'conveyancing_question'   => esc_html__( 'Question', 'sbtech' ),
+                    'conveyancing_answer'   => esc_html__( 'Answer', 'sbtech' ),
+                ],
+            ],
+            'fields'       => [
+                'conveyancing_question'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Faq Question', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+                'conveyancing_answer'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Faq Answer', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+            ],
+        ]
+    );
 }
 sbtech_conveyancing();
 
@@ -1707,6 +2131,149 @@ function sbtech_property_snagging(){
             'description' => esc_html__( 'Property Snaggingyancing', 'sbtech' ),
             'panel'       => 'sbtech_panel',
             'priority'    => 160,
+        ]
+    );
+    
+    // property-snagging hero title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'property_snagging_hero_title',
+            'label'    => esc_html__( 'property-snagging Title', 'sbtech' ),
+            'section'  => 'property_snagging_section',
+            'default'  => esc_html__( 'Property Snagging  <br>Services', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // hero description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'property_snagging_hero_desc',
+            'label'    => esc_html__( 'property snagging Descripiton', 'sbtech' ),
+            'section'  => 'property_snagging_section',
+            'default'  => esc_html__( 'Welcome to CBA Real Estate — ensuring your property is delivered to the highest standards before handover.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // button text 1
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'property_snagging_hero_btn_text_1',
+            'label'    => esc_html__( 'property_snagging Button text 1', 'sbtech' ),
+            'section'  => 'property_snagging_section',
+            'default'  => esc_html__( 'View Properties', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // button text 2
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'property_snagging_hero_btn_text_2',
+            'label'    => esc_html__( 'property_snagging Button text 2', 'sbtech' ),
+            'section'  => 'property_snagging_section',
+            'default'  => esc_html__( 'Contact', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // property_snagging subtitle
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'property_snagging_about_sub_title',
+            'label'    => esc_html__( 'What we Deliver Mortage subtitle', 'sbtech' ),
+            'section'  => 'property_snagging_section',
+            'default'  => esc_html__( 'Property Snagging', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // property_snagging title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'property_snagging_about_title',
+            'label'    => esc_html__( 'property_snagging Support title', 'sbtech' ),
+            'section'  => 'property_snagging_section',
+            'default'  => esc_html__( 'Why Snagging & Inspection with CBA Real Estate?', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // property_snagging description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'property_snagging_about_desc',
+            'label'    => esc_html__( 'property_snagging description', 'sbtech' ),
+            'section'  => 'property_snagging_section',
+            'default'  => esc_html__( '<p> Our snagging service identifies finishing defects, functional issues, and quality gaps before you take ownership. We inspect key areas such as walls and paintwork, flooring, doors and windows, plumbing, electrical points, HVAC performance, and visible workmanship details. </p> <p> You receive a structured snagging report with prioritized items, so you can request rectifications from the or contractor quickly and confidently—reducing post-handover surprises.</p>', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // property_snagging why choose subtitle
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'property_snagging_why_c_sub_title',
+            'label'    => esc_html__( 'property_snagging why choose subtitle', 'sbtech' ),
+            'section'  => 'property_snagging_section',
+            'default'  => esc_html__( 'Property Snagging', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // property_snagging why choose title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'property_snagging_why_c_title',
+            'label'    => esc_html__( 'property_snagging why choose title', 'sbtech' ),
+            'section'  => 'property_snagging_section',
+            'default'  => esc_html__( 'Why Choose Us?', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // property_snagging why choose point 1
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'property_snagging_why_c_point_1',
+            'label'    => esc_html__( 'property_snagging why choose point 1', 'sbtech' ),
+            'section'  => 'property_snagging_section',
+            'default'  => esc_html__( '<strong>Experienced Inspectors:</strong> Our team understands real-world handover issues and knows what to check—so defects don’t get missed.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // property_snagging why choose point 2
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'property_snagging_why_c_point_2',
+            'label'    => esc_html__( 'property_snagging why choose point 2', 'sbtech' ),
+            'section'  => 'property_snagging_section',
+            'default'  => esc_html__( '<strong>Thorough & Detailed:</strong> We inspect finishes, fittings, doors/windows, plumbing points, electrical outlets, and visible workmanship to ensure quality standards.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // property_snagging why choose point 3
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'property_snagging_why_c_point_3',
+            'label'    => esc_html__( 'property_snagging why choose point 3', 'sbtech' ),
+            'section'  => 'property_snagging_section',
+            'default'  => esc_html__( '<strong>Clear Reporting:</strong> You receive an actionable snag list with priorities—making it easy to request rectifications from the developer or contractor.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // property_snagging why choose point 4
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'property_snagging_why_c_point_4',
+            'label'    => esc_html__( 'property_snagging why choose point 1', 'sbtech' ),
+            'section'  => 'property_snagging_section',
+            'default'  => esc_html__( 'Peace of Mind:</strong> Move in with confidence, knowing your property was checked properly and issues were identified before handover.', 'sbtech' ),
+            'priority' => 10,
         ]
     );
 
@@ -1742,6 +2309,64 @@ function sbtech_property_snagging(){
             'default'     => get_template_directory_uri().'/assets/services/property-snagging/property_snagging_why_choose.avif',
         ]
     );
+    
+    // snagging Faq title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'snagging_title',
+            'label'    => esc_html__( 'Faq title', 'sbtech' ),
+            'section'  => 'property_snagging_section',
+            'default'  => esc_html__( 'Property Snagging FAQ', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+  
+    // snagging Faq Description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'snagging_desc',
+            'label'    => esc_html__( 'Faq Description', 'sbtech' ),
+            'section'  => 'property_snagging_section',
+            'default'  => esc_html__( 'FGet quick answers about our property snagging and inspection process in Dubai—what we check, when to book, what you’ll receive, and how snagging helps protect your investment before handover.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+     // reapeater snagging section
+    new \Kirki\Field\Repeater(
+        [
+            'settings'     => 'snagging_repeater',
+            'label'        => esc_html__( 'Repeater Control', 'sbtech' ),
+            'section'      => 'property_snagging_section',
+            'priority'     => 10,
+            'row_label'    => [
+                'type'  => 'field',
+                'value' => esc_html__( 'Your Custom Value', 'sbtech' ),
+                'field' => 'link_text',
+            ],
+            'button_label' => esc_html__( '"Add new" button label (optional) ', 'sbtech' ),
+            'default'      => [
+                [
+                    'snagging_question'   => esc_html__( 'Question', 'sbtech' ),
+                    'snagging_answer'   => esc_html__( 'Answer', 'sbtech' ),
+                ],
+            ],
+            'fields'       => [
+                'snagging_question'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Faq Question', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+                'snagging_answer'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Faq Answer', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+            ],
+        ]
+    );
 }
 sbtech_property_snagging();
 
@@ -1756,6 +2381,83 @@ function sbtech_partner_program(){
             'description' => esc_html__( 'Partner Program pages', 'sbtech' ),
             'panel'       => 'sbtech_panel',
             'priority'    => 160,
+        ]
+    );
+     
+    // partner-program hero title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'partner_program_hero_title',
+            'label'    => esc_html__( 'partner_program Title', 'sbtech' ),
+            'section'  => 'partner_program_section',
+            'default'  => esc_html__( 'CBA Real Estate  <br>Partner Program', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // partner-program hero description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'partner_program_hero_desc',
+            'label'    => esc_html__( 'partner_program Descripiton', 'sbtech' ),
+            'section'  => 'partner_program_section',
+            'default'  => esc_html__( 'Collaborate with a trusted brand and capitalize on Dubai’s thriving property market.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // partner-program button text 1
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'partner_program_hero_btn_text_1',
+            'label'    => esc_html__( 'partner_program Button text 1', 'sbtech' ),
+            'section'  => 'partner_program_section',
+            'default'  => esc_html__( 'View Properties', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // partner-program button text 2
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'partner_program_hero_btn_text_2',
+            'label'    => esc_html__( 'partner_program Button text 2', 'sbtech' ),
+            'section'  => 'partner_program_section',
+            'default'  => esc_html__( 'Contact', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // partner-program about subtitle
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'partner_program_about_sub_title',
+            'label'    => esc_html__( 'partner_program subtitle', 'sbtech' ),
+            'section'  => 'partner_program_section',
+            'default'  => esc_html__( 'Partner Program', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // partner-program about title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'partner_program_about_title',
+            'label'    => esc_html__( 'partner_program about title', 'sbtech' ),
+            'section'  => 'partner_program_section',
+            'default'  => esc_html__( 'About CBA', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // partner-program about description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'partner_program_about_desc',
+            'label'    => esc_html__( 'partner_program about description', 'sbtech' ),
+            'section'  => 'partner_program_section',
+            'default'  => esc_html__( '<p> Our snagging service identifies finishing defects, functional issues, and quality gaps before you take ownership. We inspect key areas such as walls and paintwork, flooring, doors and windows, plumbing, electrical points, HVAC performance, and visible workmanship details. </p> <p> You receive a structured snagging report with prioritized items, so you can request rectifications from the or contractor quickly and confidently—reducing post-handover surprises.</p>', 'sbtech' ),
+            'priority' => 10,
         ]
     );
 
@@ -1781,6 +2483,65 @@ function sbtech_partner_program(){
         ]
     );
 
+     
+    // partner-program Faq title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'partner_program_title',
+            'label'    => esc_html__( 'Faq title', 'sbtech' ),
+            'section'  => 'partner_program_section',
+            'default'  => esc_html__( 'Partner With Us & Grow Together', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+  
+    // partner-program Faq Description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'partner_program_desc',
+            'label'    => esc_html__( 'Faq Description', 'sbtech' ),
+            'section'  => 'partner_program_section',
+            'default'  => esc_html__( 'Join our partner program and unlock new opportunities for growth and collaboration. We work with agencies, freelancers, and businesses who want to expand their services, increase revenue, and deliver more value to their clients.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+     // reapeater partner_program section
+    new \Kirki\Field\Repeater(
+        [
+            'settings'     => 'partner_program_repeater',
+            'label'        => esc_html__( 'Repeater Control', 'sbtech' ),
+            'section'      => 'partner_program_section',
+            'priority'     => 10,
+            'row_label'    => [
+                'type'  => 'field',
+                'value' => esc_html__( 'Your Custom Value', 'sbtech' ),
+                'field' => 'link_text',
+            ],
+            'button_label' => esc_html__( '"Add new" button label (optional) ', 'sbtech' ),
+            'default'      => [
+                [
+                    'partner_program_question'   => esc_html__( 'Question', 'sbtech' ),
+                    'partner_program_answer'   => esc_html__( 'Answer', 'sbtech' ),
+                ],
+            ],
+            'fields'       => [
+                'partner_program_question'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Faq Question', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+                'partner_program_answer'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Faq Answer', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+            ],
+        ]
+    );
+
 }
 sbtech_partner_program();
 
@@ -1797,6 +2558,50 @@ function sbtech_about_us(){
             'priority'    => 160,
         ]
     );
+       
+    // about us hero title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'about_us_hero_title',
+            'label'    => esc_html__( 'about_us Title', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'About Our <br> Premium Properties', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // about us hero description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'about_us_hero_desc',
+            'label'    => esc_html__( 'about_us Descripiton', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Award-winning real estate agency in Dubai, offering expert services in sales, rentals, and property management. We help clients from all over the world.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // about us button text 1
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'about_us_hero_btn_text_1',
+            'label'    => esc_html__( 'about_us Button text 1', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'View Properties', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // about us button text 2
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'about_us_hero_btn_text_2',
+            'label'    => esc_html__( 'about_us Button text 2', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Contact', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
 
     // Hero bg image
     new \Kirki\Field\Image(
@@ -1809,6 +2614,28 @@ function sbtech_about_us(){
         ]
     );
 
+    // who we are title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'who_wa_title',
+            'label'    => esc_html__( 'who we are title', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Who We Are', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // who we are description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'who_wa_desc',
+            'label'    => esc_html__( 'who we are description', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( '<p class="about_text">We are a Dubai-based real estate consultancy focused on premium residential and investment opportunities. Our team blends local market expertise with clear guidance—helping buyers, sellers, and investors move with confidence. </p> <p class="about_text"> From discovery to closing, we deliver a seamless experience with verified listings, strong developer relationships, and responsive support tailored to your goals. </p>', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
     // Who we are image
     new \Kirki\Field\Image(
         [
@@ -1817,6 +2644,17 @@ function sbtech_about_us(){
             'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
             'section'     => 'about_us_section',
             'default'     => get_template_directory_uri().'/assets/about_us/about_us_who_we_are.avif',
+        ]
+    );
+
+    // clients served text
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'about_us_clients_served_text',
+            'label'    => esc_html__( 'clients served text', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'clients served', 'sbtech' ),
+            'priority' => 10,
         ]
     );
 
@@ -1834,10 +2672,32 @@ function sbtech_about_us(){
     // clients expertise
     new \Kirki\Field\Text(
         [
+            'settings' => 'about_us_expertise_text',
+            'label'    => esc_html__( 'Clients Expertise text', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Clients Expertise', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // clients expertise
+    new \Kirki\Field\Text(
+        [
             'settings' => 'about_us_expertise',
             'label'    => esc_html__( 'Clients Expertise', 'sbtech' ),
             'section'  => 'about_us_section',
             'default'  => esc_html__( '12', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // successful closings text
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'about_us_successful_closings_text',
+            'label'    => esc_html__( 'successful closings text', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'successful closings', 'sbtech' ),
             'priority' => 10,
         ]
     );
@@ -1849,6 +2709,17 @@ function sbtech_about_us(){
             'label'    => esc_html__( 'successful closings', 'sbtech' ),
             'section'  => 'about_us_section',
             'default'  => esc_html__( '3,000', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // transaction text
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'about_us_transaction_text',
+            'label'    => esc_html__( 'Transaction Value text', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'ransaction Value', 'sbtech' ),
             'priority' => 10,
         ]
     );
@@ -1875,6 +2746,17 @@ function sbtech_about_us(){
         ]
     );
 
+    // Why sell title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'why_sell_title',
+            'label'    => esc_html__( 'Why sell title', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Why sell your property <span>with us?</span>', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
     // market value
     new \Kirki\Field\Text(
         [
@@ -1882,6 +2764,17 @@ function sbtech_about_us(){
             'label'    => esc_html__( 'Properties sold at market value', 'sbtech' ),
             'section'  => 'about_us_section',
             'default'  => esc_html__( '98', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // market value text
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'about_us_mv_text',
+            'label'    => esc_html__( 'Properties sold at market value text', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Properties sold at market value', 'sbtech' ),
             'priority' => 10,
         ]
     );
@@ -1897,6 +2790,17 @@ function sbtech_about_us(){
         ]
     );
     
+    // Experience TEXT  
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'about_us_experience_text',
+            'label'    => esc_html__( 'Experience text', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Experience in property sales', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
     // Successful property transactions
     new \Kirki\Field\Text(
         [
@@ -1904,6 +2808,17 @@ function sbtech_about_us(){
             'label'    => esc_html__( 'Successful property transactions', 'sbtech' ),
             'section'  => 'about_us_section',
             'default'  => esc_html__( '450', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Successful property transactions text
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'about_us_sptrans_text',
+            'label'    => esc_html__( 'Successful property transactions text', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Successful property transactions', 'sbtech' ),
             'priority' => 10,
         ]
     );
@@ -1919,6 +2834,17 @@ function sbtech_about_us(){
         ]
     );
     
+    // Active buyers text
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'about_us_active_buyers_text',
+            'label'    => esc_html__( 'Active buyers text', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Active buyers in our network', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
     // Client support
     new \Kirki\Field\Text(
         [
@@ -1926,6 +2852,17 @@ function sbtech_about_us(){
             'label'    => esc_html__( 'Client suppor', 'sbtech' ),
             'section'  => 'about_us_section',
             'default'  => esc_html__( '24/7', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Client support text
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'about_us_client_support_text',
+            'label'    => esc_html__( 'Client suppor text', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Client support & consultation', 'sbtech' ),
             'priority' => 10,
         ]
     );
@@ -1940,7 +2877,127 @@ function sbtech_about_us(){
             'priority' => 10,
         ]
     );
-
+    
+    // Transparent selling process text
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'about_us_transparent_selling_process_text',
+            'label'    => esc_html__( 'Transparent selling process text', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Transparent selling process', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Powerful Marketing title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'powerful_m_title',
+            'label'    => esc_html__( 'Powerful Marketing title', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Powerful Marketing. <span>Real Results.</span>', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Powerful Marketing item 1
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'powerful_m_item_1',
+            'label'    => esc_html__( 'Powerful Marketing Item 1 ', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Professional photography, videography, and high-converting property presentations.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Powerful Marketing item 2
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'powerful_m_item_2',
+            'label'    => esc_html__( 'Powerful Marketing Item 2', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Optimized website visibility and SEO-ready listing pages to attract organic buyers.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Powerful Marketing item 3
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'powerful_m_item_3',
+            'label'    => esc_html__( 'Powerful Marketing Item 3 ', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Targeted social media campaigns across key channels to reach serious buyers fast.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Powerful Marketing item 4
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'powerful_m_item_4',
+            'label'    => esc_html__( 'Powerful Marketing Item 4', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'WhatsApp & email outreach to our engaged database for immediate exposure.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Powerful Marketing item 5
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'powerful_m_item_5',
+            'label'    => esc_html__( 'Powerful Marketing Item 5 ', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Qualified buyer leads from portals, remarketing, and high-intent ad funnels.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Powerful Marketing item 6
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'powerful_m_item_6',
+            'label'    => esc_html__( 'Powerful Marketing Item 6', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'PR-ready listing assets and premium branding for stronger buyer trust.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Powerful Marketing item 7
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'powerful_m_item_7',
+            'label'    => esc_html__( 'Powerful Marketing Item 7 ', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Private viewings, open houses, and guided buyer tours that convert.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Powerful Marketing item 8
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'powerful_m_item_8',
+            'label'    => esc_html__( 'Powerful Marketing Item 8 ', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Dedicated support from listing to closing, with clear updates and reporting.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // Powerful Marketing item 9
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'powerful_m_item_9',
+            'label'    => esc_html__( 'Powerful Marketing Item 9', 'sbtech' ),
+            'section'  => 'about_us_section',
+            'default'  => esc_html__( 'Smart scheduling, follow-ups, and negotiation strategy to close faster.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
     
     // switch achivement
 	new \Kirki\Field\Checkbox_Switch(
@@ -1973,6 +3030,435 @@ function sbtech_careers(){
             'priority'    => 160,
         ]
     );
+       
+    // careers hero title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'careers_hero_title',
+            'label'    => esc_html__( 'careers Title', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'Careers & <br>Opportunities', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // careers hero description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'careers_hero_desc',
+            'label'    => esc_html__( 'careers Descripiton', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'Build your future with us. Join a dynamic team, grow your skills, and explore exciting career opportunities in a professional and supportive environment.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // careers button text 1
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'careers_hero_btn_text_1',
+            'label'    => esc_html__( 'careers Button text 1', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'View Properties', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // careers button text 2
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'careers_hero_btn_text_2',
+            'label'    => esc_html__( 'careers Button text 2', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'Contact', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+         
+    // award title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'award_title',
+            'label'    => esc_html__( 'award Title', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( ' The Leading Real Estate Employer <span class="accent">Recognized for Excellence</span>', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // award description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'award_desc',
+            'label'    => esc_html__( 'award Descripiton', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'Our workplace is built on innovation, growth, and a people-first culture. We are proud to be recognized for fostering talent, empowering careers, and creating an environment where individuals thrive and succeed together.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // award background image
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'award_background_img',
+            'label'       => esc_html__( 'Careers award background image', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => get_template_directory_uri().'/assets/awards/PhotoshopExtension_Image.png',
+        ]
+    );
+
+    // award image 1
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'award_img_1',
+            'label'       => esc_html__( 'Careers award image 1', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => get_template_directory_uri().'/assets/awards/PhotoshopExtension_Image.png',
+        ]
+    );
+    
+    // award image 1 text
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'award_img_1_text',
+            'label'    => esc_html__( 'Careers award image 1 text', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'OBest Workplaces for Millennials', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // award image 2
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'award_img_2',
+            'label'       => esc_html__( 'Careers award image 2', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => get_template_directory_uri().'/assets/awards/PhotoshopExtension_Image.png',
+        ]
+    );
+       
+    // award image 2 text
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'award_img_2_text',
+            'label'    => esc_html__( 'Careers award image 2 text', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'Best Workplaces — UAE 2024', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // award image 3
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'award_img_3',
+            'label'       => esc_html__( 'Careers award image 3', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => get_template_directory_uri().'/assets/awards/PhotoshopExtension_Image.png',
+        ]
+    );
+           
+    // award image 3 text
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'award_img_3_text',
+            'label'    => esc_html__( 'Careers award image 3 text', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'Best Workplaces — UAE 2024', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // award image 4
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'award_img_4',
+            'label'       => esc_html__( 'Careers award image 4', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => get_template_directory_uri().'/assets/awards/PhotoshopExtension_Image.png',
+        ]
+    );
+           
+    // award image 4 text
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'award_img_4_text',
+            'label'    => esc_html__( 'Careers award image 4 text', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'Best Workplaces — UAE 2024', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // award image 5
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'award_img_5',
+            'label'       => esc_html__( 'Careers award image 5', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => get_template_directory_uri().'/assets/awards/background_what.png',
+        ]
+    );
+
+    // What Makes background image
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'what_makes_background_img',
+            'label'       => esc_html__( 'What Makes background image', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => get_template_directory_uri().'/assets/team_member/background_what.avif',
+        ]
+    );
+
+    // What Makes team Image 1
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'what_makes_team_1',
+            'label'       => esc_html__( 'What Makes team Image 1', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => get_template_directory_uri().'/assets/team_member/1.jpg',
+        ]
+    );
+
+    // What Makes team name 1
+    new \Kirki\Field\Text(
+        [
+            'settings'    => 'what_makes_team_name_1',
+            'label'       => esc_html__( 'What Makes team Name 1', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the name.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => esc_html__( 'Aitolkyn Durimkhan', 'sbtech' ),
+        ]
+    );
+
+    // What Makes team role 1
+    new \Kirki\Field\Text(
+        [
+            'settings'    => 'what_makes_team_role_1',
+            'label'       => esc_html__( 'What Makes team Role 1', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the role.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => esc_html__( 'HR Business Partner', 'sbtech' ),
+        ]
+    );
+
+    // What Makes team Image 2
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'what_makes_team_2',
+            'label'       => esc_html__( 'What Makes team Image 2', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => get_template_directory_uri().'/assets/team_member/2.jpg',
+        ]
+    );
+    
+    // What Makes team name 2
+    new \Kirki\Field\Text(
+        [
+            'settings'    => 'what_makes_team_name_2',
+            'label'       => esc_html__( 'What Makes team Name 2', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the name.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => esc_html__( 'Michael Stone', 'sbtech' ),
+        ]
+    );
+
+    // What Makes team role 2
+    new \Kirki\Field\Text(
+        [
+            'settings'    => 'what_makes_team_role_2',
+            'label'       => esc_html__( 'What Makes team Role 2', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the role.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => esc_html__( 'Operations Lead', 'sbtech' ),
+        ]
+    );
+
+    // What Makes team Image 3
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'what_makes_team_3',
+            'label'       => esc_html__( 'What Makes team Image 3', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => get_template_directory_uri().'/assets/team_member/3.jpg',
+        ]
+    );
+    
+    // What Makes team name 3
+    new \Kirki\Field\Text(
+        [
+            'settings'    => 'what_makes_team_name_3',
+            'label'       => esc_html__( 'What Makes team Name 3', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the name.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => esc_html__( 'Sarah Johnson', 'sbtech' ),
+        ]
+    );
+
+    // What Makes team role 3
+    new \Kirki\Field\Text(
+        [
+            'settings'    => 'what_makes_team_role_3',
+            'label'       => esc_html__( 'What Makes team Role 3', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the role.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => esc_html__( 'Operations Lead', 'sbtech' ),
+        ]
+    );
+
+    // What Makes team Image 4
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'what_makes_team_4',
+            'label'       => esc_html__( 'What Makes team Image 4', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => get_template_directory_uri().'/assets/team_member/4.jpg',
+        ]
+    );
+    
+    // What Makes team name 4
+    new \Kirki\Field\Text(
+        [
+            'settings'    => 'what_makes_team_name_4',
+            'label'       => esc_html__( 'What Makes team Name 4', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the name.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => esc_html__( 'David Wilson', 'sbtech' ),
+        ]
+    );
+
+    // What Makes team role 4
+    new \Kirki\Field\Text(
+        [
+            'settings'    => 'what_makes_team_role_4',
+            'label'       => esc_html__( 'What Makes team Role 4', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the role.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => esc_html__( 'Operations Lead', 'sbtech' ),
+        ]
+    );
+
+    // What Makes team Image 5
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'what_makes_team_5',
+            'label'       => esc_html__( 'What Makes team Image 5', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => get_template_directory_uri().'/assets/team_member/5.jpg',
+        ]
+    );
+    
+    // What Makes team name 5
+    new \Kirki\Field\Text(
+        [
+            'settings'    => 'what_makes_team_name_5',
+            'label'       => esc_html__( 'What Makes team Name 5', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the name.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => esc_html__( 'Lisa Anderson', 'sbtech' ),
+        ]
+    );
+
+    // What Makes team role 5
+    new \Kirki\Field\Text(
+        [
+            'settings'    => 'what_makes_team_role_5',
+            'label'       => esc_html__( 'What Makes team Role 5', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the role.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => esc_html__( 'Operations Lead', 'sbtech' ),
+        ]
+    );
+
+    // What Makes team Image 6
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'what_makes_team_6',
+            'label'       => esc_html__( 'What Makes team Image 6', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => get_template_directory_uri().'/assets/team_member/6.jpg',
+        ]
+    );
+    
+    // What Makes team name 6
+    new \Kirki\Field\Text(
+        [
+            'settings'    => 'what_makes_team_name_6',
+            'label'       => esc_html__( 'What Makes team Name 6', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the name.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => esc_html__( 'Michael Stone', 'sbtech' ),
+        ]
+    );
+
+    // What Makes team role 6
+    new \Kirki\Field\Text(
+        [
+            'settings'    => 'what_makes_team_role_6',
+            'label'       => esc_html__( 'What Makes team Role 6', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the role.', 'sbtech' ),
+            'section'     => 'careers_section',
+            'default'     => esc_html__( 'Operations Lead', 'sbtech' ),
+        ]
+    );
+
+    //What Makes area video url
+    new \Kirki\Field\URL(
+        [
+            'settings' => 'what_makes_video_url',
+            'label'    => esc_html__( 'What Makes Video URL', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1',
+            'priority' => 10,
+        ]
+    );
+            
+    // What Makes area subtitle
+    new \Kirki\Field\text(
+        [
+            'settings' => 'what_makes_subtitle',
+            'label'    => esc_html__( 'What Makes area Subtitle', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'Inspiring People. Stronger Culture.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+            
+    // What Makes area title
+    new \Kirki\Field\text(
+        [
+            'settings' => 'what_makes_title',
+            'label'    => esc_html__( 'What Makes area title', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'What Makes CBA Real Estate <br>A Great Place To Work?', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+            
+    // What Makes area description
+    new \Kirki\Field\textarea(
+        [
+            'settings' => 'what_makes_desc',
+            'label'    => esc_html__( 'What Makes area Description', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'Meet the people behind our culture. Passionate professionals, bold thinkers, and a team that makes work feel meaningful every single day.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
 
     // Hero bg image
     new \Kirki\Field\Image(
@@ -1982,6 +3468,28 @@ function sbtech_careers(){
             'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
             'section'     => 'careers_section',
             'default'     => get_template_directory_uri().'/assets/careers/careers_bg.webp',
+        ]
+    );
+             
+    // Our team title
+    new \Kirki\Field\text(
+        [
+            'settings' => 'our_team_title',
+            'label'    => esc_html__( 'Our Team Title', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'Our Amazing Team', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+             
+    // Our team description
+    new \Kirki\Field\textarea(
+        [
+            'settings' => 'our_team_description',
+            'label'    => esc_html__( 'Our Team Description', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'A glimpse into our culture—team achievements, events, and the people who make everything possible.', 'sbtech' ),
+            'priority' => 10,
         ]
     );
 
@@ -2061,7 +3569,188 @@ function sbtech_careers(){
             'default'     => get_template_directory_uri().'/assets/careers/team_img_7.avif',
         ]
     );
+                 
+    // faq title
+    new \Kirki\Field\text(
+        [
+            'settings' => 'faq_title',
+            'label'    => esc_html__( 'FAQ Title', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'Join Our Team & Build Your Future With Us', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+                 
+    // faq description
+    new \Kirki\Field\text(
+        [
+            'settings' => 'faq_description',
+            'label'    => esc_html__( 'FAQ Description', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'We are always looking for passionate, talented, and driven individuals who are ready to grow and make an impact. At our company, you’ll work in a dynamic environment where innovation, collaboration, and professional development are at the core of everything we do.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+ 
+    // reapeater
+    new \Kirki\Field\Repeater(
+        [
+            'settings'     => 'repeater_careers_page_faq',
+            'label'        => esc_html__( 'Repeater Control', 'sbtech' ),
+            'section'      => 'careers_section',
+            'priority'     => 10,
+            'row_label'    => [
+                'type'  => 'field',
+                'value' => esc_html__( 'Your Custom Value', 'sbtech' ),
+                'field' => 'link_text',
+            ],
+            'button_label' => esc_html__( '"Add new" button label (optional) ', 'sbtech' ),
+            'default'      => [
+                [
+                    'faq_question'   => esc_html__( 'question', 'sbtech' ),
+                    'faq_answer'   => esc_html__( 'Answer', 'sbtech' ),
+                ],
+            ],
+            'fields'       => [
+                'faq_question'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Faq Question', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+                'faq_answer'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Faq Answer', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+            ],
+        ]
+    );
+               
+    // Hear from our team title
+    new \Kirki\Field\text(
+        [
+            'settings' => 'hear_from_our_team_title',
+            'label'    => esc_html__( 'Hear from Our Team Title', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'Hear from our team', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+               
+    // Hear from our team description
+    new \Kirki\Field\text(
+        [
+            'settings' => 'hear_from_our_team_description',
+            'label'    => esc_html__( 'Hear from Our Team Description', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'Real stories from the people behind our success—collaboration, growth, and a culture that supports you.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
 
+    // hear from our team reapeater
+    new \Kirki\Field\Repeater(
+        [
+            'settings'     => 'repeater_careers_here_from_our_team',
+            'label'        => esc_html__( 'Repeater Control', 'sbtech' ),
+            'section'      => 'careers_section',
+            'priority'     => 10,
+            'row_label'    => [
+                'type'  => 'field',
+                'value' => esc_html__( 'Your Custom Value', 'sbtech' ),
+                'field' => 'link_text',
+            ],
+            'button_label' => esc_html__( '"Add new" button label (optional) ', 'sbtech' ),
+            'default'      => [
+                [
+                    'faq_review'   => esc_html__( 'review', 'sbtech' ),
+                    'faq_name'   => esc_html__( 'name', 'sbtech' ),
+                    'faq_role'   => esc_html__( 'role', 'sbtech' ),
+                    'faq_image'   => esc_html__( 'image', 'sbtech' ),
+                ],
+            ],
+            'fields'       => [
+                'faq_review'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Faq Question', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+                'faq_name'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Faq Name', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+                'faq_role'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Faq Role', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+                'faq_image'   => [
+                    'type'        => 'image',
+                    'label'       => esc_html__( 'Faq Image', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+            ],
+        ]
+    );
+
+                  
+    // career form title
+    new \Kirki\Field\text(
+        [
+            'settings' => 'career_form_title',
+            'label'    => esc_html__( 'Career Form Title', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'Apply for a Position', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+               
+    // career form description
+    new \Kirki\Field\text(
+        [
+            'settings' => 'career_form_description',
+            'label'    => esc_html__( 'Career Form Description', 'sbtech' ),
+            'section'  => 'careers_section',
+            'default'  => esc_html__( 'Submit your application and upload your CV. Our team will review and contact shortlisted candidates.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // reapeater career positon add
+    new \Kirki\Field\Repeater(
+        [
+            'settings'     => 'repeater_career_position_add',
+            'label'        => esc_html__( 'Repeater Control', 'sbtech' ),
+            'section'      => 'careers_section',
+            'priority'     => 10,
+            'row_label'    => [
+                'type'  => 'field',
+                'value' => esc_html__( 'Your Custom Value', 'sbtech' ),
+                'field' => 'link_text',
+            ],
+            'button_label' => esc_html__( '"Add new" button label (optional) ', 'sbtech' ),
+            'default'      => [
+                [
+                    'career_position'   => esc_html__( 'position', 'sbtech' ),
+                ],
+            ],
+            'fields'       => [
+                'career_position'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Career Position', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+            ],
+        ]
+    );
 
 }
 sbtech_careers();
@@ -2090,6 +3779,120 @@ function sbtech_Contact_us(){
             'default'     => get_template_directory_uri().'/assets/contact_us/contact_us_bg.webp',
         ]
     );
+        
+    // contact us hero title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'Contact_us_hero_title',
+            'label'    => esc_html__( 'Contact Us Title', 'sbtech' ),
+            'section'  => 'Contact_us_section',
+            'default'  => esc_html__( 'Get in Touch with  <br>CBA Real Estate', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // contact us hero description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'Contact_us_hero_desc',
+            'label'    => esc_html__( 'Contact Us Description', 'sbtech' ),
+            'section'  => 'Contact_us_section',
+            'default'  => esc_html__( 'Have a question about buying, selling, renting, or new projects in Dubai? Send us a message and our team will get back to you quickly with the right guidance and next steps.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // contact us button text 1
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'Contact_us_btn_text_1',
+            'label'    => esc_html__( 'Contact Us Button text 1', 'sbtech' ),
+            'section'  => 'Contact_us_section',
+            'default'  => esc_html__( 'View Properties', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+        
+    // contact us form title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'Contact_us_form_title',
+            'label'    => esc_html__( 'Contact Us Form Title', 'sbtech' ),
+            'section'  => 'Contact_us_section',
+            'default'  => esc_html__( 'Contact us', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // contact us form description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'Contact_us_form_desc',
+            'label'    => esc_html__( 'Contact Us Form Description', 'sbtech' ),
+            'section'  => 'Contact_us_section',
+            'default'  => esc_html__( 'Have a question about buying, selling, renting, or new projects in Dubai? Send us a message and our team will get back to you quickly with the right guidance and next steps.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+     
+    // reapeater contact us form property type
+    new \Kirki\Field\Repeater(
+        [
+            'settings'     => 'repeater_contact_us_form_property_type',
+            'label'        => esc_html__( 'Repeater Control', 'sbtech' ),
+            'section'      => 'Contact_us_section',
+            'priority'     => 10,
+            'row_label'    => [
+                'type'  => 'field',
+                'value' => esc_html__( 'Your Custom Value', 'sbtech' ),
+                'field' => 'link_text',
+            ],
+            'button_label' => esc_html__( '"Add new" button label (optional) ', 'sbtech' ),
+            'default'      => [
+                [
+                    'property_type'   => esc_html__( 'type', 'sbtech' ),
+                ],
+            ],
+            'fields'       => [
+                'property_type'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Property Type', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+            ],
+        ]
+    );
+     
+    // reapeater contact us form area
+    new \Kirki\Field\Repeater(
+        [
+            'settings'     => 'repeater_contact_us_form_area',
+            'label'        => esc_html__( 'Repeater Control', 'sbtech' ),
+            'section'      => 'Contact_us_section',
+            'priority'     => 10,
+            'row_label'    => [
+                'type'  => 'field',
+                'value' => esc_html__( 'Your Custom Value', 'sbtech' ),
+                'field' => 'link_text',
+            ],
+            'button_label' => esc_html__( '"Add new" button label (optional) ', 'sbtech' ),
+            'default'      => [
+                [
+                    'property_area'   => esc_html__( 'area', 'sbtech' ),
+                ],
+            ],
+            'fields'       => [
+                'property_area'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Property Area', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+            ],
+        ]
+    );
+    
 
     // map address
     new \Kirki\Field\Text(
@@ -2116,6 +3919,39 @@ function sbtech_complaints_procedure(){
             'description' => esc_html__( 'Complaints Procedure', 'sbtech' ),
             'panel'       => 'sbtech_panel',
             'priority'    => 160,
+        ]
+    );
+         
+    // complaints hero title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'complaints_procedure_hero_title',
+            'label'    => esc_html__( 'Complaints Procedure Title', 'sbtech' ),
+            'section'  => 'complaints_procedure_section',
+            'default'  => esc_html__( 'Get in Touch with  <br>CBA Real Estate', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // complaints hero description
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'complaints_procedure_hero_desc',
+            'label'    => esc_html__( 'Complaints Procedure Description', 'sbtech' ),
+            'section'  => 'complaints_procedure_section',
+            'default'  => esc_html__( 'Have a question about buying, selling, renting, or new projects in Dubai? Send us a message and our team will get back to you quickly with the right guidance and next steps.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // complaints button text 1
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'complaints_procedure_btn_text_1',
+            'label'    => esc_html__( 'Complaints Procedure Button text 1', 'sbtech' ),
+            'section'  => 'complaints_procedure_section',
+            'default'  => esc_html__( 'View Properties', 'sbtech' ),
+            'priority' => 10,
         ]
     );
 
@@ -2152,6 +3988,561 @@ function sbtech_complaints_procedure(){
             'priority' => 10,
         ]
     );
+     
+    // reapeater Preferred Language add
+    new \Kirki\Field\Repeater(
+        [
+            'settings'     => 'repeater_preferred_language_add',
+            'label'        => esc_html__( 'Repeater Control', 'sbtech' ),
+            'section'      => 'complaints_procedure_section',
+            'priority'     => 10,
+            'row_label'    => [
+                'type'  => 'field',
+                'value' => esc_html__( 'Your Custom Value', 'sbtech' ),
+                'field' => 'link_text',
+            ],
+            'button_label' => esc_html__( '"Add new" button label (optional) ', 'sbtech' ),
+            'default'      => [
+                [
+                    'preferred_language'   => esc_html__( 'language', 'sbtech' ),
+                ],
+            ],
+            'fields'       => [
+                'preferred_language'   => [
+                    'type'        => 'text',
+                    'label'       => esc_html__( 'Preferred Language', 'sbtech' ),
+                    'description' => esc_html__( 'Description', 'sbtech' ),
+                    'default'     => '',
+                ],
+            ],
+        ]
+    );
 
 }
 sbtech_complaints_procedure();
+
+//Meet the Team section
+function sbtech_meet_the_team(){
+
+    // Header section
+    new \Kirki\Section(
+	'meet_the_team_section',
+        [
+            'title'       => esc_html__( 'Meet the Team pages', 'sbtech' ),
+            'description' => esc_html__( 'Meet the Team pages', 'sbtech' ),
+            'panel'       => 'sbtech_panel',
+            'priority'    => 160,
+        ]
+    );
+       
+    // Meet the team title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'meet_the_team_title',
+            'label'    => esc_html__( 'Meet the team Title', 'sbtech' ),
+            'section'  => 'meet_the_team_section',
+            'default'  => esc_html__( 'Meet the Team', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+       
+    // Meet the team descripiton
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'meet_the_team_desc',
+            'label'    => esc_html__( 'Meet the team Description', 'sbtech' ),
+            'section'  => 'meet_the_team_section',
+            'default'  => esc_html__( 'Find the right agent based on name, language, and nationality. Suggestions come directly from your database.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+}
+sbtech_meet_the_team();
+
+
+//testimonial section
+function sbtech_testimonial(){
+
+    // Header section
+    new \Kirki\Section(
+	'testimonial_section',
+        [
+            'title'       => esc_html__( 'Testimonial pages', 'sbtech' ),
+            'description' => esc_html__( 'Testimonial pages', 'sbtech' ),
+            'panel'       => 'sbtech_panel',
+            'priority'    => 160,
+        ]
+    );
+       
+    // Testimonial title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'testimonial_title',
+            'label'    => esc_html__( 'Testimonial Title', 'sbtech' ),
+            'section'  => 'meet_the_team_section',
+            'default'  => esc_html__( 'Meet the Team', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+       
+    // testimonial descripiton
+    new \Kirki\Field\Textarea(
+        [
+            'settings' => 'testimonial_desc',
+            'label'    => esc_html__( 'Testimonial Description', 'sbtech' ),
+            'section'  => 'testimonial_section',
+            'default'  => esc_html__( 'Find the right agent based on name, language, and nationality. Suggestions come directly from your database.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+}
+sbtech_testimonial();
+
+// home page filter bg image
+function sbtech_filter_bg_image(){
+
+    // Header section
+    new \Kirki\Section(
+	'sbtech_filter_bg_image',
+        [
+            'title'       => esc_html__( 'Filter background image ', 'sbtech' ),
+            'description' => esc_html__( 'Filter background image', 'sbtech' ),
+            'panel'       => 'sbtech_panel',
+            'priority'    => 160,
+        ]
+    );
+
+    // Hero bg image
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'home_img_1',
+            'label'       => esc_html__( 'Home page background image 1', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/ahmed-galal-o27Syy2u6wU-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'home_img_2',
+            'label'       => esc_html__( 'Home page background image 2', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/anubhav-sonker-jIImBrmMpsE-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'home_img_3',
+            'label'       => esc_html__( 'Home page background image 3', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/farhan-khan-CFbVdWD1RiI-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'home_img_4',
+            'label'       => esc_html__( 'Home page background image 4', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/ft-shafi-1OBRQpOLeY8-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'home_img_5',
+            'label'       => esc_html__( 'Home page background image 5', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/ionut-ciortea-qOKwIef01BA-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'home_img_6',
+            'label'       => esc_html__( 'Home page background image 6', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/kent-tupas-2jfZ2Vj06sk-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'home_img_7',
+            'label'       => esc_html__( 'Home page background image 7', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/ionut-ciortea-qOKwIef01BA-unsplash.jpg',
+        ]
+    );
+
+    // buy page filter image
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'buy_img_1',
+            'label'       => esc_html__( 'Buy page Filter background image 1', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/nelemson-guevarra-3Pu21dk2e1Y-unsplash.jpg',
+        ]
+    );
+    
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'buy_img_2',
+            'label'       => esc_html__( 'Buy page Filter background image 2', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/nelemson-guevarra-eCS02JdJBuI-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'buy_img_3',
+            'label'       => esc_html__( 'Buy page Filter background image 3', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/riyas-mohammed-syA-NZnb2pA-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'buy_img_4',
+            'label'       => esc_html__( 'Buy page Filter background image 4', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/shibin-joseph-GsTqt8M0fls-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'buy_img_5',
+            'label'       => esc_html__( 'Buy page Filter background image 5', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/shibin-joseph-yP8oPC3_v38-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'buy_img_6',
+            'label'       => esc_html__( 'Buy page Filter background image 6', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/thomas-haas-wfANLGIhOtM-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'buy_img_7',
+            'label'       => esc_html__( 'Buy page Filter background image 7', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/upscalemedia-transformed.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'buy_img_8',
+            'label'       => esc_html__( 'Buy page Filter background image 8', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/wmremove-transformed.jpg',
+        ]
+    );
+
+    // rent page filter image
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'rent_img_1',
+            'label'       => esc_html__( 'Rent page Filter background image 1', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/nelemson-guevarra-3Pu21dk2e1Y-unsplash.jpg',
+        ]
+    );
+    
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'rent_img_2',
+            'label'       => esc_html__( 'Rent page Filter background image 2', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/nelemson-guevarra-eCS02JdJBuI-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'rent_img_3',
+            'label'       => esc_html__( 'Rent page Filter background image 3', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/riyas-mohammed-syA-NZnb2pA-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'rent_img_4',
+            'label'       => esc_html__( 'Rent page Filter background image 4', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/shibin-joseph-GsTqt8M0fls-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'rent_img_5',
+            'label'       => esc_html__( 'Rent page Filter background image 5', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/shibin-joseph-yP8oPC3_v38-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'rent_img_6',
+            'label'       => esc_html__( 'Rent page Filter background image 6', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/thomas-haas-wfANLGIhOtM-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'rent_img_7',
+            'label'       => esc_html__( 'Rent page Filter background image 7', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/upscalemedia-transformed.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'rent_img_8',
+            'label'       => esc_html__( 'Rent page Filter background image 8', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/wmremove-transformed.jpg',
+        ]
+    );
+
+    // rent page filter image
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'commercial_img_1',
+            'label'       => esc_html__( 'Rent page Filter background image 1', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/nelemson-guevarra-3Pu21dk2e1Y-unsplash.jpg',
+        ]
+    );
+    
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'commercial_img_2',
+            'label'       => esc_html__( 'Rent page Filter background image 2', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/nelemson-guevarra-eCS02JdJBuI-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'commercial_img_3',
+            'label'       => esc_html__( 'Rent page Filter background image 3', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/riyas-mohammed-syA-NZnb2pA-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'commercial_img_4',
+            'label'       => esc_html__( 'Rent page Filter background image 4', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/shibin-joseph-GsTqt8M0fls-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'commercial_img_5',
+            'label'       => esc_html__( 'Rent page Filter background image 5', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/shibin-joseph-yP8oPC3_v38-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'commercial_img_6',
+            'label'       => esc_html__( 'Rent page Filter background image 6', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/thomas-haas-wfANLGIhOtM-unsplash.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'commercial_img_7',
+            'label'       => esc_html__( 'Rent page Filter background image 7', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/upscalemedia-transformed.jpg',
+        ]
+    );
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'commercial_img_8',
+            'label'       => esc_html__( 'Rent page Filter background image 8', 'sbtech' ),
+            'description' => esc_html__( 'The saved value will be the URL.', 'sbtech' ),
+            'section'     => 'sbtech_filter_bg_image',
+            'default'     => get_template_directory_uri().'/assets/filter_bg_image/wmremove-transformed.jpg',
+        ]
+    );
+}
+
+sbtech_filter_bg_image();
+
+
+// Sbtech services form
+function sbtech_sercices_form(){
+
+    // Header section
+    new \Kirki\Section(
+	'sbtech_sercices_form_section',
+        [
+            'title'       => esc_html__( 'Sbtech services form', 'sbtech' ),
+            'description' => esc_html__( 'Sbtech services form', 'sbtech' ),
+            'panel'       => 'sbtech_panel',
+            'priority'    => 160,
+        ]
+    );
+
+    // services page contact form design 
+
+    // form left site title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'fls_title',
+            'label'    => esc_html__( 'Form left site title', 'sbtech' ),
+            'section'  => 'sbtech_sercices_form_section',
+            'default'  => esc_html__( 'Contact Us', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // form left site desc
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'fls_desc',
+            'label'    => esc_html__( 'Form left site Description', 'sbtech' ),
+            'section'  => 'sbtech_sercices_form_section',
+            'default'  => esc_html__( 'Premium Properties — quick response & professional support.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // form left email
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'fls_email',
+            'label'    => esc_html__( 'Form left site Email', 'sbtech' ),
+            'section'  => 'sbtech_sercices_form_section',
+            'default'  => esc_html__( 'hello@cbaestate.com', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // form left Phone
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'fls_phone',
+            'label'    => esc_html__( 'Form left site Email', 'sbtech' ),
+            'section'  => 'sbtech_sercices_form_section',
+            'default'  => esc_html__( '+97144286151', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // form left address
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'fls_address',
+            'label'    => esc_html__( 'Form left site Address', 'sbtech' ),
+            'section'  => 'sbtech_sercices_form_section',
+            'default'  => esc_html__( 'DAMAC Smart Heights - Office 1205 - Al Thanyah First - Barsha Heights - Dubai', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+    
+    // form Right site title
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'frs_title',
+            'label'    => esc_html__( 'Form Right site title', 'sbtech' ),
+            'section'  => 'sbtech_sercices_form_section',
+            'default'  => esc_html__( 'Get A Free Consultation', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // form Right site desc
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'frs_desc',
+            'label'    => esc_html__( 'Form Right site Description', 'sbtech' ),
+            'section'  => 'sbtech_sercices_form_section',
+            'default'  => esc_html__( 'Ready for your new home? Send us a message.', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // form Right site checkbox text
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'frs_checkbox_text',
+            'label'    => esc_html__( 'Form Right site checkbox text', 'sbtech' ),
+            'section'  => 'sbtech_sercices_form_section',
+            'default'  => esc_html__( 'I agree to receive information about offers, deals and services (optional).', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+
+    // form Right site desc
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'frs_btn_text',
+            'label'    => esc_html__( 'Form Right site Button text', 'sbtech' ),
+            'section'  => 'sbtech_sercices_form_section',
+            'default'  => esc_html__( 'Property Inquiry', 'sbtech' ),
+            'priority' => 10,
+        ]
+    );
+}
+sbtech_sercices_form();

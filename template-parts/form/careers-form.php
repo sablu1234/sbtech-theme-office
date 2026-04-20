@@ -236,13 +236,24 @@ add_shortcode('careers_form', function () {
         }
     </style>
 
+    <?php
+    $career_form_title = get_theme_mod( 'career_form_title', __('Apply for a Position', 'sbtech') );
+    $career_form_description = get_theme_mod( 'career_form_description', __('Submit your application and upload your CV. Our team will review and contact shortlisted candidates.', 'sbtech') );
+
+    $repeater_career_position_add_items = get_theme_mod('repeater_career_position_add');
+    ?>
     <section class="career_wrap">
         <div class="career_container">
             <div class="career_card">
 
                 <div class="career_head">
-                    <h2 class="career_title">Apply for a Position</h2>
-                    <p class="career_sub">Submit your application and upload your CV. Our team will review and contact shortlisted candidates.</p>
+                    <?php if (!empty($career_form_title)) : ?>
+                    <h2 class="career_title"><?php echo esc_html($career_form_title); ?></h2>
+                    <?php endif; ?>
+
+                    <?php if (!empty($career_form_description)) : ?>
+                    <p class="career_sub"><?php echo esc_html($career_form_description); ?></p>
+                    <?php endif; ?>
                 </div>
 
                 <?php if ($success): ?>
@@ -278,10 +289,14 @@ add_shortcode('careers_form', function () {
                             <label class="career_label">Position *</label>
                             <select class="career_select" name="position">
                                 <option value="">Select</option>
-                                <option>Property Manager</option>
-                                <option>Real Estate Agent</option>
-                                <option>Real Estate Consultant</option>
-                                <option>Content Strategist</option>
+                                <?php
+                                if ( ! empty( $repeater_career_position_add_items ) ) : foreach ( $repeater_career_position_add_items as $item ) : 
+                                ?>
+                                <option><?php echo esc_html( $item['career_position'] ); ?></option>
+                                <?php 
+                                endforeach;
+                                endif; 
+                                ?>
                             </select>
                         </div>
 

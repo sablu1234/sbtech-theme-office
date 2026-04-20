@@ -2,6 +2,35 @@
 
 function careers_section_what_makes_funciton() {
     ob_start();
+    $what_makes_title = get_theme_mod( 'what_makes_title', __('What Makes CBA Real Estate <br>A Great Place To Work?', 'sbtech') );
+    $what_makes_subtitle = get_theme_mod( 'what_makes_subtitle', __('Inspiring People. Stronger Culture.', 'sbtech') );
+    $what_makes_desc = get_theme_mod( 'what_makes_desc', __('Meet the people behind our culture. Passionate professionals, bold thinkers, and a team that makes work feel meaningful every single day.', 'sbtech') );
+
+    $what_makes_team_1 = get_theme_mod('what_makes_team_1', get_template_directory_uri().'/assets/team_member/1.jpg');
+    $what_makes_team_2 = get_theme_mod('what_makes_team_2', get_template_directory_uri().'/assets/team_member/2.jpg');
+    $what_makes_team_3 = get_theme_mod('what_makes_team_3', get_template_directory_uri().'/assets/team_member/3.jpg');
+    $what_makes_team_4 = get_theme_mod('what_makes_team_4', get_template_directory_uri().'/assets/team_member/4.jpg');
+    $what_makes_team_5 = get_theme_mod('what_makes_team_5', get_template_directory_uri().'/assets/team_member/5.jpg');
+    $what_makes_team_6 = get_theme_mod('what_makes_team_6', get_template_directory_uri().'/assets/team_member/6.jpg');
+
+    $what_makes_team_name_1 = get_theme_mod( 'what_makes_team_name_1', __('Aitolkyn Durimkhan', 'sbtech') );
+    $what_makes_team_name_2 = get_theme_mod( 'what_makes_team_name_2', __('Michael Stone', 'sbtech') );
+    $what_makes_team_name_3 = get_theme_mod( 'what_makes_team_name_3', __('Sarah Johnson', 'sbtech') );
+    $what_makes_team_name_4 = get_theme_mod( 'what_makes_team_name_4', __('David Wilson', 'sbtech') );
+    $what_makes_team_name_5 = get_theme_mod( 'what_makes_team_name_5', __('Lisa Anderson', 'sbtech') );
+    $what_makes_team_name_6 = get_theme_mod( 'what_makes_team_name_6', __('John Doe', 'sbtech') ); 
+
+    $what_makes_team_role_1 = get_theme_mod( 'what_makes_team_role_1', __('HR Business Partner', 'sbtech') );
+    $what_makes_team_role_2 = get_theme_mod( 'what_makes_team_role_2', __('Operations Lead', 'sbtech') );
+    $what_makes_team_role_3 = get_theme_mod( 'what_makes_team_role_3', __('Sales Manager', 'sbtech') );
+    $what_makes_team_role_4 = get_theme_mod( 'what_makes_team_role_4', __('Marketing Specialist', 'sbtech') );
+    $what_makes_team_role_5 = get_theme_mod( 'what_makes_team_role_5', __('Finance Analyst', 'sbtech') );
+    $what_makes_team_role_6 = get_theme_mod( 'what_makes_team_role_6', __('IT Support Specialist', 'sbtech') );
+
+    $what_makes_video_url = get_theme_mod( 'what_makes_video_url', __('https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1', 'sbtech') );
+
+    $what_makes_background_img = get_theme_mod('what_makes_background_img', get_template_directory_uri().'/assets/team_member/background_what.png');
+
     ?>
     <section class="team-section">
         <div class="container">
@@ -13,21 +42,27 @@ function careers_section_what_makes_funciton() {
             <div class="floating-shape shape-3"></div>
 
             <div class="hero-content">
+                
+                <?php if (!empty($what_makes_subtitle)) : ?>
                 <div class="badge">
                 <span></span>
-                Inspiring People. Stronger Culture.
+                <?php echo esc_html($what_makes_subtitle); ?>
                 </div>
+                <?php endif; ?>
 
-                <h2>What Makes CBA Real Estate <br>A Great Place To Work?</h2>
+                <?php if (!empty($what_makes_title)) : ?>
+                <h2><?php echo sbtech_kses($what_makes_title); ?></h2>
+                <?php endif; ?>
 
-                <p>
-                Meet the people behind our culture. Passionate professionals, bold thinkers,
-                and a team that makes work feel meaningful every single day.
-                </p>
+                <?php if (!empty($what_makes_desc)) : ?>
+                <p><?php echo esc_html($what_makes_desc); ?></p>
+                <?php endif; ?>
 
+                <?php if (!empty($what_makes_video_url)) : ?>
                 <div class="hero-actions">
                 <a href="#" class="btn btn-primary" id="openVideo">Watch the Video</a>
                 </div>
+                <?php endif; ?>
             </div>
             </div>
 
@@ -35,80 +70,143 @@ function careers_section_what_makes_funciton() {
             <div class="members">
 
                 <div class="member-card" tabindex="0">
+                <?php if (!empty($what_makes_team_1)) : ?>
                 <div class="member-image-wrap">
-                    <img class="member-image" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Aitolkyn Durimkhan">
+                    <?php if (!empty($what_makes_team_1)) : ?>
+                    <img class="member-image" src="<?php echo esc_url($what_makes_team_1); ?>" alt="Aitolkyn Durimkhan">
+                    <?php endif; ?>
+
                     <div class="member-overlay">
                     <div class="member-info">
-                        <div class="member-name">Aitolkyn Durimkhan</div>
-                        <div class="member-role">HR Business Partner</div>
+                        <?php if (!empty($what_makes_team_name_1)) : ?>
+                        <div class="member-name"><?php echo esc_html($what_makes_team_name_1); ?></div>
+                        <?php endif; ?>
+
+                        <?php if (!empty($what_makes_team_role_1)) : ?>
+                        <div class="member-role"><?php echo esc_html($what_makes_team_role_1); ?></div>
+                        <?php endif; ?>
                     </div>
                     </div>
                 </div>
+                <?php endif; ?>
+
                 <div class="member-glow"></div>
                 </div>
 
                 <div class="member-card" tabindex="0">
+
+                <?php if (!empty($what_makes_team_2)) : ?>
                 <div class="member-image-wrap">
-                    <img class="member-image" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Stone">
+                    <?php if (!empty($what_makes_team_2)) : ?>
+                    <img class="member-image" src="<?php echo esc_url($what_makes_team_2); ?>" alt="Michael Stone">
+                    <?php endif; ?>
                     <div class="member-overlay">
                     <div class="member-info">
-                        <div class="member-name">Michael Stone</div>
-                        <div class="member-role">Operations Lead</div>
+                        <?php if (!empty($what_makes_team_name_2)) : ?>
+                        <div class="member-name"><?php echo esc_html($what_makes_team_name_2); ?></div>
+                        <?php endif; ?>
+
+                        <?php if (!empty($what_makes_team_role_2)) : ?>
+                        <div class="member-role"><?php echo esc_html($what_makes_team_role_2); ?></div>
+                        <?php endif; ?>
                     </div>
                     </div>
                 </div>
+                <?php endif; ?>
                 <div class="member-glow"></div>
                 </div>
 
                 <div class="member-card" tabindex="0">
+                
+                <?php if (!empty($what_makes_team_3)) : ?>
                 <div class="member-image-wrap">
-                    <img class="member-image" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Sophia Carter">
+                    <?php if (!empty($what_makes_team_3)) : ?>
+                    <img class="member-image" src="<?php echo esc_url($what_makes_team_3); ?>" alt="Sophia Carter">
+                    <?php endif; ?>
                     <div class="member-overlay">
                     <div class="member-info">
-                        <div class="member-name">Sophia Carter</div>
-                        <div class="member-role">Brand Strategist</div>
+                        <?php if (!empty($what_makes_team_name_3)) : ?>
+                        <div class="member-name"><?php echo esc_html($what_makes_team_name_3); ?></div>
+                        <?php endif; ?>
+
+                        <?php if (!empty($what_makes_team_role_3)) : ?>
+                        <div class="member-role"><?php echo esc_html($what_makes_team_role_3); ?></div>
+                        <?php endif; ?>
                     </div>
                     </div>
                 </div>
+                <?php endif; ?>
+
                 <div class="member-glow"></div>
                 </div>
 
                 <div class="member-card featured" tabindex="0">
+                <?php if (!empty($what_makes_team_4)) : ?>
                 <div class="member-image-wrap">
-                    <img class="member-image" src="https://randomuser.me/api/portraits/women/65.jpg" alt="Emma Brooks">
+                    <?php if (!empty($what_makes_team_4)) : ?>
+                    <img class="member-image" src="<?php echo esc_url($what_makes_team_4); ?>" alt="Emma Brooks">
+                    <?php endif; ?>
                     <div class="member-overlay">
                     <div class="member-info">
-                        <div class="member-name">Emma Brooks</div>
-                        <div class="member-role">People & Culture Manager</div>
+                        <?php if (!empty($what_makes_team_name_4)) : ?>
+                        <div class="member-name"><?php echo esc_html($what_makes_team_name_4); ?></div>
+                        <?php endif; ?>
+
+                        <?php if (!empty($what_makes_team_role_4)) : ?>
+                        <div class="member-role"><?php echo esc_html($what_makes_team_role_4); ?></div>
+                        <?php endif; ?>
                     </div>
                     </div>
                 </div>
+                <?php endif; ?>
                 <div class="member-glow"></div>
                 </div>
 
                 <div class="member-card" tabindex="0">
+                
+                <?php if (!empty($what_makes_team_5)) : ?>
                 <div class="member-image-wrap">
-                    <img class="member-image" src="https://randomuser.me/api/portraits/men/45.jpg" alt="Daniel Reed">
+                    <?php if (!empty($what_makes_team_5)) : ?>
+                    <img class="member-image" src="<?php echo esc_url($what_makes_team_5); ?>" alt="Daniel Reed">
+                    <?php endif; ?>
                     <div class="member-overlay">
                     <div class="member-info">
-                        <div class="member-name">Daniel Reed</div>
-                        <div class="member-role">Finance Director</div>
+                        <?php if (!empty($what_makes_team_name_5)) : ?>
+                        <div class="member-name"><?php echo esc_html($what_makes_team_name_5); ?></div>
+                        <?php endif; ?>
+
+                        <?php if (!empty($what_makes_team_role_5)) : ?>
+                        <div class="member-role"><?php echo esc_html($what_makes_team_role_5); ?></div>
+                        <?php endif; ?>
                     </div>
                     </div>
                 </div>
+                <?php endif; ?>
+
                 <div class="member-glow"></div>
                 </div>
 
                 <div class="member-card" tabindex="0">
+
+                <?php if (!empty($what_makes_team_6)) : ?>
                 <div class="member-image-wrap">
-                    <img class="member-image" src="https://randomuser.me/api/portraits/women/12.jpg" alt="Olivia Hayes">
+                    <?php if (!empty($what_makes_team_6)) : ?>
+                    <img class="member-image" src="<?php echo esc_url($what_makes_team_6); ?>" alt="Olivia Hayes">
+                    <?php endif; ?>
                     <div class="member-overlay">
                     <div class="member-info">
-                        <div class="member-name">Olivia Hayes</div>
-                        <div class="member-role">Corporate Trainer</div>
+                        <?php if (!empty($what_makes_team_name_6)) : ?>
+                        <div class="member-name"><?php echo esc_html($what_makes_team_name_6); ?></div>
+                        <?php endif; ?>
+
+                        <?php if (!empty($what_makes_team_role_6)) : ?>
+                        <div class="member-role"><?php echo esc_html($what_makes_team_role_6); ?></div>
+                        <?php endif; ?>
                     </div>
                     </div>
                 </div>
+                <?php endif; ?>
+
                 <div class="member-glow"></div>
                 </div>
 
@@ -217,7 +315,7 @@ function careers_section_what_makes_funciton() {
             inset: 0;
             background:
                 linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55)),
-                url("https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1400&q=80") center/cover no-repeat;
+                url("<?php echo esc_url($what_makes_background_img); ?>") center/cover no-repeat;
             transform: scale(1.03);
             z-index: -3;
             }
@@ -751,7 +849,7 @@ function careers_section_what_makes_funciton() {
             const iframe = document.getElementById("videoFrame");
 
             // এখানে তোমার YouTube embed link বসাও
-            const videoURL = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
+            const videoURL = "<?php echo esc_url($what_makes_video_url); ?>";
 
             openBtn.addEventListener("click", function(e) {
             e.preventDefault();

@@ -1,16 +1,23 @@
 <?php
 function mortgage_calculator_function() {
     ob_start();
+    $mortage_calculator_title = get_theme_mod( 'mortage_calculator_title', 'Mortgage Calculator' );
+    $mortage_calculator_desc = get_theme_mod( 'mortage_calculator_desc', 'Estimate your monthly mortgage payment instantly. Adjust price, down payment, interest rate, and loan term.' );
     ?>
     <section class="why-choose-mortgage-section" aria-label="Mortgage Calculator">
         <div class="why-choose-mortgage-container">
             <div class="why-choose-mortgage-box">
 
                 <div class="why-choose-mortgage-head">
-                    <h2 class="why-choose-mortgage-title">Mortgage Calculator</h2>
-                    <p class="why-choose-mortgage-subtitle">
-                        Estimate your monthly mortgage payment instantly. Adjust price, down payment, interest rate, and loan term.
-                    </p>
+                    <?php if(!empty($mortage_calculator_title)) : ?>
+                    <h2 class="why-choose-mortgage-title"><?php echo esc_html( $mortage_calculator_title )?></h2>
+                    <?php endif; ?>
+
+
+                    <?php if(!empty($mortage_calculator_desc)) : ?>
+                    <p class="why-choose-mortgage-subtitle"><?php echo esc_html( $mortage_calculator_desc )?></p>
+                    <?php endif; ?>
+
                 </div>
 
                 <div class="why-choose-mortgage-row">

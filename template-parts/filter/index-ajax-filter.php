@@ -2,6 +2,8 @@
 
 // ajax filter - index version =========================================
 
+ $home_img_1 = get_theme_mod('home_img_1', get_template_directory_uri().'/assets/filter_bg_image/ahmed-galal-o27Syy2u6wU-unsplash.jpg');
+
 if (!defined('INDEX_CPT')) {
     define('INDEX_CPT', 'porpertypi');
 }
@@ -925,12 +927,23 @@ form#reFilterForm{
         (function($){
             const ajaxUrl = " . json_encode($ajax_url) . ";
 
+            const home_img_1 = " . json_encode(get_theme_mod('home_img_1',get_template_directory_uri() . '/assets/filter_bg_image/ahmed-galal-o27Syy2u6wU-unsplash.jpg')) . ";
+            const home_img_2 = " . json_encode(get_theme_mod('home_img_2',get_template_directory_uri() . '/assets/filter_bg_image/anubhav-sonker-jIImBrmMpsE-unsplash.jpg')) . ";
+            const home_img_3 = " . json_encode(get_theme_mod('home_img_3',get_template_directory_uri() . '/assets/filter_bg_image/farhan-khan-CFbVdWD1RiI-unsplash.jpg')) . ";
+            const home_img_4 = " . json_encode(get_theme_mod('home_img_4',get_template_directory_uri() . '/assets/filter_bg_image/ft-shafi-1OBRQpOLeY8-unsplash.jpg')) . ";
+            const home_img_5 = " . json_encode(get_theme_mod('home_img_5',get_template_directory_uri() . '/assets/filter_bg_image/ionut-ciortea-qOKwIef01BA-unsplash.jpg')) . ";
+            const home_img_6 = " . json_encode(get_theme_mod('home_img_6',get_template_directory_uri() . '/assets/filter_bg_image/kent-tupas-2jfZ2Vj06sk-unsplash.jpg')) . ";
+            const home_img_7 = " . json_encode(get_theme_mod('home_img_7',get_template_directory_uri() . '/assets/filter_bg_image/ionut-ciortea-qOKwIef01BA-unsplash.jpg')) . ";
+
             const heroBgImages = [
-                'https://sam91222.wpvence.com/wp-content/uploads/2026/04/property-3-scaled.jpg',
-                'https://sam91222.wpvence.com/wp-content/uploads/2026/04/property-4-scaled.jpg',
-                'https://sam91222.wpvence.com/wp-content/uploads/2026/04/property-1-scaled.jpg',
-                'https://sam91222.wpvence.com/wp-content/uploads/2026/04/property-2-scaled.jpg'
-            ];
+                home_img_1,
+                home_img_2,
+                home_img_3,
+                home_img_4,
+                home_img_5,
+                home_img_6,
+                home_img_7,
+            ].filter(Boolean);
 
             let heroSliderStarted = false;
             let heroCurrentLayer = 1;

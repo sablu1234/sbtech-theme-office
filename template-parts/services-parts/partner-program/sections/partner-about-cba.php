@@ -2,6 +2,10 @@
 function partner_about_cba_function() {
     ob_start();
     $partner_program_about_img = get_theme_mod('partner_program_about_img', get_template_directory_uri().'/assets/services/partner-program/partner_program_about.avif');
+
+    $partner_program_about_sub_title = get_theme_mod( 'partner_program_about_sub_title', __('Partner Program', 'sbtech') );
+    $partner_program_about_title = get_theme_mod( 'partner_program_about_title', __('About CBA', 'sbtech') );
+    $partner_program_about_desc = get_theme_mod( 'partner_program_about_desc', __('<p> Our snagging service identifies finishing defects, functional issues, and quality gaps before you take ownership. We inspect key areas such as walls and paintwork, flooring, doors and windows, plumbing, electrical points, HVAC performance, and visible workmanship details. </p> <p> You receive a structured snagging report with prioritized items, so you can request rectifications from the or contractor quickly and confidently—reducing post-handover surprises.</p>', 'sbtech') );
     ?>
     <section class="partner-program-section" aria-label="About CBA Partner Program">
     <div class="partner-program-container">
@@ -9,50 +13,18 @@ function partner_about_cba_function() {
 
         <!-- Left content -->
         <div class="partner-program-content">
-            <p class="partner-program-kicker">Partner Program</p>
-            <h2 class="partner-program-title">About CBA</h2>
+            <?php if (!empty($partner_program_about_sub_title)) : ?>
+            <p class="partner-program-kicker"><?php echo esc_html($partner_program_about_sub_title); ?></p>
+            <?php endif; ?>
 
-            <div class="partner-program-text">
-            <p>
-                The CBA Real Estate Partnership Program is designed for individuals and businesses who want to grow in Dubai’s
-                booming property market. We empower partners with access to exclusive listings, structured referral opportunities,
-                and expert support—so you can build profitable, long-term collaborations that deliver results.
-            </p>
+            <?php if (!empty($partner_program_about_title)) : ?>
+            <h2 class="partner-program-title"><?php echo esc_html($partner_program_about_title); ?></h2>
+            <?php endif; ?>
 
-            <p>
-                Looking to capitalize on high-demand opportunities? Partner with CBA Real Estate to unlock premium inventory,
-                strengthen your network, and generate new revenue streams through transparent, performance-driven referrals.
-            </p>
-            </div>
+            <?php if (!empty($partner_program_about_desc)) : ?>
+            <div class="partner-program-text"><?php echo sbtech_kses($partner_program_about_desc); ?></div>
+            <?php endif; ?>
 
-            <ul class="partner-program-list">
-            <li class="partner-program-item">
-                <span class="partner-program-dot" aria-hidden="true"></span>
-                <strong>Exclusive Listings:</strong> Access sought-after properties and curated opportunities.
-            </li>
-            <li class="partner-program-item">
-                <span class="partner-program-dot" aria-hidden="true"></span>
-                <strong>Boost Income:</strong> Earn competitive referral commissions with clear partner support.
-            </li>
-            <li class="partner-program-item">
-                <span class="partner-program-dot" aria-hidden="true"></span>
-                <strong>Expert Support:</strong> Work with a team that understands Dubai’s market and buyer demand.
-            </li>
-            </ul>
-
-            <p class="partner-program-ctaText">
-            Take your real estate potential to the next level with CBA Real Estate. Let’s grow together—contact us today to get started.
-            </p>
-
-            <div class="partner-program-actions d-none">
-            <a class="partner-program-btn partner-program-btn--primary" href="#">
-                Become a Partner
-                <span class="partner-program-arrow" aria-hidden="true">→</span>
-            </a>
-            <a class="partner-program-btn partner-program-btn--ghost" href="#">
-                Request Details
-            </a>
-            </div>
         </div>
 
         <!-- Right image -->

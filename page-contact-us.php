@@ -2,6 +2,11 @@
 <!-- Hero area start -->
     <?php
     $Contact_us_hero_bg = get_theme_mod('Contact_us_hero_bg', get_template_directory_uri().'/assets/contact_us/contact_us_bg.webp');
+
+    $Contact_us_hero_title = get_theme_mod( 'Contact_us_hero_title', __('Get in Touch with  <br>CBA Real Estate', 'sbtech') );
+    $Contact_us_hero_desc = get_theme_mod( 'Contact_us_hero_desc', __('Have a question about buying, selling, renting, or new projects in Dubai? Send us a message and our team will get back to you quickly with the right guidance and next steps.', 'sbtech') );
+    $Contact_us_btn_text_1 = get_theme_mod( 'Contact_us_btn_text_1', __('View Properties', 'sbtech') );
+
     ?>
     <style>
     .contact_hero{
@@ -25,15 +30,19 @@
                     <a href="<?php echo home_url('/contact-us'); ?>">Contact Us</a>
                 </div>
 
-                <h1 class="about_title">
-                    Get in Touch with  <br>CBA Real Estate
-                </h1>
+                <?php if (!empty($about_us_transaction_text)) : ?>
+                <h1 class="about_title"><?php echo $Contact_us_hero_title; ?></h1>
+                <?php endif; ?>
 
-                <p class="about_desc">
-                    Have a question about buying, selling, renting, or new projects in Dubai? Send us a message and our team will get back to you quickly with the right guidance and next steps.
+                <?php if (!empty($Contact_us_hero_desc)) : ?>
+                <p class="about_desc"><?php echo $Contact_us_hero_desc; ?></p>
+                <?php endif; ?>
 
                 <div class="about_buttons">
-                    <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary">View Properties</a>
+                    <?php if (!empty($Contact_us_btn_text_1)) : ?>
+                    <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary"><?php echo $Contact_us_btn_text_1; ?></a>
+                    <?php endif; ?>
+
                     <button class="sell-cta-btn d-none" id="sellOpenModal" class="about_btn">Contact Us</button>
                 </div>
 

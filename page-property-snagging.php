@@ -3,6 +3,11 @@
 <!-- Hero area start -->
     <?php
     $property_snagging_hero_bg = get_theme_mod('property_snagging_hero_bg', );
+
+    $property_snagging_hero_title = get_theme_mod( 'property_snagging_hero_title', __('Property Snagging  <br>Services', 'sbtech') );
+    $property_snagging_hero_desc = get_theme_mod( 'property_snagging_hero_desc', __('Welcome to CBA Real Estate — ensuring your property is delivered to the highest standards before handover.', 'sbtech') );
+    $property_snagging_hero_btn_text_1 = get_theme_mod( 'property_snagging_hero_btn_text_1', __('View Properties', 'sbtech') );
+    $property_snagging_hero_btn_text_2 = get_theme_mod( 'property_snagging_hero_btn_text_2', __('Contact', 'sbtech') );
     ?>
     <style>
     .partner_program_hero{
@@ -28,16 +33,23 @@
                     <a href="<?php echo home_url('/property-snagging'); ?>">property-snagging</a>
                 </div>
 
-                <h1 class="about_title">
-                    Property Snagging  <br>Services
-                </h1>
+                <?php if (!empty($property_snagging_hero_title)) : ?>
+                <h1 class="about_title"><?php echo sbtech_kses($property_snagging_hero_title); ?></h1>
+                <?php endif; ?>
 
-                <p class="about_desc">
-                    Welcome to CBA Real Estate — ensuring your property is delivered to the highest standards before handover.
-                </p>
+                <?php if (!empty($property_snagging_hero_desc)) : ?>
+                <p class="about_desc"><?php echo sbtech_kses($property_snagging_hero_desc); ?></p>
+                <?php endif; ?>
+
                 <div class="about_buttons">
-                    <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary">View Properties</a>
-                    <button class="sell-cta-btn" id="sellOpenModal" class="about_btn">Contact Us</button>
+                    <?php if (!empty($property_snagging_hero_btn_text_1)) : ?>
+                    <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary"><?php echo esc_html($property_snagging_hero_btn_text_1); ?></a>
+                    <?php endif; ?>
+
+                    <?php if (!empty($property_snagging_hero_btn_text_2)) : ?>
+                    <button class="sell-cta-btn" id="sellOpenModal" class="about_btn"><?php echo esc_html($property_snagging_hero_btn_text_2); ?></button>
+                    <?php endif; ?>
+
                 </div>
 
             </div>

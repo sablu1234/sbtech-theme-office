@@ -5,9 +5,9 @@ function why_choose_mortgage_function() {
     $property_snagging_hero_bg = get_theme_mod('property_snagging_hero_bg', get_template_directory_uri().'/assets/services/mortgages/mortgages-support.avif');
     $mortgages_ms_img = get_theme_mod('mortgages_ms_img', get_template_directory_uri().'/assets/services/mortgages/mortgages-support.avif');
 
-    $mortage_sub_title = get_theme_mod( 'wwd_sub_title', 'What we deliver' );
-    $mortage_title = get_theme_mod( 'wwd_title', 'Explore what we do Real estate property management' );
-    $mortage_desc = get_theme_mod( 'wwd_desc', '<p>We help buyers and investors in Dubai access competitive mortgage solutions with clear guidance—from eligibility checks to approvals and final documentation.</p> <p>Whether you’re purchasing your first home, upgrading, or investing, our process is designed to be fast,transparent, and aligned with your property goals.</p> <p> You’ll get tailored options from trusted lenders, competitive rates and terms, and a smooth end-to-end experience—so you can focus on choosing the right property with confidence. </p>' );
+    $mortage_sub_title = get_theme_mod( 'mortage_sub_title', 'Mortgage Support' );
+    $mortage_suppoer_title = get_theme_mod( 'mortage_suppoer_title', 'Why choose mortgage support with CBA Real Estate?' );
+    $mortage_support_desc = get_theme_mod( 'mortage_support_desc', '<p>We help buyers and investors in Dubai access competitive mortgage solutions with clear guidance—from eligibility checks to approvals and final documentation.</p> <p>Whether you’re purchasing your first home, upgrading, or investing, our process is designed to be fast,transparent, and aligned with your property goals.</p> <p> You’ll get tailored options from trusted lenders, competitive rates and terms, and a smooth end-to-end experience—so you can focus on choosing the right property with confidence. </p>' );
 
     ?>
     <section class="why-choose-mortgage-section" aria-label="Why choose mortgage">
@@ -33,13 +33,13 @@ function why_choose_mortgage_function() {
             <p class="why-choose-mortgage-kicker"><?php echo esc_html( $mortage_sub_title )?></p>
             <?php endif;?>
 
-            <?php if(!empty($mortage_title)) : ?>
-            <h2 class="why-choose-mortgage-title"><?php echo esc_html( $mortage_title )?></h2>
+            <?php if(!empty($mortage_suppoer_title)) : ?>
+            <h2 class="why-choose-mortgage-title"><?php echo esc_html( $mortage_suppoer_title )?></h2>
             <?php endif;?>
 
-            <?php if(!empty($mortage_desc)) : ?>
+            <?php if(!empty($mortage_support_desc)) : ?>
             <div class="why-choose-mortgage-text">
-            <?php echo sbtech_kses( $mortage_desc )?>
+            <?php echo sbtech_kses( $mortage_support_desc )?>
             <?php endif;?>
             </div>
 

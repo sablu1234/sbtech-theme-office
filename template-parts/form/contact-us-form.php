@@ -156,16 +156,26 @@ add_shortcode('contact_us_form', function () {
     }
   </style>
 
+  <?php
+    $contact_us_form_title = get_theme_mod( 'Contact_us_form_title', __('Contact us', 'sbtech') );
+    $contact_us_form_desc = get_theme_mod( 'Contact_us_form_desc', __('Have a question about buying, selling, renting, or new projects in Dubai? Send us a message and our team will get back to you quickly with the right guidance and next steps.', 'sbtech') );
+
+    $repeater_contact_us_form_property_type_items = get_theme_mod( 'repeater_contact_us_form_property_type');
+    $repeater_contact_us_form_area_items = get_theme_mod( 'repeater_contact_us_form_area');
+  ?>
   <section class="contact-us-section">
     <div class="contact-us-container">
       <div class="contact-us-card">
 
         <div class="contact-us-head">
           <div>
-            <h3 class="contact-us-title">Contact Us</h3>
-            <p class="contact-us-subtitle">
-              Share your details and property requirements. Our team will respond quickly with the right next steps.
-            </p>
+            <?php if (!empty($contact_us_form_title)) : ?>
+            <h3 class="contact-us-title"><?php echo sbtech_kses($contact_us_form_title); ?></h3>
+            <?php endif; ?>
+
+            <?php if (!empty($contact_us_form_desc)) : ?>
+            <p class="contact-us-subtitle"> <?php echo esc_html($contact_us_form_desc); ?></p>
+            <?php endif; ?>
           </div>
         </div>
 
@@ -222,11 +232,14 @@ add_shortcode('contact_us_form', function () {
               <label class="contact-us-label" for="contact-us-type">Type</label>
               <select class="contact-us-select" id="contact-us-type" name="property_type">
                 <option value="">Select</option>
-                <option value="Apartment">Apartment</option>
-                <option value="Villa">Villa</option>
-                <option value="Townhouse">Townhouse</option>
-                <option value="Penthouse">Penthouse</option>
-                <option value="Commercial">Commercial</option>
+                <?php
+                 if ( ! empty( $repeater_contact_us_form_property_type_items ) ) : foreach ( $repeater_contact_us_form_property_type_items as $item ) : 
+                ?>
+                <option value="<?php echo esc_attr($item['property_type']); ?>"><?php echo esc_html($item['property_type']); ?></option>
+                <?php 
+                endforeach;
+                endif; 
+                ?>
               </select>
             </div>
 
@@ -239,10 +252,14 @@ add_shortcode('contact_us_form', function () {
               <label class="contact-us-label" for="contact-us-city">City</label>
               <select class="contact-us-select" id="contact-us-city" name="city">
                 <option value="">Select</option>
-                <option value="Dubai">Dubai</option>
-                <option value="Abu Dhabi">Abu Dhabi</option>
-                <option value="Sharjah">Sharjah</option>
-                <option value="Ajman">Ajman</option>
+                <?php
+                 if ( ! empty( $repeater_contact_us_form_area_items ) ) : foreach ( $repeater_contact_us_form_area_items as $item ) : 
+                ?>
+                <option value="<?php echo esc_attr($item['property_area']); ?>"><?php echo esc_html($item['property_area']); ?></option>
+                <?php 
+                endforeach;
+                endif; 
+                ?>
               </select>
             </div>
 

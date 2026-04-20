@@ -3,6 +3,11 @@
 <!-- Hero area start -->
     <?php
     $careers_hero_bg = get_theme_mod('careers_hero_bg', get_template_directory_uri().'/assets/media_press/media_press.jpg');
+
+    $careers_hero_title = get_theme_mod( 'careers_hero_title', __('About Our <br> Premium Properties', 'sbtech') );
+    $careers_hero_desc = get_theme_mod( 'careers_hero_desc', __('About Our <br> Premium Properties', 'sbtech') );
+    $careers_hero_btn_text_1 = get_theme_mod( 'careers_hero_btn_text_1', __('View Properties', 'sbtech') );
+    $careers_hero_btn_text_2 = get_theme_mod( 'careers_hero_btn_text_2', __('Contact Us', 'sbtech') );
     ?>
     <style>
     .careers_hero{
@@ -26,17 +31,22 @@
                     <a href="<?php echo home_url('/careers'); ?>">Careers</a>
                 </div>
 
-                <h1 class="about_title">
-                    Careers & <br>Opportunities
-                </h1>
+                <?php if (!empty($careers_hero_title)) : ?>
+                <h1 class="about_title"><?php echo sbtech_kses($careers_hero_title); ?></h1>
+                <?php endif; ?>
 
-                <p class="about_desc">
-                    Build your future with us. Join a dynamic team, grow your skills, and explore exciting career opportunities in a professional and supportive environment.
-                </p>
+                <?php if (!empty($careers_hero_desc)) : ?>
+                <p class="about_desc"><?php echo esc_html($careers_hero_desc); ?></p>
+                <?php endif; ?>
 
                 <div class="about_buttons">
-                    <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary">View Properties</a>
-                    <button class="sell-cta-btn" id="sellOpenModal" class="about_btn">Contact Us</button>
+                    <?php if (!empty($careers_hero_btn_text_1)) : ?>
+                    <a href="<?php echo home_url('/buy'); ?>" class="about_btn about_primary"><?php echo esc_html($careers_hero_btn_text_1); ?></a>
+                    <?php endif; ?>
+
+                    <?php if (!empty($careers_hero_btn_text_2)) : ?>
+                    <button class="sell-cta-btn" id="sellOpenModal" class="about_btn"><?php echo esc_html($careers_hero_btn_text_2); ?></button>
+                    <?php endif; ?>
                 </div>
 
             </div>
@@ -58,72 +68,113 @@
 <!-- Hero area end -->
 
 <!-- Great Place To Work start -->
-<section class="awards" id="awards">
-    <div class="awards__container">
-        <h2 class="awards__title">
-            The Leading Real Estate Employer <span class="accent">Recognized for Excellence</span>
-        </h2>
-        <p class="awards__sub">
-            Our workplace is built on innovation, growth, and a people-first culture. We are proud to be recognized for fostering talent, empowering careers, and creating an environment where individuals thrive and succeed together.
-        </p>
+    <?php
+    $award_title = get_theme_mod( 'award_title', __('The Leading Real Estate Employer <span class="accent">Recognized for Excellence</span>', 'sbtech') );
+    $award_desc = get_theme_mod( 'award_desc', __('Our workplace is built on innovation, growth, and a people-first culture. We are proud to be recognized for fostering talent, empowering careers, and creating an environment where individuals thrive and succeed together.', 'sbtech') );
 
-        <div class="awards__frame" data-awards>
-            <button class="awards__nav awards__nav--prev" type="button" aria-label="Previous" data-prev>
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            </button>
+    $award_img_1 = get_theme_mod('award_img_1', get_template_directory_uri().'/assets/awards/PhotoshopExtension_Image.png');
+    $award_img_2 = get_theme_mod('award_img_2', get_template_directory_uri().'/assets/awards/PhotoshopExtension_Image.png');
+    $award_img_3 = get_theme_mod('award_img_3', get_template_directory_uri().'/assets/awards/PhotoshopExtension_Image.png');
+    $award_img_4 = get_theme_mod('award_img_4', get_template_directory_uri().'/assets/awards/PhotoshopExtension_Image.png');
+    $award_img_5 = get_theme_mod('award_img_5', get_template_directory_uri().'/assets/awards/PhotoshopExtension_Image.png');
 
-            <div class="awards__viewport">
-                <div class="awards__track" data-track>
-                    <!-- Replace src with your real badge images -->
-                    <article class="awards__card">
-                        <div class="awards__img">
-                            <img src="https://dummyimage.com/600x600/ffffff/000000.png&text=Best+Workplaces+2025" alt="Best Workplaces UAE 2025">
-                        </div>
-                        <p class="awards__cap">Best Workplaces — UAE 2025</p>
-                    </article>
+    $award_img_1_text = get_theme_mod( 'award_img_1_text', __('Best Workplaces — UAE 2024', 'sbtech') );
+    $award_img_2_text = get_theme_mod( 'award_img_2_text', __('Best Workplaces — UAE 2024', 'sbtech') );
+    $award_img_3_text = get_theme_mod( 'award_img_3_text', __('Best Workplaces — UAE 2024', 'sbtech') );
+    $award_img_4_text = get_theme_mod( 'award_img_4_text', __('Best Workplaces — UAE 2024', 'sbtech') );
+    $award_img_5_text = get_theme_mod( 'award_img_5_text', __('Best Workplaces — UAE 2024', 'sbtech') );
 
-                    <article class="awards__card">
-                        <div class="awards__img">
-                            <img src="https://dummyimage.com/600x600/ffffff/000000.png&text=Best+Workplaces+2024" alt="Best Workplaces UAE 2024">
-                        </div>
-                        <p class="awards__cap">Best Workplaces — UAE 2024</p>
-                    </article>
+    ?>
+    <section class="awards" id="awards">
+        <div class="awards__container">
+            <?php if (!empty($award_title)) : ?>
+            <h2 class="awards__title"><?php echo sbtech_kses($award_title); ?> </h2>
+            <?php endif; ?>
 
-                    <article class="awards__card">
-                        <div class="awards__img">
-                            <img src="https://dummyimage.com/600x600/ffffff/000000.png&text=For+Women" alt="Best Workplaces for Women">
-                        </div>
-                        <p class="awards__cap">Best Workplaces for Women</p>
-                    </article>
+            <?php if (!empty($award_desc)) : ?>
+            <p class="awards__sub"><?php echo sbtech_kses($award_desc); ?></p>
+            <?php endif; ?>
 
-                    <article class="awards__card">
-                        <div class="awards__img">
-                            <img src="https://dummyimage.com/600x600/ffffff/000000.png&text=For+Millennials" alt="Best Workplaces for Millennials">
-                        </div>
-                        <p class="awards__cap">Best Workplaces for Millennials</p>
-                    </article>
+            <div class="awards__frame" data-awards>
+                <button class="awards__nav awards__nav--prev" type="button" aria-label="Previous" data-prev>
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
 
-                    <article class="awards__card">
-                        <div class="awards__img">
-                            <img src="https://dummyimage.com/600x600/ffffff/000000.png&text=GCC+2022" alt="Best Workplaces GCC 2022">
-                        </div>
-                        <p class="awards__cap">Best Workplaces — GCC 2022</p>
-                    </article>
+                <div class="awards__viewport">
+                    <div class="awards__track" data-track>
+                        <!-- Replace src with your real badge images -->
+
+                        <?php if (!empty($award_img_1)) : ?>
+                        <article class="awards__card">
+                            <div class="awards__img">
+                                <img src="<?php echo esc_url($award_img_1); ?>" alt="Best Workplaces UAE 2025">
+                            </div>
+
+                            <?php if (!empty($award_img_1_text)) : ?>
+                            <p class="awards__cap"><?php echo esc_html($award_img_1_text); ?></p>
+                            <?php endif; ?>
+                        </article>
+                        <?php endif; ?>
+
+                        <?php if (!empty($award_img_2)) : ?>
+                        <article class="awards__card">
+                            <div class="awards__img">
+                                <img src="<?php echo esc_url($award_img_2); ?>" alt="Best Workplaces UAE 2024">
+                            </div>
+                            <?php if (!empty($award_img_2_text)) : ?>
+                            <p class="awards__cap"><?php echo esc_html($award_img_2_text); ?></p>
+                            <?php endif; ?>
+                        </article>
+                        <?php endif; ?>
+
+                        <?php if (!empty($award_img_3)) : ?>
+                        <article class="awards__card">
+                            <div class="awards__img">
+                                <img src="<?php echo esc_url($award_img_3); ?>" alt="Best Workplaces for Women">
+                            </div>
+                            <?php if (!empty($award_img_3_text)) : ?>
+                            <p class="awards__cap"><?php echo esc_html($award_img_3_text); ?></p>
+                            <?php endif; ?>
+                        </article>
+                        <?php endif; ?>
+
+                        <?php if (!empty($award_img_4)) : ?>
+                        <article class="awards__card">
+                            <div class="awards__img">
+                                <img src="<?php echo esc_url($award_img_4); ?>" alt="Best Workplaces for Millennials">
+                            </div>
+                            <?php if (!empty($award_img_4_text)) : ?>
+                            <p class="awards__cap"><?php echo esc_html($award_img_4_text); ?></p>
+                            <?php endif; ?>
+                        </article>
+                        <?php endif; ?>
+
+                        <?php if (!empty($award_img_5)) : ?>
+                        <article class="awards__card">
+                            <div class="awards__img">
+                                <img src="<?php echo esc_url($award_img_5); ?>" alt="Best Workplaces GCC 2022">
+                            </div>
+                            <?php if (!empty($award_img_5_text)) : ?>
+                            <p class="awards__cap"><?php echo esc_html($award_img_5_text); ?></p>
+                            <?php endif; ?>
+                        </article>
+                        <?php endif; ?>
+
+                    </div>
                 </div>
+
+                <button class="awards__nav awards__nav--next" type="button" aria-label="Next" data-next>
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+
+                <div class="awards__dots" data-dots></div>
             </div>
-
-            <button class="awards__nav awards__nav--next" type="button" aria-label="Next" data-next>
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            </button>
-
-            <div class="awards__dots" data-dots></div>
         </div>
-    </div>
-</section>
+    </section>
 <!-- Great Place To Work end -->
 
 <!-- what_makes section start -->
@@ -139,15 +190,23 @@
     $careers_team_5 = get_theme_mod('careers_team_5', get_template_directory_uri().'/assets/careers/team_img_5.avif');
     $careers_team_6 = get_theme_mod('careers_team_6', get_template_directory_uri().'/assets/careers/team_img_6.avif');
     $careers_team_7 = get_theme_mod('careers_team_7', get_template_directory_uri().'/assets/careers/team_img_7.avif');
+
+    $our_team_title = get_theme_mod( 'our_team_title', __('Our Amazing Team', 'sbtech') );
+    $our_team_description = get_theme_mod( 'our_team_description', __('A glimpse into our culture—team achievements, events, and the people who make everything possible.', 'sbtech') );
     ?>
     <section class="careers_gallery">
         <div class="careers_container">
 
             <div class="careers_gallery__head">
-                <h2 class="careers_gallery__title">Our Team</h2>
+                <?php if (!empty($our_team_title)) : ?>
+                <h2 class="careers_gallery__title"><?php echo esc_html($our_team_title); ?></h2>
+                <?php endif; ?>
+
+                <?php if (!empty($our_team_description)) : ?>
                 <p class="careers_gallery__sub">
-                    A glimpse into our culture—team achievements, events, and the people who make everything possible.
+                    <?php echo esc_html($our_team_description); ?>
                 </p>
+                <?php endif; ?>
             </div>
 
             <div class="careers_gallery__grid">
@@ -202,122 +261,78 @@
 <!-- faq section end -->
 
 <!-- Hear form our team start -->
-<section class="careers_testimonials" id="careers_testimonials">
-    <div class="careers_testimonials__container">
+    <?php
+    $faq_title = get_theme_mod( 'hear_from_our_team_title', __('Hear from our team', 'sbtech') );
+    $faq_description = get_theme_mod( 'hear_from_our_team_description', __('Real stories from the people behind our success—collaboration, growth, and a culture that supports you.', 'sbtech') );
+    $repeater_careers_here_from_our_team_items = get_theme_mod('repeater_careers_here_from_our_team');
+    ?>
+    <section class="careers_testimonials" id="careers_testimonials">
+        <div class="careers_testimonials__container">
 
-        <div class="careers_testimonials__head">
-            <h2 class="careers_testimonials__title">Hear from our team</h2>
-            <p class="careers_testimonials__sub">
-                Real stories from the people behind our success—collaboration, growth, and a culture that supports you.
-            </p>
-        </div>
+            <div class="careers_testimonials__head">
+                <?php if (!empty($faq_title)) : ?>
+                <h2 class="careers_testimonials__title"><?php echo $faq_title; ?></h2>
+                <?php endif; ?>
 
-        <div class="careers_testimonials__frame" data-careers-slider>
-            <div class="careers_testimonials__track" data-careers-track>
-
-                <!-- Slide 1 -->
-                <article class="careers_testimonials__slide">
-                    <div class="careers_testimonials__media">
-                        <div class="careers_testimonials__quoteMark" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M7 17h4V9H6v5c0 1.7 1.3 3 3 3Zm10 0h4V9h-5v5c0 1.7 1.3 3 3 3Z" fill="currentColor" />
-                            </svg>
-                        </div>
-                        <div class="careers_testimonials__photo">
-                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80" alt="Team member portrait">
-                        </div>
-                    </div>
-
-                    <div class="careers_testimonials__content">
-                        <p class="careers_testimonials__quote">
-                            “I feel genuinely supported here. The team collaboration is strong, leadership listens, and I’m encouraged
-                            to grow through real opportunities. The environment is fast-paced but positive—and we celebrate wins together.”
-                        </p>
-
-                        <div class="careers_testimonials__nameRow">
-                            <div class="careers_testimonials__meta">
-                                <p class="careers_testimonials__name">Saidi Latipov</p>
-                                <p class="careers_testimonials__role">Senior Real Estate Agent</p>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Slide 2 -->
-                <article class="careers_testimonials__slide">
-                    <div class="careers_testimonials__media">
-                        <div class="careers_testimonials__quoteMark" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M7 17h4V9H6v5c0 1.7 1.3 3 3 3Zm10 0h4V9h-5v5c0 1.7 1.3 3 3 3Z" fill="currentColor" />
-                            </svg>
-                        </div>
-                        <div class="careers_testimonials__photo">
-                            <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=900&q=80" alt="Team member portrait">
-                        </div>
-                    </div>
-
-                    <div class="careers_testimonials__content">
-                        <p class="careers_testimonials__quote">
-                            “What stands out most is the culture. Everyone is approachable, learning is continuous, and processes are
-                            clear. You know what success looks like, and you have the support to achieve it.”
-                        </p>
-
-                        <div class="careers_testimonials__nameRow">
-                            <div class="careers_testimonials__meta">
-                                <p class="careers_testimonials__name">Svetlana Vasilieva</p>
-                                <p class="careers_testimonials__role">Marketing & Communications</p>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Slide 3 -->
-                <article class="careers_testimonials__slide">
-                    <div class="careers_testimonials__media">
-                        <div class="careers_testimonials__quoteMark" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M7 17h4V9H6v5c0 1.7 1.3 3 3 3Zm10 0h4V9h-5v5c0 1.7 1.3 3 3 3Z" fill="currentColor" />
-                            </svg>
-                        </div>
-                        <div class="careers_testimonials__photo">
-                            <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=900&q=80" alt="Team member portrait">
-                        </div>
-                    </div>
-
-                    <div class="careers_testimonials__content">
-                        <p class="careers_testimonials__quote">
-                            “It’s a place where performance matters—but so does people. The balance of ambition and support makes it
-                            easy to stay motivated, improve your skills, and build a long-term career.”
-                        </p>
-
-                        <div class="careers_testimonials__nameRow">
-                            <div class="careers_testimonials__meta">
-                                <p class="careers_testimonials__name">Ahmed Al Zahra</p>
-                                <p class="careers_testimonials__role">Client Relationship Manager</p>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
+                <?php if (!empty($faq_description)) : ?>
+                <p class="careers_testimonials__sub"><?php echo $faq_description; ?></p>
+                <?php endif; ?>
             </div>
 
-            <div class="careers_testimonials__controls">
-                <button class="careers_testimonials__btn" type="button" aria-label="Previous" data-careers-prev>
-                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-                <button class="careers_testimonials__btn" type="button" aria-label="Next" data-careers-next>
-                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-            </div>
-        </div>
+            <div class="careers_testimonials__frame" data-careers-slider>
+                <div class="careers_testimonials__track" data-careers-track>
+                    
+                    <!-- Slide 1 -->
+                     <?php
+                    if ( ! empty( $repeater_careers_here_from_our_team_items ) ) : foreach ( $repeater_careers_here_from_our_team_items as $item ) : 
+                    ?>
+                    <article class="careers_testimonials__slide">
+                        <div class="careers_testimonials__media">
+                            <div class="careers_testimonials__quoteMark" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M7 17h4V9H6v5c0 1.7 1.3 3 3 3Zm10 0h4V9h-5v5c0 1.7 1.3 3 3 3Z" fill="currentColor" />
+                                </svg>
+                            </div>
+                            <div class="careers_testimonials__photo">
+                                <img src="<?php echo $item['faq_image']; ?>" alt="Team member portrait">
+                            </div>
+                        </div>
 
-        <div class="careers_testimonials__dots" data-careers-dots></div>
-    </div>
-</section>
+                        <div class="careers_testimonials__content">
+                            <p class="careers_testimonials__quote"><?php echo $item['faq_review']; ?></p>
+
+                            <div class="careers_testimonials__nameRow">
+                                <div class="careers_testimonials__meta">
+                                    <p class="careers_testimonials__name"><?php echo $item['faq_name']; ?></p>
+                                    <p class="careers_testimonials__role"><?php echo $item['faq_role']; ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <?php 
+                    endforeach;
+                    endif; 
+                    ?>
+
+                </div>
+
+                <div class="careers_testimonials__controls">
+                    <button class="careers_testimonials__btn" type="button" aria-label="Previous" data-careers-prev>
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <button class="careers_testimonials__btn" type="button" aria-label="Next" data-careers-next>
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="careers_testimonials__dots" data-careers-dots></div>
+        </div>
+    </section>
 <!-- Hear from our team end -->
 
 <!-- careers form start -->

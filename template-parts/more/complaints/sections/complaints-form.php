@@ -279,6 +279,10 @@ add_shortcode('complaints_form', function () {
     }
   </style>
 
+  <?php
+    $repeater_preferred_language_add_items = get_theme_mod( 'repeater_preferred_language_add');
+  ?>
+
   <section class="complaints-section" aria-label="Complaints">
     <div class="complaints-container">
 
@@ -528,10 +532,14 @@ add_shortcode('complaints_form', function () {
                 <div class="complaints-field">
                   <label class="complaints-label">Preferred Language</label>
                   <select class="complaints-select" name="language">
-                    <option value="English">English</option>
-                    <option value="Arabic">Arabic</option>
-                    <option value="Hindi">Hindi</option>
-                    <option value="Urdu">Urdu</option>
+                    <?php
+                    if ( ! empty( $repeater_preferred_language_add_items ) ) : foreach ( $repeater_preferred_language_add_items as $item ) : 
+                    ?>
+                    <option value="<?php echo esc_attr($item['preferred_language']); ?>"><?php echo esc_html($item['preferred_language']); ?></option>
+                    <?php 
+                    endforeach;
+                    endif; 
+                    ?>
                   </select>
                 </div>
 
@@ -556,7 +564,7 @@ add_shortcode('complaints_form', function () {
 
               <button class="complaints-btn" type="submit">Submit Details</button>
 
-              <p class="complaints-foot">
+              <p class="complaints-foot d-none">
                 By clicking Submit, you agree to our <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>.
               </p>
             </form>
@@ -576,7 +584,7 @@ add_shortcode('complaints_form', function () {
             <div class="complaints-infoBlock">
               <p class="complaints-infoLabel">Office Address</p>
               <p class="complaints-infoText"><?php echo $sbtech_address; ?></p>
-              <a class="complaints-link" target="_blank" rel="noopener" href="https://www.google.com/maps?q=Dubai+Marina&output=embed">
+              <a class="complaints-link d-none" target="_blank" rel="noopener" href="https://www.google.com/maps?q=Dubai+Marina&output=embed">
                 Open in Google Maps
               </a>
             </div>

@@ -295,15 +295,24 @@ add_shortcode('meet_the_team', function () {
       }
     </style>
 
+    <?php
+    $meet_the_team_title = get_theme_mod( 'meet_the_team_title', __('Meet the Team', 'sbtech') );
+    $meet_the_team_desc = get_theme_mod( 'meet_the_team_desc', __('Find the right agent based on name, language, and nationality. Suggestions come directly from your database.', 'sbtech') );
+    ?>
+
     <section class="meet-the-team-section" aria-label="Meet the Team">
       <div class="meet-the-team-container">
 
         <div class="meet-the-team-head">
           <div>
-            <h2 class="meet-the-team-title">Meet the Team</h2>
-            <p class="meet-the-team-subtitle">
-              Find the right agent based on name, language, and nationality. Suggestions come directly from your database.
-            </p>
+            <?php if (!empty($meet_the_team_title)) : ?>
+            <h2 class="meet-the-team-title"><?php echo esc_html($meet_the_team_title); ?></h2>
+            <?php endif; ?>
+
+            <?php if (!empty($meet_the_team_desc)) : ?>
+            <p class="meet-the-team-subtitle"><?php echo esc_html($meet_the_team_desc); ?> </p>
+            <?php endif; ?>
+
           </div>
           <div class="meet-the-team-note d-none">Theme color: <strong>#ef3c26</strong></div>
         </div>
