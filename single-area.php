@@ -21,7 +21,7 @@
                 </p>
 
                 <div class="new_projects_area_actions">
-                    <a class="new_projects_area_btn new_projects_area_btn_primary" href="<?php echo esc_url(home_url('/')); ?>">
+                    <a class="new_projects_area_btn new_projects_area_btn_primary" href="<?php echo esc_url(home_url('/buy')); ?>">
                         Find Property
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                             <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

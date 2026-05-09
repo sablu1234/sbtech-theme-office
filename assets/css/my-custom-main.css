@@ -34,7 +34,7 @@ body{
 .logo img {
     height: 60px;
     border-radius: 8px;
-    border: 1px solid var(--clr-primary);
+/*     border: 1px solid var(--clr-primary); */
 }
 
 .top-actions{
@@ -421,3 +421,5 @@ body{
     .new_projects_area_btn{width:100%;}
     .new_projects_area_left:before{width:200px;height:200px;}
   }
+
+  

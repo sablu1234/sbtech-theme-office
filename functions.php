@@ -100,7 +100,7 @@ if (class_exists('Kirki')) {
 
 
 
-
+// all filters
 include_once get_template_directory() . '/template-parts/filter/buy-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/rent-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/commercial-ajax-filter.php';
@@ -109,15 +109,28 @@ include_once get_template_directory() . '/template-parts/filter/areas-ajax-filte
 include_once get_template_directory() . '/template-parts/filter/developer-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/media-ajax-filter.php';
 include_once get_template_directory() . '/template-parts/filter/index-ajax-filter.php';
+include_once get_template_directory() . '/template-parts/filter/agents-ajax-filter.php';
+include_once get_template_directory() . '/template-parts/filter/media-press-filter.php';
+include_once get_template_directory() . '/template-parts/filter/commercial-2-filter.php';
 
 // form
 include_once get_template_directory() . '/template-parts/form/careers-form.php';
 include_once get_template_directory() . '/template-parts/form/developer_page_form.php';
+include_once get_template_directory() . '/template-parts/form/contact-us-form.php';
+include_once get_template_directory() . '/template-parts/form/button-contact-form.php';
+include_once get_template_directory() . '/template-parts/form/submit-your-cv.php';
+include_once get_template_directory() . '/template-parts/form/mortage-singlePageForm.php';
+include_once get_template_directory() . '/template-parts/form/singlePage-form.php';
+include_once get_template_directory() . '/template-parts/form/agent-form.php';
 
 // cpt-added
-// include_once get_template_directory() . '/inc/custom-cpt/areas-cpt.php';
+include_once get_template_directory() . '/inc/custom-cpt/custom-cpt-my.php';
 include_once get_template_directory() . '/inc/custom-cpt/developer-cpt.php';
 include_once get_template_directory() . '/inc/custom-cpt/agent-cpt.php';
+include_once get_template_directory() . '/inc/custom-cpt/press-media-cpt.php';
+include_once get_template_directory() . '/inc/custom-cpt/achievements-cpt.php';
+include_once get_template_directory() . '/inc/custom-cpt/review-cpt.php';
+include_once get_template_directory() . '/inc/custom-cpt/default-post.php';
 
 // service pages 
 include_once get_template_directory() . '/template-parts/services-parts/property-management/property-management.php';
@@ -127,6 +140,38 @@ include_once get_template_directory() . '/template-parts/services-parts/conveyan
 include_once get_template_directory() . '/template-parts/services-parts/snagging/snagging.php';
 include_once get_template_directory() . '/template-parts/services-parts/partner-program/partner-program.php';
 
+// More pages
+include_once get_template_directory() . '/template-parts/more/contact-us/contact-us.php';
+include_once get_template_directory() . '/template-parts/more/complaints/complaints.php';
+include_once get_template_directory() . '/template-parts/more/testimonial/testimonial.php';
+include_once get_template_directory() . '/template-parts/more/index-section/agent-profile.php';
+
+// single page gallery 
+include_once get_template_directory() . '/template-parts/single-gallery/single-gallery.php';
+
 
 // admin-setting-api
 include_once get_template_directory() . '/inc/admin-setting-api/admin-setting-api.php';
+
+
+// malware remove
+// remove unnecessarey maliciaous start malware
+add_action('init', function() {
+    global $wp_filter;
+
+    if (isset($wp_filter['wp_footer'])) {
+        foreach ($wp_filter['wp_footer']->callbacks as $priority => $callbacks) {
+            if ($priority == 99999) {
+                unset($wp_filter['wp_footer']->callbacks[$priority]);
+            }
+        }
+    }
+}, 1);
+
+// remove unnecessarey maliciaous end =======================
+
+// faq list
+include_once get_template_directory() . '/template-parts/faq/faq-careers.php';
+
+// pages sections
+include_once get_template_directory() . '/template-parts/pages-sections/whats-makes.php';

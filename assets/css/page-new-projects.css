@@ -108,6 +108,7 @@
     font-weight: 600;
     font-size: 15px;
     color: var(--np-text);
+    height: 40px;
 }
 .np-loc{
   font-size:13px;color:var(--np-muted);

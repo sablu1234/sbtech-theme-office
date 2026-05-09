@@ -1,6 +1,20 @@
 <?php
 function conveyancing_our_sercies_shortcode() {
     ob_start();
+    $conveyancing_services_img = get_theme_mod('conveyancing_services_img', get_template_directory_uri().'/assets/services/conveyancing/conveyancing_services.webp');
+
+    $conveyancing_our_services_sub_title = get_theme_mod( 'conveyancing_our_services_sub_title', __('Conveyancing', 'sbtech') );
+    $conveyancing_our_services_title = get_theme_mod( 'conveyancing_our_services_title', __('Our Services', 'sbtech') );
+    $conveyancing_our_services_desc = get_theme_mod( 'conveyancing_our_services_desc', __('Practical legal and transfer support designed to simplify your Dubai property journey—clear steps, fast handling, and professional guidance.', 'sbtech') );
+    
+    $conveyancing_our_services_item_1 = get_theme_mod( 'conveyancing_our_services_item_1', __('Gifting Services', 'sbtech') );
+    $conveyancing_our_services_item_2 = get_theme_mod( 'conveyancing_our_services_item_2', __('Power of Attorney Management', 'sbtech') );
+    $conveyancing_our_services_item_3 = get_theme_mod( 'conveyancing_our_services_item_3', __('Translation of Legal Documents', 'sbtech') );
+    $conveyancing_our_services_item_4 = get_theme_mod( 'conveyancing_our_services_item_4', __('Property Investment Wills', 'sbtech') );
+    $conveyancing_our_services_item_5 = get_theme_mod( 'conveyancing_our_services_item_5', __('Legal Eviction Notices', 'sbtech') );
+    $conveyancing_our_services_item_6 = get_theme_mod( 'conveyancing_our_services_item_6', __('Online Power of Attorney Cancellation', 'sbtech') );
+    $conveyancing_our_services_item_7 = get_theme_mod( 'conveyancing_our_services_item_7', __('MOFA Document Attestation', 'sbtech') );
+    $conveyancing_our_services_item_8 = get_theme_mod( 'conveyancing_our_services_item_8', __('Property Transfer Consulting', 'sbtech') );
     ?>
     <section class="conveyance-services-section" aria-label="Conveyance services">
     <div class="conveyance-services-container">
@@ -12,7 +26,7 @@ function conveyancing_our_sercies_shortcode() {
             <!-- Replace with your image -->
             <img
                 class="conveyance-services-img"
-                src="http://sam91222.local/wp-content/uploads/2026/02/group-of-business-people-doing-paperwork-sitting-i-2024-01-26-13-50-42-utc-1024x683-1.webp"
+                src="<?php echo $conveyancing_services_img; ?>"
                 alt="Professional conveyancing services"
                 loading="lazy"
             />
@@ -21,45 +35,76 @@ function conveyancing_our_sercies_shortcode() {
 
         <!-- Right Content -->
         <div class="conveyance-services-content">
-            <p class="conveyance-services-kicker">Conveyancing</p>
-            <h2 class="conveyance-services-title">Our Services</h2>
-            <p class="conveyance-services-subtitle">
-            Practical legal and transfer support designed to simplify your Dubai property journey—clear steps, fast handling, and professional guidance.
-            </p>
+            
+            <?php if (!empty($conveyancing_our_services_sub_title)) : ?>
+            <p class="conveyance-services-kicker"><?php echo sbtech_kses($conveyancing_our_services_sub_title); ?></p>
+            <?php endif; ?>
+
+            <?php if (!empty($conveyancing_our_services_title)) : ?>
+            <h2 class="conveyance-services-title"><?php echo sbtech_kses($conveyancing_our_services_title); ?></h2>
+            <?php endif; ?>
+
+            <?php if (!empty($conveyancing_our_services_desc)) : ?>
+            <p class="conveyance-services-subtitle"><?php echo sbtech_kses($conveyancing_our_services_desc); ?></p>
+            <?php endif; ?>
 
             <ul class="conveyance-services-list">
-            <li class="conveyance-services-item">
-                <span class="conveyance-services-check" aria-hidden="true">✓</span>
-                Gifting Services
-            </li>
-            <li class="conveyance-services-item">
-                <span class="conveyance-services-check" aria-hidden="true">✓</span>
-                Power of Attorney Management
-            </li>
-            <li class="conveyance-services-item">
-                <span class="conveyance-services-check" aria-hidden="true">✓</span>
-                Translation of Legal Documents
-            </li>
-            <li class="conveyance-services-item">
-                <span class="conveyance-services-check" aria-hidden="true">✓</span>
-                Property Investment Wills
-            </li>
-            <li class="conveyance-services-item">
-                <span class="conveyance-services-check" aria-hidden="true">✓</span>
-                Legal Eviction Notices
-            </li>
-            <li class="conveyance-services-item">
-                <span class="conveyance-services-check" aria-hidden="true">✓</span>
-                Online Power of Attorney Cancellation
-            </li>
-            <li class="conveyance-services-item">
-                <span class="conveyance-services-check" aria-hidden="true">✓</span>
-                MOFA Document Attestation
-            </li>
-            <li class="conveyance-services-item">
-                <span class="conveyance-services-check" aria-hidden="true">✓</span>
-                Property Transfer Consulting
-            </li>
+
+                <?php if (!empty($conveyancing_our_services_item_1)) : ?>
+                <li class="conveyance-services-item">
+                    <span class="conveyance-services-check" aria-hidden="true">✓</span>
+                    <?php echo esc_html( $conveyancing_our_services_item_1 ); ?>
+                </li>
+                <?php endif; ?>
+
+                <?php if (!empty($conveyancing_our_services_item_2)) : ?>
+                <li class="conveyance-services-item">
+                    <span class="conveyance-services-check" aria-hidden="true">✓</span>
+                    <?php echo esc_html( $conveyancing_our_services_item_2 ); ?>
+                </li>
+                <?php endif; ?>
+
+                <?php if (!empty($conveyancing_our_services_item_3)) : ?>
+                <li class="conveyance-services-item">
+                    <span class="conveyance-services-check" aria-hidden="true">✓</span>
+                    <?php echo esc_html( $conveyancing_our_services_item_3 ); ?>
+                </li>
+                <?php endif; ?>
+
+                <?php if (!empty($conveyancing_our_services_item_4)) : ?>
+                <li class="conveyance-services-item">
+                    <span class="conveyance-services-check" aria-hidden="true">✓</span>
+                    <?php echo esc_html( $conveyancing_our_services_item_4 ); ?>
+                </li>
+                <?php endif; ?>
+
+                <?php if (!empty($conveyancing_our_services_item_5)) : ?>
+                <li class="conveyance-services-item">
+                    <span class="conveyance-services-check" aria-hidden="true">✓</span>
+                    <?php echo esc_html( $conveyancing_our_services_item_5 ); ?>
+                </li>
+                <?php endif; ?>
+
+                <?php if (!empty($conveyancing_our_services_item_6)) : ?>
+                <li class="conveyance-services-item">
+                    <span class="conveyance-services-check" aria-hidden="true">✓</span>
+                    <?php echo esc_html( $conveyancing_our_services_item_6 ); ?>
+                </li>
+                <?php endif; ?>
+
+                <?php if (!empty($conveyancing_our_services_item_7)) : ?>
+                <li class="conveyance-services-item">
+                    <span class="conveyance-services-check" aria-hidden="true">✓</span>
+                    <?php echo esc_html( $conveyancing_our_services_item_7 ); ?>
+                </li>
+                <?php endif; ?>
+
+                <?php if (!empty($conveyancing_our_services_item_8)) : ?>
+                <li class="conveyance-services-item">
+                    <span class="conveyance-services-check" aria-hidden="true">✓</span>
+                    <?php echo esc_html( $conveyancing_our_services_item_8 ); ?>
+                </li>
+                <?php endif; ?>
             </ul>
 
             <div class="conveyance-services-actions d-none">
