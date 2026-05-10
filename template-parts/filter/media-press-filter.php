@@ -69,6 +69,7 @@ function press_media_shortcode() {
         </div>
 
         <div class="news_views">
+        <i class="fa fa-eye"></i>
         <?php echo $view_count ? $view_count : '120'; ?>
     </div>
 
