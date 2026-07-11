@@ -73,47 +73,6 @@ function agent_cpt_area() {
     }
     agents_editor_charecter_limit();
 
-    //editor charecter limit for agent cpt
-    function agents_editor_charecter_limit(){
-        add_action('admin_footer', function () {
-            global $post_type;
-
-            if ($post_type !== 'agents') {
-                return;
-            }
-            ?>
-            <script>
-                jQuery(document).ready(function ($) {
-
-                    // Title max 20 characters
-                    // $('#title').attr('maxlength', 20);
-
-                    // Description/editor max 30 characters
-                    $('#content').attr('maxlength', 500);
-
-                    // $('#title').on('input', function () {
-                    //     if ($(this).val().length > 20) {
-                    //         $(this).val($(this).val().substring(0, 20));
-                    //     }
-                    // });
-
-                    // $('#title').after('<p style="color:#666;">Max 20 characters allowed</p>');  
-                    $('#content').after('<p style="color:#666;">Max 500 characters allowed</p>');
-
-                    $('#content').on('input', function () {
-                        if ($(this).val().length > 30) {
-                            $(this).val($(this).val().substring(0, 500));
-                        }
-                    });
-
-                });
-            </script>
-            <?php
-        });
-    }
-    agents_editor_charecter_limit();
-
-
     // Add Repeatable meta box for agent cpt============================================================
     add_action('add_meta_boxes', function () {
         add_meta_box(
