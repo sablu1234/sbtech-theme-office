@@ -73,6 +73,7 @@
 <section class="rent-faqs" aria-label="rent faq">
     <div class="rent-container">
         <div class="rent-faqs__head">
+            <?php if(!empty($rent_faq_title)) : ?>
             <div>
                 <span class="rent-faqs__kicker">FAQ</span>
 				<?php if(!empty($rent_faq_title)) : ?>
@@ -83,6 +84,7 @@
                 <p class="rent-faqs__sub"><?php echo esc_html( $rent_faq_description ); ?></p>
 				<?php endif;?>
             </div>
+            <? endif;?>
         </div>
 
         <div class="rent-faqs__wrap" id="rentFaq">
@@ -122,3 +124,4 @@
 
 
 <?php get_footer();
+

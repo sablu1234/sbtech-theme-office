@@ -117,7 +117,7 @@
             </div>
 
             <div class="rent-faq">
-                <button class="rent-faq__q" type="button" aria-expanded="false">
+                <button class="rent-faq__q" type="button" aria-expanded="true">
                     2. Can I view full project details before enquiring?
                     <span class="rent-faq__icon" aria-hidden="true"></span>
                 </button>
@@ -129,7 +129,7 @@
             </div>
 
             <div class="rent-faq">
-                <button class="rent-faq__q" type="button" aria-expanded="false">
+                <button class="rent-faq__q" type="button" aria-expanded="true">
                     3. Are the developers and listings verified?
                     <span class="rent-faq__icon" aria-hidden="true"></span>
                 </button>
@@ -141,7 +141,7 @@
             </div>
 
             <div class="rent-faq">
-                <button class="rent-faq__q" type="button" aria-expanded="false">
+                <button class="rent-faq__q" type="button" aria-expanded="true">
                     4. Is it possible to add projects in bulk?
                     <span class="rent-faq__icon" aria-hidden="true"></span>
                 </button>
@@ -153,7 +153,7 @@
             </div>
 
             <div class="rent-faq">
-                <button class="rent-faq__q" type="button" aria-expanded="false">
+                <button class="rent-faq__q" type="button" aria-expanded="true">
                     5. Do you offer flexible payment plan options?
                     <span class="rent-faq__icon" aria-hidden="true"></span>
                 </button>
@@ -165,7 +165,7 @@
             </div>
 
             <div class="rent-faq">
-                <button class="rent-faq__q" type="button" aria-expanded="false">
+                <button class="rent-faq__q" type="button" aria-expanded="true">
                     6. How can I contact an agent or request more details?
                     <span class="rent-faq__icon" aria-hidden="true"></span>
                 </button>
