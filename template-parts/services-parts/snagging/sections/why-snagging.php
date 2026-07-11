@@ -1,6 +1,11 @@
 <?php
 function why_snagging_function() {
     ob_start();
+    $property_snagging_ws_img = get_theme_mod('property_snagging_ws_img', get_template_directory_uri().'/assets/services/property-snagging/property_snagging_why_snagging.avif');
+
+    $property_snagging_about_sub_title = get_theme_mod( 'property_snagging_about_sub_title', __('Property Snagging', 'sbtech') );
+    $property_snagging_about_title = get_theme_mod( 'property_snagging_about_title', __('Why Snagging & Inspection with CBA Real Estate?', 'sbtech') );
+    $property_snagging_about_desc = get_theme_mod( 'property_snagging_about_desc', __('<p> Our snagging service identifies finishing defects, functional issues, and quality gaps before you take ownership. We inspect key areas such as walls and paintwork, flooring, doors and windows, plumbing, electrical points, HVAC performance, and visible workmanship details. </p> <p> You receive a structured snagging report with prioritized items, so you can request rectifications from the or contractor quickly and confidently—reducing post-handover surprises.</p>', 'sbtech') );
     ?>
     <section class="property-snagging-section" aria-label="Property snagging and inspection">
     <div class="property-snagging-container">
@@ -8,28 +13,17 @@ function why_snagging_function() {
 
         <!-- Left Content -->
         <div class="property-snagging-content">
-            <p class="property-snagging-kicker">Property Snagging</p>
+            <?php if (!empty($property_snagging_about_sub_title)) : ?>
+            <p class="property-snagging-kicker"><?php echo esc_html($property_snagging_about_sub_title); ?></p>
+            <?php endif; ?>
 
-            <h2 class="property-snagging-title">
-            Why Snagging & Inspection with CBA Real Estate?
-            </h2>
+            <?php if (!empty($property_snagging_about_title)) : ?>
+            <h2 class="property-snagging-title"><?php echo esc_html($property_snagging_about_title); ?> </h2>
+            <?php endif; ?>
 
-            <p class="property-snagging-lead">
-            Protect your investment before handover with a detailed snagging inspection—clear reporting, actionable fixes, and total peace of mind.
-            </p>
-
-            <div class="property-snagging-text">
-            <p>
-                Our snagging service identifies finishing defects, functional issues, and quality gaps before you take ownership.
-                We inspect key areas such as walls and paintwork, flooring, doors and windows, plumbing, electrical points,
-                HVAC performance, and visible workmanship details.
-            </p>
-
-            <p>
-                You receive a structured snagging report with prioritized items, so you can request rectifications from the
-                developer or contractor quickly and confidently—reducing post-handover surprises.
-            </p>
-            </div>
+            <?php if (!empty($property_snagging_about_desc)) : ?>
+            <div class="property-snagging-text"><?php echo sbtech_kses($property_snagging_about_desc); ?></div>
+            <?php endif; ?>
 
             <div class="property-snagging-actions d-none">
             <a class="property-snagging-btn property-snagging-btn--primary" href="#">
@@ -55,7 +49,7 @@ function why_snagging_function() {
             <!-- Replace this image URL with your own -->
             <img
                 class="property-snagging-img"
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80"
+                src="<?php echo $property_snagging_ws_img; ?>"
                 alt="Property inspection and snagging"
                 loading="lazy"
             />

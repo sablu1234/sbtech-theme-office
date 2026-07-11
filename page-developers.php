@@ -1,6 +1,5 @@
 <?php get_header(); ?>
 
-
 <!-- new projects filter shortcode start -->
 <section class="container new-projects">
     <?php echo do_shortcode('[developers_page]'); ?>
@@ -9,7 +8,7 @@
 
 
 <!-- Office for sate start -->
-<section class="np-wrap np-sec">
+<section class="np-wrap np-sec d-none">
     <div class="np-container">
 
         <div class="np-head">

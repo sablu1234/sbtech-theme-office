@@ -64,7 +64,12 @@
 <!-- hero area end -->
 
 <!-- about area start -->
-<section class="area_single_section">
+    <?php
+        $the_content = get_the_content(); // the_content() পরিবর্তে get_the_content() ব্যবহার করুন
+    
+        $display = $the_content ? 'd-block' : 'd-none';
+    ?>
+<section class="area_single_section <?php echo $display; ?>">
     <div class="area_single_container">
 
         <?php if (!empty(get_the_title())): ?>
@@ -90,52 +95,7 @@
 
 <!-- agets of the monthe start -->
 <section class="agents_month_section">
-    <div class="agents_month_container">
-
-        <div class="agents_month_header">
-            <div>
-                <h2 class="agents_month_title">Agents of the Month</h2>
-                <p class="agents_month_sub">
-                    Meet our top-performing agents selected for outstanding results, client satisfaction, and market expertise.
-                </p>
-            </div>
-        </div>
-
-        <div class="agents_month_grid">
-            <?php
-            $agent_query = new WP_Query([
-                'post_type' => 'agent',
-                'posts_per_page' => 4,
-                'post_status' => 'publish',
-                'orderby' => 'rand'
-            ]);
-            while ($agent_query->have_posts()) : $agent_query->the_post(); ?>
-                <a class="agent_card" href="<?php echo get_permalink(get_the_ID()); ?>">
-                    <div class="agent_card_media">
-                        <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" alt="Agent">
-                        <div class="agent_card_tag d-none">Top Performer</div>
-                    </div>
-                    <div class="agent_card_body">
-                        <h3 class="agent_name"><?php echo get_the_title(); ?></h3>
-                        <p class="agent_meta"><strong>Speaks:</strong>
-                            <?php
-                            $speaking_language = get_post_meta(get_the_ID(), 'agent_repeat_items', true);
-                            if (is_array($speaking_language) && !empty($speaking_language)) {
-                                foreach ($speaking_language as $item) {
-                                    echo esc_html($item) . ', ';
-                                }
-                            }
-                            ?>
-                        </p>
-                    </div>
-                    <div class="agent_card_footer">
-                        <span class="agent_btn">View Profile →</span>
-                    </div>
-                </a>
-            <?php endwhile; ?>
-        </div>
-
-    </div>
+    <?php echo do_shortcode('[agent_profile]'); ?>
 </section>
 <!-- agets of the monthe end -->
 

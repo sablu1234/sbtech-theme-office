@@ -389,16 +389,33 @@
   max-width:520px;
 }
 
-/* Grid */
+/* Slider wrapper */
+.agents_month_slider_wrap{
+  position:relative;
+  margin-top:18px;
+}
+
+/* Slider track */
 .agents_month_grid{
-  display:grid;
-  grid-template-columns:repeat(4, 1fr);
+  display:flex;
   gap:18px;
   margin-top:18px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+  padding:4px 2px 24px;
+}
+
+.agents_month_grid::-webkit-scrollbar{
+  display:none;
 }
 
 /* Card */
 .agent_card{
+  flex:0 0 calc((100% - 54px) / 4);
+  scroll-snap-align:start;
   background:var(--aom_white);
   border:1px solid var(--aom_border);
   border-radius:var(--aom_radius);
@@ -419,7 +436,7 @@
 /* Image */
 .agent_card_media{
   position:relative;
-  height:230px; /* same height */
+  height:230px;
   overflow:hidden;
   background:#f6f7f8;
 }
@@ -430,6 +447,7 @@
   object-fit:cover;
   object-position:center;
   transition:transform .7s ease;
+  display:block;
 }
 
 .agent_card:hover .agent_card_media img{
@@ -497,25 +515,116 @@
   text-decoration:none;
   transition:.2s ease;
 }
+
 .agent_btn:hover{
   background:var(--aom_primary);
   color:#fff;
 }
 
+/* Navigation buttons */
+.agents_month_nav{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:5;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:1px solid rgba(239,60,38,.25);
+  background:rgba(255,255,255,.96);
+  color:var(--aom_primary);
+  box-shadow:0 12px 35px rgba(16,24,40,.16);
+  font-size:30px;
+  line-height:1;
+  font-weight:400;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.agents_month_nav:hover{
+  background:var(--aom_primary);
+  color:#fff;
+}
+
+.agents_month_prev{
+  left:-18px;
+}
+
+.agents_month_next{
+  right:-18px;
+}
+
 /* Tablet */
 @media (max-width: 992px){
-  .agents_month_title{ font-size:32px; }
-  .agents_month_grid{ grid-template-columns:repeat(2, 1fr); }
-  .agent_card_media{ height:240px; }
+  .agents_month_title{
+    font-size:32px;
+  }
+
+  .agent_card{
+    flex:0 0 calc((100% - 18px) / 2);
+  }
+
+  .agent_card_media{
+    height:240px;
+  }
+
+  .agents_month_prev{
+    left:-10px;
+  }
+
+  .agents_month_next{
+    right:-10px;
+  }
 }
 
 /* Mobile */
 @media (max-width: 600px){
-  .agents_month_section{ padding:44px 14px; }
-  .agents_month_header{ flex-direction:column; align-items:flex-start; }
-  .agents_month_title{ font-size:26px; }
-  .agents_month_grid{ grid-template-columns:1fr; gap:14px; }
-  .agent_card_media{ height:240px; }
+  .agents_month_section{
+    padding:44px 14px;
+  }
+
+  .agents_month_header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .agents_month_title{
+    font-size:26px;
+  }
+
+  .agents_month_slider_wrap{
+    padding:0 4px;
+  }
+
+  .agents_month_grid{
+    gap:14px;
+    padding:4px 0 18px;
+  }
+
+  .agent_card{
+    flex:0 0 100%;
+  }
+
+  .agent_card_media{
+    height:240px;
+  }
+
+  .agents_month_nav{
+    width:38px;
+    height:38px;
+    font-size:28px;
+  }
+
+  .agents_month_prev{
+    left:-2px;
+  }
+
+  .agents_month_next{
+    right:-2px;
+  }
 }
 /* agents of the month end ======================================================================*/
 

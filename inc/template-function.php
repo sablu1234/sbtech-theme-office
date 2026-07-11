@@ -1,43 +1,62 @@
 <?php
 
 // Sbtech_header_logo
-function Sbtech_header_logo() {
-
-    $header_logo = get_theme_mod('header_logo', get_template_directory_uri() . '/assets/img/logo/logo.png');
-?>
-    <a href="<?php echo home_url('/'); ?>"><img src="<?php echo $header_logo; ?>" alt=""></a>
-<?php
+function sbtech_header_logo(){
+    $header_logo = get_theme_mod('header_logo', get_template_directory_uri().'/assets/header/logo-main.jpg');
+    ?>
+    <a class="logo" href="<?php echo home_url('/'); ?>"><img src="<?php echo esc_url($header_logo); ?>" alt="Logo"></a>
+    <?php
 }
 
-// Sbtech_footer_copyright
-function Sbtech_footer_copyright() {
-    $footer_copyright = get_theme_mod('footer_copyright', __('Full Copyright & Design By @ Theme pure – 2024'));
-?>
-    <p class="tp-footer-copy-paragraph tp-footer-4-copy-paragraph"><?php echo wp_kses_post($footer_copyright) ?></a></p>
-<?php
+// Sbtech_social Media
+function sbtech_social_media(){
+    $sbtech_fb_link = get_theme_mod('sbtech_fb_link', '#');
+    $sbtech_ig_link = get_theme_mod('sbtech_ig_link', '#');
+    $sbtech_youtube_link = get_theme_mod('sbtech_youtube_link', '#');
+    $sbtech_tw_link = get_theme_mod('sbtech_tw_link', '#');
+    $sbtech_ld_link = get_theme_mod('sbtech_ld_link', '#');
+    $sbtech_tg_link = get_theme_mod('sbtech_tg_link', '#');
+    ?>
+    
+    <?php if(!empty($sbtech_fb_link)) : ?>
+    <a href="<?php echo esc_url( $sbtech_fb_link ); ?>" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
+        <i class="fa-brands fa-facebook-f"></i>
+    </a>
+    <?php endif;?>
+
+    <?php if(!empty($sbtech_ig_link)) : ?>
+    <a href="<?php echo esc_url( $sbtech_ig_link ); ?>" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
+        <i class="fab fa-instagram"></i>
+    </a>
+    <?php endif;?>
+
+    <?php if(!empty($sbtech_youtube_link)) : ?>
+    <a href="<?php echo esc_url( $sbtech_youtube_link ); ?>" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
+        <i class="fab fa-youtube"></i>
+    </a>
+    <?php endif;?>
+
+    <?php if(!empty($sbtech_tw_link)) : ?>
+    <a href="<?php echo esc_url( $sbtech_tw_link ); ?>" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
+        <i class="fab fa-twitter"></i>
+    </a>
+    <?php endif;?>
+
+    <?php if(!empty($sbtech_ld_link)) : ?>
+    <a href="<?php echo esc_url( $sbtech_ld_link ); ?>" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
+        <i class="fab fa-linkedin-in"></i>
+    </a>
+    <?php endif;?>
+
+    <?php if(!empty($sbtech_tg_link)) : ?>
+    <a href="<?php echo esc_url( $sbtech_tg_link ); ?>" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--clr-primary);border-radius:8px;color:var(--clr-primary);text-decoration:none;">
+        <i class="fab fa-telegram-plane"></i>
+    </a>
+    <?php endif;?>
+
+    <?php
 }
 
-// Sbtech_header_social
-function sbtech_header_social() {
-    $header_fb = get_theme_mod('header_fb', '#');
-    $header_in = get_theme_mod('header_in', '#');
-    $header_tw = get_theme_mod('header_tw', '#');
-
-?>
-    <?php if (!empty($header_fb)) : ?>
-        <a href="<?php echo esc_url($header_fb); ?>"><i class="fa-brands fa-facebook"></i></a>
-    <?php endif; ?>
-    <?php if (!empty($header_in)) : ?>
-        <a href="<?php echo esc_url($header_in); ?>"><i class="fa-brands fa-instagram"></i></a>
-    <?php endif; ?>
-    <?php if (!empty($header_tw)) : ?>
-        <a href="<?php echo esc_url($header_tw); ?>"><i class="fa-brands fa-twitter"></i></a>
-    <?php endif; ?>
-    <?php if (!empty($header_pin)) : ?>
-        <a href="<?php echo esc_url($header_pin); ?>"><i class="fa-brands fa-pinterest"></i></a>
-    <?php endif; ?>
-<?php
-}
 
 // Main menu display funciton
 function sbtech_header_menu() {

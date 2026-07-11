@@ -2,20 +2,44 @@
 
 function why_partner_with_cba_function() {
     ob_start();
+    $partner_programs_why_partner_with_cba_sub_title = get_theme_mod( 'partner_programs_why_partner_with_cba_sub_title', __('Partner Program', 'sbtech') );
+    $partner_programs_why_partner_with_cba_title = get_theme_mod( 'partner_programs_why_partner_with_cba_title', __('Why Partner With CBA?', 'sbtech') );
+    $partner_programs_why_partner_with_cba_desc = get_theme_mod( 'partner_programs_why_partner_with_cba_desc', __('Join CBA Real Estate and unlock premium inventory, structured referrals, and dedicated support—built for long-term growth in Dubai’s market.', 'sbtech') );
+
+    $partner_program_why_partner_with_cba_card_1_title = get_theme_mod( 'partner_program_why_partner_with_cba_card_1_title', __('Access Exclusive Properties', 'sbtech') );
+    $partner_program_why_partner_with_cba_card_2_title = get_theme_mod( 'partner_program_why_partner_with_cba_card_2_title', __('Lucrative Referral Program', 'sbtech') );
+    $partner_program_why_partner_with_cba_card_3_title = get_theme_mod( 'partner_program_why_partner_with_cba_card_3_title', __('Trusted Expertise', 'sbtech') );
+    $partner_program_why_partner_with_cba_card_4_title = get_theme_mod( 'partner_program_why_partner_with_cba_card_4_title', __('Comprehensive Support', 'sbtech') );
+    $partner_program_why_partner_with_cba_card_5_title = get_theme_mod( 'partner_program_why_partner_with_cba_card_5_title', __('Expand Your Network', 'sbtech') );
+    $partner_program_why_partner_with_cba_card_6_title = get_theme_mod( 'partner_program_why_partner_with_cba_card_6_title', __('Stay Ahead in the Market', 'sbtech') );
+
+    $partner_program_why_partner_with_cba_card_1_desc = get_theme_mod( 'partner_program_why_partner_with_cba_card_1_desc', __('Get priority access to high-demand listings and curated opportunities—so you stay ahead with the right inventory.', 'sbtech') );
+    $partner_program_why_partner_with_cba_card_2_desc = get_theme_mod( 'partner_program_why_partner_with_cba_card_2_desc', __('Earn competitive referral commissions with a transparent, performance-driven partnership model.', 'sbtech') );
+    $partner_program_why_partner_with_cba_card_3_desc = get_theme_mod( 'partner_program_why_partner_with_cba_card_3_desc', __('Partner with experienced professionals known for market insights, clear guidance, and strong deal execution.', 'sbtech') );
+    $partner_program_why_partner_with_cba_card_4_desc = get_theme_mod( 'partner_program_why_partner_with_cba_card_4_desc', __('Get marketing assets, partner assistance, and end-to-end coordination to keep every lead moving smoothly.', 'sbtech') );
+    $partner_program_why_partner_with_cba_card_5_desc = get_theme_mod( 'partner_program_why_partner_with_cba_card_5_desc', __('Connect with buyers, investors, and decision-makers—opening new opportunities through strategic relationships.', 'sbtech') );
+    $partner_program_why_partner_with_cba_card_6_desc = get_theme_mod( 'partner_program_why_partner_with_cba_card_6_desc', __('Leverage Dubai’s fast-moving market with timely inventory, data-backed insights, and strong partner positioning.', 'sbtech') );
     ?>
     <section class="partner-program-benefits-section" aria-label="Partner program benefits">
     <div class="partner-program-benefits-container">
 
         <header class="partner-program-benefits-head">
-        <p class="partner-program-benefits-kicker">Partner Program</p>
-        <h2 class="partner-program-benefits-title">Why Partner With CBA Real Estate?</h2>
-        <p class="partner-program-benefits-subtitle">
-            Join CBA Real Estate and unlock premium inventory, structured referrals, and dedicated support—built for long-term growth in Dubai’s market.
-        </p>
+        <?php if (!empty($partner_programs_why_partner_with_cba_sub_title)) : ?>
+        <p class="partner-program-benefits-kicker"><?php echo esc_html($partner_programs_why_partner_with_cba_sub_title); ?></p>
+        <?php endif; ?>
+
+        <?php if (!empty($partner_programs_why_partner_with_cba_title)) : ?>
+        <h2 class="partner-program-benefits-title"><?php echo esc_html($partner_programs_why_partner_with_cba_title); ?></h2>
+        <?php endif; ?>
+
+        <?php if (!empty($partner_programs_why_partner_with_cba_desc)) : ?>
+        <p class="partner-program-benefits-subtitle"><?php echo esc_html($partner_programs_why_partner_with_cba_desc); ?></p>
+        <?php endif; ?>
+
         </header>
 
         <div class="partner-program-benefits-grid">
-
+        <?php if (!empty($partner_program_why_partner_with_cba_card_1_title)) : ?>
         <article class="partner-program-benefits-card">
             <div class="partner-program-benefits-icon" aria-hidden="true">
             <!-- home icon -->
@@ -23,12 +47,17 @@ function why_partner_with_cba_function() {
                 <path d="M12 3l9 8h-3v10h-5v-6H11v6H6V11H3l9-8z"/>
             </svg>
             </div>
-            <h3 class="partner-program-benefits-cardTitle">Access Exclusive Properties</h3>
-            <p class="partner-program-benefits-cardText">
-            Get priority access to high-demand listings and curated opportunities—so you stay ahead with the right inventory.
-            </p>
-        </article>
+            <?php if (!empty($partner_program_why_partner_with_cba_card_1_title)) : ?>
+            <h3 class="partner-program-benefits-cardTitle"><?php echo esc_html($partner_program_why_partner_with_cba_card_1_title); ?></h3>
+            <?php endif; ?>
 
+            <?php if (!empty($partner_program_why_partner_with_cba_card_1_desc)) : ?>
+            <p class="partner-program-benefits-cardText"><?php echo esc_html($partner_program_why_partner_with_cba_card_1_desc); ?></p>
+            <?php endif; ?>
+        </article>
+        <?php endif; ?>
+
+        <?php if (!empty($partner_program_why_partner_with_cba_card_2_title)) : ?>
         <article class="partner-program-benefits-card">
             <div class="partner-program-benefits-icon" aria-hidden="true">
             <!-- thumbs up -->
@@ -36,12 +65,17 @@ function why_partner_with_cba_function() {
                 <path d="M2 10h4v12H2V10zm20 1c0-1.1-.9-2-2-2h-6.3l.9-4.3.03-.32c0-.4-.16-.78-.44-1.06L13 2 7.6 7.4C7.22 7.78 7 8.3 7 8.83V20c0 1.1.9 2 2 2h8c.82 0 1.54-.5 1.84-1.22l2.02-4.71c.09-.23.14-.47.14-.72v-4.37z"/>
             </svg>
             </div>
-            <h3 class="partner-program-benefits-cardTitle">Lucrative Referral Program</h3>
-            <p class="partner-program-benefits-cardText">
-            Earn competitive referral commissions with a transparent, performance-driven partnership model.
-            </p>
-        </article>
+            <?php if (!empty($partner_program_why_partner_with_cba_card_2_title)) : ?>
+            <h3 class="partner-program-benefits-cardTitle"><?php echo esc_html($partner_program_why_partner_with_cba_card_2_title); ?></h3>
+            <?php endif; ?>
 
+            <?php if (!empty($partner_program_why_partner_with_cba_card_2_desc)) : ?>
+            <p class="partner-program-benefits-cardText"><?php echo esc_html($partner_program_why_partner_with_cba_card_2_desc); ?></p>
+            <?php endif; ?>
+        </article>
+        <?php endif; ?>
+
+        <?php if (!empty($partner_program_why_partner_with_cba_card_3_title)) : ?>
         <article class="partner-program-benefits-card">
             <div class="partner-program-benefits-icon" aria-hidden="true">
             <!-- building -->
@@ -49,12 +83,17 @@ function why_partner_with_cba_function() {
                 <path d="M4 22V2h12v6h4v14H4zm2-2h2v-2H6v2zm0-4h2v-2H6v2zm0-4h2v-2H6v2zm0-4h2V6H6v2zm4 12h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V6h-2v2zm4 12h2v-2h-2v2zm0-4h2v-2h-2v2z"/>
             </svg>
             </div>
-            <h3 class="partner-program-benefits-cardTitle">Trusted Expertise</h3>
-            <p class="partner-program-benefits-cardText">
-            Partner with experienced professionals known for market insights, clear guidance, and strong deal execution.
-            </p>
-        </article>
+            <?php if (!empty($partner_program_why_partner_with_cba_card_3_title)) : ?>
+            <h3 class="partner-program-benefits-cardTitle"><?php echo esc_html($partner_program_why_partner_with_cba_card_3_title); ?></h3>
+            <?php endif; ?>
 
+            <?php if (!empty($partner_program_why_partner_with_cba_card_3_desc)) : ?>
+            <p class="partner-program-benefits-cardText"><?php echo esc_html($partner_program_why_partner_with_cba_card_3_desc); ?></p>
+            <?php endif; ?>
+        </article>
+        <?php endif; ?>
+
+        <?php if (!empty($partner_program_why_partner_with_cba_card_4_title)) : ?>
         <article class="partner-program-benefits-card">
             <div class="partner-program-benefits-icon" aria-hidden="true">
             <!-- support -->
@@ -62,12 +101,17 @@ function why_partner_with_cba_function() {
                 <path d="M12 1a9 9 0 00-9 9v5a3 3 0 003 3h1v-8H6a7 7 0 0114 0h-1v8h1a3 3 0 003-3v-5a9 9 0 00-9-9zm-5 18h10v2H7v-2z"/>
             </svg>
             </div>
-            <h3 class="partner-program-benefits-cardTitle">Comprehensive Support</h3>
-            <p class="partner-program-benefits-cardText">
-            Get marketing assets, partner assistance, and end-to-end coordination to keep every lead moving smoothly.
-            </p>
-        </article>
+            <?php if (!empty($partner_program_why_partner_with_cba_card_4_title)) : ?>
+            <h3 class="partner-program-benefits-cardTitle"><?php echo esc_html($partner_program_why_partner_with_cba_card_4_title); ?></h3>
+            <?php endif; ?>
 
+            <?php if (!empty($partner_program_why_partner_with_cba_card_4_desc)) : ?>
+            <p class="partner-program-benefits-cardText"><?php echo esc_html($partner_program_why_partner_with_cba_card_4_desc); ?></p>
+            <?php endif; ?>
+        </article>
+        <?php endif; ?>
+
+        <?php if (!empty($partner_program_why_partner_with_cba_card_5_title)) : ?>
         <article class="partner-program-benefits-card">
             <div class="partner-program-benefits-icon" aria-hidden="true">
             <!-- network -->
@@ -75,12 +119,17 @@ function why_partner_with_cba_function() {
                 <path d="M16 11c1.66 0 3-1.34 3-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zM8 11c1.66 0 3-1.34 3-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5C15 14.17 10.33 13 8 13zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.96 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
             </svg>
             </div>
-            <h3 class="partner-program-benefits-cardTitle">Expand Your Network</h3>
-            <p class="partner-program-benefits-cardText">
-            Connect with buyers, investors, and decision-makers—opening new opportunities through strategic relationships.
-            </p>
-        </article>
+            <?php if (!empty($partner_program_why_partner_with_cba_card_5_title)) : ?>
+            <h3 class="partner-program-benefits-cardTitle"><?php echo esc_html($partner_program_why_partner_with_cba_card_5_title); ?></h3>
+            <?php endif; ?>
 
+            <?php if (!empty($partner_program_why_partner_with_cba_card_5_desc)) : ?>
+            <p class="partner-program-benefits-cardText"><?php echo esc_html($partner_program_why_partner_with_cba_card_5_desc); ?></p>
+            <?php endif; ?>
+        </article>
+        <?php endif; ?>
+
+        <?php if (!empty($partner_program_why_partner_with_cba_card_6_title)) : ?>
         <article class="partner-program-benefits-card">
             <div class="partner-program-benefits-icon" aria-hidden="true">
             <!-- location -->
@@ -88,11 +137,16 @@ function why_partner_with_cba_function() {
                 <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/>
             </svg>
             </div>
-            <h3 class="partner-program-benefits-cardTitle">Stay Ahead in the Market</h3>
-            <p class="partner-program-benefits-cardText">
-            Leverage Dubai’s fast-moving market with timely inventory, data-backed insights, and strong partner positioning.
-            </p>
+            <?php if (!empty($partner_program_why_partner_with_cba_card_6_title)) : ?>
+            <h3 class="partner-program-benefits-cardTitle"><?php echo esc_html($partner_program_why_partner_with_cba_card_6_title); ?></h3>
+            <?php endif; ?>
+
+            <?php if (!empty($partner_program_why_partner_with_cba_card_6_desc)) : ?>
+            <p class="partner-program-benefits-cardText"><?php echo esc_html($partner_program_why_partner_with_cba_card_6_desc); ?></p>
+            <?php endif; ?>
+            
         </article>
+        <?php endif; ?>
 
         </div>
     </div>

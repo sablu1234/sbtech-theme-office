@@ -12,8 +12,8 @@ function register_custom_post_developer() {
         'all_items'          => __( 'All developer' ),
         'view_item'          => __( 'View developer' ),
         'search_items'       => __( '' ),
-        'featured_image'     => 'Poster',
-        'set_featured_image' => 'Add Poster'
+        'featured_image'     => 'Poster Logo(Size: 600x164)',
+        'set_featured_image' => 'Add developer Poster logo'
     );
 
     $args = array(
@@ -36,49 +36,11 @@ add_action('init', 'register_custom_post_developer');
 // Meta field for developer
 function meta_field_for_developer() {
     // one to many relationship between developer and property
-    add_action('add_meta_boxes', function () {
-    add_meta_box(
-        'porpertypi_developer_box',
-        'Developer',
-        'porpertypi_developer_box_html',
-        'porpertypi',   // <-- YOUR CPT SLUG
-        'side',
-        'default'
-    );
-    });
-
-    function porpertypi_developer_box_html($post){
-    $selected = (int) get_post_meta($post->ID, '_developer_id', true);
-
-    $developers = get_posts([
-        'post_type'   => 'developer',
-        'numberposts' => -1,
-        'orderby'     => 'title',
-        'order'       => 'ASC',
-    ]);
-
-    echo '<select name="developer_id" style="width:100%">';
-    echo '<option value="0">Select Developer</option>';
-    foreach ($developers as $dev) {
-        echo '<option value="'.esc_attr($dev->ID).'" '.selected($selected, $dev->ID, false).'>'
-        .esc_html($dev->post_title).
-        '</option>';
-    }
-    echo '</select>';
-    }
-
-    // Save selected developer
-    add_action('save_post_porpertypi', function($post_id){
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-    if (!current_user_can('edit_post', $post_id)) return;
-
-    $dev_id = isset($_POST['developer_id']) ? (int) $_POST['developer_id'] : 0;
-    update_post_meta($post_id, '_developer_id', $dev_id);
-    });
+   
 
     // image meta field for developer
     add_action('add_meta_boxes', function () {
-    add_meta_box('dev_img_box', 'Developer Image', 'dev_img_box_html', 'developer', 'side');
+    add_meta_box('dev_img_box', 'Feature Image(Size: 1000x700px)', 'dev_img_box_html', 'developer', 'side');
     });
 
     function dev_img_box_html($post){
@@ -174,3 +136,53 @@ function meta_field_for_developer() {
     });
 }
 meta_field_for_developer();
+
+
+
+// one to many relationship between developer and property
+
+/*
+ function developer_relation_with_property(){
+    add_action('add_meta_boxes', function () {
+    add_meta_box(
+        'porpertypi_developer_box',
+        'Developer',
+        'porpertypi_developer_box_html',
+        'porpertypi',   // <-- YOUR CPT SLUG
+        'side',
+        'default'
+    );
+    });
+
+    function porpertypi_developer_box_html($post){
+    $selected = (int) get_post_meta($post->ID, '_developer_id', true);
+
+    $developers = get_posts([
+        'post_type'   => 'developer',
+        'numberposts' => -1,
+        'orderby'     => 'title',
+        'order'       => 'ASC',
+    ]);
+
+    echo '<select name="developer_id" style="width:100%">';
+    echo '<option value="0">Select Developer</option>';
+    foreach ($developers as $dev) {
+        echo '<option value="'.esc_attr($dev->ID).'" '.selected($selected, $dev->ID, false).'>'
+        .esc_html($dev->post_title).
+        '</option>';
+    }
+    echo '</select>';
+    }
+
+    // Save selected developer
+    add_action('save_post_porpertypi', function($post_id){
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_post', $post_id)) return;
+
+    $dev_id = isset($_POST['developer_id']) ? (int) $_POST['developer_id'] : 0;
+    update_post_meta($post_id, '_developer_id', $dev_id);
+    });
+ }
+
+developer_relation_with_property();
+*/

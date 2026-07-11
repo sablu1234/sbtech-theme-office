@@ -1,155 +1,151 @@
-// Great Place To Work start ar js
-
-(function () {
-    const root = document.querySelector('[data-awards]');
-    if (!root) return;
-
-    const track = root.querySelector('[data-track]');
-    const cards = Array.from(track.querySelectorAll('.awards__card'));
-    const prevBtn = root.querySelector('[data-prev]');
-    const nextBtn = root.querySelector('[data-next]');
-    const dotsWrap = root.querySelector('[data-dots]');
-
-    let index = 0;
-    let perView = 1;
-    let maxIndex = 0;
-
-    function getGap() {
-        const cs = window.getComputedStyle(track);
-        const g = parseFloat(cs.gap || cs.columnGap || '14');
-        return isNaN(g) ? 14 : g;
-    }
-
-    function calc() {
-        const frame = root.querySelector('.awards__viewport');
-        const frameW = frame.getBoundingClientRect().width;
-        const cardW = cards[0].getBoundingClientRect().width;
-        const gap = getGap();
-        perView = Math.max(1, Math.floor((frameW + gap) / (cardW + gap)));
-        maxIndex = Math.max(0, cards.length - perView);
-        index = Math.min(index, maxIndex);
-    }
-
-    function buildDots() {
-        dotsWrap.innerHTML = '';
-        const dotsCount = maxIndex + 1; // pages
-        for (let i = 0; i < dotsCount; i++) {
-            const b = document.createElement('button');
-            b.type = 'button';
-            b.className = 'awards__dot' + (i === index ? ' is-active' : '');
-            b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-            b.addEventListener('click', () => { index = i; update(); });
-            dotsWrap.appendChild(b);
-        }
-    }
-
-    function updateDots() {
-        const dots = Array.from(dotsWrap.querySelectorAll('.awards__dot'));
-        dots.forEach((d, i) => d.classList.toggle('is-active', i === index));
-    }
-
-    function update() {
-        const cardW = cards[0].getBoundingClientRect().width;
-        const gap = getGap();
-        const x = (cardW + gap) * index;
-        track.style.transform = 'translateX(' + (-x) + 'px)';
-
-        // buttons
-        if (prevBtn) prevBtn.disabled = (index <= 0);
-        if (nextBtn) nextBtn.disabled = (index >= maxIndex);
-
-        updateDots();
-    }
-
-    function init() {
-        calc();
-        buildDots();
-        update();
-    }
-
-    prevBtn && prevBtn.addEventListener('click', () => {
-        index = Math.max(0, index - 1);
-        update();
-    });
-    nextBtn && nextBtn.addEventListener('click', () => {
-        index = Math.min(maxIndex, index + 1);
-        update();
-    });
-
-    window.addEventListener('resize', () => { init(); });
-
-    // optional swipe (mobile)
-    let startX = 0, dx = 0, isDown = false;
-    const viewport = root.querySelector('.awards__viewport');
-
-    viewport.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX; dx = 0;
-    }, { passive: true });
-
-    viewport.addEventListener('touchmove', (e) => {
-        dx = e.touches[0].clientX - startX;
-    }, { passive: true });
-
-    viewport.addEventListener('touchend', () => {
-        if (Math.abs(dx) > 40) {
-            if (dx < 0) index = Math.min(maxIndex, index + 1);
-            else index = Math.max(0, index - 1);
-            update();
-        }
-    });
-
-    init();
-})();
-
-// hear from our team start ar js
+// hear from our team start ar js - smooth infinite version
 (function () {
     const root = document.querySelector('[data-careers-slider]');
     if (!root) return;
 
     const track = root.querySelector('[data-careers-track]');
-    const slides = Array.from(track.querySelectorAll('.careers_testimonials__slide'));
+    const originalSlides = Array.from(track.querySelectorAll('.careers_testimonials__slide'));
     const prev = root.querySelector('[data-careers-prev]');
     const next = root.querySelector('[data-careers-next]');
     const dotsWrap = document.querySelector('[data-careers-dots]');
 
-    let i = 0;
+    if (!track || originalSlides.length === 0) return;
+
+    let i = 1;
     let timer = null;
-    const interval = 3000; // 1 second
+
+    // TIME 1:
+    // Auto slide change time.
+    // 3000ms = 3 seconds.
+    // Increase this if you want the slide to stay longer.
+    // Example: 5000 = 5 seconds.
+    const interval = 2000;
+
+    // TIME 2:
+    // Slide movement animation speed.
+    // 600ms = 0.6 seconds.
+    // Increase this if you want slower/smoother movement.
+    // Example: 1000 = 1 second.
+    const transitionSpeed = 1000;
+
+    // Clone first and last slide for smooth infinite loop
+    const firstClone = originalSlides[0].cloneNode(true);
+    const lastClone = originalSlides[originalSlides.length - 1].cloneNode(true);
+
+    firstClone.classList.add('is-clone');
+    lastClone.classList.add('is-clone');
+
+    track.appendChild(firstClone);
+    track.insertBefore(lastClone, originalSlides[0]);
+
+    const slides = Array.from(track.querySelectorAll('.careers_testimonials__slide'));
+
+    // First position setup without animation
+    track.style.transition = 'none';
+    track.style.transform = 'translateX(-100%)';
+
+    // TIME 3:
+    // Small delay before enabling animation again.
+    // 50ms is only used so browser can apply the first transform properly.
+    // Usually you do not need to change this.
+    setTimeout(() => {
+        track.style.transition = `transform ${transitionSpeed}ms ease`;
+    }, 50);
 
     function buildDots() {
+        if (!dotsWrap) return;
+
         dotsWrap.innerHTML = '';
-        slides.forEach((_, idx) => {
+
+        originalSlides.forEach((_, idx) => {
             const d = document.createElement('button');
             d.type = 'button';
-            d.className = 'careers_testimonials__dot' + (idx === i ? ' is-active' : '');
+            d.className = 'careers_testimonials__dot' + (idx === 0 ? ' is-active' : '');
             d.setAttribute('aria-label', 'Go to testimonial ' + (idx + 1));
-            d.addEventListener('click', () => { i = idx; update(true); });
+
+            d.addEventListener('click', () => {
+                i = idx + 1;
+                update();
+                restart();
+            });
+
             dotsWrap.appendChild(d);
         });
     }
 
     function setActiveDot() {
+        if (!dotsWrap) return;
+
         const dots = Array.from(dotsWrap.querySelectorAll('.careers_testimonials__dot'));
-        dots.forEach((d, idx) => d.classList.toggle('is-active', idx === i));
+
+        let activeIndex = i - 1;
+
+        if (i === 0) {
+            activeIndex = originalSlides.length - 1;
+        }
+
+        if (i === slides.length - 1) {
+            activeIndex = 0;
+        }
+
+        dots.forEach((d, idx) => {
+            d.classList.toggle('is-active', idx === activeIndex);
+        });
     }
 
-    function update(resetTimer) {
+    function update() {
+        // This controls how fast the slide moves
+        track.style.transition = `transform ${transitionSpeed}ms ease`;
+
         track.style.transform = 'translateX(' + (-i * 100) + '%)';
         setActiveDot();
-        if (resetTimer) restart();
     }
 
     function nextSlide() {
-        i = (i + 1) % slides.length;
-        update(false);
+        if (i >= slides.length - 1) return;
+        i++;
+        update();
     }
 
     function prevSlide() {
-        i = (i - 1 + slides.length) % slides.length;
-        update(false);
+        if (i <= 0) return;
+        i--;
+        update();
     }
 
+    track.addEventListener('transitionend', () => {
+        if (i === slides.length - 1) {
+            track.style.transition = 'none';
+            i = 1;
+            track.style.transform = 'translateX(-100%)';
+
+            // TIME 3 again:
+            // Small reset delay after jumping from clone slide to real first slide
+            setTimeout(() => {
+                track.style.transition = `transform ${transitionSpeed}ms ease`;
+            }, 50);
+        }
+
+        if (i === 0) {
+            track.style.transition = 'none';
+            i = originalSlides.length;
+            track.style.transform = 'translateX(' + (-i * 100) + '%)';
+
+            // TIME 3 again:
+            // Small reset delay after jumping from clone slide to real last slide
+            setTimeout(() => {
+                track.style.transition = `transform ${transitionSpeed}ms ease`;
+            }, 50);
+        }
+
+        setActiveDot();
+    });
+
     function start() {
+        stop();
+
+        // TIME 1 is used here:
+        // Every 3000ms / 3 seconds, nextSlide() will run automatically
         timer = setInterval(nextSlide, interval);
     }
 
@@ -163,26 +159,48 @@
         start();
     }
 
-    prev && prev.addEventListener('click', () => { prevSlide(); restart(); });
-    next && next.addEventListener('click', () => { nextSlide(); restart(); });
+    if (prev) {
+        prev.addEventListener('click', () => {
+            prevSlide();
+            restart();
+        });
+    }
 
-    // pause on hover (desktop)
+    if (next) {
+        next.addEventListener('click', () => {
+            nextSlide();
+            restart();
+        });
+    }
+
     root.addEventListener('mouseenter', stop);
     root.addEventListener('mouseleave', start);
 
-    // swipe (mobile)
-    let startX = 0, dx = 0;
-    root.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; dx = 0; }, { passive: true });
-    root.addEventListener('touchmove', (e) => { dx = e.touches[0].clientX - startX; }, { passive: true });
+    let startX = 0;
+    let dx = 0;
+
+    root.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        dx = 0;
+    }, { passive: true });
+
+    root.addEventListener('touchmove', (e) => {
+        dx = e.touches[0].clientX - startX;
+    }, { passive: true });
+
     root.addEventListener('touchend', () => {
         if (Math.abs(dx) > 40) {
-            if (dx < 0) nextSlide();
-            else prevSlide();
+            if (dx < 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+
             restart();
         }
     });
 
     buildDots();
-    update(false);
+    setActiveDot();
     start();
 })();

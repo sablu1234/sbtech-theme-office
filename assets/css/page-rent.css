@@ -114,14 +114,14 @@
     border: 1px solid rgba(255,255,255,.18);
   }
 
-  /* body */
-  .rent-cardx__body{
+.rent-cardx__body {
     padding: 16px;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-  }
-
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 100%;
+    justify-content: space-around;
+}
   .rent-cardx__price {
       font-size: 22px;
       font-weight: 600;

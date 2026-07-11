@@ -29,13 +29,16 @@
     }
 
     // init: open first (or any with data-open="true")
-    let opened = items.find(i => i.getAttribute("data-open") === "true") || items[0];
-    items.forEach((i) => i.classList.remove("is-open"));
-    if (opened) {
-        opened.classList.add("is-open");
-        const btn = opened.querySelector(".rent-faq__q");
-        if (btn) btn.setAttribute("aria-expanded", "true");
-    }
+    items.forEach((item) => {
+        item.classList.remove("is-open");
+
+        const btn = item.querySelector(".rent-faq__q");
+        const ans = item.querySelector(".rent-faq__a");
+
+        if (btn) btn.setAttribute("aria-expanded", "false");
+        if (ans) ans.style.maxHeight = "0px";
+    });
+
     setHeights();
 
     wrap.addEventListener("click", (e) => {

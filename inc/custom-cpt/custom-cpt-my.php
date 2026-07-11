@@ -15,6 +15,7 @@ function register_cpt_area() {
                 'search_items'       => 'Search Areas',
                 'not_found'          => 'No Areas Found',
                 'menu_name'          => 'Areas',
+                'featured_image'     => 'Poster(size: 768x376 px)',
             ],
 
             'public'              => true,
@@ -26,40 +27,7 @@ function register_cpt_area() {
         ]);
     });
 
-
-    add_action('add_meta_boxes', function () {
-        add_meta_box(
-            'porpertypi_area',
-            'Area',
-            function ($post) {
-
-                $selected = get_post_meta($post->ID, '_area_id', true);
-
-                $areas = get_posts([
-                    'post_type' => 'area',
-                    'numberposts' => -1,
-                    'post_status' => 'publish'
-                ]);
-
-                echo '<select name="area_id" style="width:100%;padding:6px">';
-                echo '<option value="">Select Area</option>';
-
-                foreach ($areas as $a) {
-                    printf(
-                        '<option value="%d"%s>%s</option>',
-                        $a->ID,
-                        selected($selected, $a->ID, false),
-                        esc_html($a->post_title)
-                    );
-                }
-
-                echo '</select>';
-            },
-            'porpertypi',
-            'side',
-            'high'
-        );
-    });
+  
 
     add_action('save_post', function ($post_id) {
         if (isset($_POST['area_id'])) {
@@ -275,4 +243,43 @@ function meta_box_for_area() {
 meta_box_for_area();
 
 
-// 
+//one to many relationship between area and property
+
+/*
+function area_relation_with_property(){
+    add_action('add_meta_boxes', function () {
+        add_meta_box(
+            'porpertypi_area',
+            'Area',
+            function ($post) {
+
+                $selected = get_post_meta($post->ID, '_area_id', true);
+
+                $areas = get_posts([
+                    'post_type' => 'area',
+                    'numberposts' => -1,
+                    'post_status' => 'publish'
+                ]);
+
+                echo '<select name="area_id" style="width:100%;padding:6px">';
+                echo '<option value="">Select Area</option>';
+
+                foreach ($areas as $a) {
+                    printf(
+                        '<option value="%d"%s>%s</option>',
+                        $a->ID,
+                        selected($selected, $a->ID, false),
+                        esc_html($a->post_title)
+                    );
+                }
+
+                echo '</select>';
+            },
+            'porpertypi',
+            'side',
+            'high'
+        );
+    });
+}
+area_relation_with_property();
+*/

@@ -1,20 +1,40 @@
 <?php
 function how_does_it_works_shortcode() {
     ob_start();
+    $hdiw_title = get_theme_mod( 'hdiw_title', 'How does it work?' );
+    $hdiw_desc = get_theme_mod( 'hdiw_desc', 'A simple, structured flow to list your property with CBA Real Estate—fast execution, premium marketing, and qualified leads.' );
+    $hdiw_step_1_title = get_theme_mod( 'hdiw_step_1_title', 'Property Review & Pricing' );
+    $hdiw_step_1_desc = get_theme_mod( 'hdiw_step_1_desc', 'We assess your property and recommend a competitive price based on market demand, location, and comparable listings.' );
+
+    $hdiw_step_2_title = get_theme_mod( 'hdiw_step_2_title', 'Listing Setup & Approval' );
+    $hdiw_step_2_desc = get_theme_mod( 'hdiw_step_2_desc', 'We prepare your listing with strong presentation and details, then confirm everything with you before going live.' );
+
+    $hdiw_step_3_title = get_theme_mod( 'hdiw_step_3_title', 'Property Review & Pricing' );
+    $hdiw_step_3_desc = get_theme_mod( 'hdiw_step_3_desc', 'We assess your property and recommend a competitive price based on market demand, location, and comparable listings' );
+
+    $hdiw_step_4_title = get_theme_mod( 'hdiw_step_4_title', 'Property Review & Pricing' );
+    $hdiw_step_4_desc = get_theme_mod( 'hdiw_step_4_desc', 'We assess your property and recommend a competitive price based on market demand, location, and comparable listings.' );
     ?>
     <section class="how-does-it-work-section" aria-label="How does it work">
     <div class="how-does-it-work-container">
 
         <div class="how-does-it-work-head">
-        <h2 class="how-does-it-work-title">How does it work?</h2>
-        <p class="how-does-it-work-subtitle">
-            A simple, structured flow to list your property with CBA Real Estate—fast execution, premium marketing, and qualified leads.
-        </p>
+        
+        <?php if(!empty($hdiw_title)) : ?>
+        <h2 class="how-does-it-work-title"><?php echo esc_html( $hdiw_title )?> </h2>
+        <?php endif;?>
+
+        <?php if(!empty($hdiw_desc)) : ?>
+        <p class="how-does-it-work-subtitle"><?php echo esc_html( $hdiw_desc )?>  </p>
+        <?php endif;?>
+        
         </div>
 
         <div class="how-does-it-work-row">
 
+        
         <!-- Card 1 -->
+         <?php if(!empty($hdiw_step_1_title)) : ?>
         <article class="how-does-it-work-card">
             <div class="how-does-it-work-icon" aria-hidden="true">
             <!-- simple inline svg icon -->
@@ -24,13 +44,20 @@ function how_does_it_works_shortcode() {
             </div>
 
             <p class="how-does-it-work-step">Step 1</p>
-            <h3 class="how-does-it-work-card-title">Property Review & Pricing</h3>
-            <p class="how-does-it-work-text">
-            We assess your property and recommend a competitive price based on market demand, location, and comparable listings.
-            </p>
+            
+            <?php if(!empty($hdiw_step_1_title)) : ?>
+            <h3 class="how-does-it-work-card-title"><?php echo esc_html( $hdiw_step_1_title )?></h3>
+            <?php endif;?>
+
+            <?php if(!empty($hdiw_step_1_desc)) : ?>
+            <p class="how-does-it-work-text"><?php echo esc_html( $hdiw_step_1_desc )?></p>
+            <?php endif;?>
+
         </article>
+        <?php endif;?>
 
         <!-- Card 2 -->
+        <?php if(!empty($hdiw_step_2_title)) : ?>
         <article class="how-does-it-work-card">
             <div class="how-does-it-work-icon" aria-hidden="true">
             <svg class="how-does-it-work-svg" viewBox="0 0 24 24" fill="none">
@@ -41,13 +68,18 @@ function how_does_it_works_shortcode() {
             </div>
 
             <p class="how-does-it-work-step">Step 2</p>
-            <h3 class="how-does-it-work-card-title">Listing Setup & Approval</h3>
-            <p class="how-does-it-work-text">
-            We prepare your listing with strong presentation and details, then confirm everything with you before going live.
-            </p>
+            <?php if(!empty($hdiw_step_2_title)) : ?>
+            <h3 class="how-does-it-work-card-title"><?php echo esc_html( $hdiw_step_2_title )?></h3>
+            <?php endif;?>
+
+            <?php if(!empty($hdiw_step_2_desc)) : ?>
+            <p class="how-does-it-work-text"><?php echo esc_html( $hdiw_step_2_desc )?></p>
+            <?php endif;?>
         </article>
+        <?php endif;?>
 
         <!-- Card 3 -->
+         <?php if(!empty($hdiw_step_3_title)) : ?>
         <article class="how-does-it-work-card">
             <div class="how-does-it-work-icon" aria-hidden="true">
             <svg class="how-does-it-work-svg" viewBox="0 0 24 24" fill="none">
@@ -59,13 +91,19 @@ function how_does_it_works_shortcode() {
             </div>
 
             <p class="how-does-it-work-step">Step 3</p>
-            <h3 class="how-does-it-work-card-title">Premium Marketing & Reach</h3>
-            <p class="how-does-it-work-text">
-            Your property is promoted to qualified buyers and tenants through targeted exposure and trusted channels.
-            </p>
+
+            <?php if(!empty($hdiw_step_3_title)) : ?>
+            <h3 class="how-does-it-work-card-title"><?php echo esc_html( $hdiw_step_3_title )?></h3>
+            <?php endif;?>
+
+            <?php if(!empty($hdiw_step_3_desc)) : ?>
+            <p class="how-does-it-work-text"><?php echo esc_html( $hdiw_step_3_desc )?></p>
+            <?php endif;?>
         </article>
+        <?php endif;?>
 
         <!-- Card 4 -->
+         <?php if(!empty($hdiw_step_4_title)) : ?>
         <article class="how-does-it-work-card">
             <div class="how-does-it-work-icon" aria-hidden="true">
             <svg class="how-does-it-work-svg" viewBox="0 0 24 24" fill="none">
@@ -76,11 +114,16 @@ function how_does_it_works_shortcode() {
             </div>
 
             <p class="how-does-it-work-step">Step 4</p>
-            <h3 class="how-does-it-work-card-title">Viewings, Negotiation & Close</h3>
-            <p class="how-does-it-work-text">
-            We manage enquiries, arrange viewings, negotiate offers, and guide you through to a smooth closing or tenant move-in.
-            </p>
+
+            <?php if(!empty($hdiw_step_4_title)) : ?>
+            <h3 class="how-does-it-work-card-title"><?php echo esc_html( $hdiw_step_4_title )?></h3>
+            <?php endif;?>
+
+            <?php if(!empty($hdiw_step_4_desc)) : ?>
+            <p class="how-does-it-work-text"><?php echo esc_html( $hdiw_step_4_desc )?></p>
+            <?php endif;?>
         </article>
+        <?php endif;?>
 
         </div>
     </div>
