@@ -22,6 +22,33 @@ SBTech Main is a premium, custom WordPress theme designed for real estate agenci
 
 ---
 
+## Theme Directory Structure
+
+```text
+wp-content/themes/sbtech-main/
+├── assets/                  # CSS, JS, Images, and dynamic styling assets
+├── inc/                     # Core helper functions, customization libraries, and CPTs
+│   ├── custom-cpt/          # Custom Post Types (agent-cpt, developer-cpt, achievements, etc.)
+│   ├── admin-setting-api/   # Options page and settings administration logic
+│   ├── sbtech-kirki.php     # Customizer settings and control logic
+│   └── template-function.php# Global theme helper functions
+├── template-parts/          # Theme template components
+│   ├── developers/          # Template blocks specifically for developers post types
+│   ├── filter/              # Property listing Ajax filters templates
+│   ├── form/                # Inquiry, contact, cv, and mortgage estimation forms
+│   ├── services-parts/      # Subpage services layouts (mortgages, management, snagging, etc.)
+│   ├── content.php          # Main property single page layout
+│   └── loop-movie.php       # Dynamic loop layouts
+├── single-agents.php        # Single page template for agents post types
+├── single-area.php          # Single page template for areas post types
+├── single-developer.php     # Single page template for developers post types
+├── page-*.php               # Customized page templates (about, buy, careers, rent, sell, etc.)
+├── functions.php            # Primary theme functions, hooks, and stylesheet enqueues
+└── README.md                # Project documentation and theme overview
+```
+
+---
+
 ## Important Customized Files
 
 ### Theme Files (`wp-content/themes/sbtech-main/`)
